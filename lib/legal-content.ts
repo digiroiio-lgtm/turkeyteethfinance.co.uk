@@ -11,6 +11,7 @@ export type LegalContent = {
   label: string;
   heading: string;
   updated: string;
+  lastModified: string;
   notice?: string;
   sections: { heading: string; paragraphs: LegalParagraph[] }[];
 };
@@ -29,6 +30,7 @@ export function privacyContent(): LegalContent {
     label: "YOUR INFORMATION",
     heading: "Privacy & cookies",
     updated: "20 October 2026",
+    lastModified: "2026-10-20",
     notice: publicationApproved()
       ? undefined
       : "Draft notice for review. The enquiry service must not be enabled until the privacy contact, processors, retention schedule and international transfer arrangements are approved.",
@@ -122,6 +124,7 @@ export function termsContent(): LegalContent {
     label: "WEBSITE INFORMATION",
     heading: "Website terms",
     updated: "20 October 2026",
+    lastModified: "2026-10-20",
     sections: [
       {
         heading: "Our role",

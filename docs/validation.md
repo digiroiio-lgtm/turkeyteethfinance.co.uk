@@ -4,9 +4,10 @@ Completed on 20 October 2026:
 
 - `npm run lint`: passed with no warnings.
 - `npm run typecheck`: passed.
-- `npm test`: 18 tests passed. Covers consent and honeypot validation, image signatures, streaming upload bounds, password-free draft access, broker URL validation, missing integration behaviour, signed mocked webhook delivery, menu state, budget selection, all four enquiry steps and LLM exports.
+- `npm test`: 24 tests passed. Covers independent production search indexing, preview/hold controls, canonical redirects, page-specific content dates, IndexNow key configuration, consent and honeypot validation, image signatures, streaming upload bounds, password-free access, broker URL validation, missing integration behaviour, signed mocked webhook delivery, menu state, budget selection, all four enquiry steps and LLM exports.
 - `npm run build`: passed. All 18 brief pages and both legal pages are statically generated, with server route handlers for enquiries and the IndexNow key.
 - Inspected the generated HTML for all 20 content pages: one H1, unique title and description, one canonical, valid JSON-LD and valid internal link destinations.
+- Production search checks: 20 populated sitemap entries match generated canonical URLs and `index, follow` metadata. `lastmod` uses the actual initial content date, 20 October 2026. Production HTTP checks confirmed public crawl access and absence of noindex headers on canonical pages, the www-to-canonical 308 redirect with query preservation, and blocked indexing on preview aliases. Search indexing is independent of finance application approval.
 - `/llms.txt` and `/llms-full.txt` are generated at build time from shared public page data. Tests cover all 20 canonical pages, current FAQs, complete guides, content edits, public configuration and exclusion of private settings. Production HTTP checks confirmed UTF-8 plain text, the discovery `Link` header and matching generated response bodies. Privacy and terms retain their prior visible wording after moving their content into the shared model.
 - Browser visual review: desktop and 390 px iframe layout. The narrow layout reported equal content/client widths of 375 px after the scrollbar, with no horizontal overflow.
 

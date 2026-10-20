@@ -17,7 +17,6 @@ import { proxy } from "../proxy";
 import { POST } from "../app/api/quote/route";
 import { canonicalPaths } from "../lib/site";
 import { pages } from "../lib/content";
-import sitemap from "../app/sitemap";
 
 const enquiry = {
   treatment: "Veneers",
@@ -123,10 +122,9 @@ test("streamed bodies are bounded even without content-length", async () => {
   } as RequestInit);
   await assert.rejects(() => readBoundedBody(req), /TOO_LARGE/);
 });
-test("unapproved finance cannot be indexed or treated as published", () => {
+test("finance application approval requires the approved disclosure and link", () => {
   withEnv({ SITE_CONTENT_APPROVED: "false" }, () => {
     assert.equal(publicationApproved(), false);
-    assert.deepEqual(sitemap(), []);
   });
   withEnv(
     {
@@ -153,7 +151,7 @@ test("a verified CRM and privacy configuration are required to enable submission
     assert.equal(leadsConfigured(), false),
   );
 });
-test("production pages open without credentials while drafts retain noindex", () => {
+test("non-canonical preview URLs open without credentials and retain noindex", () => {
   for (const password of [undefined, "legacy-preview-password"]) {
     withEnv(
       {

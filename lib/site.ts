@@ -1,10 +1,20 @@
 export const SITE_NAME = "Turkey Teeth Finance";
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://turkeyteethfinance.co.uk";
+  (process.env.NEXT_PUBLIC_SITE_URL || "https://turkeyteethfinance.co.uk").replace(/\/+$/, "");
 export const COMPANY = "Akdeniz Dental Consultancy UK Ltd";
 export const PRIMARY_CTA = "Get My Free Treatment Quote";
 export const draftNotice =
   "Design preview · Finance content awaiting compliance approval · Not a live finance offer";
+
+/** Public search visibility is independent of finance application approval. */
+export function indexingEnabled() {
+  return (
+    process.env.SITE_INDEXING_ENABLED !== "false" &&
+    process.env.VERCEL_ENV !== "preview" &&
+    process.env.VERCEL_ENV !== "development" &&
+    process.env.NODE_ENV !== "development"
+  );
+}
 
 export function financeApplicationUrl(): string | undefined {
   const value = process.env.FINANCE_APPLICATION_URL;

@@ -41,9 +41,11 @@ Every response advertises `/llms.txt` with a `Link` header. The index links to t
 
 ## Before public launch
 
-The website is accessible without a password in every environment. Draft pages display a preview notice, remain marked noindex and are excluded from the sitemap until finance publication is configured. There is no site-wide authentication or HTTP 503 preview gate.
+The website is accessible without a password in every environment. Production search indexing is enabled independently of finance application approval. Set `SITE_INDEXING_ENABLED=false` and rebuild for a deliberate search hold. Vercel preview/development builds and non-canonical deployment hosts remain blocked from indexing. The www/apex alias redirects permanently to `NEXT_PUBLIC_SITE_URL`.
 
 Supply the genuine approved Ideal4Finance application URL and complete approved disclosure, then set `SITE_CONTENT_APPROVED=true` and rebuild. The application URL is restricted to HTTPS on the provider’s domain. Do not use an invented URL or copy a generic homepage link into this setting.
+
+The sitemap uses the same route list as the public pages, plus privacy and terms. Its `lastmod` values come from each page’s `lastModified` content field, not the deployment clock. Update the affected page dates only when their primary content changes; for a shared FAQ edit, update each affected page. Legal notices also have a human-readable `updated` date to keep in sync. A CSS-only deployment must not change these dates.
 
 Enquiry delivery stays unavailable until the private receiver, Turnstile, reviewed privacy notices and delivery verification are configured. See [deployment and enquiry integration](docs/deployment.md). No live CRM delivery has been verified in this implementation session.
 

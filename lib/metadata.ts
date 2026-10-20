@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_NAME, SITE_URL, publicationApproved } from "./site";
+import { SITE_NAME, SITE_URL, indexingEnabled } from "./site";
 export function pageMetadata(
   title: string,
   description: string,
@@ -9,7 +9,7 @@ export function pageMetadata(
     title,
     description,
     alternates: { canonical: path },
-    robots: publicationApproved()
+    robots: indexingEnabled()
       ? { index: true, follow: true }
       : { index: false, follow: false },
     openGraph: {

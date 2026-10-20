@@ -1,9 +1,7 @@
-import { canonicalPaths, SITE_URL, publicationApproved } from "../lib/site";
+import { canonicalPaths, SITE_URL, indexingEnabled } from "../lib/site";
 async function main() {
-  if (!publicationApproved())
-    throw new Error(
-      "Publish only after finance content approval and production configuration.",
-    );
+  if (!indexingEnabled())
+    throw new Error("Search indexing is disabled in this environment.");
   const key = process.env.INDEXNOW_KEY;
   if (!key || !/^[a-zA-Z0-9_-]{8,128}$/.test(key))
     throw new Error(

@@ -20,7 +20,13 @@ export const metadata: Metadata = {
   description:
     "Explore dental treatment in Antalya and payment options for eligible UK patients. Start with a free written treatment estimate.",
   verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION,
+    google: [
+      // Public verification tag for the owner's canonical Search Console property.
+      "ZSUB8TeusumW1WrwVBQZfcMyGvvfDs3jI_a8P3eMGBo",
+      ...(process.env.GOOGLE_SITE_VERIFICATION
+        ? [process.env.GOOGLE_SITE_VERIFICATION]
+        : []),
+    ],
     other: process.env.BING_SITE_VERIFICATION
       ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
       : undefined,

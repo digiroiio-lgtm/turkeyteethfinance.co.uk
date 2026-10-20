@@ -1,5 +1,6 @@
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
+  lastModified: "2026-10-20",
   title: "Dental Finance Turkey | Flexible Payment Options",
   description:
     "Explore dental treatment in Antalya with flexible payment options for eligible UK patients. Start with a free written treatment estimate, with no required phone call.",
@@ -23,6 +24,7 @@ export const informationSources = [
 
 export type Section = { title: string; body: string; bullets?: string[] };
 export type PageContent = {
+  lastModified: string;
   title: string;
   description: string;
   label: string;
@@ -114,6 +116,7 @@ export const treatments = [
 
 export const pages: Record<string, PageContent> = {
   "pay-monthly": {
+    lastModified: "2026-10-20",
     title: "Pay Monthly for Dental Treatment in Turkey",
     description:
       "Explore monthly payment options for dental treatment in Antalya. Get a personalised quote, understand treatment costs and check UK finance eligibility.",
@@ -141,6 +144,7 @@ export const pages: Record<string, PageContent> = {
     related: ["finance-eligibility", "prices", "dental-finance"],
   },
   "dental-finance": {
+    lastModified: "2026-10-20",
     title: "Dental Finance in Turkey for UK Patients",
     description:
       "Understand the difference between your dental treatment quote and a credit application. Explore finance for UK patients planning dental care in Turkey.",
@@ -171,6 +175,7 @@ export const pages: Record<string, PageContent> = {
     related: ["pay-monthly", "finance-eligibility", "finance-faq"],
   },
   "get-a-quote": {
+    lastModified: "2026-10-20",
     title: "Free Dental Treatment Quote Turkey",
     description:
       "Request a personalised dental treatment estimate for Antalya. Choose email or WhatsApp, tell us your goals and get a written plan without a required phone call.",
@@ -192,6 +197,7 @@ export const pages: Record<string, PageContent> = {
     related: ["how-it-works", "prices", "finance-eligibility"],
   },
   "dental-implants-finance": {
+    lastModified: "2026-10-20",
     title: "Dental Implant Finance Turkey | UK Patients",
     description:
       "Plan dental implant treatment in Antalya with a personalised estimate. Understand healing, visits, additional costs and finance options for eligible UK patients.",
@@ -234,6 +240,7 @@ export const pages: Record<string, PageContent> = {
     related: ["all-on-4-finance", "prices", "how-it-works"],
   },
   "finance-eligibility": {
+    lastModified: "2026-10-20",
     title: "Dental Finance Eligibility UK | What to Check",
     description:
       "Understand the UK finance eligibility questions to consider before applying for dental treatment finance. Decisions depend on affordability, status and lender criteria.",
@@ -278,6 +285,7 @@ export const pages: Record<string, PageContent> = {
     related: ["dental-finance", "pay-monthly", "finance-faq"],
   },
   "veneers-finance": {
+    lastModified: "2026-10-20",
     title: "Veneers Finance Turkey | Costs & Payment Options",
     description:
       "Explore veneers in Antalya with a personalised plan. Understand enamel preparation, material choices, aftercare and finance options for eligible UK patients.",
@@ -320,6 +328,7 @@ export const pages: Record<string, PageContent> = {
     related: ["zirconia-crowns-finance", "smile-makeover-finance", "prices"],
   },
   prices: {
+    lastModified: "2026-10-20",
     title: "Dental Treatment Prices Turkey | Written Quotes",
     description:
       "Understand what affects dental treatment prices in Antalya. Compare treatment, travel, visit schedules and payment options with a personalised written estimate.",
@@ -359,6 +368,7 @@ export const pages: Record<string, PageContent> = {
     related: ["get-a-quote", "pay-monthly", "how-it-works"],
   },
   "smile-makeover-finance": {
+    lastModified: "2026-10-20",
     title: "Smile Makeover Finance Turkey | Personal Plans",
     description:
       "Explore a personalised smile makeover in Antalya. Understand combined treatment plans, visit schedules and finance options for eligible UK patients.",
@@ -397,6 +407,7 @@ export const pages: Record<string, PageContent> = {
     related: ["veneers-finance", "dental-implants-finance", "before-and-after"],
   },
   "zirconia-crowns-finance": {
+    lastModified: "2026-10-20",
     title: "Zirconia Crowns Finance Turkey | Treatment Planning",
     description:
       "Understand zirconia crowns in Antalya, including preparation, shade, bite and maintenance. Request a written quote and explore UK finance options.",
@@ -439,6 +450,7 @@ export const pages: Record<string, PageContent> = {
     related: ["veneers-finance", "smile-makeover-finance", "prices"],
   },
   "all-on-4-finance": {
+    lastModified: "2026-10-20",
     title: "All-on-4 Dental Implants Finance Turkey",
     description:
       "Explore full-arch implant treatment in Antalya. Understand assessment, temporary and final teeth, healing and finance options for eligible UK patients.",
@@ -481,6 +493,7 @@ export const pages: Record<string, PageContent> = {
     related: ["dental-implants-finance", "prices", "how-it-works"],
   },
   "before-and-after": {
+    lastModified: "2026-10-20",
     title: "Dental Treatment Before and After Turkey",
     description:
       "Understand how to review dental before-and-after photographs, compare relevant treatment cases and set realistic expectations for dental care in Antalya.",
@@ -511,6 +524,7 @@ export const pages: Record<string, PageContent> = {
     related: ["reviews", "our-clinic", "smile-makeover-finance"],
   },
   reviews: {
+    lastModified: "2026-10-20",
     title: "Dental Treatment Turkey Patient Reviews",
     description:
       "Learn what to look for in independent dental patient reviews: verified sources, treatment context, follow-up and a realistic picture of care in Turkey.",
@@ -541,6 +555,7 @@ export const pages: Record<string, PageContent> = {
     related: ["before-and-after", "our-clinic", "how-it-works"],
   },
   "how-it-works": {
+    lastModified: "2026-10-20",
     title: "How Dental Finance in Turkey Works",
     description:
       "Follow four steps from a written treatment enquiry to planning your visit to Antalya. Explore finance separately, with no required phone call to request a quote.",
@@ -564,6 +579,7 @@ export const pages: Record<string, PageContent> = {
     related: ["get-a-quote", "dental-finance", "our-clinic"],
   },
   "our-clinic": {
+    lastModified: "2026-10-20",
     title: "Dental Clinic Antalya Turkey | Akdeniz Dental",
     description:
       "Learn about treatment coordination with Akdeniz Dental in Antalya. Understand the role of the clinical team, questions to ask and your aftercare arrangements.",
@@ -602,6 +618,7 @@ export const pages: Record<string, PageContent> = {
     related: ["before-and-after", "reviews", "contact"],
   },
   "finance-faq": {
+    lastModified: "2026-10-20",
     title: "Dental Finance Turkey FAQs | UK Patient Questions",
     description:
       "Answers about dental finance, treatment estimates, credit applications, payments and planning dental care in Antalya for UK patients.",
@@ -638,6 +655,7 @@ export const pages: Record<string, PageContent> = {
     related: ["dental-finance", "finance-eligibility", "prices"],
   },
   contact: {
+    lastModified: "2026-10-20",
     title: "Contact | Dental Treatment Quote Antalya",
     description:
       "Contact the patient coordination team about treatment in Antalya. Request a written estimate, ask a question and choose email or WhatsApp without a required call.",
@@ -661,6 +679,7 @@ export const pages: Record<string, PageContent> = {
     related: ["get-a-quote", "our-clinic", "finance-faq"],
   },
   guides: {
+    lastModified: "2026-10-20",
     title: "Dental Finance and Treatment Guides | Turkey",
     description:
       "Practical guides for UK patients considering dental care in Turkey: comparing quotes, preparing for treatment, reviewing finance and planning aftercare.",

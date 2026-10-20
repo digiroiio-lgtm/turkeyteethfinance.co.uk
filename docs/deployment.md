@@ -4,13 +4,13 @@
 
 1. Import this repository as a Next.js project; use `npm ci` and `npm run build` with the default Next.js output.
 2. Configure the environment variables from `.env.example`. Keep all secrets in the hosting environment, never in Git.
-3. For review, leave `SITE_CONTENT_APPROVED=false`. Pages are accessible without credentials, with a draft notice and noindex metadata. Review all pages, legal copy, fees and the application journey in the deployment.
+3. For a search hold, set `SITE_INDEXING_ENABLED=false` before building. Production defaults to indexable metadata and a populated sitemap, independently of finance approval. Vercel preview/development builds and non-canonical hosts stay noindex, and the alternate www/apex hostname redirects to the configured canonical origin. Review all pages, legal copy, fees and the application journey in a preview deployment.
 4. Obtain the actual approved bespoke Ideal4Finance link and the complete approved wording identifying all relevant entities, permissions, fees and any required examples. Populate `FINANCE_APPLICATION_URL` and `APPROVED_FINANCE_DISCLOSURE` only with that approved content.
 5. Confirm clinic identity, clinical descriptions, privacy notices, data processors, retention and UK-to-Turkey transfer safeguards with the operator. No invented clinician credentials or author endorsements are present.
-6. After written financial-promotion approval, set `SITE_CONTENT_APPROVED=true` and rebuild. This enables indexable metadata, a populated sitemap and the external application CTA. Changing runtime variables without rebuilding is insufficient for statically generated metadata and forms.
+6. After written financial-promotion approval, set `SITE_CONTENT_APPROVED=true` and rebuild. This enables the approved finance disclosure and external application CTA. Search indexing uses its separate `SITE_INDEXING_ENABLED` setting. Changing runtime variables without rebuilding is insufficient for statically generated metadata and forms.
 7. Connect the production domain using the hosting provider’s verified domain workflow. This task has not changed DNS, created a Vercel project or published financial promotions.
 
-The application has no site-wide password or preview-access gate. `PREVIEW_PASSWORD` is no longer used and can be removed from existing hosting settings. Draft indexing controls and the independent finance/lead integration settings continue to apply.
+The application has no site-wide password or preview-access gate. `PREVIEW_PASSWORD` is no longer used and can be removed from existing hosting settings. Search, finance and lead integration settings are independent.
 
 ## Private lead receiver
 
@@ -37,12 +37,14 @@ Tested here: missing integration returns 503, cross-site requests return 403, in
 
 ## Search and IndexNow
 
-Google and Bing verification meta tags are driven by `GOOGLE_SITE_VERIFICATION` and `BING_SITE_VERIFICATION`. Verification with the search platforms itself requires the owner’s account and is not completed by adding these variables.
+The canonical site's public Google ownership tag is included in the repository. `GOOGLE_SITE_VERIFICATION` can add another verification tag; `BING_SITE_VERIFICATION` supplies the Bing tag. Verification with the search platforms itself requires the owner’s account and is not completed by adding these variables.
 
-Generate one site-specific `INDEXNOW_KEY` with 8–128 allowed characters. After the approved build is live, the application serves `/<key>.txt`. Submit only canonical paths that actually changed, from an environment with the same production configuration:
+With production indexing enabled, `/robots.txt` allows public pages, excludes `/api/` and advertises `/sitemap.xml`. The sitemap includes only canonical page routes, without query parameters or deployment aliases. Each entry's `lastmod` comes from the page's explicit content date (`lastModified` in the shared content models); update affected dates when meaningful content changes, not on ordinary redeploys.
+
+Generate one site-specific `INDEXNOW_KEY` with 8–128 allowed characters. After the indexable build is live, the canonical host serves `/<key>.txt`. Submit only canonical paths that actually changed, from an environment with the same production configuration:
 
 ```sh
 npm run indexnow -- / /pay-monthly
 ```
 
-The script refuses unapproved builds, unknown paths and a mismatched live key file. It does not submit the whole sitemap automatically. Search visibility and indexing depend on the search services; this project does not represent a ranking guarantee.
+The script refuses search-disabled builds, unknown paths and a mismatched live key file. It does not submit the whole sitemap automatically. Search visibility and indexing depend on the search services; this project does not represent a ranking guarantee.

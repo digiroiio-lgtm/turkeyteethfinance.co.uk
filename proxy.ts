@@ -1,17 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
-import { publicationApproved } from "./lib/site";
+import { SITE_URL, indexingEnabled } from "./lib/site";
 export function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
+  const canonical = new URL(SITE_URL);
+  const hostname = (request.headers.get("host") || request.nextUrl.hostname)
+    .split(":")[0]
+    .toLowerCase();
+  const alias = canonical.hostname.startsWith("www.")
+    ? canonical.hostname.slice(4)
+    : `www.${canonical.hostname}`;
+  if (hostname === alias) {
+    const destination = new URL(SITE_URL);
+    destination.pathname = path;
+    destination.search = request.nextUrl.search;
+    return NextResponse.redirect(destination, 308);
+  }
+
+  const indexable = indexingEnabled() && hostname === canonical.hostname;
+  if (path === "/robots.txt" && !indexable) {
+    return new NextResponse("User-agent: *\nDisallow: /\n", {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Robots-Tag": "noindex, nofollow, noarchive",
+        "Cache-Control": "private, no-store",
+      },
+    });
+  }
   const key = process.env.INDEXNOW_KEY;
   if (
-    publicationApproved() &&
+    indexable &&
     key &&
     /^[a-zA-Z0-9_-]{8,128}$/.test(key) &&
     path === `/${key}.txt`
   )
     return NextResponse.rewrite(new URL("/api/indexnow-key", request.url));
   const response = NextResponse.next();
-  if (!publicationApproved()) {
+  if (!indexable || path.startsWith("/api/")) {
     response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
     response.headers.set("Cache-Control", "private, no-store");
   }
