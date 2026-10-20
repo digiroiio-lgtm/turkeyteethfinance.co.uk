@@ -49,9 +49,12 @@ export function publicationApproved() {
 
 export function leadsConfigured() {
   const delivery = enquiryDelivery();
+  if (!delivery || process.env.ENQUIRY_DELIVERY_ENABLED === "false") return false;
+  // The supplied Formspree form is enabled and uses its own Formshield filtering.
+  // A custom Turnstile widget is optional; the API requires its token when set.
+  if (delivery.provider === "formspree") return true;
   return (
-    !!delivery &&
-    (delivery.provider === "formspree" || !!process.env.TURNSTILE_SECRET_KEY) &&
+    !!process.env.TURNSTILE_SECRET_KEY &&
     !!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY &&
     !!process.env.PRIVACY_CONTACT_EMAIL &&
     !!process.env.PRIVACY_RETENTION_NOTICE &&

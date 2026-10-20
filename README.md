@@ -47,7 +47,7 @@ Supply the genuine approved Ideal4Finance application URL and complete approved 
 
 The sitemap uses the same route list as the public pages, plus privacy and terms. Its `lastmod` values come from each page’s `lastModified` content field, not the deployment clock. Update the affected page dates only when their primary content changes; for a shared FAQ edit, update each affected page. Legal notices also have a human-readable `updated` date to keep in sync. A CSS-only deployment must not change these dates.
 
-Enquiry delivery stays unavailable until the private receiver, Turnstile, reviewed privacy notices and delivery verification are configured. See [deployment and enquiry integration](docs/deployment.md). No live CRM delivery has been verified in this implementation session.
+The supplied Formspree endpoint enables the shared React enquiry form without legacy webhook activation flags. Required fields, explicit consents, server validation and photo processing remain in place. A custom Turnstile token is required only when its widget is configured. Set ENQUIRY_DELIVERY_ENABLED=false to pause delivery. See [Formspree setup](docs/formspree.md); the separately selected signed-webhook provider retains its existing configuration requirements.
 
 Patient review and result pages intentionally do not invent patient names, testimonials, ratings or outcomes. Verified consented content must be supplied before populating these modules.
 
@@ -64,4 +64,4 @@ See [SEO validation](docs/seo-validation.md). Pull requests run a fresh producti
 
 ## Formspree enquiries
 
-The shared React enquiry form can deliver through Formspree endpoint xgaojavy using the existing server validation route. See [Formspree setup](docs/formspree.md) for CAPTCHA, optional attachments, required environment values and delivery verification. The existing collection gates remain in place until configuration is complete.
+The shared React enquiry form can deliver through Formspree endpoint xgaojavy using the existing server validation route. See [Formspree setup](docs/formspree.md) for matching CAPTCHA settings, optional attachments, the operational off switch and delivery verification.

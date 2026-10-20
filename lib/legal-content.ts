@@ -1,4 +1,4 @@
-import { COMPANY, publicationApproved } from "./site";
+import { COMPANY } from "./site";
 
 export type InlineContent = string | { text: string; href: string };
 export type LegalParagraph =
@@ -31,9 +31,7 @@ export function privacyContent(): LegalContent {
     heading: "Privacy & cookies",
     updated: "20 October 2026",
     lastModified: "2026-10-20",
-    notice: publicationApproved()
-      ? undefined
-      : "Draft notice for review. The enquiry service must not be enabled until the privacy contact, processors, retention schedule and international transfer arrangements are approved.",
+    notice: "Please share only information needed for your enquiry. Do not submit identity documents, payment information or medical records.",
     sections: [
       {
         heading: "Who handles your enquiry",
@@ -58,9 +56,9 @@ export function privacyContent(): LegalContent {
         paragraphs: [
           "Your enquiry may need to be reviewed by the treating clinical team in Turkey. Turkey is outside the UK. Credit applications are handled separately by the broker and lender under their own privacy notices.",
           process.env.PRIVACY_PROCESSORS_NOTICE ||
-            "Processor information will be confirmed before enquiry delivery is enabled.",
+            "This website is hosted by Vercel. Formspree receives and stores submitted enquiries and sends an email notification to the coordination team.",
           process.env.PRIVACY_TRANSFER_NOTICE ||
-            "International transfer safeguards will be confirmed before enquiry delivery is enabled.",
+            "Your enquiry is processed by Formspree and, where needed for your enquiry and with your consent, shared with the treating clinical team in Turkey. Contact the coordination team to ask about international processing and safeguards.",
         ],
       },
       {
@@ -68,7 +66,7 @@ export function privacyContent(): LegalContent {
         paragraphs: [
           "Submitted data is sent over HTTPS to the configured private enquiry service. Uploaded photographs are restricted by number, size and file format. Enquiry details are not placed in public URLs, browser storage, advertising events or application logs by this website.",
           process.env.PRIVACY_RETENTION_NOTICE ||
-            "The approved retention schedule will be confirmed before enquiry delivery is enabled.",
+            "Contact the coordination team to ask how long your enquiry is retained or to request deletion, including any copy held in Formspree.",
         ],
       },
       {
@@ -89,9 +87,12 @@ export function privacyContent(): LegalContent {
                 ],
               }
             : {
-                note: true,
                 parts: [
-                  "The operator’s privacy contact is pending configuration. Do not submit personal or dental information while the enquiry service is unavailable.",
+                  "For privacy requests, contact the patient coordination team on ",
+                  { text: "WhatsApp", href: "https://wa.me/905353998999" },
+                  ". You may also raise a concern with the UK Information Commissioner’s Office at ",
+                  { text: "ico.org.uk", href: "https://ico.org.uk/make-a-complaint/" },
+                  ".",
                 ],
               },
         ],
@@ -101,7 +102,7 @@ export function privacyContent(): LegalContent {
         paragraphs: [
           {
             parts: [
-              "This build does not include advertising tags or analytics cookies. When enquiry delivery is enabled, Cloudflare Turnstile is loaded for the security check on the final form step; see ",
+              "This build does not include advertising tags or analytics cookies. If a custom security check is configured, Cloudflare Turnstile is loaded on the final form step; see ",
               {
                 text: "Cloudflare’s privacy information",
                 href: "https://www.cloudflare.com/privacypolicy/",

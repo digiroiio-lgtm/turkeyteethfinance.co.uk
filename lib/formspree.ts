@@ -13,7 +13,7 @@ export type FormspreeLead = Omit<z.infer<typeof leadSchema>, "website"> & {
 export function formspreeSubmission(
   lead: FormspreeLead,
   photos: EnquiryPhoto[],
-  captchaToken: string,
+  captchaToken = "",
 ): FormData {
   const data = new FormData();
   for (const [name, value] of Object.entries(lead)) data.set(name, String(value));
@@ -24,7 +24,7 @@ export function formspreeSubmission(
   // Newsletter plugins treat the presence of _optin as consent, even for "false".
   if (lead.marketingConsent) data.set("_optin", "true");
   data.set("_gotcha", "");
-  data.set("cf-turnstile-response", captchaToken);
+  if (captchaToken) data.set("cf-turnstile-response", captchaToken);
   for (const photo of photos) {
     data.append("attachment", new Blob([new Uint8Array(Buffer.from(photo.data, "base64"))], { type: photo.type }), photo.filename);
   }

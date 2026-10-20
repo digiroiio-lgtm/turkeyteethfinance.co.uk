@@ -112,11 +112,29 @@ test("unchecked privacy consents, honeypot values and missing CAPTCHA never reac
   });
 });
 
-test("delivery verification, privacy notices and public widget configuration still gate collection", async () => {
-  for (const key of [
-    "LEADS_DELIVERY_VERIFIED", "PRIVACY_CONTACT_EMAIL", "PRIVACY_RETENTION_NOTICE",
-    "PRIVACY_PROCESSORS_NOTICE", "PRIVACY_TRANSFER_NOTICE", "NEXT_PUBLIC_TURNSTILE_SITE_KEY",
-  ]) await withConfig({ [key]: "" }, async () => {
+test("the supplied Formspree endpoint works without legacy activation flags or an unconfigured CAPTCHA", async () => {
+  await withConfig({
+    LEADS_DELIVERY_VERIFIED: undefined, PRIVACY_CONTACT_EMAIL: undefined,
+    PRIVACY_RETENTION_NOTICE: undefined, PRIVACY_PROCESSORS_NOTICE: undefined,
+    PRIVACY_TRANSFER_NOTICE: undefined, NEXT_PUBLIC_TURNSTILE_SITE_KEY: undefined,
+  }, async () => {
+    assert.equal(leadsConfigured(), true);
+    let calls = 0;
+    globalThis.fetch = (async (input, init) => {
+      calls++;
+      assert.equal(String(input), DEFAULT_FORMSPREE_ENDPOINT);
+      const data = init?.body as FormData;
+      assert.equal(data.has("cf-turnstile-response"), false);
+      assert.equal(data.get("email"), fields.email);
+      return Response.json({ next: "/thanks" });
+    }) as typeof fetch;
+    assert.equal((await POST(request(fields, [], ""))).status, 201);
+    assert.equal(calls, 1);
+  });
+});
+
+test("the explicit operational off switch still prevents delivery", async () => {
+  await withConfig({ ENQUIRY_DELIVERY_ENABLED: "false" }, async () => {
     assert.equal(leadsConfigured(), false);
     globalThis.fetch = (async () => { throw new Error("Unexpected external request"); }) as typeof fetch;
     assert.equal((await POST(request())).status, 503);

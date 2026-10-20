@@ -202,7 +202,7 @@ function QuoteFormInner({
       );
       return;
     }
-    if (!token) {
+    if (turnstileSiteKey && !token) {
       setError("Please complete the security check.");
       return;
     }
@@ -288,8 +288,8 @@ function QuoteFormInner({
       </div>
       {!available && (
         <p className="form-preview-notice">
-          Preview form. Enquiry delivery is not connected yet; submissions are
-          unavailable.
+          Enquiries are temporarily unavailable. Please contact the team on{" "}
+          <a href="https://wa.me/905353998999">WhatsApp</a>.
         </p>
       )}
       <p className="card-eyebrow">STEP {step + 1} OF 4</p>

@@ -198,3 +198,46 @@ test("photo totals are limited before entering contact details", () => {
   fireEvent.change(view.container.querySelector('input[type="file"]')!, { target: { files: photos } });
   assert.match(view.getByRole("alert").textContent || "", /4 MB in total/);
 });
+
+
+test("the enabled Formspree form submits without an unconfigured CAPTCHA and still requires consent", async () => {
+  const { render, fireEvent, waitFor } = testing;
+  const originalFetch = globalThis.fetch;
+  let calls = 0;
+  try {
+    globalThis.fetch = (async (input, init) => {
+      calls++;
+      assert.equal(input, "/api/quote");
+      const data = init?.body as FormData;
+      const fields = JSON.parse(String(data.get("fields")));
+      assert.equal(fields.dataConsent, true);
+      assert.equal(fields.healthConsent, true);
+      assert.equal(fields.marketingConsent, false);
+      assert.equal(data.get("captchaToken"), "");
+      return Response.json({ ok: true, reference: "no-custom-captcha-reference" }, { status: 201 });
+    }) as typeof fetch;
+    const view = render(
+      <SearchParamsContext.Provider value={new URLSearchParams()}>
+        <QuoteForm available={true} />
+      </SearchParamsContext.Provider>,
+    );
+    fireEvent.click(view.getByRole("radio", { name: "Not sure yet" }));
+    fireEvent.click(view.getByRole("button", { name: "Continue" }));
+    fireEvent.click(view.getByRole("button", { name: "Continue" }));
+    fireEvent.change(view.getByLabelText(/Full name/), { target: { value: "Test Patient" } });
+    fireEvent.change(view.getByLabelText(/Email address/), { target: { value: "test@example.com" } });
+    fireEvent.click(view.getByRole("button", { name: "Continue" }));
+    assert.equal((view.getByRole("button", { name: "Send my enquiry" }) as HTMLButtonElement).disabled, false);
+    fireEvent.click(view.getByRole("button", { name: "Send my enquiry" }));
+    assert.match(view.getByRole("alert").textContent || "", /required privacy/);
+    assert.equal(calls, 0);
+    fireEvent.click(view.getByLabelText(/I have read the/));
+    fireEvent.click(view.getByLabelText(/I explicitly consent/));
+    fireEvent.click(view.getByRole("button", { name: "Send my enquiry" }));
+    await waitFor(() => assert.ok(view.getByRole("status")));
+    assert.ok(view.getByText("Reference: no-custom-captcha-reference"));
+    assert.equal(calls, 1);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
