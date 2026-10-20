@@ -1,6 +1,6 @@
 import { z } from "zod";
-export const MAX_UPLOAD_SIZE = 3 * 1024 * 1024;
-export const MAX_REQUEST_SIZE = 10 * 1024 * 1024;
+import { MAX_REQUEST_SIZE } from "./enquiry-limits";
+export { MAX_UPLOAD_SIZE, MAX_REQUEST_SIZE, MAX_TOTAL_UPLOAD_SIZE } from "./enquiry-limits";
 export const leadSchema = z
   .object({
     treatment: z.enum([

@@ -1,3 +1,5 @@
+import { enquiryDelivery } from "./enquiry-config";
+
 export const SITE_NAME = "Turkey Teeth Finance";
 export const SITE_URL =
   (process.env.NEXT_PUBLIC_SITE_URL || "https://turkeyteethfinance.co.uk").replace(/\/+$/, "");
@@ -43,10 +45,10 @@ export function publicationApproved() {
 }
 
 export function leadsConfigured() {
+  const delivery = enquiryDelivery();
   return (
-    !!process.env.LEAD_WEBHOOK_URL &&
-    !!process.env.LEAD_WEBHOOK_SECRET &&
-    !!process.env.TURNSTILE_SECRET_KEY &&
+    !!delivery &&
+    (delivery.provider === "formspree" || !!process.env.TURNSTILE_SECRET_KEY) &&
     !!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY &&
     !!process.env.PRIVACY_CONTACT_EMAIL &&
     !!process.env.PRIVACY_RETENTION_NOTICE &&

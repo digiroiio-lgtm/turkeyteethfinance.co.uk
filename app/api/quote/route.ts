@@ -5,9 +5,12 @@ import {
   leadSchema,
   imageType,
   MAX_UPLOAD_SIZE,
+  MAX_TOTAL_UPLOAD_SIZE,
   readBoundedBody,
 } from "@/lib/lead-validation";
 import { leadsConfigured, SITE_URL } from "@/lib/site";
+import { enquiryDelivery } from "@/lib/enquiry-config";
+import { formspreeSubmission } from "@/lib/formspree";
 export const runtime = "nodejs";
 export const maxDuration = 30;
 const json = (body: unknown, status: number) =>
@@ -37,7 +40,7 @@ export async function POST(request: Request) {
       {
         error:
           e instanceof Error && e.message === "TOO_LARGE"
-            ? "The enquiry is too large. Please use up to 3 photos, no larger than 3 MB each."
+            ? "The enquiry is too large. Keep photographs under 4 MB in total and 3 MB each."
             : "The form could not be read.",
       },
       e instanceof Error && e.message === "TOO_LARGE" ? 413 : 400,
@@ -66,6 +69,9 @@ export async function POST(request: Request) {
       { error: "Use up to 3 photographs, no larger than 3 MB each." },
       400,
     );
+  if (files.reduce((total, file) => total + (file as File).size, 0) > MAX_TOTAL_UPLOAD_SIZE) {
+    return json({ error: "Keep photographs under 4 MB in total." }, 413);
+  }
   const photos: { filename: string; type: string; data: string }[] = [];
   for (let i = 0; i < files.length; i++) {
     const f = files[i] as File;
@@ -82,7 +88,8 @@ export async function POST(request: Request) {
       data: Buffer.from(bytes).toString("base64"),
     });
   }
-  if (!leadsConfigured())
+  const delivery = enquiryDelivery();
+  if (!delivery || !leadsConfigured())
     return json(
       {
         error:
@@ -98,31 +105,34 @@ export async function POST(request: Request) {
   )
     return json({ error: "Please complete the security check." }, 400);
   try {
-    const verification = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          secret: process.env.TURNSTILE_SECRET_KEY!,
-          response: captchaToken,
-        }),
-        signal: AbortSignal.timeout(8000),
-      },
-    );
-    const result = await verification.json();
-    if (
-      !result.success ||
-      result.action !== "treatment-enquiry" ||
-      result.hostname !== new URL(SITE_URL).hostname
-    )
-      return json(
+    // Formspree verifies its Turnstile token once. Webhooks use our own verifier.
+    if (delivery.provider === "webhook") {
+      const verification = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
         {
-          error:
-            "The security check expired or could not be verified. Please try again.",
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            secret: process.env.TURNSTILE_SECRET_KEY!,
+            response: captchaToken,
+          }),
+          signal: AbortSignal.timeout(8000),
         },
-        400,
       );
+      const result = await verification.json();
+      if (
+        !result.success ||
+        result.action !== "treatment-enquiry" ||
+        result.hostname !== new URL(SITE_URL).hostname
+      )
+        return json(
+          {
+            error:
+              "The security check expired or could not be verified. Please try again.",
+          },
+          400,
+        );
+    }
     for (const photo of photos) {
       try {
         const bytes = await sharp(Buffer.from(photo.data, "base64"), {
@@ -151,29 +161,51 @@ export async function POST(request: Request) {
         );
       }
     }
-    const webhook = new URL(process.env.LEAD_WEBHOOK_URL!);
-    if (webhook.protocol !== "https:" || webhook.username || webhook.password)
-      return json(
-        { error: "Enquiry delivery is temporarily unavailable." },
-        503,
-      );
     const { website: _website, ...lead } = parsed.data;
     void _website;
     const reference = randomUUID();
     const submittedAt = new Date().toISOString();
-    const payload = JSON.stringify({
+    const enquiry = {
       schemaVersion: 1,
       reference,
       submittedAt,
       source: "turkeyteethfinance.co.uk",
       privacyNoticeVersion: "2026-10-20",
       ...lead,
-      photos,
-    });
+    };
+    if (delivery.provider === "formspree") {
+      const response = await fetch(delivery.url, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Origin: expectedOrigin,
+          Referer: expectedOrigin + "/get-a-quote",
+        },
+        body: formspreeSubmission(enquiry, photos, captchaToken),
+        signal: AbortSignal.timeout(12000),
+        redirect: "error",
+        cache: "no-store",
+      });
+      if (response.status === 429) return json(
+        { error: "The enquiry service is busy. Please wait a few minutes and try again." }, 429,
+      );
+      const result: unknown = await response.json();
+      const body = result && typeof result === "object" ? result as Record<string, unknown> : undefined;
+      const errors = Array.isArray(body?.errors) ? body.errors : [];
+      if (errors.some((error) => error && typeof error === "object" && "code" in error && error.code === "NO_FILE_UPLOADS")) {
+        return json({ error: "Photograph upload is unavailable. Remove the photographs and try again, or contact the team." }, 422);
+      }
+      if (!response.ok || !body || typeof body.next !== "string" || body.error || errors.length) {
+        return json({ error: "We could not deliver your enquiry. Please complete the security check and try again." }, 502);
+      }
+      // next is an acknowledgement, not a destination to redirect the visitor to.
+      return json({ ok: true, reference }, 201);
+    }
+    const payload = JSON.stringify({ ...enquiry, photos });
     const signature = createHmac("sha256", process.env.LEAD_WEBHOOK_SECRET!)
       .update(payload)
       .digest("hex");
-    const response = await fetch(webhook, {
+    const response = await fetch(delivery.url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
