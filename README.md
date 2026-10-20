@@ -55,4 +55,13 @@ Patient review and result pages intentionally do not invent patient names, testi
 
 `/`, `/pay-monthly`, `/dental-finance`, `/get-a-quote`, `/dental-implants-finance`, `/finance-eligibility`, `/veneers-finance`, `/prices`, `/smile-makeover-finance`, `/zirconia-crowns-finance`, `/all-on-4-finance`, `/before-and-after`, `/reviews`, `/how-it-works`, `/our-clinic`, `/finance-faq`, `/contact`, `/guides`.
 
-Implementation notes and image provenance are in [visual references](docs/visual-references.md). Changes are provided on a review branch; no production domain or DNS is configured by this repository.
+Implementation notes and image provenance are in [visual references](docs/visual-references.md). Production deploys from main on Vercel at https://turkeyteethfinance.co.uk. Branch previews retain their indexing protection.
+
+## Search regression checks
+
+See [SEO validation](docs/seo-validation.md). Pull requests run a fresh production audit and build/test/HTTP smoke checks for both production and preview. `npm run seo:check` checks the live domain; `npm run seo:smoke` checks an existing local production build. Both HTTP check commands use Python 3.
+
+
+## Formspree enquiries
+
+The shared React enquiry form can deliver through Formspree endpoint xgaojavy using the existing server validation route. See [Formspree setup](docs/formspree.md) for CAPTCHA, optional attachments, required environment values and delivery verification. The existing collection gates remain in place until configuration is complete.

@@ -9,7 +9,9 @@
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test tests/*.test.ts tests/*.test.tsx",
-    "indexnow": "node --import tsx scripts/indexnow.ts"
+    "indexnow": "node --import tsx scripts/indexnow.ts",
+    "seo:check": "python3 scripts/check-seo.py",
+    "seo:smoke": "node --import tsx scripts/seo-smoke.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "5.2.8",

@@ -14,6 +14,7 @@ import {
   type LegalContent,
   type LegalParagraph,
 } from "./legal-content";
+import { publicPages } from "./public-pages";
 import {
   COMPANY,
   SITE_NAME,
@@ -73,6 +74,7 @@ function legalDocument(content: LegalContent): Document {
 }
 
 function documents(): Document[] {
+  const visible = new Set(publicPages().map((page) => page.path));
   return [
     {
       path: "/",
@@ -81,7 +83,7 @@ function documents(): Document[] {
       blocks: [
         homeContent.intro,
         "### Treatments",
-        ...treatments.flatMap((treatment) => [
+        ...treatments.filter((treatment) => visible.has(`/${treatment.slug}`)).flatMap((treatment) => [
           `#### ${treatment.name}`,
           treatment.text,
           treatment.detail,
@@ -119,6 +121,7 @@ function documents(): Document[] {
             ? [
                 "### Related pages",
                 page.related
+                  .filter((related) => visible.has(`/${related}`))
                   .map((related) => `- ${link(pages[related].title, `/${related}`)}`)
                   .join("\n"),
               ]
@@ -128,7 +131,7 @@ function documents(): Document[] {
     }),
     legalDocument(privacyContent()),
     legalDocument(termsContent()),
-  ];
+  ].filter((page) => visible.has(page.path));
 }
 
 function introduction(): string[] {
@@ -165,7 +168,7 @@ export function llmsIndex(): string {
     [
       ...introduction(),
       "## Site pages",
-      documents()
+      publicPages()
         .map((page) => `- ${link(page.title, page.path)}: ${page.description}`)
         .join("\n"),
       "## Full content",

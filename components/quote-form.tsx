@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { Icon } from "./ui";
+import { MAX_TOTAL_UPLOAD_SIZE } from "../lib/enquiry-limits";
 
 const interests = [
   "Veneers",
@@ -59,7 +60,7 @@ function Captcha({
   onToken: (token: string) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(() => typeof window !== "undefined" && !!window.turnstile);
   useEffect(() => {
     if (!loaded || !ref.current || !window.turnstile) return;
     const id = window.turnstile.render(ref.current, {
@@ -106,6 +107,8 @@ function QuoteFormInner({
   const [done, setDone] = useState(false);
   const [reference, setReference] = useState("");
   const [token, setToken] = useState("");
+  const [captchaVersion, setCaptchaVersion] = useState(0);
+  const submitting = useRef(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
   const firstRender = useRef(true);
@@ -173,11 +176,16 @@ function QuoteFormInner({
       setError("Use JPEG, PNG or WebP photographs, no larger than 3 MB each.");
       return;
     }
+    if ([...photos, ...list].reduce((total, file) => total + file.size, 0) > MAX_TOTAL_UPLOAD_SIZE) {
+      setError("Please keep photographs under 4 MB in total.");
+      return;
+    }
     setError("");
     setPhotos((p) => [...p, ...list]);
   }
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (submitting.current) return;
     if (step < 3) {
       advance();
       return;
@@ -198,6 +206,7 @@ function QuoteFormInner({
       setError("Please complete the security check.");
       return;
     }
+    submitting.current = true;
     setSending(true);
     setError("");
     try {
@@ -206,11 +215,14 @@ function QuoteFormInner({
       data.append("captchaToken", token);
       photos.forEach((p) => data.append("photos", p));
       const res = await fetch("/api/quote", { method: "POST", body: data });
-      const result = await res.json();
+      const result = await res.json().catch(() => null);
       if (!res.ok)
         throw new Error(
-          result.error || "We could not send your enquiry. Please try again.",
+          result?.error || "We could not send your enquiry. Please try again.",
         );
+      if (result?.ok !== true || typeof result.reference !== "string") {
+        throw new Error("We could not confirm delivery. Please try again later.");
+      }
       setReference(result.reference);
       setDone(true);
       setValues({ ...initial });
@@ -223,7 +235,10 @@ function QuoteFormInner({
           : "We could not send your enquiry. Please try again.",
       );
     } finally {
+      submitting.current = false;
       setSending(false);
+      setToken("");
+      setCaptchaVersion((version) => version + 1);
     }
   }
   if (done)
@@ -254,6 +269,7 @@ function QuoteFormInner({
   return (
     <form
       className="quote-form"
+      aria-busy={sending}
       onSubmit={submit}
       noValidate
       encType="multipart/form-data"
@@ -361,7 +377,7 @@ function QuoteFormInner({
               <strong>
                 Add photographs <span className="optional">(optional)</span>
               </strong>
-              <span>Up to 3 images · JPEG, PNG or WebP · 3 MB each</span>
+              <span>Up to 3 images · JPEG, PNG or WebP · 3 MB each · 4 MB total</span>
               <input
                 id="dental-photos"
                 type="file"
@@ -532,7 +548,7 @@ function QuoteFormInner({
             </span>
           </label>
           {available && turnstileSiteKey && (
-            <Captcha siteKey={turnstileSiteKey} onToken={setToken} />
+            <Captcha key={captchaVersion} siteKey={turnstileSiteKey} onToken={setToken} />
           )}
         </div>
       )}

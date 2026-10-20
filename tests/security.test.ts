@@ -161,7 +161,7 @@ test("non-canonical preview URLs open without credentials and retain noindex", (
       },
       () => {
         for (const path of ["/", "/pay-monthly", "/get-a-quote"]) {
-          const response = proxy(new NextRequest(`https://example.com${path}`));
+          const response = proxy(new NextRequest(`https://preview.vercel.app${path}`));
           assert.equal(response.status, 200);
           assert.equal(response.headers.get("x-middleware-next"), "1");
           assert.equal(response.headers.has("WWW-Authenticate"), false);
@@ -189,6 +189,7 @@ test("a missing CRM never reports successful lead delivery", async () => {
 });
 test("successful webhook handoff is signed and upstream failure is not success", async () => {
   const keys = [
+    "ENQUIRY_DELIVERY_PROVIDER",
     "LEAD_WEBHOOK_URL",
     "LEAD_WEBHOOK_SECRET",
     "TURNSTILE_SECRET_KEY",
@@ -206,6 +207,7 @@ test("successful webhook handoff is signed and upstream failure is not success",
   let fail = false;
   try {
     for (const k of keys) process.env[k] = "test";
+    process.env.ENQUIRY_DELIVERY_PROVIDER = "webhook";
     process.env.LEADS_DELIVERY_VERIFIED = "true";
     process.env.LEAD_WEBHOOK_URL = "https://crm.example.test/lead";
     process.env.LEAD_WEBHOOK_SECRET = "test-only-signing-key";

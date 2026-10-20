@@ -24,6 +24,7 @@ export const informationSources = [
 
 export type Section = { title: string; body: string; bullets?: string[] };
 export type PageContent = {
+  indexable?: boolean;
   lastModified: string;
   title: string;
   description: string;

@@ -1,16 +1,23 @@
 # Validation
 
-Completed on 20 October 2026:
+## Consolidated release checks
 
-- `npm run lint`: passed with no warnings.
-- `npm run typecheck`: passed.
-- `npm test`: 24 tests passed. Covers independent production search indexing, preview/hold controls, canonical redirects, page-specific content dates, IndexNow key configuration, consent and honeypot validation, image signatures, streaming upload bounds, password-free access, broker URL validation, missing integration behaviour, signed mocked webhook delivery, menu state, budget selection, all four enquiry steps and LLM exports.
-- `npm run build`: passed. All 18 brief pages and both legal pages are statically generated, with server route handlers for enquiries and the IndexNow key.
-- Inspected the generated HTML for all 20 content pages: one H1, unique title and description, one canonical, valid JSON-LD and valid internal link destinations.
-- Production search checks: 20 populated sitemap entries match generated canonical URLs and `index, follow` metadata. `lastmod` uses the actual initial content date, 20 October 2026. Production HTTP checks confirmed public crawl access and absence of noindex headers on canonical pages, the www-to-canonical 308 redirect with query preservation, and blocked indexing on preview aliases. Search indexing is independent of finance application approval.
-- `/llms.txt` and `/llms-full.txt` are generated at build time from shared public page data. Tests cover all 20 canonical pages, current FAQs, complete guides, content edits, public configuration and exclusion of private settings. Production HTTP checks confirmed UTF-8 plain text, the discovery `Link` header and matching generated response bodies. Privacy and terms retain their prior visible wording after moving their content into the shared model.
-- Browser visual review: desktop and 390 px iframe layout. The narrow layout reported equal content/client widths of 375 px after the scrollbar, with no horizontal overflow.
+The consolidated release includes the indexing work from PR #2 and the React/Formspree integration from PR #3. Their individual checks passed before consolidation. The combined tree must pass the single SEO validation workflow before main is updated.
 
-Browser interaction QA was not completed: the managed development preview encountered development-runtime restrictions and then an explicit browser URL security rejection. No browser workaround was attempted after that rejection. The menu, budget and form interactions were independently validated in an in-memory React DOM using synthetic data. A production-hosted browser smoke test is still required before public launch.
+The workflow runs lint, all unit/component/route tests, a production build, typecheck, and HTTP smoke checks for every canonical sitemap URL. It then builds preview configuration and verifies blocking robots, HTML and HTTP directives.
 
-No genuine credit application, live CRM submission, third-party notification, DNS change, search ownership verification or financial-promotion approval was performed. Pages are accessible without a password. Finance application links, indexing and enquiry delivery retain their independent configuration requirements. Reviews and patient outcome modules require verified source content and publication consent.
+The form tests mock Formspree and the existing signed webhook. They cover consent, honeypot and CAPTCHA presence, multipart fields, marketing opt-in, upload totals, metadata-free attachments, receiver failures, duplicate prevention and retries. No real enquiries or email notifications are sent by CI.
+
+## Production evidence and ownership
+
+A fresh live check on 20 October 2026, before this consolidation, confirmed 20 public sitemap URLs, 200 responses, matching canonicals, open robots, no blocking HTML/HTTP directives, the www-to-apex 308 redirect and consistent LLM exports.
+
+Search Console ownership was verified using the existing public HTML tag. The sitemap was submitted and processed with 20 discovered pages. Google's live homepage test confirmed crawl allowed, successful fetch and indexing allowed; the indexing request was accepted. That does not establish indexed status or ranking.
+
+After merging, verify the Vercel Production/Current deployment points to the resulting main commit, then repeat the live audit after that deployment is ready. A preview build alone is not production deployment evidence.
+
+## Earlier visual validation
+
+The initial build was reviewed at desktop and 390 px iframe sizes, with no horizontal overflow. Menu, budget and form interactions are also tested in an in-memory React DOM. No claim is made that these checks replace a full browser review of every route.
+
+Finance promotion approval and live enquiry-delivery verification remain independent configuration requirements. Reviews and patient outcome modules require verified source content and publication consent. See formspree.md and seo-validation.md for setup and executable checks.

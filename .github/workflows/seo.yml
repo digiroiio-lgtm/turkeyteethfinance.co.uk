@@ -1,0 +1,57 @@
+name: SEO validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: seo-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  live-baseline:
+    name: Current production SEO evidence
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Record the current production responses without treating an existing defect as a fix
+        run: python3 scripts/check-seo.py --report-only --output baseline-seo.json
+
+  build-and-smoke:
+    name: Build, tests and production/preview SEO
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NODE_ENV: production
+      VERCEL_ENV: production
+      NEXT_PUBLIC_SITE_URL: ""
+      SITE_CONTENT_APPROVED: "false"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --include=dev
+      - run: npm run lint
+      - run: npm test
+        env:
+          NODE_ENV: test
+      - run: npm run build
+      - run: npm run typecheck
+      - name: Check all canonical production routes over HTTP
+        run: npm run seo:smoke
+      - name: Build with explicit preview settings
+        env:
+          VERCEL_ENV: preview
+        run: npm run build
+      - name: Check preview robots, sitemap, metadata and HTTP headers
+        env:
+          VERCEL_ENV: preview
+        run: npm run seo:smoke -- --preview
