@@ -153,35 +153,25 @@ test("a verified CRM and privacy configuration are required to enable submission
     assert.equal(leadsConfigured(), false),
   );
 });
-test("production previews fail closed and require the configured password", () => {
-  withEnv(
-    {
-      NODE_ENV: "production",
-      SITE_CONTENT_APPROVED: "false",
-      PREVIEW_PASSWORD: undefined,
-    },
-    () =>
-      assert.equal(proxy(new NextRequest("https://example.com/")).status, 503),
-  );
-  withEnv(
-    {
-      NODE_ENV: "production",
-      SITE_CONTENT_APPROVED: "false",
-      PREVIEW_PASSWORD: "test-only-password",
-    },
-    () => {
-      assert.equal(proxy(new NextRequest("https://example.com/")).status, 401);
-      const res = proxy(
-        new NextRequest("https://example.com/", {
-          headers: {
-            authorization: `Basic ${Buffer.from("preview:test-only-password").toString("base64")}`,
-          },
-        }),
-      );
-      assert.equal(res.status, 200);
-      assert.match(res.headers.get("X-Robots-Tag") || "", /noindex/);
-    },
-  );
+test("production pages open without credentials while drafts retain noindex", () => {
+  for (const password of [undefined, "legacy-preview-password"]) {
+    withEnv(
+      {
+        NODE_ENV: "production",
+        SITE_CONTENT_APPROVED: "false",
+        PREVIEW_PASSWORD: password,
+      },
+      () => {
+        for (const path of ["/", "/pay-monthly", "/get-a-quote"]) {
+          const response = proxy(new NextRequest(`https://example.com${path}`));
+          assert.equal(response.status, 200);
+          assert.equal(response.headers.get("x-middleware-next"), "1");
+          assert.equal(response.headers.has("WWW-Authenticate"), false);
+          assert.match(response.headers.get("X-Robots-Tag") || "", /noindex/);
+        }
+      },
+    );
+  }
 });
 test("cross-site requests and invalid consents are rejected", async () => {
   assert.equal(

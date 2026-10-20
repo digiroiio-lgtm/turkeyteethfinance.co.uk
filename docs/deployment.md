@@ -4,13 +4,13 @@
 
 1. Import this repository as a Next.js project; use `npm ci` and `npm run build` with the default Next.js output.
 2. Configure the environment variables from `.env.example`. Keep all secrets in the hosting environment, never in Git.
-3. For review, leave `SITE_CONTENT_APPROVED=false` and set a strong `PREVIEW_PASSWORD`. The username is `preview`. Review all pages, legal copy, fees and the application journey in that private deployment.
+3. For review, leave `SITE_CONTENT_APPROVED=false`. Pages are accessible without credentials, with a draft notice and noindex metadata. Review all pages, legal copy, fees and the application journey in the deployment.
 4. Obtain the actual approved bespoke Ideal4Finance link and the complete approved wording identifying all relevant entities, permissions, fees and any required examples. Populate `FINANCE_APPLICATION_URL` and `APPROVED_FINANCE_DISCLOSURE` only with that approved content.
 5. Confirm clinic identity, clinical descriptions, privacy notices, data processors, retention and UK-to-Turkey transfer safeguards with the operator. No invented clinician credentials or author endorsements are present.
 6. After written financial-promotion approval, set `SITE_CONTENT_APPROVED=true` and rebuild. This enables indexable metadata, a populated sitemap and the external application CTA. Changing runtime variables without rebuilding is insufficient for statically generated metadata and forms.
 7. Connect the production domain using the hosting provider’s verified domain workflow. This task has not changed DNS, created a Vercel project or published financial promotions.
 
-The production preview guard covers HTML, RSC and API routes. Static design assets remain accessible and contain no submitted patient data. Deployment-level access protection can be added by the host. A missing preview password returns 503 rather than exposing unapproved content.
+The application has no site-wide password or preview-access gate. `PREVIEW_PASSWORD` is no longer used and can be removed from existing hosting settings. Draft indexing controls and the independent finance/lead integration settings continue to apply.
 
 ## Private lead receiver
 

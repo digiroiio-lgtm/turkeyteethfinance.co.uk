@@ -32,7 +32,7 @@ npm run build
 
 ## Before public launch
 
-The supplied brief requires approval of financial promotions before publication. This build deliberately defaults to a **private preview**, not an active finance offer. Production pages require preview credentials until approval is configured. If no preview password is configured, production content returns HTTP 503. Draft robots disallow crawling and the sitemap is empty.
+The website is accessible without a password in every environment. Draft pages display a preview notice, remain marked noindex and are excluded from the sitemap until finance publication is configured. There is no site-wide authentication or HTTP 503 preview gate.
 
 Supply the genuine approved Ideal4Finance application URL and complete approved disclosure, then set `SITE_CONTENT_APPROVED=true` and rebuild. The application URL is restricted to HTTPS on the provider’s domain. Do not use an invented URL or copy a generic homepage link into this setting.
 
