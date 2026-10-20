@@ -20,7 +20,7 @@ export function Hero({
         <div className="hero-copy">
           <Eyebrow>{label}</Eyebrow>
           <h1>
-            {heading}
+            {heading}{" "}
             <span className="gradient-text">{accent}</span>
           </h1>
           <p className="hero-description">{intro}</p>

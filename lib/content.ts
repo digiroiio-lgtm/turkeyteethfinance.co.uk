@@ -550,7 +550,7 @@ export const pages: Record<string, PageContent> = {
     accent: "Your questions answered.",
     kind: "clinic",
     intro:
-      "Explore treatment with Akdeniz Dental in Antalya, with UK patient coordination through Akdeniz Dental Consultancy UK Ltd.",
+      "Explore dental treatment with Akdeniz Dental in Antalya, Turkey. Akdeniz Dental Consultancy UK Ltd provides non-clinical patient coordination and administrative support. Clinical assessments, treatment planning and dental treatment are provided by the clinical team in Turkey.",
     sections: [
       {
         title: "Get to know your treating team",
