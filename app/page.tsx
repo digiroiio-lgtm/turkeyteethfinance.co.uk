@@ -10,11 +10,9 @@ import {
 import { BudgetExplorer } from "@/components/budget-explorer";
 import { ConversionBanner, FAQSection, FinanceNotice } from "@/components/ui";
 import { PageSchema } from "@/components/structured-data";
-import { commonFAQs } from "@/lib/content";
+import { commonFAQs, homeContent } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
-const title = "Dental Finance Turkey | Flexible Payment Options";
-const description =
-  "Explore dental treatment in Antalya with flexible payment options for eligible UK patients. Start with a free written treatment estimate, with no required phone call.";
+const { title, description } = homeContent;
 export const metadata = pageMetadata(title, description, "/");
 export default function Home() {
   return (

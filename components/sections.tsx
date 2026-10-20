@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Check, ArrowRight, Info, ExternalLink } from "lucide-react";
-import { treatments, pages, guideArticles } from "@/lib/content";
+import { treatments, pages, guideArticles, informationSources } from "@/lib/content";
 import { Icon, SectionTitle, Eyebrow } from "./ui";
 
 export function TrustStrip() {
@@ -410,21 +410,16 @@ export function Sources() {
     <aside className="container sources">
       <h2>Further information</h2>
       <p>Read the provider’s own information before making a decision.</p>
-      <a
-        href="https://ideal4finance.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Ideal4Finance: credit broker information <ExternalLink size={13} />
-      </a>
-      <a
-        href="https://www.gdc-uk.org/standards-guidance/information-for-patients-public/going-abroad-for-dental-treatment"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        General Dental Council: considering treatment abroad{" "}
-        <ExternalLink size={13} />
-      </a>
+      {informationSources.map((source) => (
+        <a
+          key={source.url}
+          href={source.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {source.title} <ExternalLink size={13} />
+        </a>
+      ))}
       <p className="small">
         General information only. Your treating dentist and lender provide the
         information specific to your circumstances.

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { Check, Wallet, Heart, Sparkles } from "lucide-react";
 import { Benefits, Eyebrow, QuoteCTA } from "./ui";
+import { homeContent } from "@/lib/content";
 export function Hero({
-  label = "DENTAL TREATMENT IN TURKEY",
-  heading = "Your new smile in Turkey.",
-  accent = "Flexible payment options.",
-  intro = "Quality dental treatment in Antalya with finance options for eligible UK patients, subject to status and lender approval.",
+  label = homeContent.label,
+  heading = homeContent.heading,
+  accent = homeContent.accent,
+  intro = homeContent.intro,
   type = "home",
 }: {
   label?: string;

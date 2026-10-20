@@ -1,4 +1,26 @@
 export type FAQ = { question: string; answer: string };
+export const homeContent = {
+  title: "Dental Finance Turkey | Flexible Payment Options",
+  description:
+    "Explore dental treatment in Antalya with flexible payment options for eligible UK patients. Start with a free written treatment estimate, with no required phone call.",
+  label: "DENTAL TREATMENT IN TURKEY",
+  heading: "Your new smile in Turkey.",
+  accent: "Flexible payment options.",
+  intro:
+    "Quality dental treatment in Antalya with finance options for eligible UK patients, subject to status and lender approval.",
+};
+
+export const informationSources = [
+  {
+    title: "Ideal4Finance: credit broker information",
+    url: "https://ideal4finance.com/",
+  },
+  {
+    title: "General Dental Council: considering treatment abroad",
+    url: "https://www.gdc-uk.org/standards-guidance/information-for-patients-public/going-abroad-for-dental-treatment",
+  },
+];
+
 export type Section = { title: string; body: string; bullets?: string[] };
 export type PageContent = {
   title: string;

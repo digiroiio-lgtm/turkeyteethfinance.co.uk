@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { SiteSchema } from "@/components/structured-data";
-import { SITE_URL, publicationApproved } from "@/lib/site";
+import { SITE_URL, draftNotice, publicationApproved } from "@/lib/site";
 import "./globals.css";
 const inter = localFont({
   src: "../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
@@ -37,8 +37,7 @@ export default function RootLayout({
         </a>
         {!publicationApproved() && (
           <div className="draft-banner" role="status">
-            Design preview · Finance content awaiting compliance approval · Not
-            a live finance offer
+            {draftNotice}
           </div>
         )}
         <Header />

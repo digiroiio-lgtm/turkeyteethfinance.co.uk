@@ -3,6 +3,8 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://turkeyteethfinance.co.uk";
 export const COMPANY = "Akdeniz Dental Consultancy UK Ltd";
 export const PRIMARY_CTA = "Get My Free Treatment Quote";
+export const draftNotice =
+  "Design preview · Finance content awaiting compliance approval · Not a live finance offer";
 
 export function financeApplicationUrl(): string | undefined {
   const value = process.env.FINANCE_APPLICATION_URL;

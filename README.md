@@ -29,6 +29,15 @@ npm run build
 - Server-side validation, bounded requests, same-origin checks, Turnstile verification, decoded/re-encoded photographs with metadata removed and a signed private webhook handoff. No patient data in application analytics or logs.
 - A treatment budget explorer that does not fabricate loan quotations, APRs or repayments.
 - Draft publication controls, search verification settings and an opt-in changed-URL IndexNow script.
+- Automatically generated `/llms.txt` and `/llms-full.txt`, with a discovery `Link` response header.
+
+## LLM text exports
+
+`/llms.txt` is a short directory of all 20 canonical content pages, including privacy and terms. `/llms-full.txt` includes shared page copy, treatment descriptions, all FAQs, complete guide articles and the legal notices. Navigation, repeated UI and interactive form inputs are omitted.
+
+Both UTF-8 Markdown text responses are generated during `next build` from the same content models used by the pages (`lib/content.ts`, `lib/legal-content.ts` and `lib/site.ts`). Content edits and public privacy/finance configuration are reflected on the next deployment; no separate text files need to be maintained. Only the explicitly public content fields are exported. Draft notices and approved finance links follow the website’s existing publication settings.
+
+Every response advertises `/llms.txt` with a `Link` header. The index links to the full text. These optional agent resources do not replace sitemap.xml, robots.txt or normal search indexing.
 
 ## Before public launch
 
