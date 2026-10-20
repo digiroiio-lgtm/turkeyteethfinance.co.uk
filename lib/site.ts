@@ -1,6 +1,8 @@
+import { pages } from "./content";
+import { canonicalOrigin, searchIndexingEnabled } from "./search-config";
+
 export const SITE_NAME = "Turkey Teeth Finance";
-export const SITE_URL =
-  (process.env.NEXT_PUBLIC_SITE_URL || "https://turkeyteethfinance.co.uk").replace(/\/+$/, "");
+export const SITE_URL = canonicalOrigin(process.env.NEXT_PUBLIC_SITE_URL);
 export const COMPANY = "Akdeniz Dental Consultancy UK Ltd";
 export const PRIMARY_CTA = "Get My Free Treatment Quote";
 export const draftNotice =
@@ -8,12 +10,14 @@ export const draftNotice =
 
 /** Public search visibility is independent of finance application approval. */
 export function indexingEnabled() {
-  return (
-    process.env.SITE_INDEXING_ENABLED !== "false" &&
-    process.env.VERCEL_ENV !== "preview" &&
-    process.env.VERCEL_ENV !== "development" &&
-    process.env.NODE_ENV !== "development"
-  );
+  return searchIndexingEnabled();
+}
+
+export function canonicalUrl(path: string): string {
+  if (!path.startsWith("/") || path.startsWith("//") || /[?#]/.test(path) || path.includes("\\")) {
+    throw new Error("Canonical page paths must be local, without queries or fragments.");
+  }
+  return SITE_URL + (path === "/" ? "" : path);
 }
 
 export function financeApplicationUrl(): string | undefined {
@@ -59,23 +63,6 @@ export function leadsConfigured() {
 export const financeNotice =
   "Credit is subject to status, affordability and lender approval. Rates, terms and available options depend on your circumstances. A treatment enquiry is not a credit application.";
 
-export const routeSlugs = [
-  "pay-monthly",
-  "dental-finance",
-  "get-a-quote",
-  "dental-implants-finance",
-  "finance-eligibility",
-  "veneers-finance",
-  "prices",
-  "smile-makeover-finance",
-  "zirconia-crowns-finance",
-  "all-on-4-finance",
-  "before-and-after",
-  "reviews",
-  "how-it-works",
-  "our-clinic",
-  "finance-faq",
-  "contact",
-  "guides",
-] as const;
-export const canonicalPaths = ["/", ...routeSlugs.map((s) => `/${s}`)];
+// The actual content registry drives static routes, sitemap and LLM discovery.
+export const routeSlugs = Object.keys(pages);
+export const canonicalPaths = ["/", ...routeSlugs.map((slug) => `/${slug}`)];

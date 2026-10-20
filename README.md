@@ -56,3 +56,7 @@ Patient review and result pages intentionally do not invent patient names, testi
 `/`, `/pay-monthly`, `/dental-finance`, `/get-a-quote`, `/dental-implants-finance`, `/finance-eligibility`, `/veneers-finance`, `/prices`, `/smile-makeover-finance`, `/zirconia-crowns-finance`, `/all-on-4-finance`, `/before-and-after`, `/reviews`, `/how-it-works`, `/our-clinic`, `/finance-faq`, `/contact`, `/guides`.
 
 Implementation notes and image provenance are in [visual references](docs/visual-references.md). Changes are provided on a review branch; no production domain or DNS is configured by this repository.
+
+## Search regression checks
+
+See [SEO validation](docs/seo-validation.md). Pull requests run a fresh production audit and build/test/HTTP smoke checks for both production and preview. `npm run seo:check` checks the live domain; `npm run seo:smoke` checks an existing local production build. Both HTTP check commands use Python 3.

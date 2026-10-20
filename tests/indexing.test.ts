@@ -6,12 +6,16 @@ import {
   indexingEnabled,
   publicationApproved,
   SITE_URL,
+  canonicalUrl,
 } from "../lib/site";
 import { pageMetadata } from "../lib/metadata";
 import { pages } from "../lib/content";
 import { proxy } from "../proxy";
 import sitemap from "../app/sitemap";
 import robots from "../app/robots";
+import { canonicalOrigin, DEFAULT_SITE_URL, searchIndexingEnabled } from "../lib/search-config";
+import { publicPages, publicSitemapEntries, trustedContentDate } from "../lib/public-pages";
+import { llmsIndex, llmsFull } from "../lib/llms";
 import { GET as indexNowKey } from "../app/api/indexnow-key/route";
 
 function withEnv<T>(values: Record<string, string | undefined>, fn: () => T): T {
@@ -76,7 +80,7 @@ test("explicit search holds and development/preview builds stay closed to indexi
     { SITE_INDEXING_ENABLED: "false" },
     { VERCEL_ENV: "preview" },
     { VERCEL_ENV: "development" },
-    { NODE_ENV: "development" },
+    { NODE_ENV: "development", VERCEL_ENV: undefined },
   ]) {
     withEnv({ ...production, ...overrides }, () => {
       assert.equal(indexingEnabled(), false);
@@ -145,4 +149,81 @@ test("IndexNow key delivery follows search configuration rather than finance app
   });
   assert.equal(response.status, 200);
   assert.equal(await response.text(), "test-site-specific-key");
+});
+
+test("missing or temporary site URL settings cannot replace the public canonical origin", () => {
+  for (const value of [
+    undefined, "", " ", "http://turkeyteethfinance.co.uk", "not a URL",
+    "https://localhost", "https://127.0.0.1", "https://branch.vercel.app",
+    "https://user:password@turkeyteethfinance.co.uk",
+    "https://turkeyteethfinance.co.uk/path", "https://turkeyteethfinance.co.uk?x=1",
+  ]) assert.equal(canonicalOrigin(value), DEFAULT_SITE_URL);
+  assert.equal(canonicalOrigin(" https://www.turkeyteethfinance.co.uk/ "), DEFAULT_SITE_URL);
+  assert.equal(canonicalOrigin("https://turkeyteethfinance.co.uk/"), DEFAULT_SITE_URL);
+});
+
+test("explicit Vercel production is authoritative and missing environment flags default safely", () => {
+  assert.equal(searchIndexingEnabled({ VERCEL_ENV: "production", NODE_ENV: "development" }), true);
+  assert.equal(searchIndexingEnabled({ NODE_ENV: "production" }), true);
+  assert.equal(searchIndexingEnabled({}), true);
+  assert.equal(searchIndexingEnabled({ VERCEL_ENV: "preview", NODE_ENV: "production" }), false);
+  assert.equal(searchIndexingEnabled({ VERCEL_ENV: "production", SITE_INDEXING_ENABLED: " FALSE " }), false);
+});
+
+test("an internal production hostname does not trigger preview-only noindex headers", () => {
+  withEnv(production, () => {
+    for (const host of ["origin.internal:3000", "upstream.example.test"]) {
+      const response = proxy(new NextRequest(SITE_URL + "/prices", { headers: { host } }));
+      assert.equal(response.headers.has("X-Robots-Tag"), false);
+    }
+  });
+});
+
+test("a canonical forwarded hostname works behind a proxy but never bypasses a preview environment", () => {
+  const request = new NextRequest(SITE_URL + "/prices", {
+    headers: { host: "localhost:3000", "x-forwarded-host": new URL(SITE_URL).hostname },
+  });
+  withEnv(production, () => assert.equal(proxy(request).headers.has("X-Robots-Tag"), false));
+  withEnv({ ...production, VERCEL_ENV: "preview" }, () =>
+    assert.match(proxy(request).headers.get("X-Robots-Tag") || "", /noindex/),
+  );
+});
+
+test("canonical page URLs reject external, parameterized and fragment destinations", () => {
+  for (const path of ["https://other.test", "//other.test", "/prices?budget=1", "/guides#article", "/bad\\path"]) {
+    assert.throws(() => canonicalUrl(path), /Canonical page paths/);
+  }
+});
+
+test("the public registry is shared by sitemap and LLM discovery and excludes noindex pages", () => {
+  withEnv(production, () => {
+    const page = pages["veneers-finance"];
+    const previous = page.indexable;
+    try {
+      page.indexable = false;
+      assert.equal(publicPages().some((entry) => entry.path === "/veneers-finance"), false);
+      assert.equal(sitemap().some((entry) => entry.url.endsWith("/veneers-finance")), false);
+      assert.deepEqual(pageMetadata(page.title, page.description, "/veneers-finance").robots, {
+        index: false, follow: false,
+      });
+      assert.equal(llmsIndex().includes("(" + canonicalUrl("/veneers-finance") + ")"), false);
+      assert.equal(llmsFull().includes("Source: " + canonicalUrl("/veneers-finance") + "\n"), false);
+    } finally {
+      if (previous === undefined) delete page.indexable;
+      else page.indexable = previous;
+    }
+  });
+});
+
+test("empty production sitemaps fail instead of silently publishing an empty urlset", () => {
+  assert.throws(() => publicSitemapEntries([]), /must not be empty/);
+});
+
+test("unknown content dates are omitted and valid explicit dates are preserved", () => {
+  for (const value of [undefined, "", "yesterday", "2026-02-30", "2026-13-01"]) {
+    assert.equal(trustedContentDate(value), undefined);
+  }
+  assert.equal(trustedContentDate("2026-10-20"), "2026-10-20");
+  const entry = publicSitemapEntries([{ path: "/", title: "Home", description: "Home" }])[0];
+  assert.equal("lastModified" in entry, false);
 });

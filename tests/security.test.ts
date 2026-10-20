@@ -161,7 +161,7 @@ test("non-canonical preview URLs open without credentials and retain noindex", (
       },
       () => {
         for (const path of ["/", "/pay-monthly", "/get-a-quote"]) {
-          const response = proxy(new NextRequest(`https://example.com${path}`));
+          const response = proxy(new NextRequest(`https://preview.vercel.app${path}`));
           assert.equal(response.status, 200);
           assert.equal(response.headers.get("x-middleware-next"), "1");
           assert.equal(response.headers.has("WWW-Authenticate"), false);

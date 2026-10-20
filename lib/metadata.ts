@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { SITE_NAME, SITE_URL, indexingEnabled } from "./site";
+import { SITE_NAME, SITE_URL, canonicalUrl, indexingEnabled } from "./site";
+import { publicPages } from "./public-pages";
 export function pageMetadata(
   title: string,
   description: string,
@@ -8,8 +9,8 @@ export function pageMetadata(
   return {
     title,
     description,
-    alternates: { canonical: path },
-    robots: indexingEnabled()
+    alternates: { canonical: canonicalUrl(path) },
+    robots: indexingEnabled() && publicPages().some((page) => page.path === path)
       ? { index: true, follow: true }
       : { index: false, follow: false },
     openGraph: {
