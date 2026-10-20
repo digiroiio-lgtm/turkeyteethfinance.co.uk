@@ -5,7 +5,7 @@ import { ArrowRight, Check, Info } from "lucide-react";
 import { Eyebrow } from "./ui";
 import { PRIMARY_CTA } from "@/lib/site";
 const options = ["Veneers", "Dental implants", "All-on-4", "Smile makeover"];
-export function BudgetExplorer() {
+export function BudgetExplorer({ answerIntro = false }: { answerIntro?: boolean }) {
   const [treatment, setTreatment] = useState(options[0]);
   const [cost, setCost] = useState(3500);
   const amount = new Intl.NumberFormat("en-GB", {
@@ -25,8 +25,9 @@ export function BudgetExplorer() {
               <span className="gradient-text">a clearer picture.</span>
             </h2>
             <p>
-              Choose a budget you would like to discuss with the team. Your
-              personal treatment estimate comes after we understand your needs.
+              {answerIntro
+                ? "Use the planner to record a treatment budget you would like to discuss, then request a personal estimate from the team. Moving the slider does not calculate a price, assess your eligibility or apply for credit. Your written treatment estimate and any lender quotation are separate documents."
+                : "Choose a budget you would like to discuss with the team. Your personal treatment estimate comes after we understand your needs."}
             </p>
             <p className="information-note">
               <Info size={21} />
@@ -76,7 +77,7 @@ export function BudgetExplorer() {
               <span>£10,000</span>
             </div>
             <div className="budget-summary">
-              <h3>Your next step: a personal quote</h3>
+              <p className="budget-summary-title">Your next step: a personal quote</p>
               <ul>
                 <li>
                   <Check size={16} />

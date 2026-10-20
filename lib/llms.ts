@@ -1,3 +1,4 @@
+import { guideSource, homeGuide, homeGuideSections } from "./home-guide";
 import {
   commonFAQs,
   guideArticles,
@@ -82,6 +83,16 @@ function documents(): Document[] {
       heading: `${homeContent.heading} ${homeContent.accent}`,
       blocks: [
         homeContent.intro,
+        `Last updated: ${homeGuide.updatedLabel}\nPrepared by ${homeGuide.author}.`,
+        ...homeGuideSections.flatMap((section) => [
+          `### ${section.title}`, section.answer, ...section.paragraphs,
+          ...(section.quote ? [
+            `> ${section.quote.text}`,
+            `${section.quote.name}, ${section.quote.role}. ${link("Original statement", guideSource(section.quote.sourceId).url)}`,
+          ] : []),
+          ...section.sourceIds.map((id) => link(guideSource(id).title, guideSource(id).url)),
+          ...(section.calculation ? [section.calculation] : []),
+        ]),
         "### Treatments",
         ...treatments.filter((treatment) => visible.has(`/${treatment.slug}`)).flatMap((treatment) => [
           `#### ${treatment.name}`,

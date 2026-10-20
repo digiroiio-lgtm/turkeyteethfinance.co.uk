@@ -12,28 +12,28 @@ export function TrustStrip() {
     >
       <div>
         <Icon name="users" />
-        <h2>UK patient support</h2>
+        <p className="trust-label">UK patient support</p>
         <p>Here to help you plan</p>
       </div>
       <div>
         <Icon name="wallet" />
-        <h2>Payment options</h2>
+        <p className="trust-label">Payment options</p>
         <p>Subject to lender approval</p>
       </div>
       <div>
         <Icon name="file" />
-        <h2>A personal plan</h2>
+        <p className="trust-label">A personal plan</p>
         <p>Clear, written information</p>
       </div>
       <div>
         <Icon name="tooth" />
-        <h2>Care in Antalya</h2>
+        <p className="trust-label">Care in Antalya</p>
         <p>Clinical assessment first</p>
       </div>
     </section>
   );
 }
-export function TreatmentGrid({ compact = false }: { compact?: boolean }) {
+export function TreatmentGrid({ compact = false, answerIntro = false }: { compact?: boolean; answerIntro?: boolean }) {
   return (
     <section className="section treatment-section">
       <div className="container">
@@ -41,7 +41,9 @@ export function TreatmentGrid({ compact = false }: { compact?: boolean }) {
           label="FIND YOUR TREATMENT"
           title="Different smiles."
           accent="Personal plans."
-          intro="Explore the options, then find out what is right for you with a clinical assessment."
+          intro={answerIntro
+            ? "Explore veneers, implants, crowns and full-arch options as different treatments with different indications. A clinical assessment establishes what your teeth need and whether a less invasive option is appropriate. Compare the proposed procedures and long-term care requirements before comparing prices or deciding how to pay."
+            : "Explore the options, then find out what is right for you with a clinical assessment."}
         />
         <div className={`treatment-grid ${compact ? "compact" : ""}`}>
           {treatments.map((t, i) => (
@@ -111,7 +113,7 @@ const journey = [
     ],
   },
 ];
-export function Journey({ detailed = false }: { detailed?: boolean }) {
+export function Journey({ detailed = false, intro }: { detailed?: boolean; intro?: string }) {
   return (
     <section
       className={`section journey-section ${detailed ? "detailed" : ""}`}
@@ -121,11 +123,11 @@ export function Journey({ detailed = false }: { detailed?: boolean }) {
           label={detailed ? "THE PROCESS" : "HOW IT WORKS"}
           title="Four simple steps."
           accent="We help you plan."
-          intro={
+          intro={intro ?? (
             detailed
               ? "From your first enquiry to your care in Antalya, with clear information along the way."
               : undefined
-          }
+          )}
         />
         <ol className="journey-grid">
           {journey.map((s, i) => (
@@ -178,7 +180,7 @@ export function Journey({ detailed = false }: { detailed?: boolean }) {
     </section>
   );
 }
-export function CarePanel() {
+export function CarePanel({ answerIntro = false }: { answerIntro?: boolean }) {
   return (
     <section className="section care-section">
       <div className="container care-grid">
@@ -195,10 +197,10 @@ export function CarePanel() {
           </div>
           <div className="care-photo-label">
             <span>CARE IN ANTALYA</span>
-            <h2>
+            <p className="care-visual-title">
               A personal journey.
               <br />A considered plan.
-            </h2>
+            </p>
           </div>
         </div>
         <div className="care-info">
@@ -209,8 +211,9 @@ export function CarePanel() {
             <span className="gradient-text">From the start.</span>
           </h2>
           <p>
-            Discuss your goals, understand your options and receive a written
-            estimate before making a decision.
+            {answerIntro
+              ? "Start by discussing your goals and requesting written information about the proposed treatment, alternatives and estimated cost. Akdeniz Dental Consultancy UK Ltd handles non-clinical coordination and administration. The clinical team at Akdeniz Dental in Antalya assesses suitability, plans treatment and provides dental care in Turkey."
+              : "Discuss your goals, understand your options and receive a written estimate before making a decision."}
           </p>
           <ul className="check-list">
             <li>
@@ -273,7 +276,7 @@ export function EligibilityPanel() {
                 <Check />
               </span>
               <div>
-                <h3>{t}</h3>
+                <p className="eligibility-label">{t}</p>
                 <p>{d}</p>
               </div>
             </li>
