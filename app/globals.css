@@ -449,7 +449,7 @@ select:focus-visible {
   align-items: center;
   margin-bottom: 12px;
 }
-.finance-float-title h2 {
+.finance-float-title .finance-float-heading {
   font-size: 19px;
   line-height: 1.2;
   letter-spacing: -0.035em;
@@ -599,7 +599,7 @@ select:focus-visible {
 .trust-strip > div:nth-child(4) svg {
   color: #32bcb5;
 }
-.trust-strip h2 {
+.trust-strip .trust-label {
   font-size: 17px;
   letter-spacing: -0.025em;
   margin: 0 0 4px;
@@ -792,7 +792,7 @@ select:focus-visible {
   letter-spacing: 0.15em;
   font-weight: 650;
 }
-.care-photo-label h2 {
+.care-photo-label .care-visual-title {
   font-size: 31px;
   margin: 7px 0 0;
   line-height: 1.1;
@@ -886,7 +886,7 @@ select:focus-visible {
 .conversion-copy {
   flex: 1;
 }
-.conversion-copy h2 {
+.conversion-copy .conversion-title {
   font-size: 17px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1095,7 +1095,7 @@ select:focus-visible {
   border-radius: 16px;
   margin: 23px 0 16px;
 }
-.budget-summary h3 {
+.budget-summary .budget-summary-title {
   font-size: 15px;
   letter-spacing: -0.01em;
   margin-bottom: 10px;
@@ -1161,7 +1161,7 @@ select:focus-visible {
   width: 18px;
   height: 18px;
 }
-.eligibility-panel h3 {
+.eligibility-panel .eligibility-label {
   font-size: 17px;
   margin: 0 0 5px;
   letter-spacing: -0.02em;
@@ -2058,7 +2058,7 @@ select:focus-visible {
     bottom: 135px;
     padding: 18px 16px;
   }
-  .finance-float-title h2 {
+  .finance-float-title .finance-float-heading {
     font-size: 18px;
   }
   .finance-float li {
@@ -2122,7 +2122,7 @@ select:focus-visible {
     width: 82px;
     height: 82px;
   }
-  .conversion-copy h2 {
+  .conversion-copy .conversion-title {
     font-size: 15px;
   }
   .conversion-copy p {
@@ -2285,7 +2285,7 @@ select:focus-visible {
   .finance-float {
     width: 228px;
   }
-  .finance-float-title h2 {
+  .finance-float-title .finance-float-heading {
     font-size: 16px;
   }
   .finance-float li {
@@ -2321,7 +2321,7 @@ select:focus-visible {
   .smile-seal span {
     font-size: 6px;
   }
-  .conversion-copy h2 {
+  .conversion-copy .conversion-title {
     font-size: 13px;
   }
   .conversion-copy p {
@@ -2345,10 +2345,10 @@ select:focus-visible {
   .care-info h2 {
     font-size: 26px;
   }
-  .care-photo-label h2 {
+  .care-photo-label .care-visual-title {
     font-size: 26px;
   }
-  .trust-strip h2 {
+  .trust-strip .trust-label {
     font-size: 15px;
   }
   .trust-strip p {
@@ -2545,7 +2545,7 @@ select:focus-visible {
     gap: 10px;
     margin-bottom: 8px;
   }
-  .finance-float-title h2 {
+  .finance-float-title .finance-float-heading {
     font-size: 14px;
   }
   .wallet-icon {
@@ -2606,7 +2606,7 @@ select:focus-visible {
     height: 32px;
     margin-bottom: 5px;
   }
-  .trust-strip h2 {
+  .trust-strip .trust-label {
     font-size: 14px;
     margin-bottom: 3px;
   }
@@ -2715,7 +2715,7 @@ select:focus-visible {
     width: 62px;
     height: 62px;
   }
-  .conversion-copy h2 {
+  .conversion-copy .conversion-title {
     font-size: 14px;
     letter-spacing: 0.045em;
   }
@@ -2821,7 +2821,7 @@ select:focus-visible {
   .budget-summary {
     margin-top: 20px;
   }
-  .budget-summary h3 {
+  .budget-summary .budget-summary-title {
     font-size: 14px;
   }
   .budget-summary li {
@@ -2849,7 +2849,7 @@ select:focus-visible {
   .eligibility-panel > ul > li {
     margin: 20px 0;
   }
-  .eligibility-panel h3 {
+  .eligibility-panel .eligibility-label {
     font-size: 15px;
   }
   .eligibility-panel li p {
@@ -3217,7 +3217,7 @@ select:focus-visible {
     padding: 25px 20px;
     gap: 18px;
   }
-  .conversion-copy h2 {
+  .conversion-copy .conversion-title {
     font-size: 12px;
   }
   .form-progress small {
@@ -3318,4 +3318,27 @@ select:focus-visible {
     font-size: 12px;
     padding: 8px;
   }
+}
+
+/* Navigational labels retain their styling without creating empty content sections. */
+.trust-label, .finance-float-heading, .care-visual-title, .conversion-title,
+.eligibility-label, .budget-summary-title { font-weight: 750; }
+.home-updated { color: var(--muted, #67677e); font-size: .85rem; padding-block: 1rem; }
+.home-updated p { margin: .25rem 0; }
+.home-updated a, .home-guide a { color: #6352a8; text-decoration: underline; text-underline-offset: .18em; overflow-wrap: anywhere; }
+.home-guide { background: #faf9ff; }
+.home-guide-intro { font-size: 1.1rem; line-height: 1.8; color: #38374c; }
+.guide-topics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem 1.5rem; margin: 1.5rem 0 2rem; font-size: .9rem; }
+.home-answer { padding-block: 2rem; border-top: 1px solid #e4e0ef; scroll-margin-top: 7rem; }
+.home-answer h2 { font-size: clamp(1.4rem, 3.3vw, 2rem); line-height: 1.3; margin: 0 0 1rem; }
+.home-answer > p { font-size: 1rem; line-height: 1.85; margin: 0 0 1rem; }
+.home-answer .direct-answer { color: #302e48; font-weight: 550; }
+.expert-quote { margin: 1.5rem 0; padding: 1rem 1.25rem; border-left: 4px solid #a79ad4; background: #f0edf8; border-radius: 0 1rem 1rem 0; }
+.expert-quote blockquote { margin: 0; }
+.expert-quote blockquote p { margin: 0 0 .75rem; line-height: 1.75; }
+.expert-quote figcaption, .home-answer .guide-citations { font-size: .8rem; line-height: 1.75; color: #57556e; }
+@media (max-width: 700px) {
+  .guide-topics { grid-template-columns: 1fr; }
+  .home-answer { padding-block: 1.5rem; }
+  .home-answer > p { font-size: .9rem; }
 }

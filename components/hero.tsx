@@ -72,13 +72,13 @@ export function Hero({
               <span className="wallet-icon">
                 <Wallet size={33} />
               </span>
-              <h2>
+              <p className="finance-float-heading">
                 {type === "journey"
                   ? "Your treatment journey"
                   : type === "monthly"
                     ? "Flexible payment options"
                     : "Explore finance options"}
-              </h2>
+              </p>
             </div>
             <ul>
               <li>

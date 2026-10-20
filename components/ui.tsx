@@ -163,7 +163,7 @@ export function ConversionBanner() {
           <span>YOUR SMILE</span>
         </div>
         <div className="conversion-copy">
-          <h2>Your smile. Your pace.</h2>
+          <p className="conversion-title">Your smile. Your pace.</p>
           <p>
             A personal plan and clear payment options.
             <br />

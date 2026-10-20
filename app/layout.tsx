@@ -34,9 +34,14 @@ export const metadata: Metadata = {
 };
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+  structuredHead,
+}: Readonly<{ children: React.ReactNode; structuredHead: React.ReactNode }>) {
   return (
     <html lang="en-GB" className={inter.variable}>
+      <head>
+        <SiteSchema />
+        {structuredHead}
+      </head>
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content
@@ -49,7 +54,6 @@ export default function RootLayout({
         <Header />
         <main id="main-content">{children}</main>
         <Footer />
-        <SiteSchema />
       </body>
     </html>
   );

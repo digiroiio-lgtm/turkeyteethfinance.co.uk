@@ -30,6 +30,29 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
   if (!ready) throw new Error("Production server did not become ready.");
+  // Check the rendered document, not just the schema-building function.
+  const headers = { Host: new URL(SITE_URL).host };
+  const html = await (await fetch(`http://127.0.0.1:${port}/`, { headers })).text();
+  const head = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i)?.[1] || "";
+  const nodes = [...head.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
+    .flatMap((match) => {
+      const data = JSON.parse(match[1]);
+      return data["@graph"] || [data];
+    });
+  const articles = nodes.filter((node) => node["@type"] === "Article");
+  if (articles.length !== 1 || !articles[0].dateModified || !articles[0].articleBody) {
+    throw new Error("Homepage Article JSON-LD must be complete and present once in head.");
+  }
+  for (const path of ["/contact", "/prices", "/privacy"]) {
+    const page = await fetch(`http://127.0.0.1:${port}${path}`, { headers });
+    const pageHtml = await page.text();
+    if (page.status !== 200 || pageHtml.includes('"@type":"Article"')) {
+      throw new Error("Homepage article leaked into " + path + " or the route failed.");
+    }
+  }
+  const missing = await fetch(`http://127.0.0.1:${port}/not-a-public-page-aeo-check`, { headers });
+  await missing.body?.cancel();
+  if (missing.status !== 404) throw new Error("The schema head slot must not create new public routes.");
   const args = [
     "scripts/check-seo.py", "--base", `http://127.0.0.1:${port}`,
     "--canonical", SITE_URL, "--host", new URL(SITE_URL).host,
