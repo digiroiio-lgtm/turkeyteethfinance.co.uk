@@ -1,0 +1,51 @@
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { SiteSchema } from "@/components/structured-data";
+import { SITE_URL, publicationApproved } from "@/lib/site";
+import "./globals.css";
+const inter = localFont({
+  src: "../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2",
+  variable: "--font-inter",
+  display: "swap",
+  weight: "100 900",
+});
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Dental Finance Turkey | Turkey Teeth Finance",
+    template: "%s | Turkey Teeth Finance",
+  },
+  description:
+    "Explore dental treatment in Antalya and payment options for eligible UK patients. Start with a free written treatment estimate.",
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    other: process.env.BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.BING_SITE_VERIFICATION }
+      : undefined,
+  },
+};
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en-GB" className={inter.variable}>
+      <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
+        {!publicationApproved() && (
+          <div className="draft-banner" role="status">
+            Design preview · Finance content awaiting compliance approval · Not
+            a live finance offer
+          </div>
+        )}
+        <Header />
+        <main id="main-content">{children}</main>
+        <Footer />
+        <SiteSchema />
+      </body>
+    </html>
+  );
+}

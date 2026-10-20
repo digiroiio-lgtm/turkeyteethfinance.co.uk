@@ -1,0 +1,112 @@
+import Image from "next/image";
+import { Check, Wallet, Heart, Sparkles } from "lucide-react";
+import { Benefits, Eyebrow, QuoteCTA } from "./ui";
+export function Hero({
+  label = "DENTAL TREATMENT IN TURKEY",
+  heading = "Your new smile in Turkey.",
+  accent = "Flexible payment options.",
+  intro = "Quality dental treatment in Antalya with finance options for eligible UK patients, subject to status and lender approval.",
+  type = "home",
+}: {
+  label?: string;
+  heading?: string;
+  accent?: string;
+  intro?: string;
+  type?: "home" | "monthly" | "journey" | "inner";
+}) {
+  return (
+    <section className={`hero hero-${type === "inner" ? "compact" : type}`}>
+      <div className="hero-inner container">
+        <div className="hero-copy">
+          <Eyebrow>{label}</Eyebrow>
+          <h1>
+            {heading}
+            <span className="gradient-text">{accent}</span>
+          </h1>
+          <p className="hero-description">{intro}</p>
+          <QuoteCTA />
+          <Benefits />
+        </div>
+        <div className="hero-visual">
+          <div className="portrait-halo" />
+          <Image
+            className="hero-portrait"
+            src="/images/smile-portrait.webp"
+            width={1024}
+            height={1536}
+            alt="Smiling model illustrating the website’s design; not a patient treatment result"
+            priority
+            sizes="(max-width: 700px) 100vw, 58vw"
+          />
+          <div className="handwritten" aria-hidden="true">
+            <Heart />
+            {type === "monthly" ? (
+              <>
+                Same smile.
+                <br />
+                More
+                <br />
+                possibilities.
+              </>
+            ) : type === "journey" ? (
+              <>
+                Your journey
+                <br />
+                to a new
+                <br />
+                smile.
+              </>
+            ) : (
+              <>
+                Real smiles.
+                <br />
+                New
+                <br />
+                beginnings.
+              </>
+            )}
+          </div>
+          <div className="finance-float">
+            <div className="finance-float-title">
+              <span className="wallet-icon">
+                <Wallet size={33} />
+              </span>
+              <h2>
+                {type === "journey"
+                  ? "Your treatment journey"
+                  : type === "monthly"
+                    ? "Flexible payment options"
+                    : "Explore finance options"}
+              </h2>
+            </div>
+            <ul>
+              <li>
+                <Check />
+                Personalised treatment planning
+              </li>
+              <li>
+                <Check />
+                Subject to status and approval
+              </li>
+              <li>
+                <Check />
+                Email or WhatsApp enquiries
+              </li>
+            </ul>
+          </div>
+          <div className="hero-mini-cards">
+            <span>
+              <Sparkles />
+              Your smile.<small>Your personal plan.</small>
+            </span>
+            <span>
+              <Check />
+              Your choice.<small>Your way to pay.</small>
+            </span>
+          </div>
+          <p className="model-caption">Illustrative model image</p>
+        </div>
+      </div>
+    </section>
+  );
+}
