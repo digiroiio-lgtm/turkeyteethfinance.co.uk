@@ -96,13 +96,15 @@ export function Footer() {
           </div>
         </div>
       </footer>
-      <Link
+      <a
         className="floating-contact"
-        href="/contact"
-        aria-label="Contact the patient coordination team"
+        href="https://wa.me/905353998999"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with the patient coordination team on WhatsApp"
       >
         <MessageCircle size={27} />
-      </Link>
+      </a>
     </>
   );
 }
