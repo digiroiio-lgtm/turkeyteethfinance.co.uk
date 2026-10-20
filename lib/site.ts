@@ -1,3 +1,4 @@
+import { enquiryDelivery } from "./enquiry-config";
 import { pages } from "./content";
 import { canonicalOrigin, searchIndexingEnabled } from "./search-config";
 
@@ -47,10 +48,10 @@ export function publicationApproved() {
 }
 
 export function leadsConfigured() {
+  const delivery = enquiryDelivery();
   return (
-    !!process.env.LEAD_WEBHOOK_URL &&
-    !!process.env.LEAD_WEBHOOK_SECRET &&
-    !!process.env.TURNSTILE_SECRET_KEY &&
+    !!delivery &&
+    (delivery.provider === "formspree" || !!process.env.TURNSTILE_SECRET_KEY) &&
     !!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY &&
     !!process.env.PRIVACY_CONTACT_EMAIL &&
     !!process.env.PRIVACY_RETENTION_NOTICE &&
