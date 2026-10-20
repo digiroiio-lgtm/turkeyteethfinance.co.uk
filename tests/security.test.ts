@@ -146,8 +146,8 @@ test("finance application rejects foreign domains, insecure links and credential
       assert.equal(financeApplicationUrl(), undefined),
     );
 });
-test("a verified CRM and privacy configuration are required to enable submissions", () => {
-  withEnv({ LEADS_DELIVERY_VERIFIED: "false" }, () =>
+test("an explicitly disabled enquiry service does not enable submissions", () => {
+  withEnv({ ENQUIRY_DELIVERY_ENABLED: "false" }, () =>
     assert.equal(leadsConfigured(), false),
   );
 });
@@ -181,11 +181,21 @@ test("cross-site requests and invalid consents are rejected", async () => {
     400,
   );
 });
-test("a missing CRM never reports successful lead delivery", async () => {
-  delete process.env.LEAD_WEBHOOK_URL;
-  const response = await POST(request());
-  assert.equal(response.status, 503);
-  assert.match((await response.json()).error, /No information has been sent/);
+test("an unconfigured explicit webhook never reports successful lead delivery", async () => {
+  const previous = process.env.ENQUIRY_DELIVERY_PROVIDER;
+  const previousUrl = process.env.LEAD_WEBHOOK_URL;
+  try {
+    process.env.ENQUIRY_DELIVERY_PROVIDER = "webhook";
+    delete process.env.LEAD_WEBHOOK_URL;
+    const response = await POST(request());
+    assert.equal(response.status, 503);
+    assert.match((await response.json()).error, /No information has been sent/);
+  } finally {
+    if (previous === undefined) delete process.env.ENQUIRY_DELIVERY_PROVIDER;
+    else process.env.ENQUIRY_DELIVERY_PROVIDER = previous;
+    if (previousUrl === undefined) delete process.env.LEAD_WEBHOOK_URL;
+    else process.env.LEAD_WEBHOOK_URL = previousUrl;
+  }
 });
 test("successful webhook handoff is signed and upstream failure is not success", async () => {
   const keys = [

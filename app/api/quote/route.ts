@@ -97,11 +97,14 @@ export async function POST(request: Request) {
       },
       503,
     );
-  const captchaToken = form.get("captchaToken");
+  const captchaValue = form.get("captchaToken");
+  const captchaToken = typeof captchaValue === "string" ? captchaValue : "";
+  const captchaRequired = delivery.provider === "webhook" ||
+    !!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim();
   if (
-    typeof captchaToken !== "string" ||
-    captchaToken.length < 1 ||
-    captchaToken.length > 2048
+    (captchaRequired && !captchaToken) ||
+    captchaToken.length > 2048 ||
+    (captchaValue !== null && typeof captchaValue !== "string")
   )
     return json({ error: "Please complete the security check." }, 400);
   try {
@@ -196,7 +199,7 @@ export async function POST(request: Request) {
         return json({ error: "Photograph upload is unavailable. Remove the photographs and try again, or contact the team." }, 422);
       }
       if (!response.ok || !body || typeof body.next !== "string" || body.error || errors.length) {
-        return json({ error: "We could not deliver your enquiry. Please complete the security check and try again." }, 502);
+        return json({ error: "We could not deliver your enquiry. Please try again or contact the coordination team." }, 502);
       }
       // next is an acknowledgement, not a destination to redirect the visitor to.
       return json({ ok: true, reference }, 201);
