@@ -2,7 +2,7 @@
 :root {
   --navy: #0a1c2d;
   --body: #52627a;
-  --muted: #718098;
+  --muted: #5f6c82;
   --purple: #865dff;
   --lavender: #a78bfa;
   --teal: #16b6ae;
@@ -338,7 +338,7 @@ select:focus-visible {
   font-size: 13px;
   font-weight: 650;
   letter-spacing: 0.14em;
-  color: #0ca9a4;
+  color: #087b77;
   margin-bottom: 18px;
   line-height: 1.5;
 }
