@@ -1,4 +1,5 @@
 import type { EvidenceId } from "./evidence";
+import { monthlyPlanning } from "./monthly-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
   lastModified: "2026-10-21",
@@ -29,6 +30,7 @@ export type Section = {
   paragraphs?: string[];
   bullets?: string[];
   sources?: EvidenceId[];
+  quotes?: { text: string; name: string; role: string; source: EvidenceId; attributionDate: string }[];
   links?: { text: string; href: string }[];
 };
 export type PageContent = {
@@ -100,22 +102,7 @@ export const pages: Record<string, PageContent> = {
     kind: "monthly",
     intro:
       "Explore dental treatment in Antalya with flexible monthly payment options for eligible UK patients, subject to status and lender approval.",
-    sections: [
-      {
-        title: "Start with the right treatment plan",
-        body: "Before thinking about repayments, understand what your teeth need. Your written quote sets out the proposed treatment, estimated cost and expected visits. The dentist confirms the final plan after a clinical assessment.",
-        links: [{"text": "Understand treatment cost inclusions", "href": "/prices"}, {"text": "Read the existing finance questions", "href": "/finance-faq"}],
-        sources: ["gdc"],
-      },
-      {
-        title: "A separate decision about finance",
-        body: "You can then review available finance options through Ideal4Finance. It is a credit broker, not a lender. Compare the APR, term, fees and total amount repayable before deciding whether an offer suits your budget.",
-      },
-      {
-        title: "Understand the whole cost",
-        body: "Check whether your quote includes scans, temporary restorations, accommodation, transfers and follow-up. Budget for flights, insurance and any return visits separately unless your quote explicitly includes them.",
-      },
-    ],
+    sections: monthlyPlanning.sections,
     faqs: [commonFAQs[0], commonFAQs[2]],
     related: ["finance-eligibility", "prices", "dental-finance"],
   },

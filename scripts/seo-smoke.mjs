@@ -7,6 +7,8 @@ import { publicPages } from "../lib/public-pages.ts";
 import { canonicalUrl, SITE_URL } from "../lib/site.ts";
 import { standaloneGuides } from "../lib/guides.ts";
 import { guideText } from "../lib/guide-schema.ts";
+import { monthlyPlanningText } from "../lib/monthly-schema.ts";
+import { pages } from "../lib/content.ts";
 import { JSDOM } from "jsdom";
 
 const preview = process.argv.includes("--preview");
@@ -36,7 +38,7 @@ try {
   for (const file of await readdir(".next/static/chunks")) {
     if (!file.endsWith(".js")) continue;
     const javascript = await readFile(join(".next/static/chunks", file), "utf8");
-    if (javascript.includes("Veneers cover the front surface of existing teeth") || javascript.includes("Compare what is proposed for your own teeth before comparing the total price")) {
+    if (javascript.includes("Veneers cover the front surface of existing teeth") || javascript.includes("Compare what is proposed for your own teeth before comparing the total price") || javascript.includes("The FCA survey included 17,950 respondents")) {
       throw new Error("Server-rendered editorial content must not be bundled into client JavaScript: " + file);
     }
   }
@@ -69,6 +71,16 @@ try {
     });
     if (response.status !== 200 || document.querySelectorAll("h1").length !== 1 || schemas.filter(node => node["@type"] === "WebPage").length !== 1) throw new Error("SSR heading or page schema failed: " + entry.path);
     if (entry.path === "/get-a-quote" && !document.getElementById("treatment-enquiry")) throw new Error("Treatment quote links need a server-rendered destination anchor.");
+    if (entry.path === "/pay-monthly") {
+      const article = schemas.filter(node => node["@type"] === "Article");
+      const rendered = document.getElementById("monthly-planning-guide");
+      if (article.length !== 1 || article[0].articleBody !== monthlyPlanningText() || article[0].dateModified !== entry.lastModified || !rendered) throw new Error("Monthly planning Article must match SSR content and be present once in head.");
+      if (document.querySelector('main script[type="application/ld+json"]')) throw new Error("Monthly planning schema must be in head.");
+      for (const section of pages["pay-monthly"].sections) {
+        if (!rendered.textContent.includes(section.body)) throw new Error("Missing monthly planning answer: " + section.title);
+        for (const quote of section.quotes || []) if (![...rendered.querySelectorAll("blockquote")].some(element => element.textContent.includes(quote.text))) throw new Error("Missing attributed quotation: " + quote.name);
+      }
+    }
     const faq = schemas.find(node => node["@type"] === "FAQPage");
     const visible = [...document.querySelectorAll(".faq-list details")];
     if (visible.length && (faq?.mainEntity.length !== visible.length || visible.some((element, index) => faq.mainEntity[index].acceptedAnswer.text !== element.querySelector("p").textContent))) throw new Error("FAQ schema differs from rendered answers: " + entry.path);

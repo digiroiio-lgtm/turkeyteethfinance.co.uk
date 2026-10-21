@@ -18,6 +18,10 @@ export function EditorialSections({ sections, article = false }: { sections: Sec
       <p>{section.body}</p>
       {section.paragraphs?.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
       {section.bullets && <ul className="check-list">{section.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul>}
+      {section.quotes?.map(quote => <figure className="planning-quote" key={quote.text}>
+        <blockquote cite={evidence[quote.source].url}><p>“{quote.text}”</p></blockquote>
+        <figcaption>{quote.name}, {quote.role}. <a href={evidence[quote.source].url}>Statement published {quote.attributionDate}</a>.</figcaption>
+      </figure>)}
       {section.sources?.length ? <p className="guide-citations">Sources: {section.sources.map((id, i) => <span key={id}>{i > 0 && "; "}<a href={evidence[id].url}>{evidence[id].title}</a></span>)}</p> : null}
       {section.links?.length ? <ul className="context-links">{section.links.map(link => <li key={link.href}><Link href={link.href}>{link.text}</Link></li>)}</ul> : null}
     </section>)}

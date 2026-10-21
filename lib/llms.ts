@@ -18,6 +18,7 @@ import {
 import { publicPages } from "./public-pages";
 import { standaloneGuides } from "./guides";
 import { clinicProfile, evidence } from "./evidence";
+import { monthlyPlanning } from "./monthly-planning";
 import {
   COMPANY,
   SITE_NAME,
@@ -115,10 +116,16 @@ function documents(): Document[] {
         heading: `${page.heading} ${page.accent}`,
         blocks: [
           page.intro,
+          `Last updated: ${page.lastModified}. Prepared by ${COMPANY} patient coordination team.`,
+          ...(slug === "pay-monthly" ? [`### ${monthlyPlanning.title}`, monthlyPlanning.intro] : []),
           ...page.sections.flatMap((section) => [
             `### ${section.title}`,
             section.body,
             ...(section.paragraphs || []),
+            ...(section.quotes || []).flatMap(quote => [
+              `> ${quote.text}`,
+              `${quote.name}, ${quote.role}. Statement published ${quote.attributionDate}. ${link("Original statement", evidence[quote.source].url)}`,
+            ]),
             ...(section.bullets?.length
               ? [section.bullets.map((bullet) => `- ${bullet}`).join("\n")]
               : []),

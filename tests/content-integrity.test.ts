@@ -7,6 +7,7 @@ import { guideStructuredData, guideText } from "../lib/guide-schema";
 import { llmsFull } from "../lib/llms";
 import { homeGuideSections } from "../lib/home-guide";
 import { evidence } from "../lib/evidence";
+import { monthlyStructuredData, monthlyPlanningText } from "../lib/monthly-schema";
 
 test("treatment-specific answers have distinct questions, traceable sources and public contextual destinations", () => {
   const questions = new Set<string>();
@@ -48,4 +49,24 @@ test("pricing information and homepage budgets contain no assumed clinic prices 
   assert.equal(/£\s?\d/.test(JSON.stringify(pages.prices)), false);
   assert.equal(homeGuideSections.some(section => !!section.calculation), false);
   assert.equal(/an assumed £|Original payment example|Original budgeting example/.test(JSON.stringify(homeGuideSections)), false);
+});
+
+test("monthly planning has traceable quotations, dated national context and no loan illustration or clinical endorsement", () => {
+  const page = pages["pay-monthly"];
+  const schema = monthlyStructuredData();
+  const full = llmsFull();
+  assert.equal(schema.dateModified, page.lastModified);
+  assert.equal(schema.articleBody, monthlyPlanningText());
+  assert.equal("reviewedBy" in schema, false);
+  for (const section of page.sections) {
+    assert.ok(full.includes(section.body));
+    for (const quote of section.quotes || []) {
+      assert.ok(full.includes(`> ${quote.text}`));
+      assert.ok(schema.articleBody.includes(quote.name));
+      assert.ok(schema.citation.includes(evidence[quote.source].url));
+    }
+  }
+  assert.match(schema.articleBody, /May 2024.*published in May 2025/);
+  assert.match(schema.articleBody, /not statistically different/);
+  assert.equal(/\d+(?:\.\d+)?%\s*(?:APR|interest)|£\d+\s*(?:per month|a month)|guaranteed acceptance|reviewed by a dentist/i.test(schema.articleBody), false);
 });
