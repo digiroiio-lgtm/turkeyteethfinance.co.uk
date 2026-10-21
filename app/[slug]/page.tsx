@@ -31,6 +31,7 @@ import {
   CarePanel,
 } from "@/components/sections";
 import { ContentAttribution, EditorialSections, ClinicEvidence, PatientEvidence } from "@/components/editorial";
+import { monthlyPlanning } from "@/lib/monthly-planning";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return routeSlugs.map((slug) => ({ slug }));
@@ -84,7 +85,15 @@ export default async function ContentPage({
         <>
           <TrustStrip />
           <BudgetExplorer />
-          <Journey />
+          <article className="section guide-article" id="monthly-planning-guide" aria-label={monthlyPlanning.title}>
+            <div className="container narrow">
+              <p className="eyebrow">YOUR PAYMENT PLANNING GUIDE</p>
+              <h2>{monthlyPlanning.title}</h2>
+              <p>{monthlyPlanning.intro}</p>
+              <EditorialSections sections={p.sections} article />
+              <QuoteCTA />
+            </div>
+          </article>
           <TreatmentGrid compact />
         </>
       )}
@@ -105,7 +114,7 @@ export default async function ContentPage({
       {(p.kind === "results" || p.kind === "reviews") && <PatientEvidence kind={p.kind} />}
       {p.kind === "clinic" && <><CarePanel /><ClinicEvidence /></>}
       {p.kind === "guides" && <Guides />}
-      {p.sections.length > 0 && (
+      {p.kind !== "monthly" && p.sections.length > 0 && (
         <section className="section editorial-section">
           <div className="container"><EditorialSections sections={p.sections} /></div>
         </section>

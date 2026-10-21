@@ -5,6 +5,7 @@ import { PageSchema, JsonLd } from "@/components/structured-data";
 import { clinicProfile } from "@/lib/evidence";
 import { guideStructuredData } from "@/lib/guide-schema";
 import { SITE_URL } from "@/lib/site";
+import { monthlyStructuredData } from "@/lib/monthly-schema";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return publicPages().filter((page) => page.path !== "/").map((page) => ({
@@ -21,6 +22,7 @@ export default async function OtherPageHead({ params }: { params: Promise<{ path
     <PageSchema path={path} title={page.title} description={page.description} faqs={faqs}
       lastModified={page.lastModified} parent={guide ? { name: "Patient guides", path: "/guides" } : undefined} />
     {guide && <JsonLd data={guideStructuredData(guide)} />}
+    {path === "/pay-monthly" && <JsonLd data={monthlyStructuredData()} />}
     {path === "/our-clinic" && <JsonLd data={{
       "@context": "https://schema.org", "@type": "Dentist", "@id": clinicProfile.url + "#clinic",
       name: clinicProfile.name, url: clinicProfile.url, telephone: clinicProfile.telephone,
