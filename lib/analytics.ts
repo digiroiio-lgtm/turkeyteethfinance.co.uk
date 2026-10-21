@@ -52,7 +52,12 @@ export function applyAnalyticsConsent() {
   w["ga-disable-G-BS3FP40Z46"] = !grant;
   if (!grant) { if (active) w.gtag?.("consent", "update", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" }); active = false; lastPage = ""; clearCookies(); return; }
   if (active) return;
-  w.dataLayer ||= []; w.gtag ||= (...args: unknown[]) => { w.dataLayer!.push(args); };
+  w.dataLayer ||= [];
+  // Match Google's gtag adapter: commands are Arguments objects, not plain arrays.
+  w.gtag ||= function () {
+    // eslint-disable-next-line prefer-rest-params -- gtag.js expects the documented Arguments command shape.
+    w.dataLayer!.push(arguments);
+  };
   if (!initialised) { w.gtag("consent", "default", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" }); w.gtag("js", new Date()); }
   w.gtag("consent", "update", { analytics_storage: "granted", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
   const context = safeAnalyticsContext(window.location.href, document.referrer); w.gtag("set", context);
