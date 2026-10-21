@@ -4,6 +4,8 @@ export const evidence = {
   fcaSavings: { title: "FCA: savings, resilience and support, 16 May 2025", url: "https://www.fca.org.uk/news/press-releases/more-people-have-bank-accounts-one-ten-have-no-cash-savings" },
   personalLoans: { title: "MoneyHelper: understanding personal loans", url: "https://www.moneyhelper.org.uk/en/everyday-money/credit/personal-loans" },
   implantRecords: { title: "U.S. FDA: dental implant records and follow-up", url: "https://www.fda.gov/medical-devices/dental-devices/dental-implants-what-you-should-know" },
+  gumAssessment: { title: "NIH NIDCR: gum disease and dental assessment", url: "https://www.nidcr.nih.gov/health-info/gum-disease" },
+  universityImplants: { title: "Columbia University College of Dental Medicine: implant stages", url: "https://www.dental.columbia.edu/patient-care/columbiadoctors-dentistry/our-services/dental-implants" },
   gdc: { title: "GDC: going abroad for dental treatment", url: "https://www.gdc-uk.org/standards-guidance/information-for-patients-public/going-abroad-for-dental-treatment" },
   broker: { title: "Ideal4Finance: broker information and lender assessment", url: "https://ideal4finance.com/" },
   nhs: { title: "NHS: dental treatments", url: "https://www.nhs.uk/live-well/healthy-teeth-and-gums/dental-treatments/" },
