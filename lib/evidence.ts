@@ -1,5 +1,6 @@
 /** Public sources checked on 21 October 2026. No independent credential verification or clinical endorsement is implied. */
 export const evidence = {
+  bdaTourism: { title: "BDA: survey of 1,000 UK dentists, 14 July 2022", url: "https://www.bda.org/media-centre/uk-dentists-picking-up-the-pieces-from-dental-tourism-boom/" },
   fcaSurvey: { title: "FCA: Financial Lives May 2024 survey, published May 2025", url: "https://www.fca.org.uk/publication/financial-lives/financial-lives-survey-2024-key-findings.pdf" },
   fcaSavings: { title: "FCA: savings, resilience and support, 16 May 2025", url: "https://www.fca.org.uk/news/press-releases/more-people-have-bank-accounts-one-ten-have-no-cash-savings" },
   personalLoans: { title: "MoneyHelper: understanding personal loans", url: "https://www.moneyhelper.org.uk/en/everyday-money/credit/personal-loans" },

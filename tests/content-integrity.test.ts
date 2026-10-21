@@ -45,8 +45,15 @@ test("standalone guides share canonical registry, original article text and full
   }
 });
 
-test("pricing information and homepage budgets contain no assumed clinic prices or repayment examples", () => {
-  assert.equal(/£\s?\d/.test(JSON.stringify(pages.prices)), false);
+test("pricing calculations use confirmed packages, retain scope and do not imply standalone fees or credit offers", () => {
+  const text = pages.prices.sections.flatMap(section => [section.body, ...(section.paragraphs || [])]).join(" ");
+  assert.match(text, /£140 and £125/);
+  assert.match(text, /£218\.75 and £210/);
+  assert.match(text, /not standalone crown fees/);
+  assert.match(text, /not a discount promise/);
+  assert.match(text, /not a reason to restore healthy teeth/);
+  assert.match(text, /not complication rates for Turkey/);
+  assert.equal(/\d+(?:\.\d+)?%\s*(?:APR|interest)|£\d+\s*(?:per month|a month)|guaranteed acceptance/i.test(text), false);
   assert.equal(homeGuideSections.some(section => !!section.calculation), false);
   assert.equal(/an assumed £|Original payment example|Original budgeting example/.test(JSON.stringify(homeGuideSections)), false);
 });
