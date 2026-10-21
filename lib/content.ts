@@ -1,5 +1,6 @@
 import type { EvidenceId } from "./evidence";
 import { monthlyPlanning } from "./monthly-planning";
+import { pricePlanningSections } from "./price-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
   lastModified: "2026-10-21",
@@ -430,78 +431,7 @@ export const pages: Record<string, PageContent> = {
     "accent": "Clear before you commit.",
     "kind": "prices",
     "intro": "Every smile needs a different plan. Request an itemised quote in pounds so you can understand the treatment, inclusions and payment schedule.",
-    "sections": [
-      {
-        "title": "How can I get a reliable treatment price?",
-        "body": "Request an itemised written estimate for the treatment your teeth need. The listed packages provide confirmed prices for the specified treatment and stay. Your personal quote confirms the scope and arrangements for your case. The final plan and cost depend on the treating dentist’s assessment, not a budget entered into the online planner.",
-        "paragraphs": [
-          "Tell the team the treatment you want to discuss, any existing dental work and your likely travel period. Ask which parts of the estimate are provisional and which questions need examination or imaging. If assessment changes the proposal, request a revised plan and total before agreeing to additional care. Do not interpret a headline advertised elsewhere as the price for your own case."
-        ],
-        "links": [
-          {
-            "text": "Request your personal treatment estimate",
-            "href": "/get-a-quote"
-          },
-          {
-            "text": "Use the full quote comparison checklist",
-            "href": "/guides/compare-dental-quotes"
-          }
-        ]
-      },
-      {
-        "title": "What needs to be itemised for each treatment?",
-        "body": "Veneers and crowns need a tooth count, restoration type and material. An implant estimate should distinguish fixtures, abutments and final teeth. A full-arch plan should identify each arch and both temporary and final restorations. Different specifications cannot be compared using a total alone.",
-        "paragraphs": [
-          "The table on this page lists the questions to resolve for each treatment. Ask about scans, extractions, preparatory work, laboratory stages and planned reviews. Where an item is not included, ask whether it can be estimated separately or remains unknown until assessment. Record the scope and exclusions beside the total rather than relying on the word “package”."
-        ],
-        "links": [
-          {
-            "text": "Veneer preparation and materials",
-            "href": "/veneers-finance"
-          },
-          {
-            "text": "Implant components and visits",
-            "href": "/dental-implants-finance"
-          }
-        ]
-      },
-      {
-        "title": "Are hotel nights, transfers and return visits included?",
-        "body": "The listed packages include hotel accommodation and airport and clinic transfers. Crown and veneer packages include five nights; the implant package includes three plus five nights across two visits. Confirm the hotel or room arrangement, the number of nights and the journeys covered. A first-stay package should not be assumed to include later treatment trips, extra nights or travel for a complication.",
-        "paragraphs": [
-          "Keep your travel bookings separate from the clinical estimate so that changes are visible. Ask whether the quoted treatment involves one stay or several stages and how extra appointments would affect the itinerary. Use current travel options and your own circumstances when budgeting. This page does not substitute assumed flights, hotel costs or sample clinic prices for verified quotations."
-        ],
-        "links": [
-          {
-            "text": "Plan staged visits to Antalya",
-            "href": "/guides/plan-dental-visit-antalya"
-          }
-        ]
-      },
-      {
-        "title": "What happens if the clinical plan or price changes?",
-        "body": "Ask for the changed procedures, reasons and revised cost in writing before deciding whether to proceed. A provisional online estimate may change after examination. Clarify the clinic’s deposit, cancellation, refund and payment-timing terms before paying or making non-refundable travel arrangements.",
-        "paragraphs": [
-          "Keep both versions of the estimate and confirm which items are removed, added or delayed. Ask how already-agreed accommodation or appointments would be affected. If treatment has separate stages, request the payment schedule for each one. You can ask for time to consider the revised proposal and any alternatives explained by the treating dentist."
-        ],
-        "links": [
-          {
-            "text": "Check the clinical and coordination roles",
-            "href": "/our-clinic"
-          }
-        ]
-      },
-      {
-        "title": "What should written aftercare and warranty terms explain?",
-        "body": "Written terms should explain how clinical concerns are assessed and which repairs, reviews or complications are covered. Check the conditions and exclusions, the contact route from the UK and responsibility for travel. A treatment warranty is not a guarantee of an individual result or unlimited free future care.",
-        "paragraphs": [
-          "A warranty may be relevant to a restoration while other clinical issues require a different assessment. Ask the clinic to clarify uncertainty before you commit rather than relying on an informal assurance. Keep the aftercare instructions and treatment records with your quote so that the agreed responsibilities can be checked if a question arises later."
-        ],
-        "sources": [
-          "gdc"
-        ]
-      }
-    ],
+    "sections": pricePlanningSections,
     "faqs": [
       {
         "question": "Are package prices a confirmed personal treatment plan?",

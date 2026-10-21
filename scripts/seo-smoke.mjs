@@ -75,6 +75,14 @@ try {
     const catalog = schemas.filter(node => node["@type"] === "OfferCatalog");
     if (entry.path === "/prices") {
       if (catalog.length !== 1 || catalog[0].itemListElement.length !== 5 || document.querySelectorAll(".package-card").length !== 5) throw new Error("Expected five cards and one head catalog.");
+      const copy = document.querySelector("main").textContent;
+      if (copy.trim().split(/\s+/).length < 2000 || document.querySelectorAll(".editorial-section blockquote[cite]").length !== 3) throw new Error("Prices page needs substantial rendered content and three sourced quotations.");
+      for (const section of pages.prices.sections) {
+        for (const quote of section.quotes || []) {
+          if (!copy.includes(quote.text) || !copy.includes(quote.name)) throw new Error("Missing prices quotation or attribution: " + quote.name);
+        }
+      }
+      if (document.querySelector('main script[type="application/ld+json"]')) throw new Error("Prices schemas must remain in head.");
       for (const [index, item] of treatmentPackages.entries()) {
         const card = document.getElementById("package-" + item.id);
         const offer = catalog[0].itemListElement[index];
