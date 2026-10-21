@@ -6,7 +6,7 @@ import { canonicalOrigin, searchIndexingEnabled } from "./search-config";
 export const SITE_NAME = "Turkey Teeth Finance";
 export const SITE_URL = canonicalOrigin(process.env.NEXT_PUBLIC_SITE_URL);
 export const COMPANY = "Akdeniz Dental Consultancy UK Ltd";
-export const PRIMARY_CTA = "Get My Free Treatment Quote";
+export { PRIMARY_CTA, financeNotice } from "./public-copy";
 export const draftNotice =
   "Design preview · Finance content awaiting compliance approval · Not a live finance offer";
 
@@ -65,8 +65,7 @@ export function leadsConfigured() {
   );
 }
 
-export const financeNotice =
-  "Credit is subject to status, affordability and lender approval. Rates, terms and available options depend on your circumstances. A treatment enquiry is not a credit application.";
+
 
 // The actual content registry drives static routes, sitemap and LLM discovery.
 export const routeSlugs = Object.keys(pages);

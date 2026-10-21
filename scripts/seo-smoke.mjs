@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
-import { mkdtemp, writeFile, rm } from "node:fs/promises";
+import { mkdtemp, writeFile, rm, readdir, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { publicPages } from "../lib/public-pages.ts";
@@ -33,6 +33,13 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
   if (!ready) throw new Error("Production server did not become ready.");
+  for (const file of await readdir(".next/static/chunks")) {
+    if (!file.endsWith(".js")) continue;
+    const javascript = await readFile(join(".next/static/chunks", file), "utf8");
+    if (javascript.includes("Veneers cover the front surface of existing teeth") || javascript.includes("Compare what is proposed for your own teeth before comparing the total price")) {
+      throw new Error("Server-rendered editorial content must not be bundled into client JavaScript: " + file);
+    }
+  }
   // Check the rendered document, not just the schema-building function.
   const headers = { Host: new URL(SITE_URL).host };
   const html = await (await fetch(`http://127.0.0.1:${port}/`, { headers })).text();

@@ -71,7 +71,7 @@ The pricing intent remains constrained until a current clinic-approved price she
 
 ## Verification and limits
 
-Local ESLint, all 50 tests, production build, TypeScript and HTTP production smoke passed. The expanded HTTP smoke checks all public pages for a single H1, one head WebPage entity, matching visible/structured FAQ answers and valid contextual destinations. It also checks both guide Article bodies against their content source, unknown guide 404s, sitemap/canonical parity, the www redirect, LLM endpoints, robots and HTTP headers. Separate preview validation is run by CI. No new dependencies or client-side data collection were added.
+Local ESLint, all 50 tests, production build, TypeScript and HTTP production smoke passed. The expanded HTTP smoke checks all public pages for a single H1, one head WebPage entity, matching visible/structured FAQ answers and valid contextual destinations. It also checks both guide Article bodies against their content source, unknown guide 404s, sitemap/canonical parity, the www redirect, LLM endpoints, robots and HTTP headers. Separate preview validation is run by CI. No new dependencies or client-side data collection were added. A build inspection caught the expanded content registry being pulled into browser JavaScript by shared imports. Public button labels and treatment navigation data were isolated from the server content registry; the HTTP smoke also rejects bundling the expanded article text into static client JavaScript.
 
 Core Web Vitals: the previous live mobile lab report recorded performance 98, accessibility/best practices/SEO 100, LCP 2.4s, TBT 20ms, CLS 0. This is a pre-change lab baseline, not post-change field data. A fresh production PageSpeed report is required after deployment; absence of CrUX data is not a field CWV pass. The optimized responsive hero and eager/high priority attributes remain intact.
 
@@ -109,7 +109,9 @@ Detailed before/after evidence: `docs/audit-before.json`, `docs/audit-after.json
 - `app/[slug]/page.tsx`
 - `app/globals.css`
 - `app/guides/[guide]/page.tsx`
+- `components/budget-explorer.tsx`
 - `components/editorial.tsx`
+- `components/header.tsx`
 - `components/hero.tsx`
 - `components/home-guide.tsx`
 - `components/sections.tsx`
@@ -125,8 +127,10 @@ Detailed before/after evidence: `docs/audit-before.json`, `docs/audit-after.json
 - `lib/home-guide.ts`
 - `lib/llms.ts`
 - `lib/metadata.ts`
+- `lib/public-copy.ts`
 - `lib/public-pages.ts`
 - `lib/site.ts`
+- `lib/treatments.ts`
 - `package.json`
 - `scripts/audit-content.ts`
 - `scripts/seo-smoke.mjs`

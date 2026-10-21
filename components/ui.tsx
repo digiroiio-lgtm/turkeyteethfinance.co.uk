@@ -21,7 +21,7 @@ import {
   BadgeCheck,
   type LucideIcon,
 } from "lucide-react";
-import { PRIMARY_CTA, financeNotice } from "@/lib/site";
+import { PRIMARY_CTA, financeNotice } from "@/lib/public-copy";
 import type { FAQ } from "@/lib/content";
 const icons: Record<string, LucideIcon> = {
   tooth: Tooth,
