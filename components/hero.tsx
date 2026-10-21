@@ -36,8 +36,10 @@ export function Hero({
             width={1024}
             height={1536}
             alt="Smiling model illustrating the website’s design; not a patient treatment result"
-            priority
-            sizes="(max-width: 700px) 100vw, 58vw"
+            loading="eager"
+            fetchPriority="high"
+            // Match the container, visual and portrait widths in globals.css.
+            sizes="(max-width: 360px) 78vw, (max-width: 700px) 72vw, (max-width: 1000px) 58.4vw, (max-width: 1200px) 56.5vw, (max-width: 1455px) 54.4vw, 792px"
           />
           <div className="handwritten" aria-hidden="true">
             <Heart />

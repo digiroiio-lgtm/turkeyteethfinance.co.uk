@@ -4,6 +4,10 @@ const config: NextConfig = {
   allowedDevOrigins: ["terminal.local"],
   devIndicators: false,
   serverExternalPackages: [],
+  images: {
+    // Avoid jumping from 384px to 640px for the mobile hero at higher DPRs.
+    deviceSizes: [480, 540, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+  },
   async headers() {
     return [
       {
