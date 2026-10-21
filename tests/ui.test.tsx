@@ -42,6 +42,7 @@ test("a treatment quote link preselects the same treatment in the enquiry withou
   const href = cta.getByRole("link", { name: "Get My Free Treatment Quote" }).getAttribute("href")!;
   const url = new URL(href, "https://turkeyteethfinance.co.uk");
   assert.equal(url.pathname, "/get-a-quote");
+  assert.equal(url.hash, "#treatment-enquiry");
   assert.equal(url.searchParams.get("treatment"), "Zirconia crowns");
   cta.unmount();
   const form = render(<SearchParamsContext.Provider value={url.searchParams}><QuoteForm available={false} /></SearchParamsContext.Provider>);

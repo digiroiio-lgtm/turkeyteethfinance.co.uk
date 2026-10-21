@@ -59,7 +59,7 @@ export function QuoteCTA({ small = false, treatment }: { small?: boolean; treatm
   return (
     <Link
       className={`button${small ? " button-small" : ""}`}
-      href={treatment ? `/get-a-quote?treatment=${encodeURIComponent(treatment)}` : "/get-a-quote"}
+      href={treatment ? `/get-a-quote?treatment=${encodeURIComponent(treatment)}#treatment-enquiry` : "/get-a-quote#treatment-enquiry"}
     >
       <MessageCircle size={small ? 17 : 22} />
       <span>{PRIMARY_CTA}</span>

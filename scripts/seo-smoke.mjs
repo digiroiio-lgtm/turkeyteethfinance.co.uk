@@ -61,6 +61,7 @@ try {
       const data = JSON.parse(script.textContent); return data["@graph"] || [data];
     });
     if (response.status !== 200 || document.querySelectorAll("h1").length !== 1 || schemas.filter(node => node["@type"] === "WebPage").length !== 1) throw new Error("SSR heading or page schema failed: " + entry.path);
+    if (entry.path === "/get-a-quote" && !document.getElementById("treatment-enquiry")) throw new Error("Treatment quote links need a server-rendered destination anchor.");
     const faq = schemas.find(node => node["@type"] === "FAQPage");
     const visible = [...document.querySelectorAll(".faq-list details")];
     if (visible.length && (faq?.mainEntity.length !== visible.length || visible.some((element, index) => faq.mainEntity[index].acceptedAnswer.text !== element.querySelector("p").textContent))) throw new Error("FAQ schema differs from rendered answers: " + entry.path);

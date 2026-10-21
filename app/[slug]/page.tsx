@@ -90,7 +90,7 @@ export default async function ContentPage({
       )}
       {p.kind === "journey" && <Journey detailed />}
       {(p.kind === "quote" || p.kind === "contact") && (
-        <section className="section quote-section">
+        <section className="section quote-section" id="treatment-enquiry">
           <div className="container quote-layout">
             <QuoteIntro />
             <QuoteForm

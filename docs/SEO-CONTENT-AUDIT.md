@@ -56,7 +56,7 @@ The five treatment pages pass all ten mechanical checks after the change. This d
 - Clinic address/contact and three named clinicians with source-linked education and roles attributed to official clinic profiles. No UK clinical-provider status, independent registration verification or clinician authorship/review is invented.
 - Patient-result and review pages now lead to the clinic’s published gallery and the independent Trustpilot profile linked by the clinic. No copied patient identity, aggregate rating, success-rate claim or assumed publication permission.
 - Prices page expanded into an itemised estimate/inclusion checklist. No unverified amount, package price, competitor rate, repayment or APR was introduced. Earlier hypothetical monetary examples were removed from the homepage. The functioning budget planner remains explicitly a budget to discuss, not a price or credit calculator.
-- Treatment-specific primary and lower-page CTAs carry only the selected treatment into the existing enquiry form. Marketing consent, health-data consent, optional photographs, same-origin validation, Formspree delivery and finance-approval gates are preserved.
+- Primary and lower-page CTAs scroll directly to the enquiry section instead of repeating the quote page’s hero; treatment-specific links also preserve the selected treatment. Marketing consent, health-data consent, optional photographs, same-origin validation, Formspree delivery and finance-approval gates are preserved.
 - Sitemap, LLM directory and full export share the same 22-page registry. Guide text, citations and clinic facts are exported from the current data sources. Query quote links stay out of the canonical registry.
 
 ## SERP observations and content ownership
@@ -102,3 +102,36 @@ Public source registry: `lib/evidence.ts`. Official clinician profiles:
 - https://akdenizdental.com/duygu-kolay-toklu
 
 Detailed before/after evidence: `docs/audit-before.json`, `docs/audit-after.json`. These contain every title, H1, owned word count, source/link counts and individual rubric result.
+
+## Changed files
+
+- `app/@structuredHead/[...path]/page.tsx`
+- `app/[slug]/page.tsx`
+- `app/globals.css`
+- `app/guides/[guide]/page.tsx`
+- `components/editorial.tsx`
+- `components/hero.tsx`
+- `components/home-guide.tsx`
+- `components/sections.tsx`
+- `components/structured-data.tsx`
+- `components/ui.tsx`
+- `docs/SEO-CONTENT-AUDIT.md`
+- `docs/audit-after.json`
+- `docs/audit-before.json`
+- `lib/content.ts`
+- `lib/evidence.ts`
+- `lib/guide-schema.ts`
+- `lib/guides.ts`
+- `lib/home-guide.ts`
+- `lib/llms.ts`
+- `lib/metadata.ts`
+- `lib/public-pages.ts`
+- `lib/site.ts`
+- `package.json`
+- `scripts/audit-content.ts`
+- `scripts/seo-smoke.mjs`
+- `tests/content-integrity.test.ts`
+- `tests/indexing.test.ts`
+- `tests/llms.test.ts`
+- `tests/security.test.ts`
+- `tests/ui.test.tsx`
