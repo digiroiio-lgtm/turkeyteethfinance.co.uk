@@ -1,3 +1,4 @@
+import { packageCondition, packageInclusions, packagePrice, treatmentPackages } from "./packages";
 import { guideSource, homeGuide, homeGuideSections } from "./home-guide";
 import {
   commonFAQs,
@@ -116,6 +117,7 @@ function documents(): Document[] {
         heading: `${page.heading} ${page.accent}`,
         blocks: [
           page.intro,
+          ...(slug === "prices" ? ["### Confirmed dental treatment packages", ...treatmentPackages.map(item => `${item.name}: ${packagePrice(item)} GBP. ${item.detail}. ${item.stay}. Includes ${packageInclusions.join(", ")}. ${packageCondition}`)] : []),
           `Last updated: ${page.lastModified}. Prepared by ${COMPANY} patient coordination team.`,
           ...(slug === "pay-monthly" ? [`### ${monthlyPlanning.title}`, monthlyPlanning.intro] : []),
           ...page.sections.flatMap((section) => [

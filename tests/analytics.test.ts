@@ -1,0 +1,40 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { JSDOM } from "jsdom";
+import { ANALYTICS_CONSENT_KEY, analyticsConsent, applyAnalyticsConsent, configureAnalytics, consentRecord, safeAnalyticsContext, saveAnalyticsConsent, subscribeAnalytics, trackCTAClick, trackEvent, trackPageView } from "../lib/analytics";
+
+test("analytics waits for consent, filters patient data, deduplicates page views and respects withdrawal and preview", () => {
+  const dom = new JSDOM("<head></head><body></body>", { url: "https://turkeyteethfinance.co.uk/get-a-quote?email=private@example.com#secret", referrer: "https://search.example/find?private" });
+  Object.assign(globalThis, { window: dom.window, document: dom.window.document });
+  const w = window as unknown as { dataLayer: unknown[][]; "ga-disable-G-BS3FP40Z46": boolean };
+  configureAnalytics(true, ["/", "/prices", "/get-a-quote"]); applyAnalyticsConsent();
+  assert.equal(analyticsConsent(), "unknown"); assert.equal(document.querySelector("script"), null); assert.equal(trackEvent("form_start"), false);
+  saveAnalyticsConsent("denied"); assert.equal(document.querySelector("script"), null); assert.equal(Reflect.get(w, "dataLayer"), undefined);
+  saveAnalyticsConsent("granted"); assert.equal(document.querySelectorAll("script").length, 1);
+  const config = w.dataLayer.find(command => command[0] === "config")![2] as Record<string, unknown>;
+  assert.equal(config.send_page_view, false); assert.equal(config.allow_google_signals, false);
+  trackPageView(); trackPageView(); assert.equal(w.dataLayer.filter(command => command[1] === "page_view").length, 1);
+  trackEvent("form_submit_error", { package_id: "private@example.com", form_step: 99, email: "private@example.com", concern: "secret" } as never);
+  const error = w.dataLayer.at(-1)![2] as Record<string, unknown>;
+  assert.equal(error.form_id, "treatment_enquiry"); assert.equal(error.package_id, undefined); assert.equal(error.form_step, undefined); assert.equal(error.email, undefined); assert.equal(error.concern, undefined);
+  assert.equal(error.page_location, "https://turkeyteethfinance.co.uk/get-a-quote"); assert.equal(error.page_referrer, "https://search.example");
+  const anchor = document.createElement("a"); anchor.href = "/get-a-quote?package=zirconium-24"; anchor.dataset.analyticsPackage = "zirconium-24"; anchor.dataset.analyticsLocation = "package_card"; trackCTAClick(anchor);
+  assert.equal(w.dataLayer.at(-1)![1], "quote_cta_click"); assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).package_id, "zirconium-24");
+  assert.doesNotMatch(JSON.stringify(w.dataLayer), /private@example|secret|\?email/);
+  document.cookie = "_ga=test; Path=/";
+  const unsubscribe = subscribeAnalytics(() => {});
+  window.localStorage.setItem(ANALYTICS_CONSENT_KEY, JSON.stringify({ choice: "denied", savedAt: Date.now() })); window.dispatchEvent(new dom.window.StorageEvent("storage", { key: ANALYTICS_CONSENT_KEY }));
+  assert.equal(w["ga-disable-G-BS3FP40Z46"], true); assert.doesNotMatch(document.cookie, /_ga/);
+  const count = w.dataLayer.length; trackEvent("generate_lead"); trackPageView(); assert.equal(w.dataLayer.length, count); unsubscribe();
+  saveAnalyticsConsent("granted"); assert.equal(document.querySelectorAll("script").length, 1);
+  configureAnalytics(false, ["/"]); applyAnalyticsConsent(); assert.equal(trackEvent("whatsapp_click"), false);
+  dom.reconfigure({ url: "https://preview.vercel.app/" }); configureAnalytics(true, ["/"]); applyAnalyticsConsent(); assert.equal(trackEvent("quote_cta_click"), false); dom.window.close();
+});
+test("expired, future and malformed consent and unknown URLs never leak into collection", () => {
+  assert.equal(consentRecord({ choice: "granted", savedAt: 1 }, 181 * 86400000), undefined);
+  assert.equal(consentRecord({ choice: "granted", savedAt: 100 }, 99), undefined);
+  assert.equal(consentRecord({ choice: "granted", savedAt: NaN }), undefined);
+  assert.equal(consentRecord({ choice: "yes", savedAt: Date.now() }), undefined);
+  const context = safeAnalyticsContext("https://turkeyteethfinance.co.uk/private@example.com?secret", "https://user:pass@example.com/?secret");
+  assert.equal(context.page_location, "https://turkeyteethfinance.co.uk"); assert.equal(context.page_referrer, "");
+});

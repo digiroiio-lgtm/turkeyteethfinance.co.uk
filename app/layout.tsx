@@ -1,3 +1,5 @@
+import { Analytics } from "@/components/analytics";
+import { publicPages } from "@/lib/public-pages";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/header";
@@ -54,6 +56,7 @@ export default function RootLayout({
         <Header />
         <main id="main-content">{children}</main>
         <Footer />
+        <Analytics enabled={process.env.VERCEL_ENV ? process.env.VERCEL_ENV === "production" : process.env.NODE_ENV === "production"} paths={publicPages().map(page => page.path)} />
       </body>
     </html>
   );

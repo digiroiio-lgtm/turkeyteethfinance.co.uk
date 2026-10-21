@@ -27,7 +27,7 @@ export function Hero({
             <span className="gradient-text">{accent}</span>
           </h1>
           <p className="hero-description">{intro}</p>
-          <QuoteCTA treatment={treatment} />
+          <QuoteCTA treatment={treatment} location="hero" />
           <Benefits />
         </div>
         <div className="hero-visual">

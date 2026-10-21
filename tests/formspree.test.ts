@@ -197,3 +197,15 @@ test("photos exceeding the Vercel-safe total are rejected before any receiver re
     assert.match((await response.json()).error, /4 MB in total/);
   });
 });
+
+
+test("package delivery derives the confirmed price on the server", async () => {
+  await withConfig({ NEXT_PUBLIC_TURNSTILE_SITE_KEY: undefined }, async () => {
+    globalThis.fetch = (async (_input, init) => {
+      const data = init?.body as FormData;
+      assert.equal(data.get("requestedPackage"), "16 Veneers"); assert.equal(data.get("listedPackagePriceGBP"), "3500"); assert.equal(data.get("packageStay"), "5 nights");
+      return Response.json({ next: "/thanks" });
+    }) as typeof fetch;
+    assert.equal((await POST(request({ ...fields, packageId: "veneers-16", listedPackagePriceGBP: 1 } as typeof fields))).status, 201);
+  });
+});

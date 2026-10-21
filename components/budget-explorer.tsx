@@ -1,13 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, Info } from "lucide-react";
 import { Eyebrow } from "./ui";
 import { PRIMARY_CTA } from "@/lib/public-copy";
+import { trackEvent } from "../lib/analytics";
 const options = ["Veneers", "Dental implants", "All-on-4", "Smile makeover"];
 export function BudgetExplorer({ answerIntro = false }: { answerIntro?: boolean }) {
   const [treatment, setTreatment] = useState(options[0]);
   const [cost, setCost] = useState(3500);
+  const engaged = useRef(false);
+  function engage() { if (!engaged.current) engaged.current = trackEvent("budget_interaction", { cta_location: "budget_planner" }); }
   const amount = new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: "GBP",
@@ -46,7 +49,7 @@ export function BudgetExplorer({ answerIntro = false }: { answerIntro?: boolean 
                   type="button"
                   aria-pressed={treatment === t}
                   className={treatment === t ? "selected" : ""}
-                  onClick={() => setTreatment(t)}
+                  onClick={() => { engage(); setTreatment(t); }}
                 >
                   {t}
                 </button>
@@ -65,7 +68,7 @@ export function BudgetExplorer({ answerIntro = false }: { answerIntro?: boolean 
               max="10000"
               step="100"
               value={cost}
-              onChange={(e) => setCost(Number(e.target.value))}
+              onChange={(e) => { engage(); setCost(Number(e.target.value)); }}
               style={
                 {
                   "--range-progress": `${((cost - 1000) / 9000) * 100}%`,
@@ -94,7 +97,8 @@ export function BudgetExplorer({ answerIntro = false }: { answerIntro?: boolean 
               </ul>
             </div>
             <Link
-              href={`/get-a-quote?treatment=${encodeURIComponent(treatment)}&budget=${cost}`}
+              data-analytics-action="quote" data-analytics-location="budget_planner"
+              href={`/get-a-quote?treatment=${encodeURIComponent(treatment)}&budget=${cost}#treatment-enquiry`}
               className="button button-small"
             >
               {PRIMARY_CTA}

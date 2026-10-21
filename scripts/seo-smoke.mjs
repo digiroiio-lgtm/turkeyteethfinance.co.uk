@@ -10,6 +10,7 @@ import { guideText } from "../lib/guide-schema.ts";
 import { monthlyPlanningText } from "../lib/monthly-schema.ts";
 import { pages } from "../lib/content.ts";
 import { JSDOM } from "jsdom";
+import { packageInclusions, packagePrice, treatmentPackages } from "../lib/packages.ts";
 
 const preview = process.argv.includes("--preview");
 const listener = createServer();
@@ -70,6 +71,17 @@ try {
       const data = JSON.parse(script.textContent); return data["@graph"] || [data];
     });
     if (response.status !== 200 || document.querySelectorAll("h1").length !== 1 || schemas.filter(node => node["@type"] === "WebPage").length !== 1) throw new Error("SSR heading or page schema failed: " + entry.path);
+    if (document.querySelector('script[src*="googletagmanager.com"]')) throw new Error("Google library must wait for consent.");
+    const catalog = schemas.filter(node => node["@type"] === "OfferCatalog");
+    if (entry.path === "/prices") {
+      if (catalog.length !== 1 || catalog[0].itemListElement.length !== 5 || document.querySelectorAll(".package-card").length !== 5) throw new Error("Expected five cards and one head catalog.");
+      for (const [index, item] of treatmentPackages.entries()) {
+        const card = document.getElementById("package-" + item.id);
+        const offer = catalog[0].itemListElement[index];
+        if (!card?.textContent.includes(packagePrice(item)) || !card.textContent.includes(item.stay) || packageInclusions.some(text => !card.textContent.includes(text)) || offer.price !== item.price || offer.priceCurrency !== "GBP" || new URL(offer.url).hash !== "#package-" + item.id) throw new Error("Package/schema mismatch: " + item.id);
+      }
+    } else if (catalog.length) throw new Error("Catalog leaked into " + entry.path);
+    if (entry.path === "/" && document.querySelectorAll(".package-card").length !== 3) throw new Error("Expected three homepage previews.");
     if (entry.path === "/get-a-quote" && !document.getElementById("treatment-enquiry")) throw new Error("Treatment quote links need a server-rendered destination anchor.");
     if (entry.path === "/pay-monthly") {
       const article = schemas.filter(node => node["@type"] === "Article");

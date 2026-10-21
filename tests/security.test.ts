@@ -256,3 +256,10 @@ test("successful webhook handoff is signed and upstream failure is not success",
     });
   }
 });
+
+
+test("unknown or treatment-mismatched package IDs are rejected", () => {
+  assert.equal(leadSchema.safeParse({ ...enquiry, packageId: "veneers-16" }).success, true);
+  assert.equal(leadSchema.safeParse({ ...enquiry, packageId: "zirconium-24" }).success, false);
+  assert.equal(leadSchema.safeParse({ ...enquiry, packageId: "invented" }).success, false);
+});

@@ -30,7 +30,7 @@ const config: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value: `default-src 'self'; script-src 'self' 'unsafe-inline' ${process.env.NODE_ENV === "development" ? "'unsafe-eval'" : ""} https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' ${process.env.NODE_ENV === "development" ? "ws: wss:" : ""} https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com; frame-ancestors ${process.env.NODE_ENV === "development" ? "'self'" : "'none'"}; form-action 'self'; base-uri 'self'; object-src 'none'`,
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline' ${process.env.NODE_ENV === "development" ? "'unsafe-eval'" : ""} https://challenges.cloudflare.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com; font-src 'self'; connect-src 'self' ${process.env.NODE_ENV === "development" ? "ws: wss:" : ""} https://challenges.cloudflare.com https://www.googletagmanager.com https://*.google-analytics.com https://*.google.com; frame-src 'self' https://challenges.cloudflare.com; frame-ancestors ${process.env.NODE_ENV === "development" ? "'self'" : "'none'"}; form-action 'self'; base-uri 'self'; object-src 'none'`,
           },
         ],
       },

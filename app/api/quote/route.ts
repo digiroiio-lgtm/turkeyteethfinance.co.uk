@@ -1,3 +1,4 @@
+import { packageForId } from "@/lib/packages";
 import sharp from "sharp";
 import { createHmac, randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
@@ -168,13 +169,15 @@ export async function POST(request: Request) {
     void _website;
     const reference = randomUUID();
     const submittedAt = new Date().toISOString();
+    const selectedPackage = packageForId(lead.packageId);
     const enquiry = {
       schemaVersion: 1,
       reference,
       submittedAt,
       source: "turkeyteethfinance.co.uk",
-      privacyNoticeVersion: "2026-10-20",
+      privacyNoticeVersion: "2026-10-21",
       ...lead,
+      ...(selectedPackage ? { requestedPackage: selectedPackage.name, listedPackagePriceGBP: selectedPackage.price, packageStay: selectedPackage.stay } : {}),
     };
     if (delivery.provider === "formspree") {
       const response = await fetch(delivery.url, {

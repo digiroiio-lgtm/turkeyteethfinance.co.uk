@@ -1,3 +1,4 @@
+import { packageForId } from "./packages";
 import { z } from "zod";
 import { MAX_REQUEST_SIZE } from "./enquiry-limits";
 export { MAX_UPLOAD_SIZE, MAX_REQUEST_SIZE, MAX_TOTAL_UPLOAD_SIZE } from "./enquiry-limits";
@@ -11,6 +12,7 @@ export const leadSchema = z
       "Smile makeover",
       "Not sure yet",
     ]),
+    packageId: z.string().max(40).refine(value => value === "" || !!packageForId(value)).optional(),
     teeth: z
       .string()
       .max(2)
@@ -50,7 +52,7 @@ export const leadSchema = z
   })
   .refine((v) => v.preferredContact !== "whatsapp" || v.whatsapp.length >= 7, {
     message: "WhatsApp number is required for WhatsApp contact.",
-  });
+  }).refine(v => !v.packageId || packageForId(v.packageId)?.treatment === v.treatment, { message: "Choose a package matching treatment interest.", path: ["packageId"] });
 export function imageType(
   bytes: Uint8Array,
 ): "image/jpeg" | "image/png" | "image/webp" | undefined {

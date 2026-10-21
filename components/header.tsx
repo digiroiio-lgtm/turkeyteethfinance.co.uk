@@ -73,7 +73,7 @@ export function Header() {
           ))}
           <Link
             className="button button-small header-cta"
-            href="/get-a-quote"
+            href="/get-a-quote#treatment-enquiry" data-analytics-action="quote" data-analytics-location="header"
             onClick={() => setOpen(false)}
           >
             {PRIMARY_CTA}

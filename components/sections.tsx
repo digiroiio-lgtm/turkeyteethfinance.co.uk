@@ -346,8 +346,8 @@ export function CostTable() {
         </div>
         <p className="information-note">
           <Info size={18} />
-          Prices are provided in your personal quote. There are no standard
-          package prices or lender repayment examples on this site.
+          Listed packages give you a starting point for discussion. Your personal
+          quote confirms the treatment scope, price and arrangements after clinical assessment.
         </p>
       </div>
     </section>

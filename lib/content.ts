@@ -423,8 +423,8 @@ export const pages: Record<string, PageContent> = {
   },
   "prices": {
     "lastModified": "2026-10-21",
-    "title": "Dental Treatment Prices Turkey | Written Quotes",
-    "description": "Understand what affects dental treatment prices in Antalya. Compare treatment, travel, visit schedules and payment options with a personalised written estimate.",
+    "title": "Dental Treatment Packages & Prices in Turkey",
+    "description": "Compare confirmed dental treatment packages in Antalya with hotel accommodation and transfers. Request a personalised written quote subject to clinical assessment.",
     "label": "PRICES & PAYMENT OPTIONS",
     "heading": "Dental treatment prices.",
     "accent": "Clear before you commit.",
@@ -433,7 +433,7 @@ export const pages: Record<string, PageContent> = {
     "sections": [
       {
         "title": "How can I get a reliable treatment price?",
-        "body": "Request an itemised written estimate for the treatment your teeth need. Prices on this site are provided through personal estimates rather than a fixed package price list. The final plan and cost depend on the treating dentist’s assessment, not a budget entered into the online planner.",
+        "body": "Request an itemised written estimate for the treatment your teeth need. The listed packages provide confirmed prices for the specified treatment and stay. Your personal quote confirms the scope and arrangements for your case. The final plan and cost depend on the treating dentist’s assessment, not a budget entered into the online planner.",
         "paragraphs": [
           "Tell the team the treatment you want to discuss, any existing dental work and your likely travel period. Ask which parts of the estimate are provisional and which questions need examination or imaging. If assessment changes the proposal, request a revised plan and total before agreeing to additional care. Do not interpret a headline advertised elsewhere as the price for your own case."
         ],
@@ -467,7 +467,7 @@ export const pages: Record<string, PageContent> = {
       },
       {
         "title": "Are hotel nights, transfers and return visits included?",
-        "body": "Accommodation and transfers are included only when your written quote explicitly lists them. Confirm the hotel or room arrangement, the number of nights and the journeys covered. A first-stay package should not be assumed to include later treatment trips, extra nights or travel for a complication.",
+        "body": "The listed packages include hotel accommodation and airport and clinic transfers. Crown and veneer packages include five nights; the implant package includes three plus five nights across two visits. Confirm the hotel or room arrangement, the number of nights and the journeys covered. A first-stay package should not be assumed to include later treatment trips, extra nights or travel for a complication.",
         "paragraphs": [
           "Keep your travel bookings separate from the clinical estimate so that changes are visible. Ask whether the quoted treatment involves one stay or several stages and how extra appointments would affect the itinerary. Use current travel options and your own circumstances when budgeting. This page does not substitute assumed flights, hotel costs or sample clinic prices for verified quotations."
         ],
@@ -504,8 +504,8 @@ export const pages: Record<string, PageContent> = {
     ],
     "faqs": [
       {
-        "question": "Why are there no fixed clinic prices on this Prices page?",
-        "answer": "Prices are provided through personalised written estimates. Request the procedures, materials and inclusions for your own case; a budget entered into the planner does not establish a clinic price."
+        "question": "Are package prices a confirmed personal treatment plan?",
+        "answer": "Package prices are subject to clinical assessment and personalised treatment planning. Your written quote confirms procedures, materials and arrangements for your case; the budget planner does not establish a clinic price."
       },
       {
         "question": "Is the treatment budget slider a price quotation?",

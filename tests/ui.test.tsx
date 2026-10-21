@@ -9,6 +9,7 @@ import {
 import { Header } from "../components/header";
 import { BudgetExplorer } from "../components/budget-explorer";
 import { QuoteForm } from "../components/quote-form";
+import { configureAnalytics, saveAnalyticsConsent } from "../lib/analytics";
 import { QuoteCTA } from "../components/ui";
 
 // In-memory component tests: no browser automation, external requests or patient data.
@@ -147,6 +148,10 @@ test("enquiry delivery disables duplicate submissions, refreshes CAPTCHA on fail
   const { render, fireEvent, waitFor, act } = testing;
   const originalFetch = globalThis.fetch;
   const originalTurnstile = window.turnstile;
+  dom.reconfigure({ url: "https://turkeyteethfinance.co.uk/get-a-quote?email=private@example.com" });
+  configureAnalytics(true, ["/", "/get-a-quote"]); saveAnalyticsConsent("granted");
+  const layer = (window as unknown as { dataLayer: unknown[][] }).dataLayer;
+  const leads = () => layer.filter(command => command[1] === "generate_lead");
   let widgetCount = 0;
   let calls = 0;
   let resolveSubmission: (response: Response) => void = () => {};
@@ -185,17 +190,22 @@ test("enquiry delivery disables duplicate submissions, refreshes CAPTCHA on fail
     fireEvent.click(view.getByRole("button", { name: "Send my enquiry" }));
     assert.equal((view.getByRole("button", { name: /Sending/ }) as HTMLButtonElement).disabled, true);
     fireEvent.submit(view.container.querySelector("form")!);
-    assert.equal(calls, 1);
+    assert.equal(calls, 1); assert.equal(leads().length, 0);
     await act(async () => resolveSubmission(Response.json({ error: "Test delivery failure" }, { status: 502 })));
     await waitFor(() => assert.match(view.getByRole("alert").textContent || "", /Test delivery failure/));
     await waitFor(() => assert.equal(widgetCount, 2));
     fireEvent.click(view.getByRole("button", { name: "Send my enquiry" }));
     await waitFor(() => assert.ok(view.getByRole("status")));
     assert.ok(view.getByText("Reference: test-accepted-reference"));
-    assert.equal(calls, 2);
+    assert.equal(calls, 2); assert.equal(leads().length, 1);
+    assert.equal(layer.filter(command => command[1] === "form_start").length, 1);
+    assert.equal(layer.filter(command => command[1] === "form_step_complete").length, 3);
+    assert.equal(layer.filter(command => command[1] === "form_submit_attempt").length, 2);
+    assert.doesNotMatch(JSON.stringify(layer), /Test Patient|test@example|private@example|test-accepted-reference|Test delivery failure|Veneers/);
   } finally {
     globalThis.fetch = originalFetch;
     window.turnstile = originalTurnstile;
+    saveAnalyticsConsent("denied"); configureAnalytics(false, ["/"]); dom.reconfigure({ url: "http://localhost/" });
   }
 });
 
@@ -257,4 +267,17 @@ test("the enabled Formspree form submits without an unconfigured CAPTCHA and sti
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+
+test("package quote navigation preselects the matching treatment and clears incompatible choices", () => {
+  const { render, fireEvent } = testing;
+  const view = render(<SearchParamsContext.Provider value={new URLSearchParams("package=zirconium-24")}><QuoteForm available={false} /></SearchParamsContext.Provider>);
+  assert.equal((view.getByRole("radio", { name: "Zirconia crowns" }) as HTMLInputElement).checked, true);
+  assert.equal((view.getByLabelText(/Package to discuss/) as HTMLSelectElement).value, "zirconium-24");
+  view.rerender(<SearchParamsContext.Provider value={new URLSearchParams("package=veneers-16")}><QuoteForm available={false} /></SearchParamsContext.Provider>);
+  assert.equal((view.getByRole("radio", { name: "Veneers" }) as HTMLInputElement).checked, true);
+  assert.equal((view.getByLabelText(/Package to discuss/) as HTMLSelectElement).value, "veneers-16");
+  fireEvent.click(view.getByRole("radio", { name: "Dental implants" }));
+  assert.equal((view.getByLabelText(/Package to discuss/) as HTMLSelectElement).value, "");
 });

@@ -92,6 +92,7 @@ export function Footer() {
             <div>
               <Link href="/privacy">Privacy & cookies</Link>
               <Link href="/terms">Website terms</Link>
+              <button type="button" className="cookie-settings" data-cookie-settings>Cookie settings</button>
             </div>
           </div>
         </div>
