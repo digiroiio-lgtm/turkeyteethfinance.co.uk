@@ -9,10 +9,10 @@ export const monthlyPlanning = {
       title: "What should I arrange before considering monthly payments?",
       body: "Before thinking about repayments, understand what your teeth need. Your written quote sets out the proposed treatment, estimated cost and expected visits. The dentist confirms the final plan after a clinical assessment. Keep the treatment decision separate from the question of how you will pay for it.",
       paragraphs: [
-        "Begin with your priorities: comfort, chewing, replacing a missing tooth or changing appearance. Explain any existing symptoms and what you hope treatment will achieve. Ask the clinical team which concerns require an examination and which information can only be provisional when photographs are used. A budget selected on this website does not decide which procedures are appropriate.",
+        "Begin with your priorities: comfort, chewing, replacing a missing tooth or changing appearance. Explain any existing symptoms and what you hope treatment will achieve. Ask the clinical team which concerns require an examination and which information can only be provisional when photographs are used. A budget selected on this website does not decide which procedures are appropriate. Ask whether gum health needs assessment as part of your plan; NIDCR explains how dental professionals check for gum disease.",
         "Keep a dated copy of the estimate and note what still needs confirmation. If the plan changes after examination, ask for an updated description and cost before agreeing to additional work. Read the treatment pages for clinical distinctions rather than choosing a procedure solely because it appears to fit a monthly budget.",
       ],
-      sources: ["gdc"],
+      sources: ["gdc", "gumAssessment"],
       links: [{ text: "Compare the scope of written dental quotes", href: "/guides/compare-dental-quotes" }],
     },
     {
@@ -82,7 +82,7 @@ export const monthlyPlanning = {
         "Some implant plans involve separate surgical and restorative stages, with healing and review between them. Additional procedures can change the sequence. Ask what happens if a review shows that the next stage should be delayed and whether your travel bookings can be moved. A provisional return date is different from confirmation that the next procedure can go ahead.",
         "Put appointment dates, accommodation nights, time away from work and any companion arrangements on the same calendar. Check which bookings you control and which are arranged by the clinic. Keep the clinical schedule separate from payment paperwork so each organisation can explain its own dates. Our visit-planning guide covers the travel checklist in more detail without promising a fixed treatment duration.",
       ],
-      sources: ["stages"],
+      sources: ["stages", "universityImplants"],
       links: [{ text: "Plan dental visits to Antalya", href: "/guides/plan-dental-visit-antalya" }],
     },
     {
