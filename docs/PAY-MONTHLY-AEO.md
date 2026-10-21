@@ -6,7 +6,7 @@ Updated 21 October 2026. Scope: `/pay-monthly`, its structured data and shared t
 
 The user-supplied Context.dev result was 82/100. Re-running the exact URL reproduced 82, but its extracted text was an older version, without the current attribution and reduced FAQ list. A fresh crawl of `https://turkeyteethfinance.co.uk/pay-monthly?aeo=20261021-before` returned **87/100** before this change: structure 27/30, schema 20/20, quality 15/25, technical 15/15, freshness 10/10. Thus the existing WebPage modification date already passed on a current crawl. Do not attribute the first five points to this PR.
 
-The cache-busting query does not alter content; the canonical remains the unparameterised HTTPS URL. Final checker results must be recorded after deployment. The checker is a third-party heuristic, not a measurement or guarantee of citations, ranking or patient conversion. The percentages and citation multipliers in its suggested fix prompt are not promises made by this website.
+The fresh baseline extracted 890 words, versus the older report's 983, and reported three numerical facts. The cache-busting query does not alter content; the canonical remains the unparameterised HTTPS URL. Final checker results must be recorded after deployment. The checker is a third-party heuristic, not a measurement or guarantee of citations, ranking or patient conversion. The percentages and citation multipliers in its suggested fix prompt are not promises made by this website.
 
 ## Changes
 
@@ -47,4 +47,4 @@ For the next compliance review, review the complete `/pay-monthly` page, particu
 - ESLint, TypeScript and production build pass.
 - Production HTTP smoke passes all 22 canonical URLs, robots, sitemap, indexing headers, FAQ parity, head schemas and LLM endpoints.
 - Added HTTP assertions for the monthly Article in head, its body/date matching the source, visible quotation markup and no expanded planning copy bundled into browser JavaScript.
-- Preview build and indexing smoke are checked separately. Deployment and final external checker verification are recorded in the PR once available.
+- Preview build and indexing smoke pass separately, including blocking robots, an empty preview sitemap and noindex metadata/headers. The smoke command uses `--preview` for that build. Deployment and final external checker verification are recorded in the PR once available.
