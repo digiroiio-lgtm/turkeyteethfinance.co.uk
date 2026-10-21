@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { homeContent, pages } from "./content";
+import { standaloneGuides } from "./guides";
 import { privacyContent, termsContent } from "./legal-content";
 import { canonicalUrl, routeSlugs } from "./site";
 
@@ -23,6 +24,9 @@ export function publicPages(): PublicPage[] {
     ...routeSlugs
       .filter((slug) => pages[slug].indexable !== false)
       .map((slug) => ({ ...pages[slug], path: `/${slug}` })),
+    ...standaloneGuides.map(guide => ({
+      path: guide.path!, title: guide.title, description: guide.description!, lastModified: guide.lastModified,
+    })),
     privacyContent(),
     termsContent(),
   ];

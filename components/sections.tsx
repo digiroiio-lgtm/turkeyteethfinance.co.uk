@@ -377,7 +377,7 @@ export function Guides() {
       <div className="container">
         <div className="guide-grid">
           {guideArticles.map((a) => (
-            <Link className="guide-card" href={`/guides#${a.id}`} key={a.id}>
+            <Link className="guide-card" id={a.id} href={a.path || `/guides#${a.id}-details`} key={a.id}>
               <span className="icon-tile">
                 <Icon name="book" size={30} />
               </span>
@@ -391,8 +391,8 @@ export function Guides() {
           ))}
         </div>
         <div className="guide-articles narrow">
-          {guideArticles.map((a) => (
-            <article className="article" id={a.id} key={a.id}>
+          {guideArticles.filter(a => !a.path).map((a) => (
+            <article className="article" id={`${a.id}-details`} key={a.id}>
               <Eyebrow>{a.category}</Eyebrow>
               <h2>{a.title}</h2>
               {a.paragraphs.map((p) => (

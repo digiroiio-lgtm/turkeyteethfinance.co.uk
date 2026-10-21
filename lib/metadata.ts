@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_NAME, SITE_URL, canonicalUrl, indexingEnabled } from "./site";
+import { SITE_NAME, canonicalUrl, indexingEnabled } from "./site";
 import { publicPages } from "./public-pages";
 export function pageMetadata(
   title: string,
@@ -16,7 +16,7 @@ export function pageMetadata(
     openGraph: {
       title,
       description,
-      url: SITE_URL + path,
+      url: canonicalUrl(path),
       siteName: SITE_NAME,
       locale: "en_GB",
       type: "website",

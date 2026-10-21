@@ -3,8 +3,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-import { PRIMARY_CTA } from "@/lib/site";
-import { treatments } from "@/lib/content";
+import { PRIMARY_CTA } from "@/lib/public-copy";
+import { treatments } from "@/lib/treatments";
 
 export function Logo() {
   return (

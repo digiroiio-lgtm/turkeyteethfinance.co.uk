@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, Info } from "lucide-react";
 import { Eyebrow } from "./ui";
-import { PRIMARY_CTA } from "@/lib/site";
+import { PRIMARY_CTA } from "@/lib/public-copy";
 const options = ["Veneers", "Dental implants", "All-on-4", "Smile makeover"];
 export function BudgetExplorer({ answerIntro = false }: { answerIntro?: boolean }) {
   const [treatment, setTreatment] = useState(options[0]);

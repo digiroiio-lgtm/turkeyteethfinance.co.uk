@@ -1,10 +1,13 @@
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
-import { mkdtemp, writeFile, rm } from "node:fs/promises";
+import { mkdtemp, writeFile, rm, readdir, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { publicPages } from "../lib/public-pages.ts";
 import { canonicalUrl, SITE_URL } from "../lib/site.ts";
+import { standaloneGuides } from "../lib/guides.ts";
+import { guideText } from "../lib/guide-schema.ts";
+import { JSDOM } from "jsdom";
 
 const preview = process.argv.includes("--preview");
 const listener = createServer();
@@ -30,6 +33,13 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
   if (!ready) throw new Error("Production server did not become ready.");
+  for (const file of await readdir(".next/static/chunks")) {
+    if (!file.endsWith(".js")) continue;
+    const javascript = await readFile(join(".next/static/chunks", file), "utf8");
+    if (javascript.includes("Veneers cover the front surface of existing teeth") || javascript.includes("Compare what is proposed for your own teeth before comparing the total price")) {
+      throw new Error("Server-rendered editorial content must not be bundled into client JavaScript: " + file);
+    }
+  }
   // Check the rendered document, not just the schema-building function.
   const headers = { Host: new URL(SITE_URL).host };
   const html = await (await fetch(`http://127.0.0.1:${port}/`, { headers })).text();
@@ -50,9 +60,36 @@ try {
       throw new Error("Homepage article leaked into " + path + " or the route failed.");
     }
   }
+  const registry = new Set(publicPages().map(page => page.path));
+  for (const entry of publicPages()) {
+    const response = await fetch(`http://127.0.0.1:${port}${entry.path}`, { headers });
+    const document = new JSDOM(await response.text()).window.document;
+    const schemas = [...document.head.querySelectorAll('script[type="application/ld+json"]')].flatMap(script => {
+      const data = JSON.parse(script.textContent); return data["@graph"] || [data];
+    });
+    if (response.status !== 200 || document.querySelectorAll("h1").length !== 1 || schemas.filter(node => node["@type"] === "WebPage").length !== 1) throw new Error("SSR heading or page schema failed: " + entry.path);
+    if (entry.path === "/get-a-quote" && !document.getElementById("treatment-enquiry")) throw new Error("Treatment quote links need a server-rendered destination anchor.");
+    const faq = schemas.find(node => node["@type"] === "FAQPage");
+    const visible = [...document.querySelectorAll(".faq-list details")];
+    if (visible.length && (faq?.mainEntity.length !== visible.length || visible.some((element, index) => faq.mainEntity[index].acceptedAnswer.text !== element.querySelector("p").textContent))) throw new Error("FAQ schema differs from rendered answers: " + entry.path);
+    for (const anchor of document.querySelectorAll('main a[href^="/"]')) {
+      const destination = new URL(anchor.getAttribute("href"), SITE_URL);
+      if (!registry.has(destination.pathname) && destination.pathname !== "/") throw new Error("Broken contextual page link: " + destination.pathname);
+    }
+    const guide = standaloneGuides.find(guide => guide.path === entry.path);
+    if (guide) {
+      const article = schemas.filter(node => node["@type"] === "Article");
+      if (article.length !== 1 || article[0].articleBody !== guideText(guide)) throw new Error("Guide Article differs from its source: " + entry.path);
+      if (document.querySelector('main script[type="application/ld+json"]')) throw new Error("Guide schema must be in head.");
+      for (const section of guide.sections) if (!document.querySelector("main").textContent.includes(section.body)) throw new Error("Missing SSR guide answer: " + section.title);
+    }
+  }
   const missing = await fetch(`http://127.0.0.1:${port}/not-a-public-page-aeo-check`, { headers });
   await missing.body?.cancel();
   if (missing.status !== 404) throw new Error("The schema head slot must not create new public routes.");
+  const missingGuide = await fetch(`http://127.0.0.1:${port}/guides/not-a-public-guide`, { headers });
+  await missingGuide.body?.cancel();
+  if (missingGuide.status !== 404) throw new Error("Unknown guides must return 404.");
   const args = [
     "scripts/check-seo.py", "--base", `http://127.0.0.1:${port}`,
     "--canonical", SITE_URL, "--host", new URL(SITE_URL).host,

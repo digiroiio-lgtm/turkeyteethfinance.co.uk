@@ -8,12 +8,14 @@ export function Hero({
   accent = homeContent.accent,
   intro = homeContent.intro,
   type = "home",
+  treatment,
 }: {
   label?: string;
   heading?: string;
   accent?: string;
   intro?: string;
   type?: "home" | "monthly" | "journey" | "inner";
+  treatment?: string;
 }) {
   return (
     <section className={`hero hero-${type === "inner" ? "compact" : type}`}>
@@ -25,7 +27,7 @@ export function Hero({
             <span className="gradient-text">{accent}</span>
           </h1>
           <p className="hero-description">{intro}</p>
-          <QuoteCTA />
+          <QuoteCTA treatment={treatment} />
           <Benefits />
         </div>
         <div className="hero-visual">
