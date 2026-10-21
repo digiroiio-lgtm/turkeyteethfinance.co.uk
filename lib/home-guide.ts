@@ -9,7 +9,7 @@ export type GuideSection = {
 };
 export const homeGuide = {
   title: "Dental treatment and finance in Turkey: a UK patient planning guide",
-  updatedLabel: "20 October 2026",
+  updatedLabel: "21 October 2026",
   author: COMPANY + " patient coordination team",
 };
 export const homeGuideSources: GuideSource[] = [
@@ -52,6 +52,21 @@ export const homeGuideSources: GuideSource[] = [
     "id": "gdc-crowns",
     "title": "Shamir B. Mehta, GDC: complaints about dental crowns, 10 September 2026",
     "url": "https://www.gdc-uk.org/news-blogs/blog/detail/blogs/2026/09/10/heavy-is-the-head-complaints-dental-crowns-insights-learning"
+  },
+  {
+    "id": "fda-implants",
+    "title": "U.S. FDA: dental implant components, records and follow-up",
+    "url": "https://www.fda.gov/medical-devices/dental-devices/dental-implants-what-you-should-know"
+  },
+  {
+    "id": "nih-materials",
+    "title": "NIH NIDCR: dental materials and laboratory-made restorations",
+    "url": "https://www.nidcr.nih.gov/grants-funding/funded-research/research-investments-advances/dental-materials"
+  },
+  {
+    "id": "columbia-implants",
+    "title": "Columbia University College of Dental Medicine: implant treatment stages",
+    "url": "https://www.dental.columbia.edu/patient-care/columbiadoctors-dentistry/our-services/dental-implants"
   }
 ];
 export const homeGuideSections: GuideSection[] = [
@@ -119,11 +134,13 @@ export const homeGuideSections: GuideSection[] = [
     "answer": "Some implant plans require several stages and return visits, so one holiday should not be assumed to complete treatment. Assessment, surgery, healing and the final restoration are different parts of care. Your treating dentist must confirm the schedule, any temporary teeth and the point at which you can travel.",
     "paragraphs": [
       "Guy’s and St Thomas’ NHS patient information describes 3 or 4 stages of implant treatment and says a complete course can take 6 to 12 months. That is general NHS guidance about its treatment pathway, not Akdeniz Dental’s promised timetable. Individual plans vary with the procedure and healing needs.",
-      "Leeds Teaching Hospitals describes early implant placement after extractions have healed for around 6 to 10 weeks, while immediate placement is possible only in suitable conditions. Ask whether your plan involves immediate placement, immediate loading or a later restoration; those terms describe different steps. Get the proposed intervals and arrangements if healing takes longer before buying non-refundable flights."
+      "Leeds Teaching Hospitals describes early implant placement after extractions have healed for around 6 to 10 weeks, while immediate placement is possible only in suitable conditions. Ask whether your plan involves immediate placement, immediate loading or a later restoration; those terms describe different steps. Get the proposed intervals and arrangements if healing takes longer before buying non-refundable flights.",
+      "Columbia University’s patient information also separates implant placement, bone healing and fitting replacement teeth. These are stages of care, not a promise that every patient can complete treatment within the same travel schedule."
     ],
     "sourceIds": [
       "nhs-implants",
-      "leeds"
+      "leeds",
+      "columbia-implants"
     ]
   },
   {
@@ -144,10 +161,12 @@ export const homeGuideSections: GuideSection[] = [
     "answer": "Crowns and veneers restore or change existing teeth, while implants replace missing tooth roots and support replacement teeth. They are not interchangeable products to choose by price alone. Ask the dentist what each tooth needs, what healthy tissue would be removed and whether a less invasive alternative is appropriate.",
     "paragraphs": [
       "In a September 2026 GDC learning article, Shamir B. Mehta reports that 27% of 1,619 adults examined in the 2023 oral health survey had at least one crowned tooth. This describes that survey sample, not the proportion of people who should receive crowns or a result achieved by this clinic.",
-      "A plan involving multiple crowns needs an individual explanation of why each restoration is indicated. Ask about alternatives, sensitivity, bite changes, maintenance and possible further treatment. Material names alone do not show that a plan is suitable. Request the proposed tooth numbers and reasons in writing, and consider discussing the plan with your existing dentist before committing."
+      "A plan involving multiple crowns needs an individual explanation of why each restoration is indicated. Ask about alternatives, sensitivity, bite changes, maintenance and possible further treatment. Material names alone do not show that a plan is suitable. Request the proposed tooth numbers and reasons in writing, and consider discussing the plan with your existing dentist before committing.",
+      "The NIH’s National Institute of Dental and Craniofacial Research describes crowns, veneers and bridges as laboratory-made indirect restorations. Ask which material and restoration design your dentist is proposing, rather than treating the terms as interchangeable."
     ],
     "sourceIds": [
-      "gdc-crowns"
+      "gdc-crowns",
+      "nih-materials"
     ],
     "quote": {
       "text": "Crown treatments are still a valuable aspect of restorative dentistry and can offer excellent long-term outcomes.",
@@ -185,10 +204,12 @@ export const homeGuideSections: GuideSection[] = [
     "answer": "Confirm who provides clinical aftercare, how to contact them and what happens if a problem arises after you return home. Ask which reviews or corrective procedures are included and which costs remain yours. A written warranty should explain its conditions, exclusions and process rather than relying on a headline duration.",
     "paragraphs": [
       "Keep two distinct contacts: the treating clinical team for clinical concerns and the coordination team for administrative support. Before leaving, request your treatment summary, relevant imaging or implant information, written aftercare instructions and the complaint procedure. Ask how urgent concerns are triaged, where an examination would take place and whether extra flights or accommodation would be covered.",
-      "The GDC advises patients to check the regulatory and complaint arrangements in the country where care takes place. UK patient coordination does not make treatment in Turkey subject to the same arrangements as treatment delivered in the UK. Discuss planned treatment with your own dentist and check insurance exclusions before travelling. Do not assume an existing policy covers elective treatment abroad or its complications."
+      "The GDC advises patients to check the regulatory and complaint arrangements in the country where care takes place. UK patient coordination does not make treatment in Turkey subject to the same arrangements as treatment delivered in the UK. Discuss planned treatment with your own dentist and check insurance exclusions before travelling. Do not assume an existing policy covers elective treatment abroad or its complications.",
+      "FDA patient guidance recommends keeping the implant system’s brand and model information, following the treating dentist’s cleaning instructions and attending regular reviews. This is general device information, not FDA endorsement of a clinic or a treatment plan."
     ],
     "sourceIds": [
-      "gdc-abroad"
+      "gdc-abroad",
+      "fda-implants"
     ]
   },
   {
@@ -206,7 +227,7 @@ export const homeGuideSections: GuideSection[] = [
     "title": "How were the facts and examples on this page checked?",
     "answer": "This guide combines the website’s actual enquiry process with linked public information from UK dental bodies, NHS trusts and the FCA. Research figures retain their original dates and scope. Budget examples show their assumptions and arithmetic, so readers can substitute their own figures without confusing an illustration with an offer.",
     "paragraphs": [
-      "Sources and page content were checked on 20 October 2026. The financial figures describe the FCA’s May 2024 survey, published in May 2025, rather than a new 2026 survey. The crown discussion references the GDC’s September 2026 learning article. NHS timing and survival information is general background and is not presented as clinic-specific evidence.",
+      "Sources and page content were checked on 20 October 2026. The financial figures describe the FCA’s May 2024 survey, published in May 2025, rather than a new 2026 survey. The crown discussion references the GDC’s September 2026 learning article. NHS timing and survival information is general background and is not presented as clinic-specific evidence. Supplementary FDA, NIH and Columbia University patient resources were checked and added on 21 October 2026.",
       "The three named quotations reproduce short extracts from the linked publications. Roles are those stated by the sources; none of the quoted experts has endorsed this website or reviewed your treatment. The guide is prepared by Akdeniz Dental Consultancy UK Ltd’s patient coordination team as general planning information. Clinical advice belongs with the treating dentist, and individual credit terms belong with the broker and lender."
     ],
     "sourceIds": [
