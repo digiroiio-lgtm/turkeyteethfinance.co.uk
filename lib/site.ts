@@ -1,5 +1,6 @@
 import { enquiryDelivery } from "./enquiry-config";
 import { pages } from "./content";
+import { standaloneGuides } from "./guides";
 import { canonicalOrigin, searchIndexingEnabled } from "./search-config";
 
 export const SITE_NAME = "Turkey Teeth Finance";
@@ -69,4 +70,4 @@ export const financeNotice =
 
 // The actual content registry drives static routes, sitemap and LLM discovery.
 export const routeSlugs = Object.keys(pages);
-export const canonicalPaths = ["/", ...routeSlugs.map((slug) => `/${slug}`)];
+export const canonicalPaths = ["/", ...routeSlugs.map((slug) => `/${slug}`), ...standaloneGuides.map(guide => guide.path!)];

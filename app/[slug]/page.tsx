@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, Check, ArrowRight } from "lucide-react";
-import { pages, guideArticles } from "@/lib/content";
+import { ChevronRight, ArrowRight } from "lucide-react";
+import { pages } from "@/lib/content";
 import {
   routeSlugs,
-  SITE_URL,
-  COMPANY,
   financeApplicationUrl,
   publicationApproved,
   leadsConfigured,
@@ -18,8 +16,6 @@ import {
   ConversionBanner,
   FAQSection,
   FinanceNotice,
-  EmptyProof,
-  SectionTitle,
   QuoteCTA,
 } from "@/components/ui";
 import {
@@ -34,7 +30,7 @@ import {
   QuoteIntro,
   CarePanel,
 } from "@/components/sections";
-import { PageSchema, JsonLd } from "@/components/structured-data";
+import { ContentAttribution, EditorialSections, ClinicEvidence, PatientEvidence } from "@/components/editorial";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return routeSlugs.map((slug) => ({ slug }));
@@ -67,6 +63,7 @@ export default async function ContentPage({
         heading={p.heading}
         accent={p.accent}
         intro={p.intro}
+        treatment={p.treatment}
         type={
           p.kind === "monthly"
             ? "monthly"
@@ -82,6 +79,7 @@ export default async function ContentPage({
           <span aria-current="page">{p.label.toLowerCase()}</span>
         </nav>
       </div>
+      <ContentAttribution date={p.lastModified} />
       {p.kind === "monthly" && (
         <>
           <TrustStrip />
@@ -104,66 +102,12 @@ export default async function ContentPage({
       )}
       {p.kind === "eligibility" && <EligibilityPanel />}
       {p.kind === "prices" && <CostTable />}
-      {(p.kind === "results" || p.kind === "reviews") && (
-        <section className="section">
-          <div className="container narrow">
-            <EmptyProof kind={p.kind} />
-          </div>
-        </section>
-      )}
-      {p.kind === "clinic" && <CarePanel />}
-      {p.kind === "guides" && (
-        <>
-          <Guides />
-          <JsonLd
-            data={{
-              "@context": "https://schema.org",
-              "@graph": guideArticles.map((a) => ({
-                "@type": "Article",
-                "@id": `${SITE_URL}/guides#${a.id}`,
-                headline: a.title,
-                description: a.summary,
-                articleBody: a.paragraphs.join("\n\n"),
-                url: `${SITE_URL}/guides#${a.id}`,
-                inLanguage: "en-GB",
-                author: { "@type": "Organization", name: COMPANY },
-                publisher: { "@id": `${SITE_URL}/#organisation` },
-                dateModified: "2026-10-20",
-              })),
-            }}
-          />
-        </>
-      )}
+      {(p.kind === "results" || p.kind === "reviews") && <PatientEvidence kind={p.kind} />}
+      {p.kind === "clinic" && <><CarePanel /><ClinicEvidence /></>}
+      {p.kind === "guides" && <Guides />}
       {p.sections.length > 0 && (
         <section className="section editorial-section">
-          <div className="container">
-            <SectionTitle
-              label="INFORMATION THAT HELPS"
-              title="The details"
-              accent="that matter."
-            />
-            <div
-              className={`editorial-grid ${p.sections.length === 3 ? "three" : ""}`}
-            >
-              {p.sections.map((s, i) => (
-                <article className="editorial-card" key={s.title}>
-                  <span className="article-number">0{i + 1}</span>
-                  <h2>{s.title}</h2>
-                  <p>{s.body}</p>
-                  {s.bullets && (
-                    <ul className="check-list">
-                      {s.bullets.map((b) => (
-                        <li key={b}>
-                          <Check />
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </article>
-              ))}
-            </div>
-          </div>
+          <div className="container"><EditorialSections sections={p.sections} /></div>
         </section>
       )}
       {slug === "dental-finance" && (
@@ -189,36 +133,13 @@ export default async function ContentPage({
         </section>
       )}
       <FAQSection faqs={p.faqs} />
-      <ConversionBanner />
+      <ConversionBanner treatment={p.treatment} />
       <RelatedLinks slugs={p.related} />
       <div className="container">
         <FinanceNotice full />
       </div>
       <Sources />
-      <PageSchema
-        path={`/${slug}`}
-        title={p.title}
-        description={p.description}
-        faqs={p.faqs}
-      />
-      {p.kind === "clinic" && (
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "MedicalClinic",
-            "@id": `${SITE_URL}/our-clinic#clinic`,
-            name: "Akdeniz Dental",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Antalya",
-              addressCountry: "TR",
-            },
-            medicalSpecialty: "Dentistry",
-            description:
-              "Treating dental clinic in Antalya, Turkey. Separate from the UK patient coordination company.",
-          }}
-        />
-      )}
+
     </>
   );
 }

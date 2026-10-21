@@ -4,7 +4,7 @@ import { COMPANY, SITE_NAME, SITE_URL } from "./site";
 export type GuideSource = { id: string; title: string; url: string };
 export type GuideSection = {
   id: string; title: string; answer: string; paragraphs: string[];
-  sourceIds: string[]; calculation?: string;
+  sourceIds: string[]; calculation?: string; links?: { text: string; href: string }[];
   quote?: { text: string; name: string; role: string; sourceId: string };
 };
 export const homeGuide = {
@@ -103,11 +103,20 @@ export const homeGuideSections: GuideSection[] = [
     "title": "How do I calculate the whole cost of treatment abroad?",
     "answer": "Add the treatment estimate, travel, accommodation not included in the package, insurance and a separate contingency budget. Count every planned visit rather than just the first trip. A lower advertised treatment price can still produce a higher overall cost if essential items or return journeys are excluded.",
     "paragraphs": [
-      "Original budgeting example, not a clinic price or credit offer: an assumed £3,000 treatment estimate plus £400 travel, £250 accommodation and £350 set aside for unexpected costs gives a £4,000 planning total. The assumed treatment figure is 75% of that total; the remaining 25% is travel, accommodation and contingency. Those amounts are arithmetic assumptions, not market averages.",
-      "Replace each assumption with your own written quote and live travel prices. Do not treat a contingency as a limit on what complications could cost. Confirm the currency charged, card or transfer costs, cancellation conditions and responsibility for extra accommodation. If a package includes a hotel or transfers, check dates, room arrangements and which journeys are covered."
+      "Build your own cost checklist using the clinic’s written estimate and the travel arrangements you are actually considering. Keep treatment, flights, accommodation, insurance and any reserve for changes as separate entries. Record which items a package includes so you do not count them twice or mistake an excluded item for a free service.",
+      "Use your own written quote and current travel prices. Do not treat a contingency as a limit on what complications could cost. Confirm the currency charged, card or transfer costs, cancellation conditions and responsibility for extra accommodation. If a package includes a hotel or transfers, check dates, room arrangements and which journeys are covered."
     ],
     "sourceIds": [],
-    "calculation": "Original calculation: 3000 + 400 + 250 + 350 = 4000; 3000 / 4000 × 100 = 75%."
+    "links": [
+      {
+        "text": "Check treatment cost inclusions",
+        "href": "/prices"
+      },
+      {
+        "text": "Compare written dental quotes",
+        "href": "/guides/compare-dental-quotes"
+      }
+    ]
   },
   {
     "id": "affordability",
@@ -192,11 +201,16 @@ export const homeGuideSections: GuideSection[] = [
     "title": "How should I budget for a second trip to Antalya?",
     "answer": "Budget a second trip separately whenever the clinical plan includes a return visit. Check flights, accommodation, time away and any final treatment balance for that visit. A package covering the first stay should not be assumed to cover later stays, routine reviews or a return journey for a complication.",
     "paragraphs": [
-      "Original travel example, not a travel quote: if flights and accommodation are assumed to cost £600 per visit, 2 visits require £1,200 for those items. Against a £600 allowance for one visit, that is £600 more, a 100% increase in that travel allowance. It does not mean the treatment price doubles.",
-      "Original payment example, not a clinic deposit policy: paying an assumed £200 against a £3,000 treatment estimate leaves £2,800 before any agreed changes. Ask when the balance is due and whether payments relate to clinical stages. Keep booking confirmations and written cancellation terms. If your treatment is delayed or changed, clarify who pays for rearranged travel before accepting the revised plan."
+      "List each planned visit separately, using the clinical appointment schedule and actual travel options. Confirm whether the hotel and transfer arrangements apply to the first stay, later visits or both. Include the effect of time away from work and ask what would happen if the clinical team needed to change the dates.",
+      "Ask when the treatment balance is due and whether payments relate to clinical stages. Keep booking confirmations and written cancellation terms. If treatment is delayed or changed, clarify who pays for rearranged travel before accepting the revised plan. No assumed clinic deposit, package price or sample credit repayment is used here."
     ],
     "sourceIds": [],
-    "calculation": "Original calculations: 600 × 2 = 1200; (1200 − 600) / 600 × 100 = 100%; 3000 − 200 = 2800."
+    "links": [
+      {
+        "text": "Plan your dental visit to Antalya",
+        "href": "/guides/plan-dental-visit-antalya"
+      }
+    ]
   },
   {
     "id": "aftercare",
@@ -224,8 +238,8 @@ export const homeGuideSections: GuideSection[] = [
   },
   {
     "id": "evidence-method",
-    "title": "How were the facts and examples on this page checked?",
-    "answer": "This guide combines the website’s actual enquiry process with linked public information from UK dental bodies, NHS trusts and the FCA. Research figures retain their original dates and scope. Budget examples show their assumptions and arithmetic, so readers can substitute their own figures without confusing an illustration with an offer.",
+    "title": "How were the facts on this page checked?",
+    "answer": "This guide combines the website’s actual enquiry process with linked public information from UK dental bodies, NHS trusts and the FCA. Research figures retain their original dates and scope. Treatment and travel budgets should use your own written estimates and bookings; this page does not supply hypothetical prices or loan examples.",
     "paragraphs": [
       "Sources and page content were checked on 20 October 2026. The financial figures describe the FCA’s May 2024 survey, published in May 2025, rather than a new 2026 survey. The crown discussion references the GDC’s September 2026 learning article. NHS timing and survival information is general background and is not presented as clinic-specific evidence. Supplementary FDA, NIH and Columbia University patient resources were checked and added on 21 October 2026.",
       "The three named quotations reproduce short extracts from the linked publications. Roles are those stated by the sources; none of the quoted experts has endorsed this website or reviewed your treatment. The guide is prepared by Akdeniz Dental Consultancy UK Ltd’s patient coordination team as general planning information. Clinical advice belongs with the treating dentist, and individual credit terms belong with the broker and lender."
@@ -256,7 +270,7 @@ export function homeStructuredData() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "WebPage", "@id": url + "#webpage", url,
+        "@type": "WebPage", "@id": url + "#webpage", url: SITE_URL,
         name: homeContent.title, description: homeContent.description,
         dateModified: homeContent.lastModified, inLanguage: "en-GB",
         isPartOf: { "@id": url + "#website" },

@@ -33,7 +33,7 @@ test("LLM directory covers every canonical page once, including both legal notic
     (path) => new URL(path, SITE_URL).href,
   );
   assert.deepEqual(urls, expected);
-  assert.equal(new Set(urls).size, 20);
+  assert.equal(new Set(urls).size, expected.length);
   assert.ok(llmsIndex().includes(new URL("/llms-full.txt", SITE_URL).href));
   const full = llmsFull();
   for (const url of expected) assert.ok(full.includes(`Source: ${url}\n`), url);

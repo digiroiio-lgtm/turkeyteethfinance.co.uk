@@ -9,6 +9,7 @@ import {
 import { Header } from "../components/header";
 import { BudgetExplorer } from "../components/budget-explorer";
 import { QuoteForm } from "../components/quote-form";
+import { QuoteCTA } from "../components/ui";
 
 // In-memory component tests: no browser automation, external requests or patient data.
 const dom = new JSDOM("<!doctype html><html><body></body></html>", {
@@ -34,6 +35,21 @@ test.before(async () => {
   testing = await import("@testing-library/react");
 });
 afterEach(() => testing.cleanup());
+
+test("a treatment quote link preselects the same treatment in the enquiry without adding a credit application", () => {
+  const { render, fireEvent } = testing;
+  const cta = render(<QuoteCTA treatment="Zirconia crowns" />);
+  const href = cta.getByRole("link", { name: "Get My Free Treatment Quote" }).getAttribute("href")!;
+  const url = new URL(href, "https://turkeyteethfinance.co.uk");
+  assert.equal(url.pathname, "/get-a-quote");
+  assert.equal(url.searchParams.get("treatment"), "Zirconia crowns");
+  cta.unmount();
+  const form = render(<SearchParamsContext.Provider value={url.searchParams}><QuoteForm available={false} /></SearchParamsContext.Provider>);
+  assert.equal((form.getByRole("radio", { name: "Zirconia crowns" }) as HTMLInputElement).checked, true);
+  fireEvent.click(form.getByRole("button", { name: "Continue" }));
+  assert.equal(form.queryByRole("alert"), null);
+  assert.ok(form.getByLabelText(/main dental concern/i));
+});
 
 test("navigation opens, closes and closes when a destination is selected", () => {
   const { render, fireEvent } = testing;

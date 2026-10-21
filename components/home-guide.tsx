@@ -1,4 +1,5 @@
 import { homeContent } from "@/lib/content";
+import Link from "next/link";
 import { guideSource, homeGuide, homeGuideSections } from "@/lib/home-guide";
 
 export function HomeUpdated() {
@@ -45,6 +46,7 @@ export function HomeGuide() {
               </p>
             )}
             {section.calculation && <p className="guide-citations">{section.calculation}</p>}
+            {section.links?.length ? <ul className="context-links">{section.links.map(link => <li key={link.href}><Link href={link.href}>{link.text}</Link></li>)}</ul> : null}
           </section>
         ))}
       </div>

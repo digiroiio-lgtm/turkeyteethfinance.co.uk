@@ -1,5 +1,6 @@
 import { COMPANY, SITE_URL, SITE_NAME } from "@/lib/site";
 import type { FAQ } from "@/lib/content";
+import { canonicalUrl } from "@/lib/site";
 export function JsonLd({ data }: { data: unknown }) {
   return (
     <script
@@ -42,13 +43,17 @@ export function PageSchema({
   title,
   description,
   faqs = [],
+  lastModified,
+  parent,
 }: {
   path: string;
   title: string;
   description: string;
   faqs?: FAQ[];
+  lastModified?: string;
+  parent?: { name: string; path: string };
 }) {
-  const url = SITE_URL + path;
+  const url = canonicalUrl(path);
   return (
     <JsonLd
       data={{
@@ -60,6 +65,7 @@ export function PageSchema({
             url,
             name: title,
             description,
+            ...(lastModified ? { dateModified: lastModified } : {}),
             inLanguage: "en-GB",
             isPartOf: { "@id": `${SITE_URL}/#website` },
           },
@@ -75,9 +81,12 @@ export function PageSchema({
                       name: "Home",
                       item: SITE_URL,
                     },
+                    ...(parent ? [{
+                      "@type": "ListItem", position: 2, name: parent.name, item: canonicalUrl(parent.path),
+                    }] : []),
                     {
                       "@type": "ListItem",
-                      position: 2,
+                      position: parent ? 3 : 2,
                       name: title,
                       item: url,
                     },

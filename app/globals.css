@@ -3342,3 +3342,19 @@ select:focus-visible {
   .home-answer { padding-block: 1.5rem; }
   .home-answer > p { font-size: .9rem; }
 }
+
+/* Source-linked patient information uses the existing palette and card system. */
+.content-attribution { margin-block: 1rem 1.75rem; font-size: .78rem; line-height: 1.7; }
+.content-attribution p { margin: .2rem 0; color: var(--body); }
+.editorial-card > p + p { margin-top: .9rem; }
+.context-links { margin: 1rem 0 0; padding-left: 1.15rem; }
+.context-links li { margin-block: .4rem; }
+.context-links a, .clinic-evidence a { text-decoration: underline; text-underline-offset: .18em; }
+.clinic-evidence > p { max-width: 850px; margin-block: 1rem 1.5rem; }
+.clinic-evidence address { font-style: normal; color: var(--body); line-height: 1.8; margin-block: 1.5rem; }
+.guide-article { padding-block: 1rem 3rem; }
+.guide-article h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1.5rem; }
+.guide-article p { line-height: 1.85; margin-block: 1rem; }
+.guide-answer { padding-block: 1.5rem; border-bottom: 1px solid var(--line); scroll-margin-top: 2rem; }
+.guide-answer h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); line-height: 1.35; }
+.guide-article > .button { margin-top: 1rem; }

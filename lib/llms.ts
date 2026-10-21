@@ -16,6 +16,8 @@ import {
   type LegalParagraph,
 } from "./legal-content";
 import { publicPages } from "./public-pages";
+import { standaloneGuides } from "./guides";
+import { clinicProfile, evidence } from "./evidence";
 import {
   COMPANY,
   SITE_NAME,
@@ -92,6 +94,7 @@ function documents(): Document[] {
           ] : []),
           ...section.sourceIds.map((id) => link(guideSource(id).title, guideSource(id).url)),
           ...(section.calculation ? [section.calculation] : []),
+          ...(section.links || []).map(item => link(item.text, item.href)),
         ]),
         "### Treatments",
         ...treatments.filter((treatment) => visible.has(`/${treatment.slug}`)).flatMap((treatment) => [
@@ -115,18 +118,27 @@ function documents(): Document[] {
           ...page.sections.flatMap((section) => [
             `### ${section.title}`,
             section.body,
+            ...(section.paragraphs || []),
             ...(section.bullets?.length
               ? [section.bullets.map((bullet) => `- ${bullet}`).join("\n")]
               : []),
+            ...(section.sources || []).map(id => link(evidence[id].title, evidence[id].url)),
+            ...(section.links || []).map(item => link(item.text, item.href)),
           ]),
           ...(slug === "guides"
             ? guideArticles.flatMap((article) => [
                 `### ${article.title}`,
-                `Source: ${absoluteUrl(`/guides#${article.id}`)}`,
+                `Source: ${absoluteUrl(article.path || `/guides#${article.id}-details`)}`,
                 article.summary,
-                ...article.paragraphs,
+                ...(article.path ? [] : article.paragraphs),
               ])
             : []),
+          ...(slug === "our-clinic" ? [
+            `### ${clinicProfile.name}: clinic-published information`,
+            `${clinicProfile.streetAddress}, ${clinicProfile.locality}, Turkey. ${clinicProfile.telephone}`,
+            `Source checked: ${clinicProfile.checked}. Qualifications are attributed to the clinic’s profiles; independent registration verification is not claimed.`,
+            ...clinicProfile.clinicians.flatMap(clinician => [clinician.name, clinician.role, clinician.education, link("Clinic profile", clinician.url)]),
+          ] : []),
           ...faqBlocks(page.faqs),
           ...(page.related.length
             ? [
@@ -140,6 +152,20 @@ function documents(): Document[] {
         ],
       };
     }),
+    ...standaloneGuides.map((guide): Document => ({
+      path: guide.path!, title: guide.title, description: guide.description!, heading: guide.title,
+      blocks: [
+        `Last updated: ${guide.lastModified}. Prepared by ${COMPANY} patient coordination team.`,
+        ...guide.paragraphs,
+        ...guide.sections.flatMap(section => [
+          `### ${section.title}`, section.body, ...(section.paragraphs || []),
+          ...(section.sources || []).map(id => link(evidence[id].title, evidence[id].url)),
+          ...(section.links || []).map(item => link(item.text, item.href)),
+        ]),
+        ...faqBlocks(guide.faqs),
+        ...guide.related.map(slug => link(pages[slug].title, `/${slug}`)),
+      ],
+    })),
     legalDocument(privacyContent()),
     legalDocument(termsContent()),
   ].filter((page) => visible.has(page.path));

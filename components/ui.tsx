@@ -55,11 +55,11 @@ export function Icon({
   const I = icons[name] || Tooth;
   return <I size={size} strokeWidth={1.8} aria-hidden="true" {...props} />;
 }
-export function QuoteCTA({ small = false }: { small?: boolean }) {
+export function QuoteCTA({ small = false, treatment }: { small?: boolean; treatment?: string }) {
   return (
     <Link
       className={`button${small ? " button-small" : ""}`}
-      href="/get-a-quote"
+      href={treatment ? `/get-a-quote?treatment=${encodeURIComponent(treatment)}` : "/get-a-quote"}
     >
       <MessageCircle size={small ? 17 : 22} />
       <span>{PRIMARY_CTA}</span>
@@ -154,7 +154,7 @@ export function FAQSection({
     </section>
   );
 }
-export function ConversionBanner() {
+export function ConversionBanner({ treatment }: { treatment?: string }) {
   return (
     <section className="container conversion-wrap">
       <div className="conversion-banner">
@@ -163,7 +163,7 @@ export function ConversionBanner() {
           <span>YOUR SMILE</span>
         </div>
         <div className="conversion-copy">
-          <p className="conversion-title">Your smile. Your pace.</p>
+          <p className="conversion-title">{treatment ? `Ask about ${treatment.toLowerCase()}.` : "Your smile. Your pace."}</p>
           <p>
             A personal plan and clear payment options.
             <br />
@@ -171,7 +171,7 @@ export function ConversionBanner() {
           </p>
         </div>
         <div className="conversion-action">
-          <QuoteCTA />
+          <QuoteCTA treatment={treatment} />
           <p>No obligation. No phone call required.</p>
         </div>
       </div>

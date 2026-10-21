@@ -123,13 +123,13 @@ test("www/apex alias redirects permanently to the canonical URL without losing t
 test("lastmod follows the edited page's explicit content date, leaving other pages unchanged", () => {
   withEnv(production, () => {
     const baseline = sitemap();
-    assert.equal(baseline.length, 20);
+    assert.equal(baseline.length, canonicalPaths.length + 2);
     for (const entry of baseline) assert.match(String(entry.lastModified), /^\d{4}-\d{2}-\d{2}$/);
     const previous = pages["our-clinic"].lastModified;
     try {
-      pages["our-clinic"].lastModified = "2026-10-21";
+      pages["our-clinic"].lastModified = "2026-10-22";
       const after = sitemap();
-      assert.equal(after.find((entry) => entry.url.endsWith("/our-clinic"))?.lastModified, "2026-10-21");
+      assert.equal(after.find((entry) => entry.url.endsWith("/our-clinic"))?.lastModified, "2026-10-22");
       assert.deepEqual(
         after.filter((entry) => !entry.url.endsWith("/our-clinic")),
         baseline.filter((entry) => !entry.url.endsWith("/our-clinic")),
