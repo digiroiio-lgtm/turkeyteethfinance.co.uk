@@ -1,3 +1,4 @@
+import { TreatmentPackages } from "@/components/treatment-packages";
 import { Hero } from "@/components/hero";
 import {
   TrustStrip,
@@ -20,15 +21,16 @@ export default function Home() {
       <Hero />
       <HomeUpdated />
       <TrustStrip />
+      <TreatmentPackages preview />
       <Journey intro="Start with a written enquiry, review the clinical team’s proposed plan, confirm arrangements when you are ready and attend your assessment in Antalya. These four stages organise your questions and bookings. Treatment timing and suitability depend on the dentist’s assessment; finance is a separate decision with a lender." />
       <CarePanel answerIntro />
-      <ConversionBanner />
+      <ConversionBanner location="conversion_upper" />
       <TreatmentGrid answerIntro />
       <BudgetExplorer answerIntro />
       <HomeGuide />
       <EligibilityPanel />
       <FAQSection faqs={commonFAQs} />
-      <ConversionBanner />
+      <ConversionBanner location="conversion_lower" />
       <div className="container">
         <FinanceNotice full />
       </div>

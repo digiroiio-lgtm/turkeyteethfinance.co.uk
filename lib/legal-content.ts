@@ -29,7 +29,7 @@ export function privacyContent(): LegalContent {
       "How treatment enquiries, optional dental photographs and privacy choices are handled on Turkey Teeth Finance.",
     label: "YOUR INFORMATION",
     heading: "Privacy & cookies",
-    updated: "20 October 2026",
+    updated: "21 October 2026",
     lastModified: "2026-10-20",
     notice: "Please share only information needed for your enquiry. Do not submit identity documents, payment information or medical records.",
     sections: [
@@ -102,12 +102,12 @@ export function privacyContent(): LegalContent {
         paragraphs: [
           {
             parts: [
-              "This build does not include advertising tags or analytics cookies. If a custom security check is configured, Cloudflare Turnstile is loaded on the final form step; see ",
+              "Optional Google Analytics loads only after you accept analytics. It measures public page visits, button placements, public package clicks and generic enquiry-form progress. We do not send entered contact details, dental answers, budgets, photographs, filenames or enquiry references to Analytics. Query strings and fragments are removed from measured page URLs. Advertising consent and Google Signals remain disabled. Your consent choice and analytics cookies expire after 180 days. Use Cookie settings in the footer to reject or withdraw analytics; this stops future collection and removes accessible analytics cookies, without deleting data already received by Google. Your enquiry works with either choice. Google processes analytics data separately from your enquiry and may process it internationally; see https://policies.google.com/privacy. The enquiry may include an optional package selection. If a custom security check is configured, Cloudflare Turnstile is loaded on the final form step; see ",
               {
                 text: "Cloudflare’s privacy information",
                 href: "https://www.cloudflare.com/privacypolicy/",
               },
-              ". If non-essential tracking is added later, it must remain disabled until the appropriate consent choice is made.",
+              ".",
             ],
           },
         ],
@@ -124,7 +124,7 @@ export function termsContent(): LegalContent {
       "Important information about treatment estimates, clinical responsibility and third-party finance on Turkey Teeth Finance.",
     label: "WEBSITE INFORMATION",
     heading: "Website terms",
-    updated: "20 October 2026",
+    updated: "21 October 2026",
     lastModified: "2026-10-20",
     sections: [
       {

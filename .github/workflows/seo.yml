@@ -47,6 +47,9 @@ jobs:
       - run: npm run typecheck
       - name: Check all canonical production routes over HTTP
         run: npm run seo:smoke
+      # The preceding production prerender cache must not cross environment boundaries.
+      - name: Remove production build artifacts before preview validation
+        run: mv .next "$RUNNER_TEMP/production-build"
       - name: Build with explicit preview settings
         env:
           VERCEL_ENV: preview

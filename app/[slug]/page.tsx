@@ -1,3 +1,4 @@
+import { TreatmentPackages } from "@/components/treatment-packages";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, ArrowRight } from "lucide-react";
@@ -110,7 +111,7 @@ export default async function ContentPage({
         </section>
       )}
       {p.kind === "eligibility" && <EligibilityPanel />}
-      {p.kind === "prices" && <CostTable />}
+      {p.kind === "prices" && <><TreatmentPackages /><CostTable /></>}
       {(p.kind === "results" || p.kind === "reviews") && <PatientEvidence kind={p.kind} />}
       {p.kind === "clinic" && <><CarePanel /><ClinicEvidence /></>}
       {p.kind === "guides" && <Guides />}
@@ -130,7 +131,7 @@ export default async function ContentPage({
             <QuoteCTA />
             {financeUrl && (
               <a
-                href={financeUrl}
+                href={financeUrl} data-analytics-action="finance" data-analytics-location="content"
                 className="text-link"
                 rel="noopener noreferrer"
                 target="_blank"

@@ -1,3 +1,4 @@
+import { packageStructuredData } from "@/lib/package-schema";
 import { publicPages } from "@/lib/public-pages";
 import { pages } from "@/lib/content";
 import { guideForPath } from "@/lib/guides";
@@ -22,6 +23,7 @@ export default async function OtherPageHead({ params }: { params: Promise<{ path
     <PageSchema path={path} title={page.title} description={page.description} faqs={faqs}
       lastModified={page.lastModified} parent={guide ? { name: "Patient guides", path: "/guides" } : undefined} />
     {guide && <JsonLd data={guideStructuredData(guide)} />}
+    {path === "/prices" && <JsonLd data={packageStructuredData()} />}
     {path === "/pay-monthly" && <JsonLd data={monthlyStructuredData()} />}
     {path === "/our-clinic" && <JsonLd data={{
       "@context": "https://schema.org", "@type": "Dentist", "@id": clinicProfile.url + "#clinic",

@@ -16,6 +16,9 @@ import {
 import { Icon } from "./ui";
 import { MAX_TOTAL_UPLOAD_SIZE } from "../lib/enquiry-limits";
 
+import { packageForId, packagePrice, treatmentPackages } from "../lib/packages";
+import { trackEvent } from "../lib/analytics";
+
 const interests = [
   "Veneers",
   "Dental implants",
@@ -26,6 +29,7 @@ const interests = [
 ];
 const initial = {
   treatment: "",
+  packageId: "",
   teeth: "",
   concern: "",
   notes: "",
@@ -93,9 +97,10 @@ function QuoteFormInner({
   const search = useSearchParams();
   const [values, setValues] = useState<FormValues>(() => ({
     ...initial,
-    treatment: interests.includes(search.get("treatment") || "")
+    packageId: packageForId(search.get("package"))?.id || "",
+    treatment: packageForId(search.get("package"))?.treatment || (interests.includes(search.get("treatment") || "")
       ? search.get("treatment")!
-      : "",
+      : ""),
     budget: /^\d{4,5}$/.test(search.get("budget") || "")
       ? search.get("budget")!
       : "",
@@ -112,6 +117,12 @@ function QuoteFormInner({
   const heading = useRef<HTMLHeadingElement>(null);
   const errorRef = useRef<HTMLParagraphElement>(null);
   const firstRender = useRef(true);
+  const started = useRef(false);
+  const completedSteps = useRef(new Set<number>());
+  const selectedPackage = packageForId(values.packageId);
+  function startForm() { if (!started.current) started.current = trackEvent("form_start", { form_step: step + 1 }); }
+  function fail(message: string, delivery = false) { setError(message); trackEvent(delivery ? "form_submit_error" : "form_validation_error", { form_step: step + 1 }); }
+
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
@@ -123,12 +134,14 @@ function QuoteFormInner({
     if (error) errorRef.current?.focus();
   }, [error]);
   function change<K extends keyof FormValues>(key: K, value: FormValues[K]) {
-    setValues((v) => ({ ...v, [key]: value }));
+    startForm();
+    setValues((v) => ({ ...v, [key]: value, ...(key === "treatment" && packageForId(v.packageId)?.treatment !== value ? { packageId: "" } : {}) }));
   }
   function advance() {
+    startForm();
     setError("");
     if (step === 0 && !values.treatment) {
-      setError("Please choose a treatment, or select “Not sure yet”.");
+      fail("Please choose a treatment, or select “Not sure yet”.");
       return;
     }
     if (
@@ -138,7 +151,7 @@ function QuoteFormInner({
         Number(values.teeth) < 1 ||
         Number(values.teeth) > 32)
     ) {
-      setError("Enter a whole number between 1 and 32, or leave it blank.");
+      fail("Enter a whole number between 1 and 32, or leave it blank.");
       return;
     }
     if (step === 2) {
@@ -146,24 +159,25 @@ function QuoteFormInner({
         values.fullName.trim().length < 2 ||
         !/^\S+@\S+\.\S+$/.test(values.email)
       ) {
-        setError("Please enter your full name and a valid email address.");
+        fail("Please enter your full name and a valid email address.");
         return;
       }
       if (
         values.preferredContact === "whatsapp" &&
         !/^\+?[\d\s()-]{7,24}$/.test(values.whatsapp)
       ) {
-        setError("Please add a WhatsApp number, including the country code.");
+        fail("Please add a WhatsApp number, including the country code.");
         return;
       }
     }
+    if (!completedSteps.current.has(step) && trackEvent("form_step_complete", { form_step: step + 1 })) completedSteps.current.add(step);
     setStep((s) => Math.min(s + 1, 3));
   }
   function addPhotos(files: FileList | null) {
     if (!files) return;
     const list = Array.from(files);
     if (list.length + photos.length > 3) {
-      setError("Please select up to 3 photographs.");
+      fail("Please select up to 3 photographs.");
       return;
     }
     if (
@@ -173,11 +187,11 @@ function QuoteFormInner({
           f.size > 3 * 1024 * 1024,
       )
     ) {
-      setError("Use JPEG, PNG or WebP photographs, no larger than 3 MB each.");
+      fail("Use JPEG, PNG or WebP photographs, no larger than 3 MB each.");
       return;
     }
     if ([...photos, ...list].reduce((total, file) => total + file.size, 0) > MAX_TOTAL_UPLOAD_SIZE) {
-      setError("Please keep photographs under 4 MB in total.");
+      fail("Please keep photographs under 4 MB in total.");
       return;
     }
     setError("");
@@ -191,21 +205,23 @@ function QuoteFormInner({
       return;
     }
     if (!available) {
-      setError(
+      fail(
         "The enquiry service is not available yet. No information has been sent.",
       );
       return;
     }
     if (!values.dataConsent || !values.healthConsent) {
-      setError(
+      fail(
         "Please confirm the required privacy and health-information consents.",
       );
       return;
     }
     if (turnstileSiteKey && !token) {
-      setError("Please complete the security check.");
+      fail("Please complete the security check.");
       return;
     }
+    startForm();
+    trackEvent("form_submit_attempt", { form_step: 4 });
     submitting.current = true;
     setSending(true);
     setError("");
@@ -224,15 +240,17 @@ function QuoteFormInner({
         throw new Error("We could not confirm delivery. Please try again later.");
       }
       setReference(result.reference);
+      trackEvent("generate_lead", { form_step: 4 });
       setDone(true);
       setValues({ ...initial });
       setPhotos([]);
       setToken("");
     } catch (err) {
-      setError(
+      fail(
         err instanceof Error
           ? err.message
           : "We could not send your enquiry. Please try again.",
+        true,
       );
     } finally {
       submitting.current = false;
@@ -331,6 +349,9 @@ function QuoteFormInner({
               </label>
             ))}
           </fieldset>
+          <div className="form-fields package-choice"><label>Package to discuss (optional)
+            <select value={values.packageId} onChange={event => change("packageId", event.target.value)}><option value="">A personalised treatment estimate</option>{treatmentPackages.filter(item => item.treatment === values.treatment).map(item => <option value={item.id} key={item.id}>{item.name} · {packagePrice(item)}</option>)}</select>
+          </label>{selectedPackage && <p className="small">{selectedPackage.stay} · Hotel accommodation, airport and clinic transfers. Subject to clinical assessment and personalised treatment planning.</p>}</div>
         </>
       )}
       {step === 1 && (
@@ -481,6 +502,7 @@ function QuoteFormInner({
               <dt>Treatment interest</dt>
               <dd>{values.treatment}</dd>
             </div>
+            {selectedPackage && <div><dt>Package to discuss</dt><dd>{selectedPackage.name} · {packagePrice(selectedPackage)} · {selectedPackage.stay} (subject to clinical assessment)</dd></div>}
             <div>
               <dt>Your name</dt>
               <dd>{values.fullName}</dd>
@@ -621,7 +643,15 @@ export function QuoteForm(props: {
     <Suspense
       fallback={<div className="quote-form">Loading your enquiry form…</div>}
     >
-      <QuoteFormInner {...props} />
+      <QuoteFormForSearch {...props} />
     </Suspense>
   );
+}
+
+function QuoteFormForSearch(props: { available: boolean; turnstileSiteKey?: string }) {
+  const search = useSearchParams();
+  const id = packageForId(search.get("package"))?.id || "";
+  const treatment = interests.includes(search.get("treatment") || "") ? search.get("treatment") : "";
+  const budget = /^\d{4,5}$/.test(search.get("budget") || "") ? search.get("budget") : "";
+  return <QuoteFormInner key={`${id}:${treatment}:${budget}`} {...props} />;
 }

@@ -55,10 +55,11 @@ export function Icon({
   const I = icons[name] || Tooth;
   return <I size={size} strokeWidth={1.8} aria-hidden="true" {...props} />;
 }
-export function QuoteCTA({ small = false, treatment }: { small?: boolean; treatment?: string }) {
+export function QuoteCTA({ small = false, treatment, location = "content" }: { small?: boolean; treatment?: string; location?: string }) {
   return (
     <Link
       className={`button${small ? " button-small" : ""}`}
+      data-analytics-action="quote" data-analytics-location={location}
       href={treatment ? `/get-a-quote?treatment=${encodeURIComponent(treatment)}#treatment-enquiry` : "/get-a-quote#treatment-enquiry"}
     >
       <MessageCircle size={small ? 17 : 22} />
@@ -154,7 +155,7 @@ export function FAQSection({
     </section>
   );
 }
-export function ConversionBanner({ treatment }: { treatment?: string }) {
+export function ConversionBanner({ treatment, location = "conversion_banner" }: { treatment?: string; location?: string }) {
   return (
     <section className="container conversion-wrap">
       <div className="conversion-banner">
@@ -171,7 +172,7 @@ export function ConversionBanner({ treatment }: { treatment?: string }) {
           </p>
         </div>
         <div className="conversion-action">
-          <QuoteCTA treatment={treatment} />
+          <QuoteCTA treatment={treatment} location={location} />
           <p>No obligation. No phone call required.</p>
         </div>
       </div>

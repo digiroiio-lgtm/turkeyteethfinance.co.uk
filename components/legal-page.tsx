@@ -12,7 +12,7 @@ export function LegalPage({ content }: { content: LegalContent }) {
       {content.notice && <p className="legal-note">{content.notice}</p>}
       {content.sections.map((section) => (
         <Fragment key={section.heading}>
-          <h2>{section.heading}</h2>
+          <h2 id={section.heading === "Cookies and browser storage" ? "cookies" : undefined}>{section.heading}</h2>
           {section.paragraphs.map((paragraph, index) => (
             <p
               key={index}
