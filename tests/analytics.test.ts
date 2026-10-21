@@ -11,6 +11,8 @@ test("analytics waits for consent, filters patient data, deduplicates page views
   assert.equal(analyticsConsent(), "unknown"); assert.equal(document.querySelector("script"), null); assert.equal(trackEvent("form_start"), false);
   saveAnalyticsConsent("denied"); assert.equal(document.querySelector("script"), null); assert.equal(Reflect.get(w, "dataLayer"), undefined);
   saveAnalyticsConsent("granted"); assert.equal(document.querySelectorAll("script").length, 1);
+  assert.ok(w.dataLayer.length > 0);
+  for (const command of w.dataLayer) assert.equal(Object.prototype.toString.call(command), "[object Arguments]");
   const config = w.dataLayer.find(command => command[0] === "config")![2] as Record<string, unknown>;
   assert.equal(config.send_page_view, false); assert.equal(config.allow_google_signals, false);
   trackPageView(); trackPageView(); assert.equal(w.dataLayer.filter(command => command[1] === "page_view").length, 1);
