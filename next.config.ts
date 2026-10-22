@@ -3,6 +3,7 @@ const config: NextConfig = {
   poweredByHeader: false,
   allowedDevOrigins: ["terminal.local"],
   devIndicators: false,
+  experimental: { inlineCss: true },
   serverExternalPackages: [],
   images: {
     // Avoid jumping from 384px to 640px for the mobile hero at higher DPRs.
