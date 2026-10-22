@@ -5,6 +5,7 @@ import { guideSource, homeGuide, homeGuideSections } from "@/lib/home-guide";
 export function HomeUpdated() {
   return (
     <div className="container home-updated">
+      <p className="home-summary">{homeContent.answer}</p>
       <p>Last updated: <time dateTime={homeContent.lastModified}>{homeGuide.updatedLabel}</time></p>
       <p>Prepared by {homeGuide.author}. General planning information.</p>
       <a href="#patient-guide">Read the patient planning guide</a>

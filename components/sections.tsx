@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Check, ArrowRight, Info, ExternalLink } from "lucide-react";
-import { treatments, pages, guideArticles, informationSources } from "@/lib/content";
+import { treatments, pages, guideArticles, informationSources, journeySteps } from "@/lib/content";
 import { Icon, SectionTitle, Eyebrow } from "./ui";
 
 export function TrustStrip() {
@@ -63,56 +63,6 @@ export function TreatmentGrid({ compact = false, answerIntro = false }: { compac
     </section>
   );
 }
-const journey = [
-  {
-    title: "Quote",
-    label: "START ONLINE",
-    description: "Tell us your goals by email or WhatsApp.",
-    x: 20,
-    y: 866,
-    bullets: [
-      "Choose your treatment interest",
-      "Share your questions in writing",
-      "No phone call required",
-    ],
-  },
-  {
-    title: "Plan",
-    label: "MAKE IT PERSONAL",
-    description: "Review your treatment plan and payment options.",
-    x: 270,
-    y: 866,
-    bullets: [
-      "Review the proposed treatment",
-      "Understand costs and visit stages",
-      "Explore finance separately",
-    ],
-  },
-  {
-    title: "Book",
-    label: "WHEN YOU ARE READY",
-    description: "Confirm your travel and clinic appointments.",
-    x: 520,
-    y: 866,
-    bullets: [
-      "Confirm clinical arrangements",
-      "Check your payment schedule",
-      "Plan travel and accommodation",
-    ],
-  },
-  {
-    title: "Smile",
-    label: "YOUR CARE JOURNEY",
-    description: "Meet your clinical team and begin your care.",
-    x: 770,
-    y: 866,
-    bullets: [
-      "Attend your clinical assessment",
-      "Agree the final plan with your dentist",
-      "Understand follow-up and aftercare",
-    ],
-  },
-];
 export function Journey({ detailed = false, intro }: { detailed?: boolean; intro?: string }) {
   return (
     <section
@@ -130,7 +80,7 @@ export function Journey({ detailed = false, intro }: { detailed?: boolean; intro
           )}
         />
         <ol className="journey-grid">
-          {journey.map((s, i) => (
+          {journeySteps.map((s, i) => (
             <li key={s.title}>
               <div className="step-number">{i + 1}</div>
               {detailed && <p className="step-label">{s.label}</p>}

@@ -1,0 +1,10 @@
+# ai.txt for turkeyteethfinance.co.uk
+# AI agents and crawlers may read and cite public pages. Crawl rules follow /robots.txt.
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+# Guidance for language models
+LLMs: https://turkeyteethfinance.co.uk/llms.txt
+LLMs-Full: https://turkeyteethfinance.co.uk/llms-full.txt
+Sitemap: https://turkeyteethfinance.co.uk/sitemap.xml
