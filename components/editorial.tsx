@@ -32,7 +32,7 @@ export function ClinicEvidence() {
   return <section className="section">
     <div className="container clinic-evidence">
       <h2>Clinicians listed by Akdeniz Dental</h2>
-      <p>Source checked: <time dateTime={clinicProfile.checked}>21 October 2026</time>. Names, roles and education below are attributed to the clinic’s own profiles. Confirm your assigned clinician and current registration directly with the clinic.</p>
+      <p>Source checked: <time dateTime={clinicProfile.checked}>{new Date(clinicProfile.checked + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}</time>. Names, roles and education below are attributed to the clinic’s own profiles. Confirm your assigned clinician and current registration directly with the clinic.</p>
       <div className="editorial-grid">
         {clinicProfile.clinicians.map(clinician => <article className="editorial-card" key={clinician.url}>
           <h3>{clinician.name}</h3><p>{clinician.role}</p><p>{clinician.education}</p>

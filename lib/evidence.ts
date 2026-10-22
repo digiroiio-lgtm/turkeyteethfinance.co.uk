@@ -1,5 +1,7 @@
 /** Public sources checked on 21 October 2026. No independent credential verification or clinical endorsement is implied. */
 export const evidence = {
+  gdcCrowns: { title: "GDC: Shamir B. Mehta on crown treatment, 10 September 2026", url: "https://www.gdc-uk.org/news-blogs/blog/detail/blogs/2026/09/10/heavy-is-the-head-complaints-dental-crowns-insights-learning" },
+  leedsImplants: { title: "Leeds Teaching Hospitals NHS Trust: dental implant patient information", url: "https://www.leedsth.nhs.uk/patients/resources/dental-implants/" },
   bdaTourism: { title: "BDA: survey of 1,000 UK dentists, 14 July 2022", url: "https://www.bda.org/media-centre/uk-dentists-picking-up-the-pieces-from-dental-tourism-boom/" },
   fcaSurvey: { title: "FCA: Financial Lives May 2024 survey, published May 2025", url: "https://www.fca.org.uk/publication/financial-lives/financial-lives-survey-2024-key-findings.pdf" },
   fcaSavings: { title: "FCA: savings, resilience and support, 16 May 2025", url: "https://www.fca.org.uk/news/press-releases/more-people-have-bank-accounts-one-ten-have-no-cash-savings" },
@@ -28,7 +30,7 @@ export const clinicProfile = {
   streetAddress: "Çaybaşı Mahallesi 1358 Sokak, Premier Plaza B Blok, Kat 1",
   locality: "Muratpaşa, Antalya",
   telephone: "+90 541 248 35 62",
-  checked: "2026-10-21",
+  checked: "2026-10-22",
   clinicians: [
     { name: "Dr. Mustafa Akça", role: "Aesthetic dentist and clinic owner", education: "Medipol University, 2012–2018", url: "https://akdenizdental.com/mustafa-akca" },
     { name: "Dr. Mehmet Onur Merey", role: "Oral and maxillofacial surgeon and clinic owner", education: "Marmara University, 2010–2016; oral and maxillofacial surgery specialisation, Akdeniz University, 2018–2023", url: "https://akdenizdental.com/mehmet-onur-merey" },
