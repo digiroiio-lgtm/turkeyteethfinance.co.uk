@@ -3,6 +3,7 @@ import { monthlyPlanning } from "./monthly-planning";
 import { pricePlanningSections } from "./price-planning";
 import { guidePlanningSections } from "./guide-planning";
 import { dentalFinanceSections } from "./dental-finance-planning";
+import { clinicPlanningSections } from "./clinic-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
   lastModified: "2026-10-22",
@@ -961,7 +962,7 @@ export const pages: Record<string, PageContent> = {
     related: ["get-a-quote", "dental-finance", "our-clinic"],
   },
   "our-clinic": {
-    "lastModified": "2026-10-21",
+    "lastModified": "2026-10-22",
     "title": "Dental Clinic Antalya Turkey | Akdeniz Dental",
     "description": "Learn about treatment coordination with Akdeniz Dental in Antalya. Understand the role of the clinical team, questions to ask and your aftercare arrangements.",
     "label": "OUR CLINIC",
@@ -969,63 +970,7 @@ export const pages: Record<string, PageContent> = {
     "accent": "Your questions answered.",
     "kind": "clinic",
     "intro": "Explore dental treatment with Akdeniz Dental in Antalya, Turkey. Akdeniz Dental Consultancy UK Ltd provides non-clinical patient coordination and administrative support. Clinical assessments, treatment planning and dental treatment are provided by the clinical team in Turkey.",
-    "sections": [
-      {
-        "title": "Where is the treating clinic in Antalya?",
-        "body": "Akdeniz Dental’s official contact page lists its clinic at Çaybaşı Mahallesi 1358 Sokak, Premier Plaza B Blok, Kat 1, Muratpaşa, Antalya. Confirm the appointment location with the clinical team before travelling. The treating clinic is separate from the UK company that coordinates patient enquiries.",
-        "paragraphs": [
-          "Use the official contact and gallery links to review the clinic’s own information and facilities. Ask which location and treating professional apply to your proposed care rather than assuming that a general clinic description determines your appointment. The public details and linked clinician profiles on this page were checked against the clinic website on 21 October 2026."
-        ],
-        "sources": [
-          "contact",
-          "gallery"
-        ]
-      },
-      {
-        "title": "Who assesses and carries out my dental treatment?",
-        "body": "Clinical assessment, treatment planning and procedures are provided by the clinical team in Turkey. The clinic’s published profiles identify dentists and specialists; the source-linked details below describe what the clinic currently publishes. They do not confirm who will be assigned to your case or independently verify professional registration.",
-        "paragraphs": [
-          "Ask the clinic which professional will assess you and carry out each procedure, and request current registration and relevant qualification details before consenting. The listed clinicians have not been represented as authors or reviewers of this website’s general planning information. Administrative coordination is separate from clinical diagnosis, informed consent and individual treatment advice."
-        ],
-        "sources": [
-          "team"
-        ],
-        "links": [
-          {
-            "text": "Compare treatment planning questions",
-            "href": "/guides/compare-dental-quotes"
-          }
-        ]
-      },
-      {
-        "title": "How can I check the clinic and laboratory environment?",
-        "body": "Akdeniz Dental publishes clinic and laboratory galleries on its official website. These are the appropriate source links for viewing the environment and facilities. Photographs show a setting, not proof that a particular procedure or material is appropriate for your teeth.",
-        "paragraphs": [
-          "Ask how the clinical and laboratory teams check your planned restoration, its material specification and any trial or adjustment stages. Request the details relevant to your own treatment instead of choosing from a photograph alone. The model images used for this website’s design remain illustrative and are not presented as photographs of your treating dentist or a patient’s result."
-        ],
-        "sources": [
-          "gallery",
-          "lab"
-        ]
-      },
-      {
-        "title": "What should I confirm about aftercare and UK coordination?",
-        "body": "Akdeniz Dental Consultancy UK Ltd provides non-clinical patient coordination and administrative support. It does not provide clinical dental treatment. Before treatment, obtain the clinical contact, review schedule, written aftercare instructions and route for raising concerns with the treating clinic in Turkey.",
-        "paragraphs": [
-          "Ask how a concern reported from the UK would be assessed and whether review or remedial care could require travel. Clarify the applicable warranty, cost responsibilities and complaint arrangements in writing. Keep the treatment summary and any implant or restoration details. Coordination support does not replace a dentist’s examination or individual advice about a clinical problem."
-        ],
-        "links": [
-          {
-            "text": "Plan your appointments and follow-up",
-            "href": "/guides/plan-dental-visit-antalya"
-          },
-          {
-            "text": "Contact the patient coordination team",
-            "href": "/contact"
-          }
-        ]
-      }
-    ],
+    "sections": clinicPlanningSections,
     "faqs": [
       {
         "question": "Are the clinician qualifications on this page independently verified?",
