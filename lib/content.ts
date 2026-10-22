@@ -2,6 +2,7 @@ import type { EvidenceId } from "./evidence";
 import { monthlyPlanning } from "./monthly-planning";
 import { pricePlanningSections } from "./price-planning";
 import { guidePlanningSections } from "./guide-planning";
+import { dentalFinanceSections } from "./dental-finance-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
   lastModified: "2026-10-22",
@@ -109,7 +110,7 @@ export const pages: Record<string, PageContent> = {
     related: ["finance-eligibility", "prices", "dental-finance"],
   },
   "dental-finance": {
-    lastModified: "2026-10-21",
+    lastModified: "2026-10-22",
     title: "Dental Finance in Turkey for UK Patients",
     description:
       "Understand the difference between your dental treatment quote and a credit application. Explore finance for UK patients planning dental care in Turkey.",
@@ -118,26 +119,7 @@ export const pages: Record<string, PageContent> = {
     accent: "Explore your options.",
     intro:
       "A clear treatment plan comes first. Then explore ways to pay for dental care in Antalya, including third-party finance for eligible UK patients.",
-    sections: [
-      {
-        title: "What is dental finance?",
-        body: "Dental finance is a way of borrowing to help pay for treatment, with repayments made under a separate credit agreement. The price of your dental treatment and the total cost of credit are different figures.",
-        links: [{"text": "Read the existing eligibility information", "href": "/finance-eligibility"}, {"text": "Understand the treatment estimate", "href": "/prices"}],
-        sources: ["broker"],
-      },
-      {
-        title: "How the application works",
-        body: "Once you understand your treatment estimate, the approved Ideal4Finance application link lets you explore available offers. Ideal4Finance sources options from lenders. You review an offer and complete the lender’s own application process.",
-      },
-      {
-        title: "Who receives the funds?",
-        body: "Under the customer process supplied by Ideal4Finance, a successful lender pays the funds to the customer. You remain responsible for paying the clinic according to the agreed treatment payment schedule.",
-      },
-      {
-        title: "Fees and total cost",
-        body: "Your written quote must show any applicable treatment or finance-related administration fee before you commit. A quoted treatment price is not a credit quotation. Read the lender’s APR, repayment schedule, charges and total repayable carefully.",
-      },
-    ],
+    sections: dentalFinanceSections,
     faqs: [commonFAQs[3]],
     related: ["pay-monthly", "finance-eligibility", "finance-faq"],
   },

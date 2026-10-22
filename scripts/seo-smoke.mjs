@@ -9,6 +9,7 @@ import { standaloneGuides } from "../lib/guides.ts";
 import { guideText } from "../lib/guide-schema.ts";
 import { monthlyPlanningText } from "../lib/monthly-schema.ts";
 import { guidesDirectoryStructuredData } from "../lib/guides-directory-schema.ts";
+import { dentalFinanceSections } from "../lib/dental-finance-planning.ts";
 import { guidePlanningSections } from "../lib/guide-planning.ts";
 import { pages } from "../lib/content.ts";
 import { JSDOM } from "jsdom";
@@ -41,7 +42,7 @@ try {
   for (const file of await readdir(".next/static/chunks")) {
     if (!file.endsWith(".js")) continue;
     const javascript = await readFile(join(".next/static/chunks", file), "utf8");
-    if (javascript.includes("Veneers cover the front surface of existing teeth") || javascript.includes("Compare what is proposed for your own teeth before comparing the total price") || javascript.includes("The FCA survey included 17,950 respondents")) {
+    if (javascript.includes("Veneers cover the front surface of existing teeth") || javascript.includes("Compare what is proposed for your own teeth before comparing the total price") || javascript.includes("The FCA survey included 17,950 respondents") || javascript.includes("A written dental estimate describes the proposed care, materials, appointments and inclusions")) {
       throw new Error("Server-rendered editorial content must not be bundled into client JavaScript: " + file);
     }
   }
@@ -70,6 +71,17 @@ try {
   for (const section of guidePlanningSections) {
     if (!hubMain.includes(section.body) || !(section.paragraphs || []).every(paragraph => hubMain.includes(paragraph))) {
       throw new Error("Guide hub content missing from server-rendered HTML: " + section.title);
+    }
+  }
+  const financeResponse = await fetch(`http://127.0.0.1:${port}/dental-finance`, { headers });
+  const financeDocument = new JSDOM(await financeResponse.text()).window.document;
+  const financeText = financeDocument.querySelector("main")?.textContent || "";
+  if (financeResponse.status !== 200 || financeDocument.querySelectorAll("blockquote[cite]").length !== 2) {
+    throw new Error("Finance decision support and its attributed quotations must render over HTTP.");
+  }
+  for (const section of dentalFinanceSections) {
+    if (!financeText.includes(section.body) || !(section.paragraphs || []).every(paragraph => financeText.includes(paragraph))) {
+      throw new Error("Finance decision support is missing from server-rendered HTML: " + section.title);
     }
   }
   for (const path of ["/contact", "/prices", "/privacy"]) {
