@@ -3,7 +3,7 @@ import { monthlyPlanning } from "./monthly-planning";
 import { pricePlanningSections } from "./price-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
-  lastModified: "2026-10-21",
+  lastModified: "2026-10-22",
   title: "Dental Finance Turkey | Flexible Payment Options",
   description:
     "Explore dental treatment in Antalya with flexible payment options for eligible UK patients. Start with a free written treatment estimate, with no required phone call.",

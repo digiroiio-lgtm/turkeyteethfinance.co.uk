@@ -1,5 +1,18 @@
 import { commonFAQs, homeContent } from "./content";
 import { COMPANY, SITE_NAME, SITE_URL } from "./site";
+import { packageForId, packagePrice } from "./packages";
+
+function confirmedPackage(id: string) {
+  const item = packageForId(id);
+  if (!item) throw new Error("Missing confirmed package: " + id);
+  return item;
+}
+const crowns20 = confirmedPackage("zirconium-20");
+const crowns24 = confirmedPackage("zirconium-24");
+const veneers16 = confirmedPackage("veneers-16");
+const veneers20 = confirmedPackage("veneers-20");
+const implant = confirmedPackage("osstem-4-crowns-24");
+const money = (value: number) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(value);
 
 export type GuideSource = { id: string; title: string; url: string };
 export type GuideSection = {
@@ -9,10 +22,11 @@ export type GuideSection = {
 };
 export const homeGuide = {
   title: "Dental treatment and finance in Turkey: a UK patient planning guide",
-  updatedLabel: "21 October 2026",
+  updatedLabel: "22 October 2026",
   author: COMPANY + " patient coordination team",
 };
 export const homeGuideSources: GuideSource[] = [
+  { id: "confirmed-packages", title: "Owner-confirmed package prices and inclusions, 21 October 2026", url: SITE_URL + "/prices#dental-treatment-packages" },
   {
     "id": "gdc-abroad",
     "title": "General Dental Council: going abroad for dental treatment",
@@ -86,10 +100,11 @@ export const homeGuideSections: GuideSection[] = [
     "answer": "A useful quote identifies the proposed procedures, the teeth involved, materials, estimated visits and itemised costs. It should also explain what is excluded and what may change after examination. Compare the same scope of care across providers before deciding that one package is cheaper or offers better value.",
     "paragraphs": [
       "Use six comparison headings: diagnosis and alternatives; treatment and materials; preparatory care; temporary and final restorations; travel inclusions; aftercare and cancellation terms. For implant treatment, clarify whether the implant, abutment and final crown are all included. For crowns or veneers, ask about preparation, laboratory work and reviews.",
+      `Original package averages show why a headline needs context: dividing ${packagePrice(crowns20)} by 20 crowns gives ${money(crowns20.price / 20)}, while ${packagePrice(crowns24)} divided by 24 gives ${money(crowns24.price / 24)}. The equivalent whole-package averages for 16 and 20 veneers are ${money(veneers16.price / 16)} and ${money(veneers20.price / 20)}. These figures allocate hotel and transfers too; they are not standalone tooth prices or reasons to restore additional teeth.`,
       "The GDC recommends asking about the treating professional’s qualifications, regulation, complications and arrangements if further work is needed. Obtain the relevant information in writing so you can revisit it without sales pressure. A coordinator can organise those questions; the dentist must explain the clinical reasons behind the plan. An estimate based on photographs can change after assessment."
     ],
     "sourceIds": [
-      "gdc-abroad"
+      "gdc-abroad", "confirmed-packages"
     ],
     "quote": {
       "text": "Every dental patient deserves safe, high-quality care, clear information about costs and somewhere meaningful to turn when they’re not satisfied",
@@ -104,9 +119,10 @@ export const homeGuideSections: GuideSection[] = [
     "answer": "Add the treatment estimate, travel, accommodation not included in the package, insurance and a separate contingency budget. Count every planned visit rather than just the first trip. A lower advertised treatment price can still produce a higher overall cost if essential items or return journeys are excluded.",
     "paragraphs": [
       "Build your own cost checklist using the clinic’s written estimate and the travel arrangements you are actually considering. Keep treatment, flights, accommodation, insurance and any reserve for changes as separate entries. Record which items a package includes so you do not count them twice or mistake an excluded item for a free service.",
+      `The confirmed crown packages total ${packagePrice(crowns20)} for 20 crowns and ${packagePrice(crowns24)} for 24, a ${money(crowns24.price - crowns20.price)} difference. The 16- and 20-veneer packages total ${packagePrice(veneers16)} and ${packagePrice(veneers20)}, a ${money(veneers20.price - veneers16.price)} difference. Each includes five hotel nights and the specified transfers. Compare only clinically appropriate options; a lower calculated average does not justify treating healthy teeth.`,
       "Use your own written quote and current travel prices. Do not treat a contingency as a limit on what complications could cost. Confirm the currency charged, card or transfer costs, cancellation conditions and responsibility for extra accommodation. If a package includes a hotel or transfers, check dates, room arrangements and which journeys are covered."
     ],
-    "sourceIds": [],
+    "sourceIds": ["confirmed-packages"],
     "links": [
       {
         "text": "Check treatment cost inclusions",
@@ -202,9 +218,10 @@ export const homeGuideSections: GuideSection[] = [
     "answer": "Budget a second trip separately whenever the clinical plan includes a return visit. Check flights, accommodation, time away and any final treatment balance for that visit. A package covering the first stay should not be assumed to cover later stays, routine reviews or a return journey for a complication.",
     "paragraphs": [
       "List each planned visit separately, using the clinical appointment schedule and actual travel options. Confirm whether the hotel and transfer arrangements apply to the first stay, later visits or both. Include the effect of time away from work and ask what would happen if the clinical team needed to change the dates.",
+      `The ${packagePrice(implant)} package specifies four Osstem implants and 24 zirconium crowns, with three hotel nights on one visit and five on another: eight nights across two visits. Its total is ${money(implant.price - crowns20.price)} above the 20-crown package, but the procedures differ. This is a planning comparison, not an interchangeable treatment or a standalone implant fee.`,
       "Ask when the treatment balance is due and whether payments relate to clinical stages. Keep booking confirmations and written cancellation terms. If treatment is delayed or changed, clarify who pays for rearranged travel before accepting the revised plan. No assumed clinic deposit, package price or sample credit repayment is used here."
     ],
-    "sourceIds": [],
+    "sourceIds": ["confirmed-packages"],
     "links": [
       {
         "text": "Plan your dental visit to Antalya",
@@ -241,7 +258,7 @@ export const homeGuideSections: GuideSection[] = [
     "title": "How were the facts on this page checked?",
     "answer": "This guide combines the website’s actual enquiry process with linked public information from UK dental bodies, NHS trusts and the FCA. Research figures retain their original dates and scope. Treatment and travel budgets should use your own written estimates and bookings; this page does not supply hypothetical prices or loan examples.",
     "paragraphs": [
-      "Sources and page content were checked on 20 October 2026. The financial figures describe the FCA’s May 2024 survey, published in May 2025, rather than a new 2026 survey. The crown discussion references the GDC’s September 2026 learning article. NHS timing and survival information is general background and is not presented as clinic-specific evidence. Supplementary FDA, NIH and Columbia University patient resources were checked and added on 21 October 2026.",
+      "Sources and page content were rechecked on 22 October 2026. The financial figures describe the FCA’s May 2024 survey, published in May 2025, rather than a new 2026 survey. The crown discussion references the GDC’s September 2026 learning article. NHS timing and survival information is general background and is not presented as clinic-specific evidence. Supplementary FDA, NIH and Columbia University patient resources were added on 21 October 2026. Package calculations use the owner-confirmed price registry dated 21 October 2026; displayed averages are rounded to two decimal places where needed.",
       "The three named quotations reproduce short extracts from the linked publications. Roles are those stated by the sources; none of the quoted experts has endorsed this website or reviewed your treatment. The guide is prepared by Akdeniz Dental Consultancy UK Ltd’s patient coordination team as general planning information. Clinical advice belongs with the treating dentist, and individual credit terms belong with the broker and lender."
     ],
     "sourceIds": [
