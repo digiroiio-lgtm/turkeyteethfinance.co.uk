@@ -6,6 +6,7 @@ import { PageSchema, JsonLd } from "@/components/structured-data";
 import { clinicProfile } from "@/lib/evidence";
 import { guideStructuredData } from "@/lib/guide-schema";
 import { SITE_URL } from "@/lib/site";
+import { guidesDirectoryStructuredData } from "@/lib/guides-directory-schema";
 import { monthlyStructuredData } from "@/lib/monthly-schema";
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -23,6 +24,7 @@ export default async function OtherPageHead({ params }: { params: Promise<{ path
     <PageSchema path={path} title={page.title} description={page.description} faqs={faqs}
       lastModified={page.lastModified} parent={guide ? { name: "Patient guides", path: "/guides" } : undefined} />
     {guide && <JsonLd data={guideStructuredData(guide)} />}
+    {path === "/guides" && <JsonLd data={guidesDirectoryStructuredData()} />}
     {path === "/prices" && <JsonLd data={packageStructuredData()} />}
     {path === "/pay-monthly" && <JsonLd data={monthlyStructuredData()} />}
     {path === "/our-clinic" && <JsonLd data={{

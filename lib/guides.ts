@@ -102,9 +102,9 @@ export const guideArticles: PatientGuide[] = [
   {
     id: "understand-finance", title: "Questions to ask before choosing finance",
     category: "PAYMENT OPTIONS", summary: "APR, fees, repayment terms and the full borrowing cost.",
-    lastModified: "2026-10-20", sections: [], faqs: [], related: [],
+    lastModified: "2026-10-22", sections: [], faqs: [], related: [],
     paragraphs: [
-      "First establish the treatment budget and the amount you need to borrow. The treatment estimate and a lender’s credit quotation serve different purposes.",
+      "Establish the treatment budget before considering whether to borrow, then read any lender’s actual quotation separately. The dental estimate describes proposed care; a credit agreement describes a financial commitment. Compare the full borrowing cost and repayment conditions, and do not assume that a treatment enquiry requires an application or guarantees approval.",
       "Compare the APR, repayment term, each payment, any fees and the total amount repayable. Read early settlement, missed payment and cancellation information in the lender’s documents.",
       "Only apply using the approved broker link. A finance offer does not confirm that treatment is clinically suitable and does not mean you should accept the proposed dental plan.",
     ],

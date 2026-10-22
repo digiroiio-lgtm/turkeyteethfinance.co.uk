@@ -117,7 +117,7 @@ export default async function ContentPage({
       {p.kind === "guides" && <Guides />}
       {p.kind !== "monthly" && p.sections.length > 0 && (
         <section className="section editorial-section">
-          <div className="container"><EditorialSections sections={p.sections} /></div>
+          <div className={p.kind === "guides" ? "container narrow" : "container"}><EditorialSections sections={p.sections} article={p.kind === "guides"} /></div>
         </section>
       )}
       {slug === "dental-finance" && (
