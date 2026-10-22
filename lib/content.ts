@@ -1,6 +1,7 @@
 import type { EvidenceId } from "./evidence";
 import { monthlyPlanning } from "./monthly-planning";
 import { pricePlanningSections } from "./price-planning";
+import { guidePlanningSections } from "./guide-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
   lastModified: "2026-10-22",
@@ -1135,7 +1136,7 @@ export const pages: Record<string, PageContent> = {
     related: ["get-a-quote", "our-clinic", "finance-faq"],
   },
   guides: {
-    lastModified: "2026-10-21",
+    lastModified: "2026-10-22",
     title: "Dental Finance and Treatment Guides | Turkey",
     description:
       "Practical guides for UK patients considering dental care in Turkey: comparing quotes, preparing for treatment, reviewing finance and planning aftercare.",
@@ -1145,14 +1146,7 @@ export const pages: Record<string, PageContent> = {
     kind: "guides",
     intro:
       "Practical reading to help you compare treatment plans, understand payment options and prepare for care abroad.",
-    sections: [
-      {
-        title: "Use guides as a starting point",
-        body: "General information helps you prepare questions. It does not replace a clinical assessment or personalised information from the broker and lender. Ask qualified professionals to explain the decisions that affect you.",
-        links: [{"text": "Compare treatment quotes in detail", "href": "/guides/compare-dental-quotes"}, {"text": "Plan your visit to Antalya", "href": "/guides/plan-dental-visit-antalya"}],
-        sources: ["gdc"],
-      },
-    ],
+    sections: guidePlanningSections,
     faqs: [
       {
         question: "Is this personalised clinical or financial advice?",

@@ -375,6 +375,8 @@ export function Guides() {
   return (
     <section className="section">
       <div className="container">
+        <h2>Choose a guide for your next decision</h2>
+        <p>Choose the quote comparison guide when you have a treatment proposal, the Antalya visit guide when you are arranging appointments, or the finance checklist when reviewing payment questions. Each explains what to ask the relevant professional. Read the planning sections below for context, evidence and links to the detailed information you need.</p>
         <div className="guide-grid">
           {guideArticles.map((a) => (
             <Link className="guide-card" id={a.id} href={a.path || `/guides#${a.id}-details`} key={a.id}>
@@ -382,7 +384,7 @@ export function Guides() {
                 <Icon name="book" size={30} />
               </span>
               <span className="card-eyebrow">{a.category}</span>
-              <h2>{a.title}</h2>
+              <h3>{a.title}</h3>
               <p>{a.summary}</p>
               <span className="text-link">
                 Read the guide <ArrowRight size={16} />
@@ -394,7 +396,7 @@ export function Guides() {
           {guideArticles.filter(a => !a.path).map((a) => (
             <article className="article" id={`${a.id}-details`} key={a.id}>
               <Eyebrow>{a.category}</Eyebrow>
-              <h2>{a.title}</h2>
+              <h3>{a.title}</h3>
               {a.paragraphs.map((p) => (
                 <p key={p}>{p}</p>
               ))}

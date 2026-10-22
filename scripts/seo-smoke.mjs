@@ -8,6 +8,8 @@ import { canonicalUrl, SITE_URL } from "../lib/site.ts";
 import { standaloneGuides } from "../lib/guides.ts";
 import { guideText } from "../lib/guide-schema.ts";
 import { monthlyPlanningText } from "../lib/monthly-schema.ts";
+import { guidesDirectoryStructuredData } from "../lib/guides-directory-schema.ts";
+import { guidePlanningSections } from "../lib/guide-planning.ts";
 import { pages } from "../lib/content.ts";
 import { JSDOM } from "jsdom";
 import { packageInclusions, packagePrice, treatmentPackages } from "../lib/packages.ts";
@@ -55,6 +57,20 @@ try {
   const articles = nodes.filter((node) => node["@type"] === "Article");
   if (articles.length !== 1 || !articles[0].dateModified || !articles[0].articleBody) {
     throw new Error("Homepage Article JSON-LD must be complete and present once in head.");
+  }
+  const hubResponse = await fetch(`http://127.0.0.1:${port}/guides`, { headers });
+  const hubHtml = await hubResponse.text();
+  const hubDocument = new JSDOM(hubHtml).window.document;
+  const hubSchemas = [...hubDocument.head.querySelectorAll('script[type="application/ld+json"]')].map(script => JSON.parse(script.textContent));
+  const directorySchema = hubSchemas.find(node => node["@type"] === "ItemList");
+  if (hubResponse.status !== 200 || JSON.stringify(directorySchema) !== JSON.stringify(guidesDirectoryStructuredData())) {
+    throw new Error("Guide directory schema must match visible directory and render in the initial HTML head.");
+  }
+  const hubMain = hubDocument.querySelector("main")?.textContent || "";
+  for (const section of guidePlanningSections) {
+    if (!hubMain.includes(section.body) || !(section.paragraphs || []).every(paragraph => hubMain.includes(paragraph))) {
+      throw new Error("Guide hub content missing from server-rendered HTML: " + section.title);
+    }
   }
   for (const path of ["/contact", "/prices", "/privacy"]) {
     const page = await fetch(`http://127.0.0.1:${port}${path}`, { headers });
