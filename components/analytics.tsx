@@ -3,8 +3,11 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { analyticsConsent, applyAnalyticsConsent, configureAnalytics, saveAnalyticsConsent, subscribeAnalytics, trackCTAClick, trackEvent, trackPageView } from "@/lib/analytics";
+const noopSubscribe = () => () => {};
 export function Analytics({ enabled, paths }: { enabled: boolean; paths: string[] }) {
   const choice = useSyncExternalStore(subscribeAnalytics, analyticsConsent, () => "unknown" as const);
+  // Render the banner only after hydration: a server-rendered, bottom-anchored banner shifts when the web font swaps in.
+  const hydrated = useSyncExternalStore(noopSubscribe, () => true, () => false);
   const pathname = usePathname();
   const [preferences, setPreferences] = useState(false);
   useEffect(() => { configureAnalytics(enabled, paths); applyAnalyticsConsent(); trackPageView(); }, [enabled, paths, pathname, choice]);
@@ -20,6 +23,6 @@ export function Analytics({ enabled, paths }: { enabled: boolean; paths: string[
     document.querySelectorAll("[data-package-list]").forEach(item => observer.observe(item)); return () => observer.disconnect();
   }, [enabled, pathname, choice]);
   function choose(value: "granted" | "denied") { saveAnalyticsConsent(value); setPreferences(false); }
-  if (!(enabled && choice === "unknown") && !preferences) return null;
+  if (!hydrated || (!(enabled && choice === "unknown") && !preferences)) return null;
   return <section className="cookie-banner" role="region" aria-label="Analytics cookie choices"><div><h2>Your analytics choice</h2><p>Optional Google Analytics cookies help us understand page visits, public package clicks and enquiry-form progress. We do not send your entered contact details, dental information or photographs to Analytics. Your enquiry works with either choice. <Link href="/privacy#cookies">Privacy & cookies</Link></p></div><div className="cookie-actions"><button type="button" onClick={() => choose("denied")}>Reject analytics</button><button type="button" onClick={() => choose("granted")}>Accept analytics</button>{choice !== "unknown" && <button type="button" onClick={() => setPreferences(false)}>Keep current choice</button>}</div></section>;
 }
