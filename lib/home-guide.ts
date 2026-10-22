@@ -1,4 +1,4 @@
-import { commonFAQs, homeContent } from "./content";
+import { commonFAQs, homeContent, journeySteps } from "./content";
 import { COMPANY, SITE_NAME, SITE_URL } from "./site";
 import { packageForId, packagePrice } from "./packages";
 
@@ -312,6 +312,17 @@ export function homeStructuredData() {
         mainEntity: commonFAQs.map((faq) => ({
           "@type": "Question", name: faq.question,
           acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      },
+      {
+        "@type": "HowTo", "@id": url + "#how-it-works",
+        name: "How to plan dental treatment in Antalya",
+        description: "Four stages from a written treatment enquiry to your clinical assessment in Antalya. Finance is a separate decision with a lender.",
+        inLanguage: "en-GB",
+        isPartOf: { "@id": url + "#webpage" },
+        step: journeySteps.map((step, i) => ({
+          "@type": "HowToStep", position: i + 1, name: step.title,
+          text: step.description + " " + step.bullets.join(". ") + ".",
         })),
       },
     ],

@@ -7,15 +7,68 @@ import { clinicPlanningSections } from "./clinic-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
   lastModified: "2026-10-22",
-  title: "Dental Finance Turkey | Flexible Payment Options",
+  title: "Dental Finance Turkey: Flexible Payments",
   description:
-    "Explore dental treatment in Antalya with flexible payment options for eligible UK patients. Start with a free written treatment estimate, with no required phone call.",
+    "Explore dental treatment in Antalya with flexible payment options for eligible UK patients. Start with a free written treatment estimate, no phone call needed.",
   label: "DENTAL TREATMENT IN TURKEY",
   heading: "Your new smile in Turkey.",
   accent: "Flexible payment options.",
   intro:
     "Quality dental treatment in Antalya with finance options for eligible UK patients, subject to status and lender approval.",
+  answer:
+    "Dental finance in Turkey lets eligible UK patients spread the cost of treatment in Antalya. You start by requesting a free written treatment estimate, with no phone call needed. The clinical team proposes a plan, and your dentist confirms it at your assessment in Antalya. Any finance is a separate credit decision made by the lender, subject to status.",
 };
+
+export const journeySteps = [
+  {
+    title: "Quote",
+    label: "START ONLINE",
+    description: "Tell us your goals by email or WhatsApp.",
+    x: 20,
+    y: 866,
+    bullets: [
+      "Choose your treatment interest",
+      "Share your questions in writing",
+      "No phone call required",
+    ],
+  },
+  {
+    title: "Plan",
+    label: "MAKE IT PERSONAL",
+    description: "Review your treatment plan and payment options.",
+    x: 270,
+    y: 866,
+    bullets: [
+      "Review the proposed treatment",
+      "Understand costs and visit stages",
+      "Explore finance separately",
+    ],
+  },
+  {
+    title: "Book",
+    label: "WHEN YOU ARE READY",
+    description: "Confirm your travel and clinic appointments.",
+    x: 520,
+    y: 866,
+    bullets: [
+      "Confirm clinical arrangements",
+      "Check your payment schedule",
+      "Plan travel and accommodation",
+    ],
+  },
+  {
+    title: "Smile",
+    label: "YOUR CARE JOURNEY",
+    description: "Meet your clinical team and begin your care.",
+    x: 770,
+    y: 866,
+    bullets: [
+      "Attend your clinical assessment",
+      "Agree the final plan with your dentist",
+      "Understand follow-up and aftercare",
+    ],
+  },
+];
 
 export const informationSources = [
   {

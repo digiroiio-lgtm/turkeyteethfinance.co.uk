@@ -3325,6 +3325,7 @@ select:focus-visible {
 .eligibility-label, .budget-summary-title { font-weight: 750; }
 .home-updated { color: var(--muted, #67677e); font-size: .85rem; padding-block: 1rem; }
 .home-updated p { margin: .25rem 0; }
+.home-updated .home-summary { max-width: 68ch; margin-bottom: .75rem; color: var(--body); font-size: 1rem; line-height: 1.65; }
 .home-updated a, .home-guide a { color: #6352a8; text-decoration: underline; text-underline-offset: .18em; overflow-wrap: anywhere; }
 .home-guide { background: #faf9ff; }
 .home-guide-intro { font-size: 1.1rem; line-height: 1.8; color: #38374c; }
