@@ -117,7 +117,7 @@ export default async function ContentPage({
       {p.kind === "guides" && <Guides />}
       {p.kind !== "monthly" && p.sections.length > 0 && (
         <section className="section editorial-section">
-          <div className={(p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance") ? "container narrow" : "container"}><EditorialSections sections={p.sections} article={p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance"} /></div>
+          <div className={(p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq") ? "container narrow" : "container"}><EditorialSections sections={p.sections} article={p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq"} /></div>
         </section>
       )}
       {slug === "dental-finance" && (

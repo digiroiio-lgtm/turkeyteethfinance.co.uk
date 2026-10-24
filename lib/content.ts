@@ -4,6 +4,7 @@ import { pricePlanningSections } from "./price-planning";
 import { guidePlanningSections } from "./guide-planning";
 import { dentalFinanceSections } from "./dental-finance-planning";
 import { clinicPlanningSections } from "./clinic-planning";
+import { financeFaqSections } from "./finance-faq-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
   lastModified: "2026-10-22",
@@ -1053,7 +1054,7 @@ export const pages: Record<string, PageContent> = {
     ]
   },
   "finance-faq": {
-    lastModified: "2026-10-20",
+    lastModified: "2026-10-24",
     title: "Dental Finance Turkey FAQs | UK Patient Questions",
     description:
       "Answers about dental finance, treatment estimates, credit applications, payments and planning dental care in Antalya for UK patients.",
@@ -1063,7 +1064,7 @@ export const pages: Record<string, PageContent> = {
     kind: "faq",
     intro:
       "Straightforward answers to the questions patients ask before requesting a quote or exploring third-party finance.",
-    sections: [],
+    sections: financeFaqSections,
     faqs: [
       ...commonFAQs,
       {
