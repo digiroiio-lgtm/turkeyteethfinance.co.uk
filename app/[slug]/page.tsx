@@ -117,7 +117,7 @@ export default async function ContentPage({
       {p.kind === "guides" && <Guides />}
       {p.kind !== "monthly" && p.sections.length > 0 && (
         <section className="section editorial-section">
-          <div className={(p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance") ? "container narrow" : "container"}><EditorialSections sections={p.sections} article={p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance"} /></div>
+          <div className={(p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance") ? "container narrow" : "container"}><EditorialSections sections={p.sections} article={p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance"} /></div>
         </section>
       )}
       {slug === "dental-finance" && (

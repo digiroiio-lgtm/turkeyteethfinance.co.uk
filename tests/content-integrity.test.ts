@@ -47,6 +47,10 @@ test("treatment-specific answers have distinct questions, traceable sources and 
       }
       assert.match(text, /not standalone crown fees/);
       assert.match(text, /not audited Akdeniz Dental outcomes/);
+    } else if (treatment.slug === "all-on-4-finance") {
+      assert.ok(text.includes(packagePrice(packageForId("osstem-4-crowns-24")!)));
+      assert.match(text, /not an All-on-4 price/);
+      assert.match(text, /not audited Akdeniz Dental outcomes/);
     } else {
       assert.equal(/£\s?\d/.test(text), false);
     }

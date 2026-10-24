@@ -1,5 +1,7 @@
 /** Public sources checked on 21 October 2026. No independent credential verification or clinical endorsement is implied. */
 export const evidence = {
+  allOn4Mandible: { title: "Maló et al. (2019): lower-jaw All-on-4 series with 10–18 years of follow-up", url: "https://pubmed.ncbi.nlm.nih.gov/30924309/" },
+  allOn4Maxilla: { title: "Maló et al. (2019): upper-jaw All-on-4 series with 5–13 years of follow-up", url: "https://pubmed.ncbi.nlm.nih.gov/30924250/" },
   crownWaldecker: { title: "Waldecker et al. (2022): five-year prospective zirconia single-crown study", url: "https://www.jstage.jst.go.jp/article/jpr/66/2/66_JPR_D_21_00024/_article" },
   implantFrench: { title: "French, Ofec and Levin (2021): cohort of 10,871 implants in 4,247 patients", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8359846/" },
   implantOstman: { title: "Östman et al. (2024): prospective 20-year TiUnite implant follow-up", url: "https://pubmed.ncbi.nlm.nih.gov/38607359/" },

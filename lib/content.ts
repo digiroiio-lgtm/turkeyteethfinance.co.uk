@@ -1,3 +1,4 @@
+import { fullArchPlanningSections } from "./full-arch-planning";
 import { crownPlanningSections } from "./crown-planning";
 import { implantPlanningSections } from "./implant-planning";
 import { veneerPlanningSections } from "./veneer-planning";
@@ -516,84 +517,14 @@ export const pages: Record<string, PageContent> = {
     "treatment": "Zirconia crowns"
   },
   "all-on-4-finance": {
-    "lastModified": "2026-10-21",
+    "lastModified": "2026-10-24",
     "title": "All-on-4 in Turkey: Visits & Care",
     "description": "Plan full-arch implant treatment in Antalya. Compare fixed and removable options, temporary and final teeth, visits and quote inclusions.",
     "label": "ALL-ON-4",
     "heading": "All-on-4 in Turkey.",
     "accent": "A full-arch plan.",
     "intro": "Discuss implant-supported options for a full arch of missing or failing teeth. A dentist must assess whether this approach is suitable for you.",
-    "sections": [
-      {
-        "title": "What does an All-on-4 treatment plan replace?",
-        "body": "All-on-4 describes a full-arch replacement supported by four implants in suitable cases. It is different from replacing one missing tooth. The dentist must assess the remaining teeth, bone, gums and proposed restoration before recommending this approach or a different implant configuration.",
-        "paragraphs": [
-          "Ask whether the discussion concerns the upper arch, lower arch or both. A full-arch label does not tell you the restoration material, the temporary arrangement or which preparatory procedures are included. If teeth are still present, ask which could be retained and why removal is recommended for any others. The decision should be clinical rather than based on a fixed package."
-        ],
-        "links": [
-          {
-            "text": "Compare single-tooth implant planning",
-            "href": "/dental-implants-finance"
-          }
-        ]
-      },
-      {
-        "title": "How do fixed full-arch teeth and removable options differ?",
-        "body": "A full-arch implant bridge and an implant-retained removable denture are different restorations. Ask whether your proposed teeth are intended to stay fixed in the mouth or be removed for cleaning. The number of implants alone does not describe the final restoration or its maintenance.",
-        "paragraphs": [
-          "Discuss access for cleaning, the way the restoration is supported and what happens if a component needs repair. The dentist should explain why a particular design is recommended for your bone and bite. More implants are not automatically the right answer for every person, and a conventional denture remains a separate option to discuss where appropriate."
-        ],
-        "sources": [
-          "implants"
-        ]
-      },
-      {
-        "title": "Are immediate teeth the same as final teeth?",
-        "body": "Immediate temporary teeth and the final full-arch restoration are different treatment stages. Whether a temporary restoration can be fixed at surgery depends on clinical conditions and implant stability. The final material, timing and assessment should be set out separately in the treatment plan.",
-        "paragraphs": [
-          "Ask what will happen if immediate loading is not suitable and whether the temporary alternative changes daily care or the travel schedule. Obtain a plan for the healing interval and the later restorative visit. A temporary smile photographed after surgery does not establish that treatment is complete or that the same approach will be suitable for you."
-        ],
-        "sources": [
-          "stages"
-        ],
-        "links": [
-          {
-            "text": "Plan separate visits and the healing interval",
-            "href": "/guides/plan-dental-visit-antalya"
-          }
-        ]
-      },
-      {
-        "title": "What should a full-arch estimate include?",
-        "body": "A full-arch estimate needs to specify each arch, implant system, temporary restoration and final teeth. Ask whether extractions, scans, any grafting and all planned appointments are included. Confirm what can change after assessment and how a revised plan would be agreed.",
-        "paragraphs": [
-          "Check the material of the final restoration and any later repair or maintenance charges. A single figure may describe one arch rather than both jaws, or a surgical stage rather than the whole course. Compare the same scope before comparing totals. Request travel and accommodation details separately wherever they are part of a package."
-        ],
-        "links": [
-          {
-            "text": "Use the itemised quote checklist",
-            "href": "/guides/compare-dental-quotes"
-          },
-          {
-            "text": "Check treatment inclusions",
-            "href": "/prices"
-          }
-        ]
-      },
-      {
-        "title": "How will I maintain a full-arch restoration in the UK?",
-        "body": "A full-arch restoration needs a cleaning and professional review plan suited to its design. Ask the treating team to demonstrate the required care and explain how to obtain clinical help after returning home. Responsibility for maintenance, repairs and return travel should be clear before treatment starts.",
-        "paragraphs": [
-          "Keep the implant and component records and ask whether a UK dentist can provide routine reviews for the particular restoration. Do not assume a cosmetic warranty covers every biological complication or travel expense. If a restoration feels loose or causes discomfort, contact the clinical team promptly for individual advice rather than waiting for a future holiday."
-        ],
-        "links": [
-          {
-            "text": "Check clinical contacts and responsibilities",
-            "href": "/our-clinic"
-          }
-        ]
-      }
-    ],
+    "sections": fullArchPlanningSections,
     "faqs": [
       {
         "question": "Is an All-on-4 quote for one arch or both jaws?",
