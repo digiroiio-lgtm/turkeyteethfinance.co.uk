@@ -1,5 +1,10 @@
 /** Public sources checked on 21 October 2026. No independent credential verification or clinical endorsement is implied. */
 export const evidence = {
+  ohfVeneers: { title: "Oral Health Foundation: veneers", url: "https://www.dentalhealth.org/veneers" },
+  ohfTourismRisk: { title: "Oral Health Foundation: Karen Coates on dental treatment abroad, updated 7 July 2026", url: "https://www.dentalhealth.org/faqs/turkey-teeth-risk" },
+  ohfCoates: { title: "Oral Health Foundation: Karen Coates, Oral Health Content Specialist", url: "https://www.dentalhealth.org/karen-coates-advisor" },
+  veneerBeier: { title: "Beier et al. (2012): clinical performance of porcelain laminate veneers for up to 20 years", url: "https://pubmed.ncbi.nlm.nih.gov/22259802/" },
+  veneerPeumans: { title: "Peumans et al. (2004): prospective ten-year clinical trial of porcelain veneers", url: "https://pubmed.ncbi.nlm.nih.gov/15119590/" },
   nhsTravel: { title: "NHS: going abroad for medical treatment", url: "https://www.nhs.uk/using-the-nhs/healthcare-abroad/going-abroad-for-treatment/going-abroad-for-medical-treatment/" },
   nhsChecklist: { title: "NHS: treatment abroad checklist", url: "https://www.nhs.uk/using-the-nhs/healthcare-abroad/going-abroad-for-treatment/treatment-abroad-checklist/" },
   gdcCrowns: { title: "GDC: Shamir B. Mehta on crown treatment, 10 September 2026", url: "https://www.gdc-uk.org/news-blogs/blog/detail/blogs/2026/09/10/heavy-is-the-head-complaints-dental-crowns-insights-learning" },

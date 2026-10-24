@@ -1,3 +1,4 @@
+import { veneerPlanningSections } from "./veneer-planning";
 import { quotePlanningSections } from "./quote-planning";
 import type { EvidenceId } from "./evidence";
 import { monthlyPlanning } from "./monthly-planning";
@@ -357,81 +358,14 @@ export const pages: Record<string, PageContent> = {
     related: ["dental-finance", "pay-monthly", "finance-faq"],
   },
   "veneers-finance": {
-    "lastModified": "2026-10-21",
+    "lastModified": "2026-10-24",
     "title": "Veneers in Turkey: Materials & Risks",
     "description": "Compare veneers, bonding and crowns for treatment in Antalya. Understand preparation, maintenance, appointment planning and an itemised written estimate.",
     "label": "VENEERS",
     "heading": "Veneers in Turkey.",
     "accent": "A personal difference.",
     "intro": "Discuss the shape, colour and appearance of your teeth with a dentist. Get a written veneers estimate before exploring available payment options.",
-    "sections": [
-      {
-        "title": "What can veneers change, and what do they leave unchanged?",
-        "body": "Veneers cover the front surface of existing teeth to change their appearance. They do not replace missing teeth, and a cosmetic change does not treat an underlying infection or gum problem. The dentist needs to assess the teeth and bite before recommending whether veneers are appropriate.",
-        "paragraphs": [
-          "Describe the specific change you want: the edge shape, a small gap, colour or the appearance of a particular tooth. Ask the dentist to distinguish a surface change from a problem that needs orthodontic or restorative care. A request for a natural appearance is a discussion about your own teeth, rather than an instruction to reproduce another person’s smile."
-        ],
-        "sources": [
-          "veneers"
-        ]
-      },
-      {
-        "title": "How do porcelain veneers, composite and crowns compare?",
-        "body": "Porcelain veneers are laboratory-made coverings; composite material is shaped and bonded to the tooth. A crown covers more of the tooth than a veneer. The choice depends on the remaining tooth structure and treatment goals, rather than a package name or the number of teeth visible in a photograph.",
-        "paragraphs": [
-          "Ask for the actual restoration type and material beside each tooth in your plan. If you are offered zirconia, clarify whether the proposal is for a crown rather than a front-surface veneer. Discuss whether whitening, alignment or a smaller repair could address your concern. Availability and suitability must be confirmed by the treating team."
-        ],
-        "sources": [
-          "nhs"
-        ],
-        "links": [
-          {
-            "text": "Compare zirconia crowns with veneers",
-            "href": "/zirconia-crowns-finance"
-          }
-        ]
-      },
-      {
-        "title": "What are the preparation and maintenance risks?",
-        "body": "Veneer treatment can involve irreversible removal of enamel. Veneers may chip, loosen or need replacement, and grinding or an unsuitable bite can affect the choice of restoration. Ask how these issues apply to you before agreeing to prepare healthy teeth.",
-        "paragraphs": [
-          "A written discussion should cover the condition of each tooth, alternatives and the possibility of later repair or replacement. Ask how an uncomfortable bite or a damaged restoration would be assessed after you return to the UK. Avoid treating any stated lifespan or photograph as a guarantee. The dentist should give cleaning and review instructions suited to the material and your mouth."
-        ],
-        "sources": [
-          "veneers"
-        ]
-      },
-      {
-        "title": "What happens during a veneer visit to Antalya?",
-        "body": "A veneer plan may include assessment, preparation, a scan or impression, laboratory work, a fit check and bonding. The precise appointments and temporary restorations depend on the material and clinical findings. Ask the clinic to confirm the schedule before you book flights.",
-        "paragraphs": [
-          "Agree how you will review shape and shade, when any trial or temporary stage occurs, and what happens if an adjustment is needed. Leave room in the travel plan for the appointments actually recommended. You should understand the proposed treatment before consenting, and have a clear contact for concerns after leaving Antalya."
-        ],
-        "links": [
-          {
-            "text": "Plan appointments and travel",
-            "href": "/guides/plan-dental-visit-antalya"
-          }
-        ]
-      },
-      {
-        "title": "What information should I send for a veneers estimate?",
-        "body": "Tell the team which teeth concern you, what change you would like and whether you already have crowns, veneers or bonding. Photographs are optional through the enquiry form. They can support an initial discussion, but cannot confirm preparation, suitability or a final price.",
-        "paragraphs": [
-          "Request an itemised estimate showing the number of teeth, material, temporary restorations, reviews and any preparatory care. State your preferred contact method and likely travel period. You can ask for alternatives before deciding. An enquiry does not book treatment or apply for credit, and the clinical assessment may change an initial estimate."
-        ],
-        "links": [
-          {
-            "text": "Check the treatment quote checklist",
-            "href": "/guides/compare-dental-quotes"
-          },
-          {
-            "text": "Understand what your estimate includes",
-            "href": "/prices"
-          }
-        ]
-      }
-    ],
+    "sections": veneerPlanningSections,
     "faqs": [
       {
         "question": "Can I have veneers on teeth that already have crowns?",

@@ -1,4 +1,5 @@
 import test from "node:test";
+import { packageForId, packagePrice } from "../lib/packages";
 import assert from "node:assert/strict";
 import { pages, treatments } from "../lib/content";
 import { standaloneGuides } from "../lib/guides";
@@ -22,9 +23,23 @@ test("treatment-specific answers have distinct questions, traceable sources and 
     }
     for (const section of page.sections) {
       for (const id of section.sources || []) assert.equal(new URL(evidence[id].url).protocol, "https:");
-      for (const link of section.links || []) assert.ok(publicPaths.has(link.href), link.href);
+      for (const link of section.links || []) {
+        const destination = new URL(link.href, "https://turkeyteethfinance.co.uk");
+        assert.equal(destination.origin, "https://turkeyteethfinance.co.uk");
+        assert.ok(publicPaths.has(destination.pathname), link.href);
+      }
     }
-    assert.equal(/£\s?\d|\d+(?:\.\d+)?%\s*(?:APR|interest)|guaranteed acceptance/i.test(JSON.stringify(page.sections)), false);
+    const text = JSON.stringify(page.sections);
+    assert.equal(/\d+(?:\.\d+)?%\s*(?:APR|interest)|£\d+\s*(?:per month|a month)|guaranteed acceptance/i.test(text), false);
+    if (treatment.slug === "veneers-finance") {
+      for (const id of ["veneers-16", "veneers-20"]) {
+        assert.ok(text.includes(packagePrice(packageForId(id)!)));
+      }
+      assert.match(text, /not separately purchasable veneer fees/);
+      assert.match(text, /not independently audited Akdeniz Dental results/);
+    } else {
+      assert.equal(/£\s?\d/.test(text), false);
+    }
   }
 });
 
