@@ -1,3 +1,4 @@
+import { quotePlanningSections } from "./quote-planning";
 import type { EvidenceId } from "./evidence";
 import { monthlyPlanning } from "./monthly-planning";
 import { pricePlanningSections } from "./price-planning";
@@ -179,7 +180,7 @@ export const pages: Record<string, PageContent> = {
     related: ["pay-monthly", "finance-eligibility", "finance-faq"],
   },
   "get-a-quote": {
-    lastModified: "2026-10-20",
+    lastModified: "2026-10-24",
     title: "Free Dental Treatment Quote Turkey",
     description:
       "Request a personalised dental treatment estimate for Antalya. Choose email or WhatsApp, tell us your goals and get a written plan without a required phone call.",
@@ -189,7 +190,7 @@ export const pages: Record<string, PageContent> = {
     kind: "quote",
     intro:
       "Tell us what you have in mind. Start your free treatment enquiry online, with email or WhatsApp as your preferred way to stay in touch.",
-    sections: [],
+    sections: quotePlanningSections,
     faqs: [
       commonFAQs[1],
       {

@@ -1,5 +1,7 @@
 /** Public sources checked on 21 October 2026. No independent credential verification or clinical endorsement is implied. */
 export const evidence = {
+  nhsTravel: { title: "NHS: going abroad for medical treatment", url: "https://www.nhs.uk/using-the-nhs/healthcare-abroad/going-abroad-for-treatment/going-abroad-for-medical-treatment/" },
+  nhsChecklist: { title: "NHS: treatment abroad checklist", url: "https://www.nhs.uk/using-the-nhs/healthcare-abroad/going-abroad-for-treatment/treatment-abroad-checklist/" },
   gdcCrowns: { title: "GDC: Shamir B. Mehta on crown treatment, 10 September 2026", url: "https://www.gdc-uk.org/news-blogs/blog/detail/blogs/2026/09/10/heavy-is-the-head-complaints-dental-crowns-insights-learning" },
   leedsImplants: { title: "Leeds Teaching Hospitals NHS Trust: dental implant patient information", url: "https://www.leedsth.nhs.uk/patients/resources/dental-implants/" },
   bdaTourism: { title: "BDA: survey of 1,000 UK dentists, 14 July 2022", url: "https://www.bda.org/media-centre/uk-dentists-picking-up-the-pieces-from-dental-tourism-boom/" },
