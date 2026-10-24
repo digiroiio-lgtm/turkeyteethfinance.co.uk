@@ -51,6 +51,13 @@ test("treatment-specific answers have distinct questions, traceable sources and 
       assert.ok(text.includes(packagePrice(packageForId("osstem-4-crowns-24")!)));
       assert.match(text, /not an All-on-4 price/);
       assert.match(text, /not audited Akdeniz Dental outcomes/);
+    } else if (treatment.slug === "smile-makeover-finance") {
+      for (const id of ["zirconium-20", "zirconium-24", "veneers-16", "veneers-20", "osstem-4-crowns-24"]) {
+        assert.ok(text.includes(packagePrice(packageForId(id)!)));
+      }
+      assert.match(text, /not standalone crown fees/);
+      assert.match(text, /not separately purchasable veneer fees/);
+      assert.match(text, /not audited Akdeniz Dental outcomes/);
     } else {
       assert.equal(/£\s?\d/.test(text), false);
     }

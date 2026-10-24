@@ -1,3 +1,4 @@
+import { smilePlanningSections } from "./smile-planning";
 import { fullArchPlanningSections } from "./full-arch-planning";
 import { crownPlanningSections } from "./crown-planning";
 import { implantPlanningSections } from "./implant-planning";
@@ -367,88 +368,14 @@ export const pages: Record<string, PageContent> = {
     ]
   },
   "smile-makeover-finance": {
-    "lastModified": "2026-10-21",
+    "lastModified": "2026-10-24",
     "title": "Smile Makeover in Turkey: Personal Plans",
     "description": "Plan a smile makeover in Antalya around your own teeth. Compare less invasive options, treatment stages, materials and individual quote details.",
     "label": "SMILE MAKEOVER",
     "heading": "Your smile makeover.",
     "accent": "One considered plan.",
     "intro": "A smile makeover is a personal treatment plan, not one standard procedure. Start by discussing what you want to change and what your teeth need.",
-    "sections": [
-      {
-        "title": "What is included in a personalised smile makeover?",
-        "body": "A smile makeover is a plan combining the changes appropriate to your teeth and goals, rather than one standard procedure. It may involve different treatments for different teeth. A dentist should separate treatment needed for oral health from optional changes in appearance.",
-        "paragraphs": [
-          "Start with the change that matters to you: colour, a chipped edge, missing teeth or the balance of your smile. Explain what you would prefer to retain as well as what you want to alter. The plan should identify the recommended procedures and alternatives. A package with a fixed number of restorations is not a substitute for assessing each tooth."
-        ],
-        "links": [
-          {
-            "text": "Understand veneers",
-            "href": "/veneers-finance"
-          },
-          {
-            "text": "Understand crowns",
-            "href": "/zirconia-crowns-finance"
-          }
-        ]
-      },
-      {
-        "title": "Could a less invasive option address my concern?",
-        "body": "Ask whether a smaller repair, whitening or alignment treatment could address your concern before choosing extensive restorations. These approaches have different indications and limitations. A dentist must assess which options are appropriate, including whether existing dental disease needs attention first.",
-        "paragraphs": [
-          "The least invasive suitable plan may not resemble a social-media smile transformation. Ask how each option changes the tooth and what future maintenance may involve. If orthodontic treatment is considered, discuss the continuity and location of follow-up rather than assuming it can be completed during a short trip. You can seek another clinical opinion before consenting to irreversible treatment."
-        ],
-        "sources": [
-          "nhs"
-        ]
-      },
-      {
-        "title": "How do function and appearance fit into the same plan?",
-        "body": "A treatment plan needs to consider the bite, gum health and existing teeth alongside the appearance of the smile. Shade and shape preferences are useful, but do not establish what the teeth can support. Ask how these decisions will be checked clinically.",
-        "paragraphs": [
-          "Discuss how the proposed restorations relate to untreated teeth and any existing implants or crowns. A photograph shows only part of the mouth and cannot establish every diagnosis. Ask when you will review the appearance, what adjustments are possible and how final checks are organised. The clinical team should explain the limits of the result rather than promising an exact copy of a reference."
-        ],
-        "links": [
-          {
-            "text": "Meet the clinic-listed treating team",
-            "href": "/our-clinic"
-          }
-        ]
-      },
-      {
-        "title": "Why can the treatment sequence change the travel plan?",
-        "body": "The order of a smile makeover depends on the procedures involved. A plan including implants may need a healing interval and a later restorative visit, while another plan may involve a different sequence. Confirm the actual appointments before arranging travel.",
-        "paragraphs": [
-          "Ask which stages must be completed before the next can begin, what temporary teeth are planned and what would trigger a revised schedule. Discuss who will communicate changes while you are in Antalya and after returning home. Allow decisions about healing and treatment readiness to remain with the clinical team rather than a predetermined holiday timetable."
-        ],
-        "sources": [
-          "stages"
-        ],
-        "links": [
-          {
-            "text": "Plan your dental visit",
-            "href": "/guides/plan-dental-visit-antalya"
-          }
-        ]
-      },
-      {
-        "title": "How do I compare a makeover package with an individual plan?",
-        "body": "Compare the proposed treatment tooth by tooth, including materials, temporary restorations, visits and aftercare. A broad package name does not confirm that every item is needed or included. Ask for essential and optional procedures to be distinguished and priced in the written estimate.",
-        "paragraphs": [
-          "Bring a list of your priorities to the initial enquiry and ask what needs clinical confirmation. Check how additional treatment would be authorised if assessment changes the estimate. You can request time to consider alternatives. The treatment form starts a conversation with the coordination team and does not commit you to procedures or create a credit application."
-        ],
-        "links": [
-          {
-            "text": "Compare written treatment quotes",
-            "href": "/guides/compare-dental-quotes"
-          },
-          {
-            "text": "Review what affects treatment costs",
-            "href": "/prices"
-          }
-        ]
-      }
-    ],
+    "sections": smilePlanningSections,
     "faqs": [
       {
         "question": "Can a smile makeover involve fewer teeth than a package advertises?",
