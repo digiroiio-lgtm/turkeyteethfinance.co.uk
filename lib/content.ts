@@ -1,3 +1,4 @@
+import { implantPlanningSections } from "./implant-planning";
 import { veneerPlanningSections } from "./veneer-planning";
 import { quotePlanningSections } from "./quote-planning";
 import type { EvidenceId } from "./evidence";
@@ -203,84 +204,14 @@ export const pages: Record<string, PageContent> = {
     related: ["how-it-works", "prices", "finance-eligibility"],
   },
   "dental-implants-finance": {
-    "lastModified": "2026-10-21",
+    "lastModified": "2026-10-24",
     "title": "Dental Implants in Turkey: Visits & Care",
     "description": "Understand implant components, alternatives, healing visits and aftercare in Antalya. Request an itemised estimate for your missing teeth.",
     "label": "DENTAL IMPLANTS",
     "heading": "Dental implants in Turkey.",
     "accent": "A clearer way forward.",
     "intro": "Explore implant treatment in Antalya and understand the full journey before considering how to pay. Finance may be available to eligible UK patients.",
-    "sections": [
-      {
-        "title": "What replaces a missing tooth with an implant?",
-        "body": "An implant replaces a tooth root and supports a restoration such as a crown, bridge or denture. The implant fixture, connecting abutment and visible replacement tooth are different components. Ask the clinic to identify which components and treatment stages appear in your estimate.",
-        "paragraphs": [
-          "Replacing one tooth is different from supporting a full arch. A dentist needs to assess your gums, bone, remaining teeth and medical history before choosing an approach. An implant is not simply a crown inserted in one appointment. Keep the proposed restoration and number of missing teeth clear when comparing alternatives or reading a package description."
-        ],
-        "sources": [
-          "implants"
-        ]
-      },
-      {
-        "title": "How do implants compare with bridges and dentures?",
-        "body": "Implants, conventional bridges and removable dentures support replacement teeth in different ways. A conventional bridge uses neighbouring teeth for support, while a removable denture is taken out for care. The most appropriate option depends on the teeth, bone and your ability to maintain the restoration.",
-        "paragraphs": [
-          "Ask what would happen to adjacent teeth with each option and how maintenance would work at home. If most teeth in an arch are missing, discuss a full-arch plan rather than multiplying a single-implant estimate. Preserving a tooth that can be treated is a separate clinical question from replacing one that cannot be retained."
-        ],
-        "sources": [
-          "implants"
-        ],
-        "links": [
-          {
-            "text": "Understand full-arch implant treatment",
-            "href": "/all-on-4-finance"
-          }
-        ]
-      },
-      {
-        "title": "Why might implant treatment need separate visits?",
-        "body": "Assessment, possible bone grafting, implant placement and fitting the final restoration are separate parts of implant care. Healing can require a gap between appointments. Immediate temporary teeth are possible only in selected circumstances and are not a promise that final treatment is complete.",
-        "paragraphs": [
-          "Ask for the expected surgical and restorative visits in writing, including what you will wear while healing and when the team reassesses the plan. If grafting is proposed, ask whether it changes the order or number of visits. Keep your travel bookings tied to a confirmed clinical schedule rather than an advertised holiday duration."
-        ],
-        "sources": [
-          "stages"
-        ],
-        "links": [
-          {
-            "text": "Plan your Antalya visits",
-            "href": "/guides/plan-dental-visit-antalya"
-          }
-        ]
-      },
-      {
-        "title": "What risks and long-term responsibilities should I discuss?",
-        "body": "Implant surgery and the final restoration have risks and maintenance needs. The treating dentist should explain factors relevant to your health, smoking, gum condition and available bone, as well as possible surgical complications. A favourable general statistic cannot predict your result.",
-        "paragraphs": [
-          "Request written instructions for cleaning, professional reviews and reporting discomfort or a loose component. Keep a record of the implant system and the restorations fitted. Discuss how a concern raised from the UK will be assessed and who would meet any return-travel or remedial-care costs. A warranty and a biological outcome are different matters."
-        ],
-        "sources": [
-          "implants"
-        ]
-      },
-      {
-        "title": "What must an implant estimate itemise?",
-        "body": "An implant estimate should distinguish the fixture, abutment, final restoration and any temporary teeth. Confirm the implant system, scans, extractions, grafting if required, planned visits and aftercare arrangements. A headline per-implant figure does not necessarily cover a complete replacement tooth.",
-        "paragraphs": [
-          "Tell the coordination team which teeth are missing or broken and whether any implants are already present. Share existing records only if you choose to do so through the enquiry process. Ask for the payment schedule alongside the clinical stages and check what happens if assessment changes the plan. No diagnosis or guaranteed completion date can be established through an enquiry alone."
-        ],
-        "links": [
-          {
-            "text": "Compare complete written estimates",
-            "href": "/guides/compare-dental-quotes"
-          },
-          {
-            "text": "Request itemised treatment costs",
-            "href": "/prices"
-          }
-        ]
-      }
-    ],
+    "sections": implantPlanningSections,
     "faqs": [
       {
         "question": "Is the abutment included in a dental implant quote?",

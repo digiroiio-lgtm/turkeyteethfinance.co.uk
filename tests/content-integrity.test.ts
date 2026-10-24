@@ -37,6 +37,10 @@ test("treatment-specific answers have distinct questions, traceable sources and 
       }
       assert.match(text, /not separately purchasable veneer fees/);
       assert.match(text, /not independently audited Akdeniz Dental results/);
+    } else if (treatment.slug === "dental-implants-finance") {
+      assert.ok(text.includes(packagePrice(packageForId("osstem-4-crowns-24")!)));
+      assert.match(text, /not a price for one complete implant tooth/);
+      assert.match(text, /not audited Akdeniz Dental outcomes/);
     } else {
       assert.equal(/£\s?\d/.test(text), false);
     }

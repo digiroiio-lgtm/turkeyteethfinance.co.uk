@@ -1,5 +1,7 @@
 /** Public sources checked on 21 October 2026. No independent credential verification or clinical endorsement is implied. */
 export const evidence = {
+  implantFrench: { title: "French, Ofec and Levin (2021): cohort of 10,871 implants in 4,247 patients", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8359846/" },
+  implantOstman: { title: "Östman et al. (2024): prospective 20-year TiUnite implant follow-up", url: "https://pubmed.ncbi.nlm.nih.gov/38607359/" },
   ohfVeneers: { title: "Oral Health Foundation: veneers", url: "https://www.dentalhealth.org/veneers" },
   ohfTourismRisk: { title: "Oral Health Foundation: Karen Coates on dental treatment abroad, updated 7 July 2026", url: "https://www.dentalhealth.org/faqs/turkey-teeth-risk" },
   ohfCoates: { title: "Oral Health Foundation: Karen Coates, Oral Health Content Specialist", url: "https://www.dentalhealth.org/karen-coates-advisor" },
