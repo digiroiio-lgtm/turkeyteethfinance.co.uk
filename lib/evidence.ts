@@ -1,5 +1,6 @@
 /** Public sources checked on 21 October 2026. No independent credential verification or clinical endorsement is implied. */
 export const evidence = {
+  crownWaldecker: { title: "Waldecker et al. (2022): five-year prospective zirconia single-crown study", url: "https://www.jstage.jst.go.jp/article/jpr/66/2/66_JPR_D_21_00024/_article" },
   implantFrench: { title: "French, Ofec and Levin (2021): cohort of 10,871 implants in 4,247 patients", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8359846/" },
   implantOstman: { title: "Östman et al. (2024): prospective 20-year TiUnite implant follow-up", url: "https://pubmed.ncbi.nlm.nih.gov/38607359/" },
   ohfVeneers: { title: "Oral Health Foundation: veneers", url: "https://www.dentalhealth.org/veneers" },

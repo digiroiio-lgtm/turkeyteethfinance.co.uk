@@ -1,3 +1,4 @@
+import { crownPlanningSections } from "./crown-planning";
 import { implantPlanningSections } from "./implant-planning";
 import { veneerPlanningSections } from "./veneer-planning";
 import { quotePlanningSections } from "./quote-planning";
@@ -477,81 +478,14 @@ export const pages: Record<string, PageContent> = {
     "treatment": "Smile makeover"
   },
   "zirconia-crowns-finance": {
-    "lastModified": "2026-10-21",
+    "lastModified": "2026-10-24",
     "title": "Zirconia Crowns in Turkey: Planning",
     "description": "Understand zirconia crowns in Antalya: tooth preparation, alternatives, fit and aftercare. Ask for a tooth-by-tooth treatment plan and written estimate.",
     "label": "ZIRCONIA CROWNS",
     "heading": "Zirconia crowns in Turkey.",
     "accent": "Plan with confidence.",
     "intro": "Understand whether crowns are appropriate for your teeth, what preparation involves and how your treatment could be paid for.",
-    "sections": [
-      {
-        "title": "When might a dentist recommend a crown?",
-        "body": "A crown covers a tooth to restore its shape and function when appropriate. It may be considered for a weakened, damaged or heavily restored tooth. The reason for recommending a crown should be explained separately for each tooth, rather than assumed from a full-smile package.",
-        "paragraphs": [
-          "A crown on a natural tooth and a crown supported by an implant are different situations. Ask the dentist which applies to each item in your plan. Teeth that need restorative treatment should be distinguished from healthy teeth being considered for cosmetic changes. You can ask what would happen if you chose a smaller restoration or no cosmetic treatment."
-        ],
-        "sources": [
-          "crowns"
-        ]
-      },
-      {
-        "title": "How are zirconia crowns different from veneers?",
-        "body": "A crown covers the prepared tooth more fully; a veneer usually covers the front surface. Zirconia names a material, while crown and veneer describe the restoration. Ask for both the material and the restoration type, particularly when marketing uses the terms interchangeably.",
-        "paragraphs": [
-          "The comparison should start with the remaining tooth, existing fillings, bite and the change you want. A natural-looking finish also involves shape and shade, not simply choosing the whitest option. Ask whether whitening, bonding or a veneer could address your concern with a different amount of preparation. No material removes the need for appropriate treatment planning."
-        ],
-        "sources": [
-          "nhs"
-        ],
-        "links": [
-          {
-            "text": "Read about front-surface veneers",
-            "href": "/veneers-finance"
-          }
-        ]
-      },
-      {
-        "title": "What does preparing a tooth for a crown involve?",
-        "body": "Fitting a crown generally involves reshaping the tooth, taking a scan or impression and fitting a temporary restoration while the final one is made. Preparation removes tooth tissue and is not reversible. Ask how much healthy structure would remain and what risks apply to your tooth.",
-        "paragraphs": [
-          "Existing decay, a large filling or previous root canal treatment may alter the plan. Do not assume that every tooth needs root canal treatment, or that it can always be avoided. The dentist should explain any proposed additional procedure and its separate cost. A photograph cannot establish the condition of the nerve, roots or supporting tissues."
-        ],
-        "sources": [
-          "nhs"
-        ]
-      },
-      {
-        "title": "How should fit, bite and shade be checked?",
-        "body": "The final crown needs a clinical check for fit, bite and appearance before treatment is completed. Discuss how you will review the proposed shade and shape and when adjustments can be made. Reference photographs can help communicate preferences but cannot promise an identical result.",
-        "paragraphs": [
-          "Before leaving Antalya, obtain the material specification and a treatment summary. Ask how to report a crown that feels uncomfortable, and what review is recommended once you return home. Arrange the visit schedule with enough time for the checks the team recommends, rather than treating laboratory completion as the end of clinical care."
-        ],
-        "links": [
-          {
-            "text": "Plan the appointment schedule",
-            "href": "/guides/plan-dental-visit-antalya"
-          }
-        ]
-      },
-      {
-        "title": "What should a crown quote and aftercare plan show?",
-        "body": "A crown estimate should name the teeth, material and number of restorations, with temporary crowns and additional treatment clearly identified. Confirm the review arrangements and written warranty conditions, including exclusions and responsibility for travel. A warranty is not a promise that a crown will last a particular length of time.",
-        "paragraphs": [
-          "Ask how you should clean around the restorations and whether your bite or grinding affects maintenance. Keep the agreed specification and any revised treatment plan. Your next step is an itemised assessment of the teeth that concern you, not choosing a fixed number of crowns without a clinical reason for each one."
-        ],
-        "links": [
-          {
-            "text": "Compare the contents of your quote",
-            "href": "/guides/compare-dental-quotes"
-          },
-          {
-            "text": "Understand treatment cost inclusions",
-            "href": "/prices"
-          }
-        ]
-      }
-    ],
+    "sections": crownPlanningSections,
     "faqs": [
       {
         "question": "Does every tooth in a smile makeover need a crown?",
