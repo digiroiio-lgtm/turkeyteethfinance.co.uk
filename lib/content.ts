@@ -369,7 +369,7 @@ export const pages: Record<string, PageContent> = {
   },
   "smile-makeover-finance": {
     "lastModified": "2026-10-24",
-    "title": "Smile Makeover in Turkey: Personal Plans",
+    "title": "Smile Makeover Finance in Turkey",
     "description": "Plan a smile makeover in Antalya around your own teeth. Compare less invasive options, treatment stages, materials and individual quote details.",
     "label": "SMILE MAKEOVER",
     "heading": "Your smile makeover.",
@@ -445,7 +445,7 @@ export const pages: Record<string, PageContent> = {
   },
   "all-on-4-finance": {
     "lastModified": "2026-10-24",
-    "title": "All-on-4 in Turkey: Visits & Care",
+    "title": "All-on-4 Finance in Turkey: Visits & Care",
     "description": "Plan full-arch implant treatment in Antalya. Compare fixed and removable options, temporary and final teeth, visits and quote inclusions.",
     "label": "ALL-ON-4",
     "heading": "All-on-4 in Turkey.",
