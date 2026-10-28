@@ -157,7 +157,7 @@ export { treatments } from "./treatments";
 export const pages: Record<string, PageContent> = {
   "pay-monthly": {
     lastModified: "2026-10-21",
-    title: "Pay Monthly for Dental Treatment in Turkey",
+    title: "Turkey Dental Payment Plan: Pay Monthly",
     description:
       "Explore monthly payment options for dental treatment in Antalya. Get a personalised quote, understand treatment costs and check UK finance eligibility.",
     label: "PAY MONTHLY",
@@ -208,7 +208,7 @@ export const pages: Record<string, PageContent> = {
   },
   "dental-implants-finance": {
     "lastModified": "2026-10-24",
-    "title": "Dental Implants in Turkey: Visits & Care",
+    "title": "Dental Implants Finance in Turkey",
     "description": "Understand implant components, alternatives, healing visits and aftercare in Antalya. Request an itemised estimate for your missing teeth.",
     "label": "DENTAL IMPLANTS",
     "heading": "Dental implants in Turkey.",
@@ -246,7 +246,7 @@ export const pages: Record<string, PageContent> = {
   },
   "finance-eligibility": {
     lastModified: "2026-10-21",
-    title: "Dental Finance Eligibility UK | What to Check",
+    title: "Who Can Get Dental Finance for Turkey?",
     description:
       "Understand the UK finance eligibility questions to consider before applying for dental treatment finance. Decisions depend on affordability, status and lender criteria.",
     label: "FINANCE ELIGIBILITY",
@@ -293,7 +293,7 @@ export const pages: Record<string, PageContent> = {
   },
   "veneers-finance": {
     "lastModified": "2026-10-24",
-    "title": "Veneers in Turkey: Materials & Risks",
+    "title": "Veneers Finance in Turkey: Planning",
     "description": "Compare veneers, bonding and crowns for treatment in Antalya. Understand preparation, maintenance, appointment planning and an itemised written estimate.",
     "label": "VENEERS",
     "heading": "Veneers in Turkey.",
@@ -331,7 +331,7 @@ export const pages: Record<string, PageContent> = {
   },
   "prices": {
     "lastModified": "2026-10-21",
-    "title": "Dental Treatment Packages & Prices in Turkey",
+    "title": "Dental Packages & Prices in Turkey",
     "description": "Compare confirmed dental treatment packages in Antalya with hotel accommodation and transfers. Request a personalised written quote subject to clinical assessment.",
     "label": "PRICES & PAYMENT OPTIONS",
     "heading": "Dental treatment prices.",
@@ -407,7 +407,7 @@ export const pages: Record<string, PageContent> = {
   },
   "zirconia-crowns-finance": {
     "lastModified": "2026-10-24",
-    "title": "Zirconia Crowns in Turkey: Planning",
+    "title": "Zirconia Crowns Finance in Turkey",
     "description": "Understand zirconia crowns in Antalya: tooth preparation, alternatives, fit and aftercare. Ask for a tooth-by-tooth treatment plan and written estimate.",
     "label": "ZIRCONIA CROWNS",
     "heading": "Zirconia crowns in Turkey.",
@@ -483,7 +483,7 @@ export const pages: Record<string, PageContent> = {
   },
   "before-and-after": {
     "lastModified": "2026-10-21",
-    "title": "Dental Treatment Before and After Turkey",
+    "title": "Turkey Teeth Before & After: What to Know",
     "description": "Understand how to review dental before-and-after photographs, compare relevant treatment cases and set realistic expectations for dental care in Antalya.",
     "label": "PATIENT RESULTS",
     "heading": "Before & after.",
@@ -568,7 +568,7 @@ export const pages: Record<string, PageContent> = {
   },
   "reviews": {
     "lastModified": "2026-10-21",
-    "title": "Dental Treatment Turkey Patient Reviews",
+    "title": "Akdeniz Dental Reviews: What to Check",
     "description": "Learn what to look for in independent dental patient reviews: verified sources, treatment context, follow-up and a realistic picture of care in Turkey.",
     "label": "PATIENT EXPERIENCES",
     "heading": "Patient experiences.",
@@ -675,7 +675,7 @@ export const pages: Record<string, PageContent> = {
   },
   "our-clinic": {
     "lastModified": "2026-10-22",
-    "title": "Dental Clinic Antalya Turkey | Akdeniz Dental",
+    "title": "Akdeniz Dental Clinic in Antalya",
     "description": "Learn about treatment coordination with Akdeniz Dental in Antalya. Understand the role of the clinical team, questions to ask and your aftercare arrangements.",
     "label": "OUR CLINIC",
     "heading": "Dental care in Antalya.",
@@ -713,7 +713,7 @@ export const pages: Record<string, PageContent> = {
   },
   "finance-faq": {
     lastModified: "2026-10-24",
-    title: "Dental Finance Turkey FAQs | UK Patient Questions",
+    title: "Turkey Dental Finance FAQs for UK Patients",
     description:
       "Answers about dental finance, treatment estimates, credit applications, payments and planning dental care in Antalya for UK patients.",
     label: "YOUR QUESTIONS",
@@ -776,7 +776,7 @@ export const pages: Record<string, PageContent> = {
   },
   guides: {
     lastModified: "2026-10-22",
-    title: "Dental Finance and Treatment Guides | Turkey",
+    title: "Turkey Dental Treatment & Finance Guides",
     description:
       "Practical guides for UK patients considering dental care in Turkey: comparing quotes, preparing for treatment, reviewing finance and planning aftercare.",
     label: "PATIENT GUIDES",
