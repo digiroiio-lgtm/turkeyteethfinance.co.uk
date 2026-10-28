@@ -65,7 +65,7 @@ test("treatment-specific answers have distinct questions, traceable sources and 
 });
 
 test("standalone guides share canonical registry, original article text and full LLM export without invented clinical review", () => {
-  assert.equal(standaloneGuides.length, 2);
+  assert.equal(standaloneGuides.length, 3);
   const full = llmsFull();
   for (const guide of standaloneGuides) {
     assert.ok(publicPages().some(page => page.path === guide.path));

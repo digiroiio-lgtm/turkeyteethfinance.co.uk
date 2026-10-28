@@ -100,6 +100,53 @@ export const guideArticles: PatientGuide[] = [
     related: ["dental-implants-finance", "our-clinic", "get-a-quote"],
   },
   {
+    id: "finance-abroad-uk", path: "/guides/dental-finance-for-treatment-abroad-uk",
+    title: "Dental finance for treatment abroad: what UK patients should compare",
+    category: "PAYMENT OPTIONS",
+    summary: "How to compare ways to pay for dental treatment abroad: APR, fees, term and total repayable.",
+    description: "What UK patients should compare when choosing how to pay for dental treatment abroad: personal loans, dental finance, credit cards and saving, with the questions to ask each lender.",
+    lastModified: "2026-10-28",
+    paragraphs: ["There is no single best way to pay for dental treatment abroad. The right choice depends on how much you need, how quickly you want to repay and what you can comfortably afford. Establish the treatment cost in writing first, then compare the full cost of each payment route using the provider’s own documents rather than headline figures."],
+    sections: [
+      {
+        title: "What are the main ways to pay for treatment abroad from the UK?",
+        body: "UK patients commonly choose between paying from savings, using a personal loan, using dental or treatment finance arranged through a credit broker, or using a credit card. Each has different costs, protections and approval requirements, and none is right for everyone.",
+        paragraphs: ["Paying from savings avoids borrowing costs altogether but may not suit a larger plan. A personal loan or broker-arranged finance spreads the cost into fixed monthly payments, with the lender deciding on your application. A credit card may offer different consumer protections but can become expensive if the balance is not cleared quickly. Read the terms for any product you consider, and speak to an impartial source such as MoneyHelper if you are unsure which suits your circumstances."],
+        sources: ["personalLoans"], links: [{ text: "See how monthly payment planning works", href: "/pay-monthly" }],
+      },
+      {
+        title: "What should I compare between finance options?",
+        body: "Compare the APR, the repayment term, the amount of each payment, any arrangement or late fees and the total amount repayable. The cheapest monthly payment is not necessarily the lowest overall cost, because a longer term usually means more interest paid in total.",
+        paragraphs: ["Ask each lender for a written quotation based on your own circumstances, because the rate you are offered may differ from any representative example. Check whether you can repay early and whether doing so carries a charge. Read what happens if you miss a payment and who to contact if your circumstances change. Do not borrow more than the confirmed treatment cost, and keep travel and accommodation budgets separate from the amount you finance."],
+        sources: ["personalLoans"], links: [{ text: "Questions to ask about eligibility", href: "/finance-eligibility" }],
+      },
+      {
+        title: "How does a credit broker differ from a lender?",
+        body: "A credit broker introduces you to lenders and explains the application process, but it does not lend the money. The credit agreement is with the lender, and the lender makes the decision. A broker such as Ideal4Finance should tell you clearly which lender you are applying to and what the terms are.",
+        paragraphs: ["Ask the broker whether it works with a panel of lenders, whether any fee or commission applies and whether making an application involves a credit search. Check the broker’s regulatory status on the Financial Conduct Authority Register yourself. A treatment enquiry with a clinic or coordination company is separate from any credit application and does not commit you to borrowing."],
+        sources: ["broker"], links: [{ text: "Is Turkey Teeth Finance legit?", href: "/is-turkey-teeth-finance-legit" }],
+      },
+      {
+        title: "Should I arrange finance before or after the treatment plan?",
+        body: "Arrange finance after you have a written treatment plan and cost, not before. The dental estimate tells you how much you need, and the treating dentist may revise the plan after assessing you in person. Applying early risks borrowing against a figure that later changes.",
+        paragraphs: ["Ask the clinic to confirm which stages are included, when payments fall due and what happens to any deposit if the plan changes. A finance offer does not confirm that treatment is clinically suitable, and you are free to decline the plan after your assessment. Keep the clinic’s written terms and the lender’s agreement together so you can check them against each other."],
+        links: [{ text: "Compare your dental quotes first", href: "/guides/compare-dental-quotes" }, { text: "Check packages and prices", href: "/prices" }],
+      },
+      {
+        title: "What are the risks of borrowing for treatment abroad?",
+        body: "You remain responsible for repaying the loan even if you are unhappy with the treatment or need further work. Extra visits, flights or remedial care are costs that finance may not cover. Treatment abroad also involves clinical risks that you should discuss with your usual dentist before you decide.",
+        paragraphs: ["Think about what you would do if your income fell or if the treatment needed more time or cost than planned. Check whether your travel insurance covers planned dental treatment, because ordinary holiday cover often does not. The General Dental Council and the NHS publish balanced guidance on having dental care overseas, and it is worth reading before you commit to any payment route."],
+        sources: ["gdc", "nhsTravel"],
+      },
+    ],
+    faqs: [
+      { question: "What is the best dental finance option in the UK for treatment abroad?", answer: "There is no single best option. Compare APR, fees, term and total repayable from each provider’s own quotation, and choose the route you can comfortably afford. Paying from savings avoids borrowing costs entirely." },
+      { question: "Does asking for a treatment quote affect my credit file?", answer: "A treatment enquiry is not a credit application. The broker and lender explain any credit checks when you choose to apply through their separate process." },
+      { question: "Is a lower monthly payment always better?", answer: "No. A longer term lowers each payment but usually increases the total interest paid. Compare the total amount repayable as well as the monthly figure." },
+    ],
+    related: ["pay-monthly", "dental-finance", "finance-eligibility"],
+  },
+  {
     id: "understand-finance", title: "Questions to ask before choosing finance",
     category: "PAYMENT OPTIONS", summary: "APR, fees, repayment terms and the full borrowing cost.",
     lastModified: "2026-10-22", sections: [], faqs: [], related: [],
