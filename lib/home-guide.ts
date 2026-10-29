@@ -22,7 +22,7 @@ export type GuideSection = {
 };
 export const homeGuide = {
   title: "Dental treatment and finance in Turkey: a UK patient planning guide",
-  updatedLabel: "22 October 2026",
+  updatedLabel: new Date(homeContent.lastModified + "T00:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }),
   author: COMPANY + " patient coordination team",
 };
 export const homeGuideSources: GuideSource[] = [

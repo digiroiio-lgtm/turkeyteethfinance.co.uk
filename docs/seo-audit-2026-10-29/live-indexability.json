@@ -1,0 +1,282 @@
+{
+  "base": "https://turkeyteethfinance.co.uk",
+  "canonical": "https://turkeyteethfinance.co.uk",
+  "mode": "production",
+  "checked_at": "2026-10-29T07:09:02.395042+00:00",
+  "sitemap_url_count": 22,
+  "errors": [],
+  "robots": {
+    "status": 200,
+    "content_type": "text/plain; charset=utf-8",
+    "x_robots_tag": "",
+    "text": "User-Agent: *\nAllow: /\nDisallow: /api/\n\nHost: https://turkeyteethfinance.co.uk\nSitemap: https://turkeyteethfinance.co.uk/sitemap.xml\n"
+  },
+  "homepage": {
+    "status": 200,
+    "x_robots_tag": "",
+    "html_robots": [
+      "index, follow"
+    ],
+    "canonical": [
+      "https://turkeyteethfinance.co.uk"
+    ]
+  },
+  "sitemap": {
+    "status": 200,
+    "content_type": "application/xml",
+    "x_robots_tag": ""
+  },
+  "pages": [
+    {
+      "url": "https://turkeyteethfinance.co.uk",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/pay-monthly",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/pay-monthly"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/dental-finance",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/dental-finance"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/get-a-quote",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/get-a-quote"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/dental-implants-finance",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/dental-implants-finance"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/finance-eligibility",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/finance-eligibility"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/veneers-finance",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/veneers-finance"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/prices",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/prices"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/smile-makeover-finance",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/smile-makeover-finance"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/zirconia-crowns-finance",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/zirconia-crowns-finance"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/all-on-4-finance",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/all-on-4-finance"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/before-and-after",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/before-and-after"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/reviews",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/reviews"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/how-it-works",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/how-it-works"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/our-clinic",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/our-clinic"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/finance-faq",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/finance-faq"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/contact",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/contact"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/guides",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/guides"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/guides/compare-dental-quotes",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/guides/compare-dental-quotes"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/guides/plan-dental-visit-antalya",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/guides/plan-dental-visit-antalya"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/privacy",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/privacy"
+      ]
+    },
+    {
+      "url": "https://turkeyteethfinance.co.uk/terms",
+      "status": 200,
+      "html_robots": [
+        "index, follow"
+      ],
+      "x_robots_tag": "",
+      "canonical": [
+        "https://turkeyteethfinance.co.uk/terms"
+      ]
+    }
+  ],
+  "www_redirect": {
+    "status": 308,
+    "location": "https://turkeyteethfinance.co.uk/prices?seo-check=1"
+  },
+  "llms": {
+    "index_status": 200,
+    "full_status": 200
+  },
+  "valid": true
+}

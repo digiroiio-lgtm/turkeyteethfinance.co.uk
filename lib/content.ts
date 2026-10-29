@@ -14,13 +14,13 @@ import { financeFaqSections } from "./finance-faq-planning";
 import { legitSections, legitFaqs } from "./legit-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
-  lastModified: "2026-10-22",
-  title: "Dental Finance Turkey: Flexible Payments",
+  lastModified: "2026-10-29",
+  title: "Turkey Teeth Finance: UK Patient Planning",
   description:
-    "Explore dental treatment in Antalya with flexible payment options for eligible UK patients. Start with a free written treatment estimate, no phone call needed.",
+    "Plan dental treatment in Turkey with package prices, quote checklists and payment questions for UK patients. A treatment enquiry is not a credit application.",
   label: "DENTAL TREATMENT IN TURKEY",
-  heading: "Your new smile in Turkey.",
-  accent: "Flexible payment options.",
+  heading: "Turkey teeth finance.",
+  accent: "Plan your treatment.",
   intro:
     "Quality dental treatment in Antalya with finance options for eligible UK patients, subject to status and lender approval.",
   answer:
@@ -176,13 +176,13 @@ export { treatments } from "./treatments";
 
 export const pages: Record<string, PageContent> = {
   "pay-monthly": {
-    lastModified: "2026-10-21",
-    title: "Pay Monthly for Turkey Teeth from the UK",
+    lastModified: "2026-10-29",
+    title: "Turkey Dental Payment Plans: UK Patient Guide",
     description:
-      "Explore monthly payment plans for dental implants and veneers in Antalya for UK patients. Get a written quote first, then compare finance subject to status.",
+      "Understand dental payment plans for Turkey: compare quotes, payment dates, travel costs and questions to ask before a separate finance application.",
     label: "PAY MONTHLY",
-    heading: "Same smile.",
-    accent: "More possibilities.",
+    heading: "Turkey dental payment plans.",
+    accent: "Know what to ask.",
     kind: "monthly",
     intro:
       "Explore dental treatment in Antalya with flexible monthly payment options for eligible UK patients, subject to status and lender approval.",
@@ -227,7 +227,7 @@ export const pages: Record<string, PageContent> = {
     related: ["how-it-works", "prices", "finance-eligibility"],
   },
   "dental-implants-finance": {
-    "lastModified": "2026-10-24",
+    "lastModified": "2026-10-29",
     "title": "Dental Implants Finance in Turkey",
     "description": "Understand implant components, alternatives, healing visits and aftercare in Antalya. Request an itemised estimate for your missing teeth.",
     "label": "DENTAL IMPLANTS",
@@ -313,7 +313,7 @@ export const pages: Record<string, PageContent> = {
     related: ["dental-finance", "pay-monthly", "finance-faq"],
   },
   "veneers-finance": {
-    "lastModified": "2026-10-24",
+    "lastModified": "2026-10-29",
     "title": "Veneers Finance in Turkey: Planning",
     "description": "Compare veneers, bonding and crowns for treatment in Antalya. Understand preparation, maintenance, appointment planning and an itemised written estimate.",
     "label": "VENEERS",
@@ -389,7 +389,7 @@ export const pages: Record<string, PageContent> = {
     ]
   },
   "smile-makeover-finance": {
-    "lastModified": "2026-10-24",
+    "lastModified": "2026-10-29",
     "title": "Smile Makeover Finance in Turkey",
     "description": "Plan a smile makeover in Antalya around your own teeth. Compare less invasive options, treatment stages, materials and individual quote details.",
     "label": "SMILE MAKEOVER",
@@ -427,7 +427,7 @@ export const pages: Record<string, PageContent> = {
     "treatment": "Smile makeover"
   },
   "zirconia-crowns-finance": {
-    "lastModified": "2026-10-24",
+    "lastModified": "2026-10-29",
     "title": "Zirconia Crowns Finance in Turkey",
     "description": "Understand zirconia crowns in Antalya: tooth preparation, alternatives, fit and aftercare. Ask for a tooth-by-tooth treatment plan and written estimate.",
     "label": "ZIRCONIA CROWNS",
@@ -465,7 +465,7 @@ export const pages: Record<string, PageContent> = {
     "treatment": "Zirconia crowns"
   },
   "all-on-4-finance": {
-    "lastModified": "2026-10-24",
+    "lastModified": "2026-10-29",
     "title": "All-on-4 Finance in Turkey: Visits & Care",
     "description": "Plan full-arch implant treatment in Antalya. Compare fixed and removable options, temporary and final teeth, visits and quote inclusions.",
     "label": "ALL-ON-4",
