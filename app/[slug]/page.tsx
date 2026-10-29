@@ -34,6 +34,8 @@ import {
 } from "@/components/sections";
 import { ContentAttribution, EditorialSections, ClinicEvidence, PatientEvidence } from "@/components/editorial";
 import { monthlyPlanning } from "@/lib/monthly-planning";
+import { financeAnswer } from "@/lib/price-planning";
+import { FinanceAnswer } from "@/components/finance-answer";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return routeSlugs.map((slug) => ({ slug }));
@@ -50,6 +52,16 @@ export async function generateMetadata({
 }
 const packagesForTreatment = (treatment?: string) =>
   treatmentPackages.filter((item) => item.treatment === treatment);
+const instalmentSection: Record<string, { heading: string; text: string }> = {
+  "Veneers": {
+    heading: "Can I pay for veneers in instalments?",
+    text: "Possibly, but spreading the cost is a separate credit decision, not part of the veneer package. Finance is arranged through a credit broker such as Ideal4Finance, which is a broker and not a lender, and the lender decides on your application subject to status. Get the 16- or 20-veneer estimate in writing first, ask when treatment payments fall due, then compare the APR, term, fees and total amount repayable in the lender’s own documents.",
+  },
+  "Dental implants": {
+    heading: "Can I pay for dental implants abroad in instalments?",
+    text: "Possibly, but spreading the cost is a separate credit decision, not part of the implant package. The confirmed package spans two visits (3 + 5 nights), so ask in writing which payments fall due at each stage. Finance is arranged through a credit broker such as Ideal4Finance, which is a broker and not a lender; the lender decides subject to status, and you should compare the APR, term, fees and total amount repayable before applying.",
+  },
+};
 const packageScopeNote: Record<string, string> = {
   "Veneers": "These are set-number packages, not a fee per veneer, so ask which teeth are included and whether any need crowns or other preparation instead.",
   "Dental implants": "The package combines four implants with 24 crowns. It is not a price for one implant tooth or for a full-arch plan, so ask which implants and crowns are specified for your mouth.",
@@ -93,6 +105,11 @@ export default async function ContentPage({
       <ContentAttribution date={p.lastModified} />
       {p.kind === "monthly" && (
         <>
+          <section className="section" aria-label="Short answer">
+            <div className="container narrow">
+              <p className="answer-first"><strong>{monthlyPlanning.answer}</strong></p>
+            </div>
+          </section>
           <TrustStrip />
           <BudgetExplorer />
           <article className="section guide-article" id="monthly-planning-guide" aria-label={monthlyPlanning.title}>
@@ -120,10 +137,21 @@ export default async function ContentPage({
         </section>
       )}
       {p.kind === "eligibility" && <EligibilityPanel />}
-      {p.kind === "prices" && <><TreatmentPackages /><CostTable /></>}
+      {p.kind === "prices" && (
+        <>
+          <section className="section" aria-label="Package price and finance">
+            <div className="container narrow">
+              <p className="answer-first"><strong>{financeAnswer}</strong></p>
+            </div>
+          </section>
+          <TreatmentPackages />
+          <CostTable />
+        </>
+      )}
       {(p.kind === "results" || p.kind === "reviews") && <PatientEvidence kind={p.kind} />}
       {p.kind === "clinic" && <><CarePanel answerIntro /><ClinicEvidence /></>}
       {p.kind === "guides" && <Guides />}
+      {slug === "dental-finance" && <FinanceAnswer />}
       {p.kind !== "monthly" && p.sections.length > 0 && (
         <section className="section editorial-section">
           <div className={(p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance" || slug === "smile-makeover-finance") ? "container narrow" : "container"}><EditorialSections sections={p.sections} article={p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance" || slug === "smile-makeover-finance"} /></div>
@@ -167,6 +195,15 @@ export default async function ContentPage({
               <li><Link href="/dental-finance">Read the UK patient dental finance guide</Link></li>
               <li><Link href="/guides/compare-dental-quotes">Check what your written quote includes</Link></li>
             </ul>
+          </div>
+        </section>
+      )}
+      {p.treatment && instalmentSection[p.treatment] && (
+        <section className="section" aria-labelledby="treatment-instalments">
+          <div className="container narrow">
+            <h2 id="treatment-instalments">{instalmentSection[p.treatment].heading}</h2>
+            <p>{instalmentSection[p.treatment].text}</p>
+            <p><Link href="/pay-monthly">Read the payment planning guide</Link> · <Link href="/prices">Compare package prices</Link></p>
           </div>
         </section>
       )}

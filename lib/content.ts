@@ -194,7 +194,7 @@ export const pages: Record<string, PageContent> = {
     lastModified: "2026-10-22",
     title: "Dental Finance in Turkey for UK Patients",
     description:
-      "Understand the difference between your dental treatment quote and a credit application. Explore finance for UK patients planning dental care in Turkey.",
+      "Can UK residents get finance for dental treatment in Turkey? A conditional answer, a payment-route comparison and how a treatment quote differs from a credit application.",
     label: "DENTAL FINANCE",
     heading: "Dental finance in Turkey.",
     accent: "Explore your options.",

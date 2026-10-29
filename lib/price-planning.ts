@@ -15,6 +15,9 @@ const implant = pack("osstem-4-crowns-24");
 const money = (value: number) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(value);
 const percent = (value: number) => `${Number(value.toFixed(1))}%`;
 
+export const financeAnswer =
+  "A package price covers the agreed treatment and inclusions. It is not the amount you would borrow: if you use finance, the lender’s documents separately set out the APR, term, fees and total amount repayable. A package price does not promise a repayment amount, an interest rate or acceptance.";
+
 export const pricePlanningSections: Section[] = [
   {
     title: "How can I get a reliable treatment price?",

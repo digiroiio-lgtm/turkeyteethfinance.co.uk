@@ -1650,7 +1650,7 @@ select:focus-visible {
   margin-top: 6px;
   background: #fdfdfd;
   color: var(--navy);
-  font-size: 13px;
+  font-size: 16px;
 }
 .form-fields textarea {
   resize: vertical;

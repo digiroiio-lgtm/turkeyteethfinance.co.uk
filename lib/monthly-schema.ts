@@ -5,7 +5,7 @@ import { evidence } from "./evidence";
 import { COMPANY, SITE_URL, canonicalUrl } from "./site";
 
 export function monthlyPlanningText(): string {
-  return [monthlyPlanning.intro, ...pages["pay-monthly"].sections.flatMap((section: Section) => [
+  return [monthlyPlanning.answer, monthlyPlanning.intro, ...pages["pay-monthly"].sections.flatMap((section: Section) => [
     section.title, section.body, ...(section.paragraphs || []), ...(section.bullets || []),
     ...(section.quotes || []).flatMap(quote => [quote.text, `${quote.name}, ${quote.role}. Statement published ${quote.attributionDate}.`]),
   ])].join("\n\n");

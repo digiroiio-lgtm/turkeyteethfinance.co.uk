@@ -3,6 +3,7 @@ import type { Section } from "./content";
 /** Editorial planning information, not lender terms or a clinic price list. */
 export const monthlyPlanning = {
   title: "Planning dental treatment and monthly payments in Turkey",
+  answer: "Paying monthly or in instalments for dental treatment in Turkey is a separate credit decision from your treatment estimate. Any finance is arranged through a credit broker such as Ideal4Finance, which is a broker and not a lender, and the lender decides on your application subject to status. Start with a written estimate, then compare the APR, term, fees and total amount repayable in the lender’s own documents.",
   intro: "Start with a written treatment estimate, a realistic travel budget and a separate decision about how to pay. This guide helps UK patients organise those decisions before booking dental care in Antalya. It explains what to ask and record, without supplying clinic prices, repayment examples or a promise of credit.",
   sections: [
     {
@@ -16,7 +17,7 @@ export const monthlyPlanning = {
       links: [{ text: "Compare the scope of written dental quotes", href: "/guides/compare-dental-quotes" }],
     },
     {
-      title: "How is a treatment quote different from a finance offer?",
+      title: "Can I pay in instalments, and how is a treatment quote different from a finance offer?",
       body: "You can then review available finance options through Ideal4Finance. It is a credit broker, not a lender. Compare the APR, term, fees and total amount repayable before deciding whether an offer suits your budget. A treatment estimate describes dental care; it does not set the terms of a credit agreement.",
       paragraphs: [
         "Organise the information into separate records: the proposed care and its cost, your travel arrangements, and any lender documents you receive. This makes it easier to see which organisation should answer a question. A change to an appointment or restoration belongs with the clinic; a question about the wording of a credit offer belongs with the broker or lender.",
