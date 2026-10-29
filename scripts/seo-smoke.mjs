@@ -104,9 +104,20 @@ try {
     }
   }
   const registry = new Set(publicPages().map(page => page.path));
+  const renderedPages = new Map();
+  const titles = new Map();
+  const descriptions = new Map();
   for (const entry of publicPages()) {
     const response = await fetch(`http://127.0.0.1:${port}${entry.path}`, { headers });
     const document = new JSDOM(await response.text()).window.document;
+    renderedPages.set(entry.path, document);
+    const title = document.title.trim();
+    const descriptionNodes = [...document.querySelectorAll('meta[name="description"]')];
+    const description = descriptionNodes[0]?.content.trim();
+    if (!title || document.querySelectorAll("title").length !== 1 || !description || descriptionNodes.length !== 1) throw new Error("Missing or repeated metadata: " + entry.path);
+    if (titles.has(title)) throw new Error("Duplicate title: " + entry.path + " and " + titles.get(title));
+    if (descriptions.has(description)) throw new Error("Duplicate description: " + entry.path + " and " + descriptions.get(description));
+    titles.set(title, entry.path); descriptions.set(description, entry.path);
     const schemas = [...document.head.querySelectorAll('script[type="application/ld+json"]')].flatMap(script => {
       const data = JSON.parse(script.textContent); return data["@graph"] || [data];
     });
@@ -154,6 +165,16 @@ try {
       if (article.length !== 1 || article[0].articleBody !== guideText(guide)) throw new Error("Guide Article differs from its source: " + entry.path);
       if (document.querySelector('main script[type="application/ld+json"]')) throw new Error("Guide schema must be in head.");
       for (const section of guide.sections) if (!document.querySelector("main").textContent.includes(section.body)) throw new Error("Missing SSR guide answer: " + section.title);
+    }
+  }
+  // Validate navigation/footer links and fragment destinations as well as editorial links.
+  for (const [path, document] of renderedPages) {
+    for (const anchor of document.querySelectorAll("a[href]")) {
+      const destination = new URL(anchor.getAttribute("href"), canonicalUrl(path) + (path === "/" ? "/" : ""));
+      if (destination.origin !== SITE_URL) continue;
+      const target = renderedPages.get(destination.pathname || "/");
+      if (!target) throw new Error("Unregistered internal page from " + path + ": " + destination.href);
+      if (destination.hash && !target.getElementById(decodeURIComponent(destination.hash.slice(1)))) throw new Error("Broken internal fragment from " + path + ": " + destination.href);
     }
   }
   const missing = await fetch(`http://127.0.0.1:${port}/not-a-public-page-aeo-check`, { headers });

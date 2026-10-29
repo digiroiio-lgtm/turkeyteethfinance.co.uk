@@ -66,11 +66,11 @@ function request(
 }
 
 test("each brief route has distinct metadata and working related links", () => {
-  assert.equal(canonicalPaths.length, Object.keys(pages).length + 3);
-  assert.equal(new Set(Object.values(pages).map((p) => p.title)).size, 17);
+  assert.equal(canonicalPaths.length, Object.keys(pages).length + 4);
+  assert.equal(new Set(Object.values(pages).map((p) => p.title)).size, 18);
   assert.equal(
     new Set(Object.values(pages).map((p) => p.description)).size,
-    17,
+    18,
   );
   for (const p of Object.values(pages))
     for (const related of p.related) assert.ok(pages[related]);

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, ArrowRight } from "lucide-react";
 import { pages } from "@/lib/content";
+import { packagePrice, treatmentPackages } from "@/lib/packages";
 import {
   routeSlugs,
   financeApplicationUrl,
@@ -47,6 +48,14 @@ export async function generateMetadata({
   if (!p) return {};
   return pageMetadata(p.title, p.description, `/${slug}`);
 }
+const packagesForTreatment = (treatment?: string) =>
+  treatmentPackages.filter((item) => item.treatment === treatment);
+const packageScopeNote: Record<string, string> = {
+  "Veneers": "These are set-number packages, not a fee per veneer, so ask which teeth are included and whether any need crowns or other preparation instead.",
+  "Dental implants": "The package combines four implants with 24 crowns. It is not a price for one implant tooth or for a full-arch plan, so ask which implants and crowns are specified for your mouth.",
+  "Zirconia crowns": "These are set-number packages, not a standalone fee per crown, so ask which teeth are included and what preparation they need.",
+};
+
 export default async function ContentPage({
   params,
 }: {
@@ -139,6 +148,25 @@ export default async function ContentPage({
                 Apply for finance with Ideal4Finance <ArrowRight size={16} />
               </a>
             )}
+          </div>
+        </section>
+      )}
+      {p.treatment && (
+        <section className="section" aria-labelledby="treatment-payment-planning">
+          <div className="container narrow">
+            <h2 id="treatment-payment-planning">Plan the cost of {p.treatment.toLowerCase()} in Turkey</h2>
+            {packagesForTreatment(p.treatment).length > 0 && (
+              <p>
+                Owner-confirmed packages for this treatment: {packagesForTreatment(p.treatment).map((item) => `${item.name} at ${packagePrice(item)} (${item.stay})`).join("; ")}. {packageScopeNote[p.treatment]}
+              </p>
+            )}
+            <p>Keep your treatment estimate and any credit agreement separate. Ask for the procedures, materials, visits and payment dates in writing, then include travel and follow-up costs in your budget. A treatment enquiry does not establish eligibility for credit.</p>
+            <ul className="context-links">
+              <li><Link href="/prices">Compare dental package prices and inclusions</Link></li>
+              <li><Link href="/pay-monthly">Understand Turkey dental payment plans</Link></li>
+              <li><Link href="/dental-finance">Read the UK patient dental finance guide</Link></li>
+              <li><Link href="/guides/compare-dental-quotes">Check what your written quote includes</Link></li>
+            </ul>
           </div>
         </section>
       )}

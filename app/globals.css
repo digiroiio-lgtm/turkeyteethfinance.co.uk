@@ -3382,3 +3382,5 @@ select:focus-visible {
 .cookie-banner h2{font-size:19px;margin:0 0 8px}.cookie-banner p{font-size:13px;line-height:1.6;margin:0}.cookie-banner a{color:#594378;text-decoration:underline}.cookie-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.cookie-actions button{background:#f5f2fa;border:1px solid #84719f;border-radius:8px;color:#402e5b;padding:10px 16px;font-size:13px;font-weight:650;cursor:pointer}.cookie-actions button:hover{background:#e8e0f3}
 @media(max-width:1000px){.package-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.package-grid{grid-template-columns:minmax(0,1fr);gap:26px}.package-card{padding:28px 23px}.cookie-banner{left:10px;bottom:10px;width:calc(100% - 80px);padding:17px;max-height:calc(100dvh - 25px)}.cookie-actions button{flex:1;padding:10px}.package-price{font-size:38px}}
+
+.package-facts{margin:12px 0;display:grid;gap:8px;font-size:14px}.package-facts div{display:grid;gap:2px}.package-facts dt{font-weight:600}.package-facts dd{margin:0}
