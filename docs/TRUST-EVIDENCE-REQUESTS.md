@@ -5,7 +5,7 @@ AI answers and Google both favour pages that cite verifiable third parties. None
 | # | Evidence | Who supplies | Where it plugs in | Status |
 |---|---|---|---|---|
 | 1 | Verified legal identity of the treating clinic and the UK coordination company (registered names, numbers, addresses) | Owner / clinic | `lib/evidence.ts` `clinicProfile`, `/our-clinic`, `/is-turkey-teeth-finance-legit` | Needed |
-| 2 | Named clinicians and their current professional registrations | Clinic | `lib/clinic-planning.ts`, `/our-clinic` | Needed |
+| 2 | Current professional registrations of the clinicians (names, roles and education are already in `clinicProfile`: Dr. Mustafa Akça, Dr. Mehmet Onur Merey, Dr. Duygu Kolay Toklu, checked 22 Oct 2026) | Clinic | `lib/evidence.ts`, `lib/clinic-planning.ts`, `/our-clinic` | Names present; registrations still needed |
 | 3 | One anonymised, real itemised quote (patient consent and redaction confirmed) | Owner / clinic | `/prices` or `/guides/compare-dental-quotes` | Needed |
 | 4 | Written aftercare, warranty and complaint responsibilities | Clinic | `/our-clinic`, `/prices` | Needed |
 | 5 | A link from the clinic's own site to the matching page (`/prices`, `/veneers-finance`, `/dental-implants-finance`) | Clinic | Off-site | Needed |
