@@ -114,3 +114,32 @@ export const dentalFinanceSections: Section[] = [
     links: [{ text: "Ask for a written treatment estimate", href: "/get-a-quote" }, { text: "Read existing finance questions and answers", href: "/finance-faq" }],
   },
 ];
+
+export const ukFinanceQuestion = "Can I get finance for dental treatment in Turkey if I live in the UK?";
+export const ukFinanceAnswer =
+  "Possibly. UK residents can explore third-party finance for treatment in Antalya through a credit broker, but the lender decides on residency, income, affordability and credit circumstances, so approval is never guaranteed. A treatment enquiry is not a credit application, and you can request a written estimate first.";
+export const financeRoutesIntro =
+  "These are the payment routes this site describes. They differ in who provides the money, who makes the decision and when payments happen. Use the table to see what to check before choosing, then read the clinic’s or lender’s own documents for the terms that apply to you.";
+export const financeRoutes = [
+  {
+    route: "Pay the clinic without credit",
+    provider: "The treating clinic, Akdeniz Dental",
+    decision: "No credit decision. The clinic’s written terms apply",
+    timing: "According to the payment schedule in your written quote",
+    check: "Inclusions, refund and cancellation terms, accepted payment methods",
+  },
+  {
+    route: "Finance through the broker",
+    provider: "A lender introduced by Ideal4Finance, which is a credit broker and not a lender",
+    decision: "The lender, subject to status and affordability",
+    timing: "Under the broker’s customer process a successful lender pays funds to you, and you remain responsible for paying the clinic on its schedule",
+    check: "APR, term, fees, total amount repayable, early settlement",
+  },
+  {
+    route: "Other borrowing you arrange yourself",
+    provider: "Your own bank or lender",
+    decision: "That lender",
+    timing: "Under that agreement, still separate from your payments to the clinic",
+    check: "The lender’s written quotation and MoneyHelper’s personal-loans guidance",
+  },
+] as const;

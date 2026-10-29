@@ -35,6 +35,7 @@ import {
 import { ContentAttribution, EditorialSections, ClinicEvidence, PatientEvidence } from "@/components/editorial";
 import { monthlyPlanning } from "@/lib/monthly-planning";
 import { financeAnswer } from "@/lib/price-planning";
+import { FinanceAnswer } from "@/components/finance-answer";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return routeSlugs.map((slug) => ({ slug }));
@@ -150,6 +151,7 @@ export default async function ContentPage({
       {(p.kind === "results" || p.kind === "reviews") && <PatientEvidence kind={p.kind} />}
       {p.kind === "clinic" && <><CarePanel answerIntro /><ClinicEvidence /></>}
       {p.kind === "guides" && <Guides />}
+      {slug === "dental-finance" && <FinanceAnswer />}
       {p.kind !== "monthly" && p.sections.length > 0 && (
         <section className="section editorial-section">
           <div className={(p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance" || slug === "smile-makeover-finance") ? "container narrow" : "container"}><EditorialSections sections={p.sections} article={p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance" || slug === "smile-makeover-finance"} /></div>

@@ -21,6 +21,7 @@ import { standaloneGuides } from "./guides";
 import { clinicProfile, evidence } from "./evidence";
 import { monthlyPlanning } from "./monthly-planning";
 import { financeAnswer } from "./price-planning";
+import { financeRoutes, financeRoutesIntro, ukFinanceAnswer, ukFinanceQuestion } from "./dental-finance-planning";
 import {
   COMPANY,
   SITE_NAME,
@@ -120,6 +121,7 @@ function documents(): Document[] {
           page.intro,
           ...(slug === "prices" ? [financeAnswer, "### Confirmed dental treatment packages", ...treatmentPackages.map(item => `${item.name}: ${packagePrice(item)} GBP. ${item.detail}. ${item.stay}. Includes ${packageInclusions.join(", ")}. ${packageCondition}`)] : []),
           `Last updated: ${page.lastModified}. Prepared by ${COMPANY} patient coordination team.`,
+          ...(slug === "dental-finance" ? [`### ${ukFinanceQuestion}`, ukFinanceAnswer, financeRoutesIntro, ...financeRoutes.map(row => `${row.route}. Provided by: ${row.provider}. Decided by: ${row.decision}. Payment timing: ${row.timing}. Check: ${row.check}.`)] : []),
           ...(slug === "pay-monthly" ? [`### ${monthlyPlanning.title}`, monthlyPlanning.answer, monthlyPlanning.intro] : []),
           ...page.sections.flatMap((section) => [
             `### ${section.title}`,
