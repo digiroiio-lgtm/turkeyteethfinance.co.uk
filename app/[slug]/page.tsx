@@ -34,6 +34,7 @@ import {
 } from "@/components/sections";
 import { ContentAttribution, EditorialSections, ClinicEvidence, PatientEvidence } from "@/components/editorial";
 import { monthlyPlanning } from "@/lib/monthly-planning";
+import { financeAnswer } from "@/lib/price-planning";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return routeSlugs.map((slug) => ({ slug }));
@@ -125,7 +126,17 @@ export default async function ContentPage({
         </section>
       )}
       {p.kind === "eligibility" && <EligibilityPanel />}
-      {p.kind === "prices" && <><TreatmentPackages /><CostTable /></>}
+      {p.kind === "prices" && (
+        <>
+          <section className="section" aria-label="Package price and finance">
+            <div className="container narrow">
+              <p className="answer-first"><strong>{financeAnswer}</strong></p>
+            </div>
+          </section>
+          <TreatmentPackages />
+          <CostTable />
+        </>
+      )}
       {(p.kind === "results" || p.kind === "reviews") && <PatientEvidence kind={p.kind} />}
       {p.kind === "clinic" && <><CarePanel answerIntro /><ClinicEvidence /></>}
       {p.kind === "guides" && <Guides />}
