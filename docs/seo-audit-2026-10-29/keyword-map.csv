@@ -1,0 +1,17 @@
+priority,cluster,intent,candidate_keywords,target,commercial_value_judgement,relative_attainability_judgement,rationale
+P1,Core finance,Commercial,turkey teeth finance; turkey teeth on finance; dental finance turkey; turkey dental finance uk,/,High,Medium-low,Core topical relevance; broad competition
+P1,Payment plans,Commercial,turkey teeth payment plan; turkey teeth pay monthly; dental payment plans turkey; turkey teeth monthly payments,/pay-monthly,High,Medium,Specific Turkey qualifier; keep distinct from homepage
+P1,Implants,Commercial,dental implants turkey finance; dental implants turkey payment plan; implants in turkey pay monthly,/dental-implants-finance,High,Medium,High treatment value; component and two-visit planning
+P1,Veneers,Commercial,veneers turkey finance; veneers turkey pay monthly; turkey veneers payment plan,/veneers-finance,High,Medium,Treatment-specific financing intent
+P1,Packages,Commercial investigation,turkey teeth packages prices; turkey teeth package hotel transfers; 20 zirconium crowns turkey cost,/prices,High,Medium,Existing owner-confirmed package detail
+P1,Crowns,Commercial,zirconia crowns turkey finance; zirconium crowns turkey payment plan,/zirconia-crowns-finance,High,Medium,Narrower than generic dental finance
+P1,Funding explainer,Informational commercial,can i finance dental treatment in turkey; how to finance dental work in turkey,/dental-finance,High,Medium,Funding process and separate credit decision
+P1,Quote planning,Commercial investigation,turkey dental quote; compare turkey dental quotes; turkey teeth quote inclusions,/guides/compare-dental-quotes,Medium,Medium-high,Unique written checklist; assist quote conversion
+P2,Full arch,Commercial,all on 4 turkey finance; all on 4 turkey payment plan,/all-on-4-finance,High,Medium-low,Require separately verified full-arch price; do not reuse combined four-implant package
+P2,Smile makeover,Commercial,smile makeover turkey finance; smile makeover turkey pay monthly,/smile-makeover-finance,High,Medium-low,Broader scope; prioritise precise treatments first
+P2,Eligibility,Eligibility investigation,can uk residents get dental finance turkey; turkey teeth finance eligibility,/finance-eligibility,Medium,Medium,Explain criteria without promising acceptance
+P2,Finance questions,Informational,is turkey dental finance a loan; turkey dental payment plan deposit questions,/finance-faq,Medium,Medium,Answer residual questions; avoid duplicate hub targeting
+P2,Travel budget,Planning,turkey dental treatment two visits cost; dental treatment antalya travel planning,/guides/plan-dental-visit-antalya,Medium,Medium-high,Second-trip and contingency budgeting
+Deferred,Cost comparison,Commercial investigation,turkey teeth cost vs uk; turkey dental treatment total cost,/prices (expand first; proposed /guides/turkey-dental-cost-vs-uk only after evidence),High,Medium-low,Need dated comparable UK quotes and clinical scope
+Compliance hold,Credit-sensitive,Finance offer,turkey teeth finance bad credit; guaranteed turkey teeth finance; turkey teeth 0 percent finance,/finance-eligibility (neutral answers only),Unverified,Not prioritised,No offer or acceptance promises; broker review required
+Later,Broad UK finance,Commercial,dental finance; dental payment plans; veneers finance; dental implants finance,Existing treatment pages with Turkey modifiers,High,Low,Broader lender and UK-clinic competition; avoid diluting current focus

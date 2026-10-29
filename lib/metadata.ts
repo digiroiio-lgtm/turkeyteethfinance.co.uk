@@ -7,7 +7,7 @@ export function pageMetadata(
   path: string,
 ): Metadata {
   return {
-    title,
+    title: title.includes(SITE_NAME) ? { absolute: title } : title,
     description,
     alternates: { canonical: canonicalUrl(path) },
     robots: indexingEnabled() && publicPages().some((page) => page.path === path)

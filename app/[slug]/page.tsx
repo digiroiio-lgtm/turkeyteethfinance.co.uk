@@ -142,6 +142,20 @@ export default async function ContentPage({
           </div>
         </section>
       )}
+      {p.treatment && (
+        <section className="section" aria-labelledby="treatment-payment-planning">
+          <div className="container narrow">
+            <h2 id="treatment-payment-planning">Plan the cost of {p.treatment.toLowerCase()} in Turkey</h2>
+            <p>Keep your treatment estimate and any credit agreement separate. Ask for the procedures, materials, visits and payment dates in writing, then include travel and follow-up costs in your budget. A treatment enquiry does not establish eligibility for credit.</p>
+            <ul className="context-links">
+              <li><Link href="/prices">Compare dental package prices and inclusions</Link></li>
+              <li><Link href="/pay-monthly">Understand Turkey dental payment plans</Link></li>
+              <li><Link href="/dental-finance">Read the UK patient dental finance guide</Link></li>
+              <li><Link href="/guides/compare-dental-quotes">Check what your written quote includes</Link></li>
+            </ul>
+          </div>
+        </section>
+      )}
       <FAQSection faqs={p.faqs} />
       <ConversionBanner treatment={p.treatment} />
       <RelatedLinks slugs={p.related} />
