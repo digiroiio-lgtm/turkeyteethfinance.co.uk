@@ -93,6 +93,11 @@ export default async function ContentPage({
       <ContentAttribution date={p.lastModified} />
       {p.kind === "monthly" && (
         <>
+          <section className="section" aria-label="Short answer">
+            <div className="container narrow">
+              <p className="answer-first"><strong>{monthlyPlanning.answer}</strong></p>
+            </div>
+          </section>
           <TrustStrip />
           <BudgetExplorer />
           <article className="section guide-article" id="monthly-planning-guide" aria-label={monthlyPlanning.title}>

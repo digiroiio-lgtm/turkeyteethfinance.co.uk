@@ -119,7 +119,7 @@ function documents(): Document[] {
           page.intro,
           ...(slug === "prices" ? ["### Confirmed dental treatment packages", ...treatmentPackages.map(item => `${item.name}: ${packagePrice(item)} GBP. ${item.detail}. ${item.stay}. Includes ${packageInclusions.join(", ")}. ${packageCondition}`)] : []),
           `Last updated: ${page.lastModified}. Prepared by ${COMPANY} patient coordination team.`,
-          ...(slug === "pay-monthly" ? [`### ${monthlyPlanning.title}`, monthlyPlanning.intro] : []),
+          ...(slug === "pay-monthly" ? [`### ${monthlyPlanning.title}`, monthlyPlanning.answer, monthlyPlanning.intro] : []),
           ...page.sections.flatMap((section) => [
             `### ${section.title}`,
             section.body,
