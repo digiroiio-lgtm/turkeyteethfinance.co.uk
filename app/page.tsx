@@ -14,7 +14,7 @@ import { HomeGuide, HomeUpdated } from "@/components/home-guide";
 import { commonFAQs, homeContent } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 const { title, description } = homeContent;
-export const metadata = pageMetadata(title, description, "/");
+export const metadata = { ...pageMetadata(title, description, "/"), title: { absolute: title } };
 export default function Home() {
   return (
     <>

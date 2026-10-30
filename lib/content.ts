@@ -14,17 +14,17 @@ import { financeFaqSections } from "./finance-faq-planning";
 import { legitSections, legitFaqs } from "./legit-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
-  lastModified: "2026-10-29",
-  title: "Turkey Teeth Finance: UK Patient Planning",
+  lastModified: "2026-10-30",
+  title: "Finance Turkey Teeth: Payment Options for UK Patients",
   description:
-    "Plan dental treatment in Turkey with package prices, quote checklists and payment questions for UK patients. A treatment enquiry is not a credit application.",
+    "Can you finance Turkey teeth? See how payment options and third-party finance work for UK patients, what to check first and how to request a quote.",
   label: "DENTAL TREATMENT IN TURKEY",
-  heading: "Turkey teeth finance.",
-  accent: "Plan your treatment.",
+  heading: "Finance Turkey teeth:",
+  accent: "Payment options for UK patients.",
   intro:
     "Quality dental treatment in Antalya with finance options for eligible UK patients, subject to status and lender approval.",
   answer:
-    "Dental finance in Turkey lets eligible UK patients spread the cost of treatment in Antalya. You start by requesting a free written treatment estimate, with no phone call needed. The clinical team proposes a plan, and your dentist confirms it at your assessment in Antalya. Any finance is a separate credit decision made by the lender, subject to status.",
+    "Possibly. UK residents can explore third-party finance for dental treatment in Turkey, but the lender decides on your application, so approval is never guaranteed. This page explains how the options work, what to compare and what to check before you apply. You start by requesting a free written treatment estimate, with no phone call needed. The clinical team proposes a plan, and your dentist confirms it at your assessment in Antalya.",
 };
 
 export const journeySteps = [

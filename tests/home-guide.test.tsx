@@ -17,7 +17,7 @@ test("the homepage renders substantial visible copy and direct answers below its
   assert.ok(words(document.body.textContent || "") >= 2000);
   const date = document.querySelector("time");
   assert.equal(date?.getAttribute("datetime"), homeContent.lastModified);
-  assert.match(date?.textContent || "", /29 October 2026/);
+  assert.match(date?.textContent || "", /30 October 2026/);
   for (const heading of [...document.querySelectorAll("h2")].slice(0, 5)) {
     const answer = heading.nextElementSibling;
     assert.equal(answer?.tagName, "P", heading.textContent || "");
