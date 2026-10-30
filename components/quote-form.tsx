@@ -27,6 +27,8 @@ const interests = [
   "Smile makeover",
   "Not sure yet",
 ];
+const validBudget = (value: string | null) =>
+  !!value && /^\d{4,5}$/.test(value) && Number(value) >= 1000 && Number(value) <= 10000;
 const initial = {
   treatment: "",
   packageId: "",
@@ -101,9 +103,7 @@ function QuoteFormInner({
     treatment: packageForId(search.get("package"))?.treatment || (interests.includes(search.get("treatment") || "")
       ? search.get("treatment")!
       : ""),
-    budget: /^\d{4,5}$/.test(search.get("budget") || "")
-      ? search.get("budget")!
-      : "",
+    budget: validBudget(search.get("budget")) ? search.get("budget")! : "",
   }));
   const [step, setStep] = useState(0);
   const [photos, setPhotos] = useState<File[]>([]);
@@ -232,10 +232,18 @@ function QuoteFormInner({
       photos.forEach((p) => data.append("photos", p));
       const res = await fetch("/api/quote", { method: "POST", body: data });
       const result = await res.json().catch(() => null);
-      if (!res.ok)
+      if (!res.ok) {
+        const failed: string[] = Array.isArray(result?.fields) ? result.fields : [];
+        if (failed.includes("website"))
+          throw new Error("We could not send your enquiry. Please reload the page and try again, or use a private window.");
+        if (failed.includes("dataConsent") || failed.includes("healthConsent"))
+          throw new Error("Please tick both required consents, then send your enquiry again.");
+        if (failed.includes("budget"))
+          throw new Error("Please choose a budget between £1,000 and £10,000, or leave it blank.");
         throw new Error(
           result?.error || "We could not send your enquiry. Please try again.",
         );
+      }
       if (result?.ok !== true || typeof result.reference !== "string") {
         throw new Error("We could not confirm delivery. Please try again later.");
       }
@@ -579,9 +587,12 @@ function QuoteFormInner({
           Leave this field empty
           <input
             type="text"
-            name="website"
+            name="hp_leave_empty_7x"
             tabIndex={-1}
             autoComplete="off"
+            data-lpignore="true"
+            data-1p-ignore="true"
+            data-form-type="other"
             value={values.website}
             onChange={(e) => change("website", e.target.value)}
           />
@@ -652,6 +663,6 @@ function QuoteFormForSearch(props: { available: boolean; turnstileSiteKey?: stri
   const search = useSearchParams();
   const id = packageForId(search.get("package"))?.id || "";
   const treatment = interests.includes(search.get("treatment") || "") ? search.get("treatment") : "";
-  const budget = /^\d{4,5}$/.test(search.get("budget") || "") ? search.get("budget") : "";
+  const budget = validBudget(search.get("budget")) ? search.get("budget") : "";
   return <QuoteFormInner key={`${id}:${treatment}:${budget}`} {...props} />;
 }

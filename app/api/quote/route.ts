@@ -54,11 +54,15 @@ export async function POST(request: Request) {
     return json({ error: "Please check your enquiry details." }, 400);
   }
   const parsed = leadSchema.safeParse(raw);
-  if (!parsed.success)
+  if (!parsed.success) {
+    // Field names only (never values), so a failed submission can be diagnosed without personal data.
+    const fields = [...new Set(parsed.error.issues.map((issue) => String(issue.path[0] ?? "form")))];
+    console.warn("Enquiry validation failed for fields:", fields.join(", "));
     return json(
-      { error: "Please check your details and the required privacy consents." },
+      { error: "Please check your details and the required privacy consents.", fields },
       400,
     );
+  }
   const files = form.getAll("photos");
   if (
     files.length > 3 ||

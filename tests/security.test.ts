@@ -263,3 +263,13 @@ test("unknown or treatment-mismatched package IDs are rejected", () => {
   assert.equal(leadSchema.safeParse({ ...enquiry, packageId: "zirconium-24" }).success, false);
   assert.equal(leadSchema.safeParse({ ...enquiry, packageId: "invented" }).success, false);
 });
+
+test("a failed enquiry validation names the failing fields only, never their values", async () => {
+  const response = await POST(request({ ...enquiry, website: "https://autofilled.example", budget: "500" }));
+  assert.equal(response.status, 400);
+  const body = await response.json();
+  assert.deepEqual([...body.fields].sort(), ["budget", "website"]);
+  assert.equal(JSON.stringify(body).includes("autofilled"), false);
+  const consent = await (await POST(request({ ...enquiry, healthConsent: false }))).json();
+  assert.deepEqual(consent.fields, ["healthConsent"]);
+});
