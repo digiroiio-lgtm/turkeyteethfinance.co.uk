@@ -1,3 +1,4 @@
+import { includePaymentQuestions, pagePaymentQuestions } from "./payment-questions";
 import { calculatorContent } from "./calculator-content";
 import { smilePlanningSections } from "./smile-planning";
 import { fullArchPlanningSections } from "./full-arch-planning";
@@ -834,5 +835,9 @@ export const pages: Record<string, PageContent> = {
     related: ["prices", "how-it-works", "finance-faq"],
   },
 };
+
+for (const [slug, questions] of Object.entries(pagePaymentQuestions)) {
+  includePaymentQuestions(pages[slug], questions);
+}
 
 export { guideArticles } from "./guides";

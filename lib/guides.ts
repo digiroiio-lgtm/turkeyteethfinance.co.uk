@@ -1,3 +1,4 @@
+import { guidePaymentQuestions, includePaymentQuestions } from "./payment-questions";
 import type { FAQ, Section } from "./content";
 export type PatientGuide = {
   id: string; title: string; category: string; summary: string;
@@ -177,5 +178,9 @@ guideArticles.push({
     { question: "Does a clinic refund automatically cancel my finance?", answer: "Do not assume so. Ask the clinic about its refund terms and the broker or lender about your separate agreement." },
   ], related: ["pay-monthly", "finance-calculator", "prices", "finance-eligibility"],
 });
+for (const guide of guideArticles) {
+  const questions = guide.path && guidePaymentQuestions[guide.path];
+  if (questions) includePaymentQuestions(guide, questions);
+}
 export const standaloneGuides = guideArticles.filter(guide => !!guide.path);
 export function guideForPath(path: string) { return standaloneGuides.find(guide => guide.path === path); }
