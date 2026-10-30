@@ -27,7 +27,7 @@ export function Footer() {
               <h2>Treatments</h2>
               {treatments.map((t) => (
                 <Link href={`/${t.slug}`} key={t.slug}>
-                  {t.name}
+                  {t.displayName || t.name}
                 </Link>
               ))}
             </div>

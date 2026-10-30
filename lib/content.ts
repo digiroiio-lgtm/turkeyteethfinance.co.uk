@@ -1,3 +1,4 @@
+import { expandedTreatmentPages } from "./expanded-treatments";
 import { includePaymentQuestions, pagePaymentQuestions } from "./payment-questions";
 import { calculatorContent } from "./calculator-content";
 import { smilePlanningSections } from "./smile-planning";
@@ -178,6 +179,7 @@ export const instalmentFAQs: FAQ[] = [
 export { treatments } from "./treatments";
 
 export const pages: Record<string, PageContent> = {
+  ...expandedTreatmentPages,
   "finance-calculator": calculatorContent,
   "pay-monthly": {
     lastModified: "2026-10-30",
@@ -318,10 +320,10 @@ export const pages: Record<string, PageContent> = {
   },
   "veneers-finance": {
     "lastModified": "2026-10-30",
-    "title": "Veneers Finance in Turkey: Planning",
-    "description": "Compare veneers, bonding and crowns for treatment in Antalya. Understand preparation, maintenance, appointment planning and an itemised written estimate.",
+    "title": "E.max & Porcelain Veneers Turkey: Costs & Finance",
+    "description": "Explore E.max and porcelain veneers in Antalya: material choices, tooth preparation, package scope, costs and finance. Request a written treatment estimate.",
     "label": "VENEERS",
-    "heading": "Veneers in Turkey.",
+    "heading": "E.max and porcelain veneers in Turkey.",
     "accent": "A personal difference.",
     "intro": "Discuss the shape, colour and appearance of your teeth with a dentist. Get a written veneers estimate before exploring available payment options.",
     "sections": veneerPlanningSections,
@@ -835,6 +837,24 @@ export const pages: Record<string, PageContent> = {
     related: ["prices", "how-it-works", "finance-faq"],
   },
 };
+
+pages["veneers-finance"].lastModified = "2026-10-31";
+pages["veneers-finance"].sections = [{
+  title: "Are E.max veneers the same as porcelain veneers or crowns?",
+  body: "Porcelain veneer is a broad description of a ceramic facing. IPS e.max includes branded ceramic systems; the CAD material described by Ivoclar is lithium disilicate and can be used for veneers or crowns. A veneer and a crown are different restoration designs. Confirm both the exact material and the design, rather than relying on the brand name.",
+  paragraphs: ["Akdeniz Dental publishes E.max treatment information. Ask the dentist to identify the proposed material, laboratory workflow, tooth preparation and alternatives for your case. Manufacturer information explains a material’s uses; it does not establish your suitability or independently verify a clinic’s results.", "The published 16- and 20-veneer packages do not specify that every case uses E.max. Request written confirmation of material and any price change. Do not describe those packages as E.max offers until the clinic has confirmed the specification for your estimate. Bonding, orthodontics or no cosmetic treatment may be alternatives to discuss."],
+  sources: ["emaxManufacturer", "clinicEmax", "veneers"],
+  links: [{ text: "Compare composite bonding", href: "/composite-bonding-turkey" }],
+}, ...pages["veneers-finance"].sections];
+pages["veneers-finance"].faqs.push(
+  { question: "Do the published veneer packages guarantee IPS e.max material?", answer: "No. Ask for the exact material and restoration design in your written estimate. Existing package prices must not be presented as E.max-specific offers without confirmation." },
+  { question: "Does the E.max name mean my teeth will not need preparation?", answer: "No. The dentist assesses the restoration design, tooth condition and required preparation. A material brand does not guarantee a no-preparation or reversible treatment." }
+);
+pages["veneers-finance"].related = ["composite-bonding-turkey", ...pages["veneers-finance"].related];
+for (const slug of ["dental-implants-finance", "all-on-4-finance"]) {
+  pages[slug].related = ["full-mouth-dental-implants-turkey", "all-on-6-finance", ...pages[slug].related];
+  pages[slug].lastModified = "2026-10-31";
+}
 
 for (const [slug, questions] of Object.entries(pagePaymentQuestions)) {
   includePaymentQuestions(pages[slug], questions);

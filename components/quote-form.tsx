@@ -13,20 +13,14 @@ import {
   LockKeyhole,
   X,
 } from "lucide-react";
+import { treatmentInterests, treatments } from "../lib/treatments";
 import { Icon } from "./ui";
 import { MAX_TOTAL_UPLOAD_SIZE } from "../lib/enquiry-limits";
 
 import { packageForId, packagePrice, treatmentPackages } from "../lib/packages";
 import { trackEvent } from "../lib/analytics";
 
-const interests = [
-  "Veneers",
-  "Dental implants",
-  "Zirconia crowns",
-  "All-on-4",
-  "Smile makeover",
-  "Not sure yet",
-];
+const interests = treatmentInterests;
 const validBudget = (value: string | null) =>
   !!value && /^\d{4,5}$/.test(value) && Number(value) >= 1000 && Number(value) <= 10000;
 const initial = {
@@ -330,7 +324,7 @@ function QuoteFormInner({
           </p>
           <fieldset className="interest-grid">
             <legend className="sr-only">Treatment interest</legend>
-            {interests.map((t, i) => (
+            {interests.map((t) => (
               <label
                 className={
                   values.treatment === t
@@ -348,9 +342,7 @@ function QuoteFormInner({
                 />
                 <Icon
                   name={
-                    ["sparkles", "implant", "tooth", "smile", "heart", "help"][
-                      i
-                    ]
+                    treatments.find(item => item.name === t)?.icon || "help"
                   }
                 />
                 <span>{t}</span>

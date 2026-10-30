@@ -1,3 +1,4 @@
+import { expandedTreatmentSlugs, treatmentArticle } from "@/lib/treatment-schema";
 import { packageStructuredData } from "@/lib/package-schema";
 import { publicPages } from "@/lib/public-pages";
 import { pages } from "@/lib/content";
@@ -23,6 +24,7 @@ export default async function OtherPageHead({ params }: { params: Promise<{ path
   return <>
     <PageSchema path={path} title={page.title} description={page.description} faqs={faqs}
       lastModified={page.lastModified} parent={guide ? { name: "Patient guides", path: "/guides" } : undefined} />
+    {expandedTreatmentSlugs.includes(path.slice(1)) && <JsonLd data={treatmentArticle(path.slice(1))} />}
     {guide && <JsonLd data={guideStructuredData(guide)} />}
     {path === "/guides" && <JsonLd data={guidesDirectoryStructuredData()} />}
     {path === "/prices" && <JsonLd data={packageStructuredData()} />}

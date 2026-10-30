@@ -51,7 +51,7 @@ export function TreatmentGrid({ compact = false, answerIntro = false }: { compac
               <span className={`icon-tile tone-${i}`}>
                 <Icon name={t.icon} size={32} />
               </span>
-              <h3>{t.name}</h3>
+              <h3>{t.displayName || t.name}</h3>
               <p>{t.text}</p>
               <span className="text-link">
                 Explore treatment <ArrowRight size={16} />

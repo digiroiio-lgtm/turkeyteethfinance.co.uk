@@ -56,7 +56,7 @@ export function Header() {
                   href={`/${t.slug}`}
                   onClick={() => setOpen(false)}
                 >
-                  {t.name}
+                  {t.displayName || t.name}
                   <ArrowRight size={14} />
                 </Link>
               ))}
