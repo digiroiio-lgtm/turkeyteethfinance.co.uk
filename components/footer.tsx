@@ -35,6 +35,7 @@ export function Footer() {
               <h2>Payment options</h2>
               {[
                 ["Pay monthly", "pay-monthly"],
+                ["Repayment calculator", "finance-calculator"],
                 ["Dental finance", "dental-finance"],
                 ["Finance eligibility", "finance-eligibility"],
                 ["Prices & inclusions", "prices"],

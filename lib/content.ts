@@ -1,3 +1,4 @@
+import { calculatorContent } from "./calculator-content";
 import { smilePlanningSections } from "./smile-planning";
 import { fullArchPlanningSections } from "./full-arch-planning";
 import { crownPlanningSections } from "./crown-planning";
@@ -15,7 +16,7 @@ import { legitSections, legitFaqs } from "./legit-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
   lastModified: "2026-10-30",
-  title: "Finance Turkey Teeth: Payment Options for UK Patients",
+  title: "Turkey Teeth Finance: Payment Options for UK Patients",
   description:
     "Can you finance Turkey teeth? See how payment options and third-party finance work for UK patients, what to check first and how to request a quote.",
   label: "DENTAL TREATMENT IN TURKEY",
@@ -112,6 +113,7 @@ export type PageContent = {
   related: string[];
   treatment?: string;
   kind?:
+    | "calculator"
     | "monthly"
     | "quote"
     | "eligibility"
@@ -175,23 +177,24 @@ export const instalmentFAQs: FAQ[] = [
 export { treatments } from "./treatments";
 
 export const pages: Record<string, PageContent> = {
+  "finance-calculator": calculatorContent,
   "pay-monthly": {
-    lastModified: "2026-10-29",
-    title: "Turkey Dental Payment Plans: UK Patient Guide",
+    lastModified: "2026-10-30",
+    title: "Can You Pay Monthly for Turkey Teeth? Payment Options",
     description:
-      "Understand dental payment plans for Turkey: compare quotes, payment dates, travel costs and questions to ask before a separate finance application.",
+      "Can you pay monthly for Turkey teeth? Compare loans, clinic stage payments and other ways to pay, then estimate repayments using your own assumptions.",
     label: "PAY MONTHLY",
-    heading: "Turkey dental payment plans.",
-    accent: "Know what to ask.",
+    heading: "Can you pay monthly for Turkey teeth?",
+    accent: "Understand your options.",
     kind: "monthly",
     intro:
       "Explore dental treatment in Antalya with flexible monthly payment options for eligible UK patients, subject to status and lender approval.",
     sections: monthlyPlanning.sections,
     faqs: [commonFAQs[0], instalmentFAQs[0], instalmentFAQs[2], commonFAQs[2]],
-    related: ["finance-eligibility", "prices", "dental-finance", "is-turkey-teeth-finance-legit"],
+    related: ["finance-calculator", "finance-eligibility", "prices", "dental-finance", "is-turkey-teeth-finance-legit"],
   },
   "dental-finance": {
-    lastModified: "2026-10-22",
+    lastModified: "2026-10-30",
     title: "Dental Finance in Turkey for UK Patients",
     description:
       "Can UK residents get finance for dental treatment in Turkey? A conditional answer, a payment-route comparison and how a treatment quote differs from a credit application.",
@@ -265,8 +268,8 @@ export const pages: Record<string, PageContent> = {
     "treatment": "Dental implants"
   },
   "finance-eligibility": {
-    lastModified: "2026-10-21",
-    title: "Who Can Get Dental Finance for Turkey?",
+    lastModified: "2026-10-30",
+    title: "Turkey Teeth Finance Eligibility & Credit Checks",
     description:
       "Understand the UK finance eligibility questions to consider before applying for dental treatment finance. Decisions depend on affordability, status and lender criteria.",
     label: "FINANCE ELIGIBILITY",
@@ -695,7 +698,7 @@ export const pages: Record<string, PageContent> = {
     related: ["get-a-quote", "dental-finance", "our-clinic", "is-turkey-teeth-finance-legit"],
   },
   "is-turkey-teeth-finance-legit": {
-    lastModified: "2026-10-28",
+    lastModified: "2026-10-30",
     title: "Is Turkey Teeth Finance Legit? How It Works",
     description:
       "Who is behind turkeyteethfinance.co.uk, what each company does, how finance works for UK patients and how to check a dental finance service yourself.",
@@ -747,7 +750,7 @@ export const pages: Record<string, PageContent> = {
     ]
   },
   "finance-faq": {
-    lastModified: "2026-10-24",
+    lastModified: "2026-10-30",
     title: "Turkey Dental Finance FAQs for UK Patients",
     description:
       "Answers about dental finance, treatment estimates, credit applications, payments and planning dental care in Antalya for UK patients.",
@@ -766,9 +769,9 @@ export const pages: Record<string, PageContent> = {
           "No. The enquiry form helps us understand your treatment interests. A credit application is a separate process through the approved broker link and the lender you choose.",
       },
       {
-        question: "Do you advertise a fixed APR or monthly repayment?",
+        question: "Does the calculator advertise a lender rate or repayment?",
         answer:
-          "No. The broker and lender provide the applicable information for your circumstances. Our budget explorer is not a loan calculator and does not produce credit quotations.",
+          "No. The repayment calculator uses an annual nominal interest-rate assumption you enter yourself. It is a mathematical illustration, not a lender APR, a credit quotation or an eligibility decision. The separate budget explorer only records a treatment budget.",
       },
       {
         question: "Can I choose to pay without finance?",
@@ -810,7 +813,7 @@ export const pages: Record<string, PageContent> = {
     related: ["get-a-quote", "our-clinic", "finance-faq"],
   },
   guides: {
-    lastModified: "2026-10-22",
+    lastModified: "2026-10-30",
     title: "Turkey Dental Treatment & Finance Guides",
     description:
       "Practical guides for UK patients considering dental care in Turkey: comparing quotes, preparing for treatment, reviewing finance and planning aftercare.",

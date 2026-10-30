@@ -281,3 +281,19 @@ test("package quote navigation preselects the matching treatment and clears inco
   fireEvent.click(view.getByRole("radio", { name: "Dental implants" }));
   assert.equal((view.getByLabelText(/Package to discuss/) as HTMLSelectElement).value, "");
 });
+
+test("calculator prefills a package and requires a rate assumption before showing estimates", async () => {
+  const { RepaymentCalculator } = await import("../components/repayment-calculator");
+  const { render, fireEvent } = testing;
+  const view = render(<SearchParamsContext.Provider value={new URLSearchParams("package=zirconium-24")}><RepaymentCalculator /></SearchParamsContext.Provider>);
+  assert.equal((view.getByLabelText("Treatment cost (£)") as HTMLInputElement).value, "3000");
+  assert.ok(view.getByRole("status").textContent!.includes("No lender rate is selected"));
+  fireEvent.change(view.getByLabelText("Assumed annual interest rate (%)"), { target: { value: "12" } });
+  assert.ok(view.getByRole("status").textContent!.includes("£141.22"));
+  fireEvent.change(view.getByLabelText("Upfront contribution (£)"), { target: { value: "4000" } });
+  assert.ok(view.getByRole("status").textContent!.includes("Check your inputs"));
+  assert.equal(view.queryByText("Estimated monthly repayment"), null);
+  fireEvent.change(view.getByLabelText("Upfront contribution (£)"), { target: { value: "0" } });
+  fireEvent.change(view.getByLabelText("Assumed annual interest rate (%)"), { target: { value: "0" } });
+  assert.ok(view.getByRole("status").textContent!.includes("£125.00"));
+});

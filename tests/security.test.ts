@@ -17,6 +17,7 @@ import { proxy } from "../proxy";
 import { POST } from "../app/api/quote/route";
 import { canonicalPaths } from "../lib/site";
 import { pages } from "../lib/content";
+import { standaloneGuides } from "../lib/guides";
 
 const enquiry = {
   treatment: "Veneers",
@@ -66,11 +67,11 @@ function request(
 }
 
 test("each brief route has distinct metadata and working related links", () => {
-  assert.equal(canonicalPaths.length, Object.keys(pages).length + 4);
-  assert.equal(new Set(Object.values(pages).map((p) => p.title)).size, 18);
+  assert.equal(canonicalPaths.length, Object.keys(pages).length + 1 + standaloneGuides.length);
+  assert.equal(new Set(Object.values(pages).map((p) => p.title)).size, Object.keys(pages).length);
   assert.equal(
     new Set(Object.values(pages).map((p) => p.description)).size,
-    18,
+    Object.keys(pages).length,
   );
   for (const p of Object.values(pages))
     for (const related of p.related) assert.ok(pages[related]);

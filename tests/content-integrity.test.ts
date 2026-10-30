@@ -65,7 +65,7 @@ test("treatment-specific answers have distinct questions, traceable sources and 
 });
 
 test("standalone guides share canonical registry, original article text and full LLM export without invented clinical review", () => {
-  assert.equal(standaloneGuides.length, 3);
+  assert.equal(standaloneGuides.length, 4);
   const full = llmsFull();
   for (const guide of standaloneGuides) {
     assert.ok(publicPages().some(page => page.path === guide.path));
@@ -94,7 +94,7 @@ test("pricing calculations use confirmed packages, retain scope and do not imply
   assert.equal(/an assumed £|Original payment example|Original budgeting example/.test(JSON.stringify(homeGuideSections)), false);
 });
 
-test("monthly planning has traceable quotations, dated national context and no loan illustration or clinical endorsement", () => {
+test("monthly planning has sourced payment answers and no lender illustration or clinical endorsement", () => {
   const page = pages["pay-monthly"];
   const schema = monthlyStructuredData();
   const full = llmsFull();
@@ -109,7 +109,8 @@ test("monthly planning has traceable quotations, dated national context and no l
       assert.ok(schema.citation.includes(evidence[quote.source].url));
     }
   }
-  assert.match(schema.articleBody, /May 2024.*published in May 2025/);
-  assert.match(schema.articleBody, /not statistically different/);
+  assert.match(schema.articleBody, /Clinic stage payments are different/);
+  assert.match(schema.articleBody, /Loan repayments need not begin after treatment/);
+  assert.ok(page.sections.some(section => section.links?.some(link => link.href === "/finance-calculator")));
   assert.equal(/\d+(?:\.\d+)?%\s*(?:APR|interest)|£\d+\s*(?:per month|a month)|guaranteed acceptance|reviewed by a dentist/i.test(schema.articleBody), false);
 });
