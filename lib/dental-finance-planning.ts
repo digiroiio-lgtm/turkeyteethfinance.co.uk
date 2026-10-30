@@ -122,11 +122,11 @@ export const financeRoutesIntro =
   "These are the payment routes this site describes. They differ in who provides the money, who makes the decision and when payments happen. Use the table to see what to check before choosing, then read the clinic’s or lender’s own documents for the terms that apply to you.";
 export const financeRoutes = [
   {
-    route: "Pay the clinic without credit",
-    provider: "The treating clinic, Akdeniz Dental",
+    route: "Savings or clinic stage payments",
+    provider: "Your savings; payment dates agreed with Akdeniz Dental",
     decision: "No credit decision. The clinic’s written terms apply",
     timing: "According to the payment schedule in your written quote",
-    check: "Inclusions, refund and cancellation terms, accepted payment methods",
+    check: "No loan interest when using savings. Confirm stage dates, deposit, cancellation terms and inclusions; staging is not a monthly loan",
   },
   {
     route: "Finance through the broker",
@@ -141,5 +141,12 @@ export const financeRoutes = [
     decision: "That lender",
     timing: "Under that agreement, still separate from your payments to the clinic",
     check: "The lender’s written quotation and MoneyHelper’s personal-loans guidance",
+  },
+  {
+    route: "Credit card you arrange yourself",
+    provider: "Your card issuer, if the clinic accepts your card",
+    decision: "The card issuer; acceptance and limits depend on its terms",
+    timing: "Pay the clinic on its agreed dates and repay the card issuer separately",
+    check: "Purchase rate, any promotional period, fees, minimum payments and total cost. Confirm acceptance with the clinic; no interest-free card offer is made here",
   },
 ] as const;

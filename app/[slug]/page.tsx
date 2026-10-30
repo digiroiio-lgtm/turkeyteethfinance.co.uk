@@ -12,7 +12,8 @@ import {
 } from "@/lib/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Hero } from "@/components/hero";
-import { BudgetExplorer } from "@/components/budget-explorer";
+import { Suspense } from "react";
+import { RepaymentCalculator } from "@/components/repayment-calculator";
 import { QuoteForm } from "@/components/quote-form";
 import {
   ConversionBanner,
@@ -21,7 +22,6 @@ import {
   QuoteCTA,
 } from "@/components/ui";
 import {
-  TrustStrip,
   Journey,
   TreatmentGrid,
   EligibilityPanel,
@@ -35,6 +35,7 @@ import {
 import { ContentAttribution, EditorialSections, ClinicEvidence, PatientEvidence } from "@/components/editorial";
 import { monthlyPlanning } from "@/lib/monthly-planning";
 import { financeAnswer } from "@/lib/price-planning";
+import { PaymentRouteComparison } from "@/components/payment-route-comparison";
 import { FinanceAnswer } from "@/components/finance-answer";
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -110,8 +111,9 @@ export default async function ContentPage({
               <p className="answer-first"><strong>{monthlyPlanning.answer}</strong></p>
             </div>
           </section>
-          <TrustStrip />
-          <BudgetExplorer />
+          <PaymentRouteComparison />
+          <section className="section"><div className="container narrow"><h2>Estimate your monthly repayments</h2><p>Use your own treatment cost, contribution, term and interest-rate assumption. See total interest as well as the monthly figure.</p><Link className="button button-small" href="/finance-calculator">Open the finance calculator <ArrowRight size={17} /></Link></div></section>
+          <TreatmentPackages preview />
           <article className="section guide-article" id="monthly-planning-guide" aria-label={monthlyPlanning.title}>
             <div className="container narrow">
               <p className="eyebrow">YOUR PAYMENT PLANNING GUIDE</p>
@@ -124,6 +126,7 @@ export default async function ContentPage({
           <TreatmentGrid compact />
         </>
       )}
+      {p.kind === "calculator" && <section className="section" id="repayment-calculator" aria-label="Illustrative repayment calculator"><div className="container"><Suspense fallback={<p>Loading calculator. The method and limitations are explained below. JavaScript is required for interactive estimates.</p>}><RepaymentCalculator /></Suspense><noscript>Enable JavaScript for interactive estimates. You can still read the calculation method and request a written quote below.</noscript></div></section>}
       {p.kind === "journey" && <Journey detailed />}
       {(p.kind === "quote" || p.kind === "contact") && (
         <section className="section quote-section" id="treatment-enquiry">
@@ -192,6 +195,7 @@ export default async function ContentPage({
             <ul className="context-links">
               <li><Link href="/prices">Compare dental package prices and inclusions</Link></li>
               <li><Link href="/pay-monthly">Understand Turkey dental payment plans</Link></li>
+              <li><Link href="/finance-calculator">Estimate monthly repayments using your own assumptions</Link></li>
               <li><Link href="/dental-finance">Read the UK patient dental finance guide</Link></li>
               <li><Link href="/guides/compare-dental-quotes">Check what your written quote includes</Link></li>
             </ul>

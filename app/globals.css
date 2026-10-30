@@ -3384,3 +3384,9 @@ select:focus-visible {
 @media(max-width:700px){.package-grid{grid-template-columns:minmax(0,1fr);gap:26px}.package-card{padding:28px 23px}.cookie-banner{left:10px;bottom:10px;width:calc(100% - 80px);padding:17px;max-height:calc(100dvh - 25px)}.cookie-actions button{flex:1;padding:10px}.package-price{font-size:38px}}
 
 .package-facts{margin:12px 0;display:grid;gap:8px;font-size:14px}.package-facts div{display:grid;gap:2px}.package-facts dt{font-weight:600}.package-facts dd{margin:0}
+
+/* Repayment illustration: retain the existing site palette and touch-friendly fields. */
+.repayment-tool{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;max-width:1000px;margin:auto;padding:28px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(130deg,#f6f1ff,#effbf9)}
+.repayment-fields{display:flex;flex-direction:column;gap:8px;min-width:0}.repayment-fields label{font-weight:650;margin-top:9px}.repayment-fields input,.repayment-fields select{width:100%;min-height:48px;padding:11px 13px;border:1px solid #a8b2c5;border-radius:10px;background:#fff;color:var(--navy)}
+.repayment-fields p{margin-bottom:0}.repayment-results{align-self:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;min-width:0}.repayment-results dl{margin:0 0 20px}.repayment-results dl>div{padding:12px 0;border-bottom:1px solid var(--line)}.repayment-results dt{color:var(--body);font-size:14px}.repayment-results dd{margin:3px 0 0;font-size:24px;font-weight:750;overflow-wrap:anywhere}.repayment-comparison{grid-column:1/-1}.repayment-comparison table{min-width:560px}.repayment-comparison caption{text-align:left;font-weight:650;margin-bottom:12px}
+@media(max-width:700px){.repayment-tool{grid-template-columns:minmax(0,1fr);padding:18px;gap:18px}.repayment-results{padding:18px}}

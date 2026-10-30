@@ -27,7 +27,7 @@ npm run build
 - All brief routes, unique metadata and canonical URLs, crawlable FAQs, JSON-LD, OG image, breadcrumbs, sitemap and robots.
 - A four-step treatment enquiry with email/WhatsApp preferences, optional dental photographs, explicit health-data consent and separate optional marketing consent.
 - Server-side validation, bounded requests, same-origin checks, Turnstile verification, decoded/re-encoded photographs with metadata removed and a signed private webhook handoff. No patient data in application analytics or logs.
-- A treatment budget explorer that does not fabricate loan quotations, APRs or repayments.
+- A treatment budget explorer plus an independent repayment calculator using a user-entered annual nominal rate; neither supplies lender quotes or advertised APRs.
 - Draft publication controls, search verification settings and an opt-in changed-URL IndexNow script.
 - Automatically generated `/llms.txt` and `/llms-full.txt`, with a discovery `Link` response header.
 
@@ -65,3 +65,9 @@ See [SEO validation](docs/seo-validation.md). Pull requests run a fresh producti
 ## Formspree enquiries
 
 The shared React enquiry form can deliver through Formspree endpoint xgaojavy using the existing server validation route. See [Formspree setup](docs/formspree.md) for matching CAPTCHA settings, optional attachments, the operational off switch and delivery verification.
+
+## Repayment illustrations
+
+`/finance-calculator` is a static canonical page included in sitemap and LLM exports. Package links carry only a known package ID; the calculator preselects the published price. No interest rate is preselected. Results use a user-entered annual nominal interest rate divided by 12, equal end-of-month payments and no fees. They are mathematical illustrations, not APR pricing, lender offers or eligibility decisions. The zero-interest branch and a contribution covering the whole cost are supported. No inputs are sent to analytics or a lender.
+
+Finance publication remains controlled by the existing approved disclosure and application-link settings. This release does not assert new regulatory status, publish an unapproved rate or change those production settings.

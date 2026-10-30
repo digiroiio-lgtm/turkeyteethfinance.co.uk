@@ -5,7 +5,7 @@ export const legitSections: Section[] = [
     title: "Who is involved in treatment and finance?",
     body: "Four separate parties are involved. This website helps UK patients request a written treatment estimate for dental care in Antalya and understand how third-party finance works. Treatment is provided by the clinical team at Akdeniz Dental in Antalya, and Akdeniz Dental Consultancy UK Ltd provides non-clinical patient coordination. Any credit agreement is with the lender you select.",
     paragraphs: [
-      "Three different organisations are involved, and it helps to keep them apart. Akdeniz Dental Consultancy UK Ltd provides non-clinical patient coordination and administration. Akdeniz Dental in Antalya provides assessment, treatment planning and treatment. Ideal Sales Solutions Ltd, trading as Ideal4Finance, describes itself as a credit broker rather than a lender, and it explains finance through its own separate application. The lender it matches you with makes the credit decision.",
+      "The coordinator, treating clinic, broker and lender have separate responsibilities. Akdeniz Dental Consultancy UK Ltd provides non-clinical patient coordination and administration. Akdeniz Dental in Antalya provides assessment, treatment planning and treatment. Ideal Sales Solutions Ltd, trading as Ideal4Finance, describes itself as a credit broker rather than a lender, and it explains finance through its own separate application. The lender it matches you with makes the credit decision.",
       "Because the roles are separate, you can ask for a treatment estimate without making a credit application, and you can read the broker’s information before deciding whether finance suits you at all.",
     ],
     links: [

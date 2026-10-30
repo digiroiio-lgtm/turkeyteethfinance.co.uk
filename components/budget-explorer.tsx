@@ -105,9 +105,7 @@ export function BudgetExplorer({ answerIntro = false }: { answerIntro?: boolean 
               <ArrowRight size={17} />
             </Link>
             <p className="small budget-fineprint">
-              Monthly repayments are not shown without verified, approved lender
-              examples. Credit is subject to status, affordability and lender
-              approval.
+              For a mathematical estimate using your own assumptions, <Link href="/finance-calculator">try the repayment calculator</Link>. Actual credit is subject to status, affordability and lender approval.
             </p>
           </div>
         </div>
