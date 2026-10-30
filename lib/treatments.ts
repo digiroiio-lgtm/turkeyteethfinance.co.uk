@@ -1,9 +1,11 @@
-export const treatments = [
+export type Treatment = { slug: string; name: string; displayName?: string; icon: string; text: string; detail: string };
+export const treatments: Treatment[] = [
   {
     slug: "veneers-finance",
     name: "Veneers",
+    displayName: "E.max / Porcelain Veneers",
     icon: "sparkles",
-    text: "Explore changes to the shape, colour and appearance of your smile.",
+    text: "Compare ceramic veneer materials, preparation and written package specifications.",
     detail: "Suitability and preparation depend on your teeth.",
   },
   {
@@ -35,3 +37,11 @@ export const treatments = [
     detail: "Your plan may combine several different treatments.",
   },
 ];
+
+// Prioritise distinct UK search intentions; bonding begins the second desktop row.
+treatments.unshift(
+  { slug: "full-mouth-dental-implants-turkey", name: "Full mouth dental implants", displayName: "Full Mouth Dental Implants", icon: "implant", text: "Compare fixed full-arch options, one or both jaws, visits and complete treatment costs.", detail: "An individual clinical plan defines the scope." },
+  { slug: "all-on-6-finance", name: "All-on-6", displayName: "All-on-6 Dental Implants", icon: "smile", text: "Understand six-implant arch support, temporary and final teeth, and payment planning.", detail: "Suitability and costs require assessment." }
+);
+treatments.splice(4, 0, { slug: "composite-bonding-turkey", name: "Composite bonding", displayName: "Composite Bonding", icon: "sparkles", text: "Explore resin bonding for selected changes and compare it with porcelain veneers.", detail: "Confirm service availability and suitability before travel." });
+export const treatmentInterests: [string, ...string[]] = ["Veneers", ...treatments.filter(t => t.name !== "Veneers").map(t => t.name), "Not sure yet"];

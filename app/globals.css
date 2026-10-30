@@ -3405,3 +3405,9 @@ select:focus-visible {
  .treatment-menu>summary{padding:11px 0;justify-content:space-between;min-height:44px}.treatment-dropdown{position:static;border:0;box-shadow:none;padding:0 8px;min-width:0}.treatment-dropdown a{font-size:13px;padding:10px;min-height:44px}
 }
 @media(max-width:400px){.hero-calculator-link{font-size:14px;gap:7px}.hero-calculator-cta p{font-size:11px}}
+
+/* Eight distinct treatment options, with bonding starting the second desktop row. */
+@media(min-width:1001px){.treatment-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:701px) and (max-width:1000px){.treatment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.treatment-card:last-child{grid-column:auto}.treatment-card{min-width:0}.treatment-card .text-link{margin-top:auto}
+.treatment-search-answer{background:linear-gradient(120deg,#fbf8ff,#f1fbf8);border-block:1px solid var(--line)}.treatment-search-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px}.treatment-search-actions>.text-link{min-height:44px;overflow-wrap:anywhere}@media(max-width:600px){.treatment-search-actions{align-items:stretch;flex-direction:column}.treatment-search-actions>.button{width:100%}}

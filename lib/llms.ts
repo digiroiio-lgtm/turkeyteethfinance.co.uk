@@ -1,3 +1,4 @@
+import { implantComparisonText } from "./treatment-schema";
 import { packageCondition, packageInclusions, packagePrice, treatmentPackages } from "./packages";
 import { guideSource, homeGuide, homeGuideSections } from "./home-guide";
 import {
@@ -122,6 +123,7 @@ function documents(): Document[] {
           ...(slug === "prices" ? [financeAnswer, "### Confirmed dental treatment packages", ...treatmentPackages.map(item => `${item.name}: ${packagePrice(item)} GBP. ${item.detail}. ${item.stay}. Includes ${packageInclusions.join(", ")}. ${packageCondition}`)] : []),
           `Last updated: ${page.lastModified}. Prepared by ${COMPANY} patient coordination team.`,
           ...((slug === "dental-finance" || slug === "pay-monthly") ? [`### ${ukFinanceQuestion}`, ukFinanceAnswer, financeRoutesIntro, ...financeRoutes.map(row => `${row.route}. Provided by: ${row.provider}. Decided by: ${row.decision}. Payment timing: ${row.timing}. Check: ${row.check}.`)] : []),
+          ...(slug === "full-mouth-dental-implants-turkey" ? ["### Full-arch comparison", implantComparisonText()] : []),
           ...(slug === "pay-monthly" ? [`### ${monthlyPlanning.title}`, monthlyPlanning.answer, monthlyPlanning.intro] : []),
           ...page.sections.flatMap((section) => [
             `### ${section.title}`,

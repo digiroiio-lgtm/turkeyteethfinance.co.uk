@@ -1,17 +1,11 @@
+import { treatmentInterests } from "./treatments";
 import { packageForId } from "./packages";
 import { z } from "zod";
 import { MAX_REQUEST_SIZE } from "./enquiry-limits";
 export { MAX_UPLOAD_SIZE, MAX_REQUEST_SIZE, MAX_TOTAL_UPLOAD_SIZE } from "./enquiry-limits";
 export const leadSchema = z
   .object({
-    treatment: z.enum([
-      "Veneers",
-      "Dental implants",
-      "Zirconia crowns",
-      "All-on-4",
-      "Smile makeover",
-      "Not sure yet",
-    ]),
+    treatment: z.enum(treatmentInterests),
     packageId: z.string().max(40).refine(value => value === "" || !!packageForId(value)).optional(),
     teeth: z
       .string()

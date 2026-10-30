@@ -297,3 +297,12 @@ test("calculator prefills a package and requires a rate assumption before showin
   fireEvent.change(view.getByLabelText("Assumed annual interest rate (%)"), { target: { value: "0" } });
   assert.ok(view.getByRole("status").textContent!.includes("£125.00"));
 });
+
+test("new treatment quote links preselect the corresponding enquiry interest", () => {
+  const { render } = testing;
+  for (const treatment of ["Full mouth dental implants", "All-on-6", "Composite bonding"]) {
+    const view = render(<SearchParamsContext.Provider value={new URLSearchParams({treatment})}><QuoteForm available={false} /></SearchParamsContext.Provider>);
+    assert.equal((view.getByRole("radio", {name:treatment}) as HTMLInputElement).checked,true);
+    view.unmount();
+  }
+});

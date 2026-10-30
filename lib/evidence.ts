@@ -1,5 +1,9 @@
-/** Public sources checked on 21 October 2026. No independent credential verification or clinical endorsement is implied. */
+/** Public source registry; expanded treatment entries checked on 31 October 2026. No independent credential verification or clinical endorsement is implied. */
 export const evidence = {
+  clinicAllOn6: { title: "Akdeniz Dental: published All-on-6 service information", url: "https://akdenizdental.com/all-on-6" },
+  clinicEmax: { title: "Akdeniz Dental: published E.max information", url: "https://akdenizdental.com/e-max" },
+  emaxManufacturer: { title: "Ivoclar: IPS e.max CAD and lithium disilicate restorations", url: "https://www.ivoclar.com/en_asia/products/digital-processes/ips-e.max-cad" },
+  bondingCda: { title: "Canadian Dental Association: bonding and veneers", url: "https://www.cda-adc.ca/for-the-public/understanding-your-oral-health/procedures/bonding-veneers" },
   allOn4Mandible: { title: "Maló et al. (2019): lower-jaw All-on-4 series with 10–18 years of follow-up", url: "https://pubmed.ncbi.nlm.nih.gov/30924309/" },
   allOn4Maxilla: { title: "Maló et al. (2019): upper-jaw All-on-4 series with 5–13 years of follow-up", url: "https://pubmed.ncbi.nlm.nih.gov/30924250/" },
   crownWaldecker: { title: "Waldecker et al. (2022): five-year prospective zirconia single-crown study", url: "https://www.jstage.jst.go.jp/article/jpr/66/2/66_JPR_D_21_00024/_article" },

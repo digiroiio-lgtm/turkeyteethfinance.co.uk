@@ -1,3 +1,5 @@
+import { ImplantComparison } from "@/components/implant-comparison";
+import { expandedTreatmentSlugs } from "@/lib/treatment-schema";
 import { TreatmentPaymentLinks } from "@/components/treatment-payment-links";
 import { TreatmentPackages } from "@/components/treatment-packages";
 import Link from "next/link";
@@ -105,6 +107,8 @@ export default async function ContentPage({
         </nav>
       </div>
       <ContentAttribution date={p.lastModified} />
+      {expandedTreatmentSlugs.includes(slug) && <section className="section treatment-search-answer" aria-label="Short treatment answer"><div className="container narrow"><p className="answer-first"><strong>{p.sections[0].body}</strong></p><p><Link href="/our-clinic">Check the clinic and care team</Link> · <Link href="/guides/compare-dental-quotes">Compare an itemised written plan</Link></p><div className="treatment-search-actions"><QuoteCTA treatment={p.treatment} /><a href={"https://wa.me/905353998999?text=" + encodeURIComponent(`Hello, I would like written information about ${p.treatment} in Antalya, including suitability, availability, itemised costs and visits.`)} className="text-link" target="_blank" rel="noopener noreferrer" data-analytics-action="whatsapp" data-analytics-location="content">Ask about {p.treatment?.toLowerCase()} on WhatsApp <ArrowRight size={16} aria-hidden="true" /></a></div></div></section>}
+      {slug === "full-mouth-dental-implants-turkey" && <ImplantComparison />}
       {p.treatment && ["veneers-finance", "zirconia-crowns-finance", "dental-implants-finance"].includes(slug) && <TreatmentPaymentLinks treatment={p.treatment} />}
       {p.kind === "monthly" && (
         <>
@@ -159,7 +163,7 @@ export default async function ContentPage({
       {slug === "dental-finance" && <FinanceAnswer />}
       {p.kind !== "monthly" && p.sections.length > 0 && (
         <section className="section editorial-section">
-          <div className={(p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance" || slug === "smile-makeover-finance") ? "container narrow" : "container"}><EditorialSections sections={p.sections} article={p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance" || slug === "smile-makeover-finance"} /></div>
+          <div className={(p.treatment || p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance" || slug === "smile-makeover-finance") ? "container narrow" : "container"}><EditorialSections sections={p.sections} article={!!p.treatment || p.kind === "guides" || p.kind === "clinic" || slug === "dental-finance" || slug === "finance-faq" || slug === "get-a-quote" || slug === "veneers-finance" || slug === "dental-implants-finance" || slug === "zirconia-crowns-finance" || slug === "all-on-4-finance" || slug === "smile-makeover-finance"} /></div>
         </section>
       )}
       {slug === "dental-finance" && (
