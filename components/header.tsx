@@ -17,6 +17,7 @@ export function Logo() {
 const links = [
   ["Prices", "/prices"],
   ["Pay Monthly", "/pay-monthly"],
+  ["Finance Calculator", "/finance-calculator"],
   ["How It Works", "/how-it-works"],
   ["Our Clinic", "/our-clinic"],
   ["Patients", "/before-and-after"],
