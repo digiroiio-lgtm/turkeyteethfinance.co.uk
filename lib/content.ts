@@ -16,7 +16,7 @@ import { financeFaqSections } from "./finance-faq-planning";
 import { legitSections, legitFaqs } from "./legit-planning";
 export type FAQ = { question: string; answer: string };
 export const homeContent = {
-  lastModified: "2026-10-30",
+  lastModified: "2026-10-31",
   title: "Turkey Teeth Finance: Payment Options for UK Patients",
   description:
     "Can you finance Turkey teeth? See how payment options and third-party finance work for UK patients, what to check first and how to request a quote.",

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { Check, Wallet, Heart, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Check, Wallet, Heart, Sparkles, Calculator, ArrowRight } from "lucide-react";
 import { Benefits, Eyebrow, QuoteCTA } from "./ui";
 import { homeContent } from "@/lib/content";
 export function Hero({
@@ -28,6 +29,12 @@ export function Hero({
           </h1>
           <p className="hero-description">{intro}</p>
           <QuoteCTA treatment={treatment} location="hero" />
+          {type === "home" && <div className="hero-calculator-cta">
+            <Link href="/finance-calculator" className="hero-calculator-link" aria-describedby="hero-calculator-note">
+              <Calculator size={18} aria-hidden="true" /> Estimate Monthly Payments <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+            <p id="hero-calculator-note">Illustrative estimates using your own assumptions.</p>
+          </div>}
           <Benefits />
         </div>
         <div className="hero-visual">
