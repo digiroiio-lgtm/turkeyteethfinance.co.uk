@@ -141,6 +141,16 @@ try {
       }
     } else if (catalog.length) throw new Error("Catalog leaked into " + entry.path);
     if (entry.path === "/" && document.querySelectorAll(".package-card").length !== 3) throw new Error("Expected three homepage previews.");
+    if (["/veneers-finance", "/zirconia-crowns-finance", "/dental-implants-finance"].includes(entry.path)) {
+      const panel = document.querySelector(".treatment-payment-section");
+      const items = treatmentPackages.filter(item => item.treatment === pages[entry.path.slice(1)].treatment);
+      if (!panel || panel.querySelectorAll(".treatment-payment-card").length !== items.length) throw new Error("Missing prominent payment package choices: " + entry.path);
+      for (const item of items) {
+        const href = `/finance-calculator?package=${item.id}#repayment-calculator`;
+        if (![...panel.querySelectorAll("a")].some(link => link.getAttribute("href") === href) || !panel.textContent.includes(packagePrice(item))) throw new Error("Wrong calculator package destination: " + item.id);
+      }
+      if (!(panel.compareDocumentPosition(document.querySelector(".editorial-section")) & 4)) throw new Error("Payment choices must appear before long-form treatment content.");
+    }
     if (entry.path === "/get-a-quote" && !document.getElementById("treatment-enquiry")) throw new Error("Treatment quote links need a server-rendered destination anchor.");
     if (entry.path === "/pay-monthly") {
       const article = schemas.filter(node => node["@type"] === "Article");

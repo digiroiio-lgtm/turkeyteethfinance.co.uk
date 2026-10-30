@@ -1,3 +1,4 @@
+import { TreatmentPaymentLinks } from "@/components/treatment-payment-links";
 import { TreatmentPackages } from "@/components/treatment-packages";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -104,6 +105,7 @@ export default async function ContentPage({
         </nav>
       </div>
       <ContentAttribution date={p.lastModified} />
+      {p.treatment && ["veneers-finance", "zirconia-crowns-finance", "dental-implants-finance"].includes(slug) && <TreatmentPaymentLinks treatment={p.treatment} />}
       {p.kind === "monthly" && (
         <>
           <section className="section" aria-label="Short answer">

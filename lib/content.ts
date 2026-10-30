@@ -230,7 +230,7 @@ export const pages: Record<string, PageContent> = {
     related: ["how-it-works", "prices", "finance-eligibility"],
   },
   "dental-implants-finance": {
-    "lastModified": "2026-10-29",
+    "lastModified": "2026-10-30",
     "title": "Dental Implants Finance in Turkey",
     "description": "Understand implant components, alternatives, healing visits and aftercare in Antalya. Request an itemised estimate for your missing teeth.",
     "label": "DENTAL IMPLANTS",
@@ -316,7 +316,7 @@ export const pages: Record<string, PageContent> = {
     related: ["dental-finance", "pay-monthly", "finance-faq"],
   },
   "veneers-finance": {
-    "lastModified": "2026-10-29",
+    "lastModified": "2026-10-30",
     "title": "Veneers Finance in Turkey: Planning",
     "description": "Compare veneers, bonding and crowns for treatment in Antalya. Understand preparation, maintenance, appointment planning and an itemised written estimate.",
     "label": "VENEERS",
@@ -430,7 +430,7 @@ export const pages: Record<string, PageContent> = {
     "treatment": "Smile makeover"
   },
   "zirconia-crowns-finance": {
-    "lastModified": "2026-10-29",
+    "lastModified": "2026-10-30",
     "title": "Zirconia Crowns Finance in Turkey",
     "description": "Understand zirconia crowns in Antalya: tooth preparation, alternatives, fit and aftercare. Ask for a tooth-by-tooth treatment plan and written estimate.",
     "label": "ZIRCONIA CROWNS",
