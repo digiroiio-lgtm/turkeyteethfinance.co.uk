@@ -197,7 +197,7 @@ export const pages: Record<string, PageContent> = {
     related: ["finance-calculator", "finance-eligibility", "prices", "dental-finance", "is-turkey-teeth-finance-legit"],
   },
   "dental-finance": {
-    lastModified: "2026-10-30",
+    lastModified: "2026-11-01",
     title: "Dental Finance in Turkey for UK Patients",
     description:
       "Can UK residents get finance for dental treatment in Turkey? A conditional answer, a payment-route comparison and how a treatment quote differs from a credit application.",

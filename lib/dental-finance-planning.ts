@@ -111,7 +111,7 @@ export const dentalFinanceSections: Section[] = [
       "MoneyHelper provides impartial information that can help you identify further support. Keep a list of your questions and the documents you do not understand, and ask the relevant professional to explain the options. Do not send account credentials or sensitive credit records through this website’s general enquiry form. If your immediate need is clinical information, request a written treatment estimate with no obligation to apply for credit. The next useful step may be a clearer explanation, a different clinical plan or postponement rather than an application.",
     ],
     sources: ["fcaSavings", "personalLoans"],
-    links: [{ text: "Ask for a written treatment estimate", href: "/get-a-quote" }, { text: "Read existing finance questions and answers", href: "/finance-faq" }],
+    links: [{ text: "Ask for a written treatment estimate", href: "/get-a-quote" }, { text: "Read existing finance questions and answers", href: "/finance-faq" }, { text: "Polish speakers: how to pay for treatment in Turkey while living in the UK (in Polish)", href: "https://leczeniezebowwturcji.pl/uk/jak-zaplacic-za-leczenie-zebow-w-turcji" }],
   },
 ];
 
