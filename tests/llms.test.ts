@@ -101,7 +101,7 @@ test("AI text exports state the canonical operator, clinic, broker and lender ro
     assert.ok(output.includes("Ideal4Finance"));
     assert.ok(output.includes("credit broker"));
     assert.ok(output.includes("not a lender"));
-    assert.ok(output.includes("The specific lender named in an individual credit offer"));
+    assert.ok(output.includes("Lender: the specific lender named in an individual credit offer"));
     assert.ok(output.includes("https://akdenizdental.com/contact-us"));
     assert.ok(output.includes("https://ideal4finance.com/"));
     assert.ok(output.includes("Clinical suitability requires assessment"));
