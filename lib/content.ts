@@ -219,7 +219,7 @@ export const pages: Record<string, PageContent> = {
     related: ["finance-calculator", "finance-eligibility", "prices", "dental-finance", "is-turkey-teeth-finance-legit"],
   },
   "dental-finance": {
-    lastModified: "2026-11-01",
+    lastModified: "2026-11-05",
     title: "Dental Finance for Treatment in Turkey | UK Patients",
     description:
       "Understand dental finance for UK patients considering treatment in Turkey: treatment estimates, payment routes, the credit broker and lender roles, and what to check before a separate application.",
@@ -229,7 +229,18 @@ export const pages: Record<string, PageContent> = {
     intro:
       "A clear treatment plan comes first. Then explore ways to pay for dental care in Antalya, including third-party finance for eligible UK patients.",
     sections: dentalFinanceSections,
-    faqs: [instalmentFAQs[1], commonFAQs[3]],
+    faqs: [
+      instalmentFAQs[1],
+      commonFAQs[3],
+      {
+        question: "What should I compare before choosing dental finance for treatment in Turkey?",
+        answer: "Compare the lender's actual APR, interest rate, fees, repayment term, monthly amount and total amount repayable. Check whether the offer is conditional, when repayments begin, whether early repayment charges apply and who the lender is. Separately compare the clinic's written treatment scope, stage-payment dates, cancellation terms and aftercare arrangements. A smaller monthly payment does not necessarily mean a lower overall cost.",
+      },
+      {
+        question: "Can I use a personal loan or savings instead of dental finance?",
+        answer: "Those may be alternatives to a broker-arranged dental credit application, depending on your circumstances and the terms available to you. Compare any personal loan's rate, fees and total repayable with the actual dental-finance offer, and consider whether using savings would leave enough emergency money for essential costs. This website does not recommend a particular borrowing product; MoneyHelper provides independent background on personal loans.",
+      },
+    ],
     related: ["pay-monthly", "finance-eligibility", "finance-faq", "is-turkey-teeth-finance-legit"],
   },
   "get-a-quote": {
