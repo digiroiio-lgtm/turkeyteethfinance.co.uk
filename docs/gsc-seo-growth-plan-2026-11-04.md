@@ -77,3 +77,21 @@ Export filter: Web search, last 3 months. The supplied daily chart contains data
 ## Measurement protocol
 
 Use fixed UK / Web / mobile + desktop filters and compare rolling 28-day periods. Track clicks, impressions, CTR, average position and query-to-page ownership. Segment branded vs non-branded queries and treatment vs payment vs trust intent. Keep a record of each page change and avoid interpreting a one- or two-impression position as a stable ranking.
+
+
+## UK keyword cluster implementation — 4 November 2026
+
+The cluster is deliberately mapped to distinct intent owners to reduce cannibalisation:
+
+| Search intent / query family | Primary URL | Supporting pages |
+|---|---|---|
+| turkey teeth finance; finance turkey teeth | / | /dental-finance, /how-it-works |
+| pay monthly for Turkey teeth; Turkey teeth on finance; Turkey teeth payment plan | /pay-monthly | /finance-calculator, /finance-eligibility, /guides/turkey-teeth-deposits-and-payment-plans |
+| dental finance Turkey; dental finance for treatment in Turkey UK | /dental-finance | /finance-faq, /is-turkey-teeth-finance-legit |
+| dental finance calculator; monthly repayment estimate | /finance-calculator | /pay-monthly, /prices |
+| smile makeover finance Turkey | /smile-makeover-finance | /prices, /pay-monthly |
+| All-on-4 dental implants finance Turkey | /all-on-4-finance | /dental-implants-finance, /prices |
+
+Implementation: descriptive contextual HTML links connect the finance topic pages; pay-monthly metadata and FAQs explicitly distinguish monthly borrowing from clinic stage payments. Treatment page metadata clarifies UK/Turkey scope without making unsupported treatment or finance claims. The query "without a credit check" is answered cautiously and is not used as a promise or sales claim.
+
+Measurement: use UK-only Search Console query/page exports and verify the intended URL owns each query family. Compare fixed rolling 28-day periods; monitor impressions, clicks, CTR and average position. Do not create extra near-duplicate pages or repeat exact-match phrases unnaturally.
