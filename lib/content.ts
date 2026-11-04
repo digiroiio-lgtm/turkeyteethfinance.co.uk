@@ -190,7 +190,7 @@ export const pages: Record<string, PageContent> = {
   ...expandedTreatmentPages,
   "finance-calculator": calculatorContent,
   "pay-monthly": {
-    lastModified: "2026-10-30",
+    lastModified: "2026-11-05",
     title: "Pay Monthly for Turkey Teeth: UK Dental Finance Options",
     description:
       "Explore ways to pay monthly for Turkey teeth from the UK. Compare separate borrowing with clinic stage payments and estimate repayments using your own assumptions; approval and terms depend on the lender.",
@@ -210,6 +210,10 @@ export const pages: Record<string, PageContent> = {
       {
         question: "What is the difference between paying monthly and clinic stage payments?",
         answer: "Monthly borrowing is repaid to a lender under a separate credit agreement. Clinic stage payments are dates for paying the treating clinic and are not necessarily monthly instalments. Ask for both schedules in writing and compare the full cost before booking.",
+      },
+      {
+        question: "Can I get Turkey teeth finance with bad credit?",
+        answer: "Possibly, but there is no guaranteed route or universal credit threshold. The broker can explain the application process and the lender assesses your credit history, income, existing commitments and affordability against its current criteria. Ask what type of credit search is used before you proceed. If repayments would make essential bills difficult, consider postponing elective treatment and seek independent money guidance.",
       },
     ],
     related: ["finance-calculator", "finance-eligibility", "prices", "dental-finance", "is-turkey-teeth-finance-legit"],
