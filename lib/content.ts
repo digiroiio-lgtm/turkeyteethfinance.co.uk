@@ -405,9 +405,9 @@ export const pages: Record<string, PageContent> = {
     ]
   },
   "smile-makeover-finance": {
-    "lastModified": "2026-10-29",
-    "title": "Smile Makeover Finance in Turkey",
-    "description": "Plan a smile makeover in Antalya around your own teeth. Compare less invasive options, treatment stages, materials and individual quote details.",
+    "lastModified": "2026-11-04",
+    "title": "Smile Makeover in Turkey: Treatment Planning & Finance",
+    "description": "Explore a smile makeover in Turkey for UK patients. Understand treatment options, stages, materials and how to review a separate finance decision after receiving an individual quote.",
     "label": "SMILE MAKEOVER",
     "heading": "Your smile makeover.",
     "accent": "One considered plan.",
@@ -482,8 +482,8 @@ export const pages: Record<string, PageContent> = {
   },
   "all-on-4-finance": {
     "lastModified": "2026-10-29",
-    "title": "All-on-4 Finance in Turkey: Visits & Care",
-    "description": "Plan full-arch implant treatment in Antalya. Compare fixed and removable options, temporary and final teeth, visits and quote inclusions.",
+    "title": "All-on-4 Dental Implants in Turkey: Costs, Finance & Visits",
+    "description": "Explore All-on-4 dental implants in Turkey for UK patients. Understand full-arch options, treatment stages, written quote inclusions and separate payment or finance considerations.",
     "label": "ALL-ON-4",
     "heading": "All-on-4 in Turkey.",
     "accent": "A full-arch plan.",
