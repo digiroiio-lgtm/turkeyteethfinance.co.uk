@@ -158,6 +158,14 @@ export const commonFAQs: FAQ[] = [
 ];
 
 
+export const homeFAQs: FAQ[] = [
+  ...commonFAQs,
+  {
+    question: "How does Turkey teeth finance work for UK patients?",
+    answer: "Start with a written treatment estimate from the clinic. If you want to borrow, a separate credit broker can explain the application route and the lender assesses your application and sets any offer. The treatment enquiry is not a credit application, the clinic provides dental care, and the UK coordination company does not lend money or decide credit applications.",
+  },
+];
+
 export const instalmentFAQs: FAQ[] = [
   {
     question: "Can I pay for veneers or dental implants abroad in instalments?",
@@ -182,7 +190,7 @@ export const pages: Record<string, PageContent> = {
   ...expandedTreatmentPages,
   "finance-calculator": calculatorContent,
   "pay-monthly": {
-    lastModified: "2026-10-30",
+    lastModified: "2026-11-05",
     title: "Pay Monthly for Turkey Teeth: UK Dental Finance Options",
     description:
       "Explore ways to pay monthly for Turkey teeth from the UK. Compare separate borrowing with clinic stage payments and estimate repayments using your own assumptions; approval and terms depend on the lender.",
@@ -203,11 +211,15 @@ export const pages: Record<string, PageContent> = {
         question: "What is the difference between paying monthly and clinic stage payments?",
         answer: "Monthly borrowing is repaid to a lender under a separate credit agreement. Clinic stage payments are dates for paying the treating clinic and are not necessarily monthly instalments. Ask for both schedules in writing and compare the full cost before booking.",
       },
+      {
+        question: "Can I get Turkey teeth finance with bad credit?",
+        answer: "Possibly, but there is no guaranteed route or universal credit threshold. The broker can explain the application process and the lender assesses your credit history, income, existing commitments and affordability against its current criteria. Ask what type of credit search is used before you proceed. If repayments would make essential bills difficult, consider postponing elective treatment and seek independent money guidance.",
+      },
     ],
     related: ["finance-calculator", "finance-eligibility", "prices", "dental-finance", "is-turkey-teeth-finance-legit"],
   },
   "dental-finance": {
-    lastModified: "2026-11-01",
+    lastModified: "2026-11-05",
     title: "Dental Finance for Treatment in Turkey | UK Patients",
     description:
       "Understand dental finance for UK patients considering treatment in Turkey: treatment estimates, payment routes, the credit broker and lender roles, and what to check before a separate application.",
@@ -217,7 +229,18 @@ export const pages: Record<string, PageContent> = {
     intro:
       "A clear treatment plan comes first. Then explore ways to pay for dental care in Antalya, including third-party finance for eligible UK patients.",
     sections: dentalFinanceSections,
-    faqs: [instalmentFAQs[1], commonFAQs[3]],
+    faqs: [
+      instalmentFAQs[1],
+      commonFAQs[3],
+      {
+        question: "What should I compare before choosing dental finance for treatment in Turkey?",
+        answer: "Compare the lender's actual APR, interest rate, fees, repayment term, monthly amount and total amount repayable. Check whether the offer is conditional, when repayments begin, whether early repayment charges apply and who the lender is. Separately compare the clinic's written treatment scope, stage-payment dates, cancellation terms and aftercare arrangements. A smaller monthly payment does not necessarily mean a lower overall cost.",
+      },
+      {
+        question: "Can I use a personal loan or savings instead of dental finance?",
+        answer: "Those may be alternatives to a broker-arranged dental credit application, depending on your circumstances and the terms available to you. Compare any personal loan's rate, fees and total repayable with the actual dental-finance offer, and consider whether using savings would leave enough emergency money for essential costs. This website does not recommend a particular borrowing product; MoneyHelper provides independent background on personal loans.",
+      },
+    ],
     related: ["pay-monthly", "finance-eligibility", "finance-faq", "is-turkey-teeth-finance-legit"],
   },
   "get-a-quote": {
