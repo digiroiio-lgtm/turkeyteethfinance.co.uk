@@ -158,6 +158,14 @@ export const commonFAQs: FAQ[] = [
 ];
 
 
+export const homeFAQs: FAQ[] = [
+  ...commonFAQs,
+  {
+    question: "How does Turkey teeth finance work for UK patients?",
+    answer: "Start with a written treatment estimate from the clinic. If you want to borrow, a separate credit broker can explain the application route and the lender assesses your application and sets any offer. The treatment enquiry is not a credit application, the clinic provides dental care, and the UK coordination company does not lend money or decide credit applications.",
+  },
+];
+
 export const instalmentFAQs: FAQ[] = [
   {
     question: "Can I pay for veneers or dental implants abroad in instalments?",
