@@ -675,26 +675,42 @@ export const pages: Record<string, PageContent> = {
     ]
   },
   "how-it-works": {
-    lastModified: "2026-10-21",
-    title: "How Dental Finance in Turkey Works",
+    lastModified: "2026-11-04",
+    title: "How Dental Treatment in Turkey Works for UK Patients",
     description:
-      "Follow four steps from a written treatment enquiry to planning your visit to Antalya. Explore finance separately, with no required phone call to request a quote.",
-    label: "HOW IT WORKS",
-    heading: "Four simple steps.",
-    accent: "We help you plan.",
+      "Understand the UK patient journey for dental treatment in Antalya: written estimate, dentist-led treatment plan, payment choices and travel coordination. Finance is a separate decision.",
+    label: "YOUR TREATMENT JOURNEY",
+    heading: "How does dental treatment in Turkey work?",
+    accent: "A clear journey for UK patients.",
     kind: "journey",
     intro:
-      "From your first written enquiry to your visit, understand the treatment, payment options and travel arrangements before you commit.",
+      "From your first written enquiry to your visit, understand the treatment, payment options and travel arrangements before you commit. The coordination team helps organise information and appointments; the treating dentist makes all clinical decisions.",
     sections: [
       {
-        title: "You stay in control",
-        body: "Choose email or WhatsApp for your enquiry. Review your plan in writing, ask questions and decide in your own time. You do not need to accept a finance offer to obtain a treatment quote.",
-        links: [{"text": "Plan your clinical appointments", "href": "/guides/plan-dental-visit-antalya"}, {"text": "Check the treating team", "href": "/our-clinic"}],
+        title: "1. Request a written treatment estimate",
+        body: "Tell the coordination team which treatment you want to discuss and share the information requested for an initial review. You can choose email or WhatsApp. An online estimate is provisional: it is not a diagnosis, a confirmed treatment plan or a guarantee of the final price.",
+        links: [{ text: "Request a written dental treatment estimate", href: "/get-a-quote" }, { text: "Compare package prices and inclusions", href: "/prices" }],
+      },
+      {
+        title: "2. Review the dentist-led treatment plan",
+        body: "The treating dentist assesses your oral health, discusses suitable options and confirms the clinical plan. Ask for the proposed procedures, materials, number of visits, exclusions and aftercare arrangements in writing. The plan may change after an in-person assessment.",
+        links: [{ text: "Check the clinic and treating team", href: "/our-clinic" }, { text: "How to compare dental treatment quotes", href: "/guides/compare-dental-quotes" }],
         sources: ["gdc"],
       },
       {
-        title: "Clinical decisions belong with the dentist",
-        body: "Our UK company helps coordinate the journey. Diagnosis, consent, procedures and aftercare advice are the responsibility of the treating clinical team in Antalya.",
+        title: "3. Compare how you will pay",
+        body: "Review the treatment cost first. You can ask about the clinic payment schedule or consider a separate third-party finance application if available to you. A credit broker is not a lender, the lender decides whether to offer credit, and approval, rates and terms are not guaranteed. Compare APR, fees, term and total amount repayable in the lender documents.",
+        links: [{ text: "Understand dental finance in Turkey for UK patients", href: "/dental-finance" }, { text: "Explore monthly payment options", href: "/pay-monthly" }, { text: "Estimate repayments", href: "/finance-calculator" }],
+      },
+      {
+        title: "4. Confirm appointments and travel",
+        body: "Only arrange travel after the clinic has confirmed the proposed appointment schedule and you understand the payment and cancellation terms. Some treatments need more than one visit and a healing interval. Confirm the dates and aftercare contact with the clinical team before booking.",
+        links: [{ text: "Plan your dental visit to Antalya", href: "/guides/plan-dental-visit-antalya" }],
+      },
+      {
+        title: "Who is responsible for clinical care?",
+        body: "Akdeniz Dental Consultancy UK Ltd provides consultancy and patient coordination, not clinical treatment. Diagnosis, consent, procedures and clinical aftercare advice are the responsibility of the treating clinical team in Antalya. Ask who your treating dentist is and how to contact the clinic if you need help after returning to the UK.",
+        links: [{ text: "Read about the clinic", href: "/our-clinic" }, { text: "Read the patient reviews guidance", href: "/reviews" }],
       },
     ],
     faqs: [commonFAQs[1], commonFAQs[4], legitFaqs[0]],
