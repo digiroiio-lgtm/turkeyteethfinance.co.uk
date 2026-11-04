@@ -183,9 +183,9 @@ export const pages: Record<string, PageContent> = {
   "finance-calculator": calculatorContent,
   "pay-monthly": {
     lastModified: "2026-10-30",
-    title: "Can You Pay Monthly for Turkey Teeth? Payment Options",
+    title: "Pay Monthly for Turkey Teeth: UK Dental Finance Options",
     description:
-      "Can you pay monthly for Turkey teeth? Compare loans, clinic stage payments and other ways to pay, then estimate repayments using your own assumptions.",
+      "Explore ways to pay monthly for Turkey teeth from the UK. Compare separate borrowing with clinic stage payments and estimate repayments using your own assumptions; approval and terms depend on the lender.",
     label: "PAY MONTHLY",
     heading: "Can you pay monthly for Turkey teeth?",
     accent: "Understand your options.",
@@ -193,14 +193,24 @@ export const pages: Record<string, PageContent> = {
     intro:
       "Explore dental treatment in Antalya with flexible monthly payment options for eligible UK patients, subject to status and lender approval.",
     sections: monthlyPlanning.sections,
-    faqs: [commonFAQs[0], instalmentFAQs[0], instalmentFAQs[2], commonFAQs[2]],
+    faqs: [
+      commonFAQs[0], instalmentFAQs[0], instalmentFAQs[2], commonFAQs[2],
+      {
+        question: "Can I get Turkey teeth finance without a credit check?",
+        answer: "Do not assume that finance is available without a credit check. The broker and lender explain which eligibility and credit searches apply at each stage. Ask whether a check is soft or hard before continuing, read the current disclosures and remember that approval is never guaranteed.",
+      },
+      {
+        question: "What is the difference between paying monthly and clinic stage payments?",
+        answer: "Monthly borrowing is repaid to a lender under a separate credit agreement. Clinic stage payments are dates for paying the treating clinic and are not necessarily monthly instalments. Ask for both schedules in writing and compare the full cost before booking.",
+      },
+    ],
     related: ["finance-calculator", "finance-eligibility", "prices", "dental-finance", "is-turkey-teeth-finance-legit"],
   },
   "dental-finance": {
     lastModified: "2026-11-01",
-    title: "Dental Finance in Turkey for UK Patients",
+    title: "Dental Finance for Treatment in Turkey | UK Patients",
     description:
-      "Can UK residents get finance for dental treatment in Turkey? A conditional answer, a payment-route comparison and how a treatment quote differs from a credit application.",
+      "Understand dental finance for UK patients considering treatment in Turkey: treatment estimates, payment routes, the credit broker and lender roles, and what to check before a separate application.",
     label: "DENTAL FINANCE",
     heading: "Dental finance in Turkey.",
     accent: "Explore your options.",
@@ -395,9 +405,9 @@ export const pages: Record<string, PageContent> = {
     ]
   },
   "smile-makeover-finance": {
-    "lastModified": "2026-10-29",
-    "title": "Smile Makeover Finance in Turkey",
-    "description": "Plan a smile makeover in Antalya around your own teeth. Compare less invasive options, treatment stages, materials and individual quote details.",
+    "lastModified": "2026-11-04",
+    "title": "Smile Makeover in Turkey: Treatment Planning & Finance",
+    "description": "Explore a smile makeover in Turkey for UK patients. Understand treatment options, stages, materials and how to review a separate finance decision after receiving an individual quote.",
     "label": "SMILE MAKEOVER",
     "heading": "Your smile makeover.",
     "accent": "One considered plan.",
@@ -472,8 +482,8 @@ export const pages: Record<string, PageContent> = {
   },
   "all-on-4-finance": {
     "lastModified": "2026-10-29",
-    "title": "All-on-4 Finance in Turkey: Visits & Care",
-    "description": "Plan full-arch implant treatment in Antalya. Compare fixed and removable options, temporary and final teeth, visits and quote inclusions.",
+    "title": "All-on-4 Dental Implants in Turkey: Costs, Finance & Visits",
+    "description": "Explore All-on-4 dental implants in Turkey for UK patients. Understand full-arch options, treatment stages, written quote inclusions and separate payment or finance considerations.",
     "label": "ALL-ON-4",
     "heading": "All-on-4 in Turkey.",
     "accent": "A full-arch plan.",
@@ -675,26 +685,42 @@ export const pages: Record<string, PageContent> = {
     ]
   },
   "how-it-works": {
-    lastModified: "2026-10-21",
-    title: "How Dental Finance in Turkey Works",
+    lastModified: "2026-11-04",
+    title: "How Dental Treatment in Turkey Works for UK Patients",
     description:
-      "Follow four steps from a written treatment enquiry to planning your visit to Antalya. Explore finance separately, with no required phone call to request a quote.",
-    label: "HOW IT WORKS",
-    heading: "Four simple steps.",
-    accent: "We help you plan.",
+      "Understand the UK patient journey for dental treatment in Antalya: written estimate, dentist-led treatment plan, payment choices and travel coordination. Finance is a separate decision.",
+    label: "YOUR TREATMENT JOURNEY",
+    heading: "How does dental treatment in Turkey work?",
+    accent: "A clear journey for UK patients.",
     kind: "journey",
     intro:
-      "From your first written enquiry to your visit, understand the treatment, payment options and travel arrangements before you commit.",
+      "From your first written enquiry to your visit, understand the treatment, payment options and travel arrangements before you commit. The coordination team helps organise information and appointments; the treating dentist makes all clinical decisions.",
     sections: [
       {
-        title: "You stay in control",
-        body: "Choose email or WhatsApp for your enquiry. Review your plan in writing, ask questions and decide in your own time. You do not need to accept a finance offer to obtain a treatment quote.",
-        links: [{"text": "Plan your clinical appointments", "href": "/guides/plan-dental-visit-antalya"}, {"text": "Check the treating team", "href": "/our-clinic"}],
+        title: "1. Request a written treatment estimate",
+        body: "Tell the coordination team which treatment you want to discuss and share the information requested for an initial review. You can choose email or WhatsApp. An online estimate is provisional: it is not a diagnosis, a confirmed treatment plan or a guarantee of the final price.",
+        links: [{ text: "Request a written dental treatment estimate", href: "/get-a-quote" }, { text: "Compare package prices and inclusions", href: "/prices" }],
+      },
+      {
+        title: "2. Review the dentist-led treatment plan",
+        body: "The treating dentist assesses your oral health, discusses suitable options and confirms the clinical plan. Ask for the proposed procedures, materials, number of visits, exclusions and aftercare arrangements in writing. The plan may change after an in-person assessment.",
+        links: [{ text: "Check the clinic and treating team", href: "/our-clinic" }, { text: "How to compare dental treatment quotes", href: "/guides/compare-dental-quotes" }],
         sources: ["gdc"],
       },
       {
-        title: "Clinical decisions belong with the dentist",
-        body: "Our UK company helps coordinate the journey. Diagnosis, consent, procedures and aftercare advice are the responsibility of the treating clinical team in Antalya.",
+        title: "3. Compare how you will pay",
+        body: "Review the treatment cost first. You can ask about the clinic payment schedule or consider a separate third-party finance application if available to you. A credit broker is not a lender, the lender decides whether to offer credit, and approval, rates and terms are not guaranteed. Compare APR, fees, term and total amount repayable in the lender documents.",
+        links: [{ text: "Understand dental finance in Turkey for UK patients", href: "/dental-finance" }, { text: "Explore monthly payment options", href: "/pay-monthly" }, { text: "Estimate repayments", href: "/finance-calculator" }],
+      },
+      {
+        title: "4. Confirm appointments and travel",
+        body: "Only arrange travel after the clinic has confirmed the proposed appointment schedule and you understand the payment and cancellation terms. Some treatments need more than one visit and a healing interval. Confirm the dates and aftercare contact with the clinical team before booking.",
+        links: [{ text: "Plan your dental visit to Antalya", href: "/guides/plan-dental-visit-antalya" }],
+      },
+      {
+        title: "Who is responsible for clinical care?",
+        body: "Akdeniz Dental Consultancy UK Ltd provides consultancy and patient coordination, not clinical treatment. Diagnosis, consent, procedures and clinical aftercare advice are the responsibility of the treating clinical team in Antalya. Ask who your treating dentist is and how to contact the clinic if you need help after returning to the UK.",
+        links: [{ text: "Read about the clinic", href: "/our-clinic" }, { text: "Read the patient reviews guidance", href: "/reviews" }],
       },
     ],
     faqs: [commonFAQs[1], commonFAQs[4], legitFaqs[0]],

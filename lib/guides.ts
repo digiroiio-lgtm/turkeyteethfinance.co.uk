@@ -102,12 +102,12 @@ export const guideArticles: PatientGuide[] = [
   },
   {
     id: "finance-abroad-uk", path: "/guides/dental-finance-for-treatment-abroad-uk",
-    title: "Dental finance for treatment abroad: what UK patients should compare",
+    title: "Dental Finance for Treatment in Turkey: UK Patient Guide",
     category: "PAYMENT OPTIONS",
     summary: "How to compare ways to pay for dental treatment abroad: APR, fees, term and total repayable.",
-    description: "What UK patients should compare when choosing how to pay for dental treatment abroad: personal loans, dental finance, credit cards and saving, with the questions to ask each lender.",
-    lastModified: "2026-10-28",
-    paragraphs: ["There is no single best way to pay for dental treatment abroad. The right choice depends on how much you need, how quickly you want to repay and what you can comfortably afford. Establish the treatment cost in writing first, then compare the full cost of each payment route using the provider’s own documents rather than headline figures."],
+    description: "A UK patient guide to paying for dental treatment in Turkey. Compare personal loans, broker-arranged finance, credit cards and savings, including APR, fees, repayment term and total repayable.",
+    lastModified: "2026-11-04",
+    paragraphs: ["There is no single best way to pay for dental treatment in Turkey from the UK. Eligible UK patients may be able to explore third-party finance, but availability and terms depend on the broker, lender and the applicant’s circumstances. The lender makes the credit decision. Establish the proposed treatment cost in writing first, then compare the full cost of each payment route using the provider’s own documents rather than headline figures."],
     sections: [
       {
         title: "What are the main ways to pay for treatment abroad from the UK?",

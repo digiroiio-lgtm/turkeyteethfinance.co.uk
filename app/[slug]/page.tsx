@@ -40,6 +40,7 @@ import { monthlyPlanning } from "@/lib/monthly-planning";
 import { financeAnswer } from "@/lib/price-planning";
 import { PaymentRouteComparison } from "@/components/payment-route-comparison";
 import { FinanceAnswer } from "@/components/finance-answer";
+import { FinanceClusterLinks } from "@/components/finance-cluster-links";
 export const dynamicParams = false;
 export function generateStaticParams() {
   return routeSlugs.map((slug) => ({ slug }));
@@ -217,6 +218,7 @@ export default async function ContentPage({
           </div>
         </section>
       )}
+      <FinanceClusterLinks currentSlug={slug} />
       <FAQSection faqs={p.faqs} />
       <ConversionBanner treatment={p.treatment} />
       <RelatedLinks slugs={p.related} />
