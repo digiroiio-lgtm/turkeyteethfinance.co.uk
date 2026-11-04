@@ -3411,3 +3411,10 @@ select:focus-visible {
 @media(min-width:701px) and (max-width:1000px){.treatment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .treatment-card:last-child{grid-column:auto}.treatment-card{min-width:0}.treatment-card .text-link{margin-top:auto}
 .treatment-search-answer{background:linear-gradient(120deg,#fbf8ff,#f1fbf8);border-block:1px solid var(--line)}.treatment-search-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px}.treatment-search-actions>.text-link{min-height:44px;overflow-wrap:anywhere}@media(max-width:600px){.treatment-search-actions{align-items:stretch;flex-direction:column}.treatment-search-actions>.button{width:100%}}
+
+/* Sitelinks discovery section: visible, semantic HTML links */
+.sitelinks-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; list-style: none; padding: 0; margin: 1.5rem 0 0; }
+.sitelinks-grid li { border: 1px solid var(--border, #dce2e5); border-radius: 12px; padding: 1.25rem; }
+.sitelinks-grid a { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.sitelinks-grid p { margin: .6rem 0 0; }
+@media (max-width: 760px) { .sitelinks-grid { grid-template-columns: 1fr; } }
