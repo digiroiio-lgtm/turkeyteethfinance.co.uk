@@ -1,3 +1,4 @@
+import { ImportantPages } from "@/components/important-pages";
 import { TreatmentPackages } from "@/components/treatment-packages";
 import { Hero } from "@/components/hero";
 import {
@@ -27,6 +28,7 @@ export default function Home() {
       <ConversionBanner location="conversion_upper" />
       <TreatmentGrid answerIntro />
       <BudgetExplorer answerIntro />
+      <ImportantPages />
       <HomeGuide />
       <EligibilityPanel />
       <FAQSection faqs={commonFAQs} />
