@@ -20,6 +20,8 @@ const links = [
   ["Finance Calculator", "/finance-calculator"],
   ["How It Works", "/how-it-works"],
   ["Our Clinic", "/our-clinic"],
+  ["Patient Reviews", "/reviews"],
+  ["Contact", "/contact"],
   ["Patients", "/before-and-after"],
   ["FAQ", "/finance-faq"],
   ["Guides", "/guides"],
