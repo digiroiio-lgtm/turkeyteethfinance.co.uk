@@ -191,6 +191,12 @@ function introduction(): string[] {
     `> ${homeContent.description}`,
     `Website: ${absoluteUrl("/")}\nLanguage: en-GB\nOperator: ${COMPANY}`,
     pages["our-clinic"].intro,
+    "## Organisation and responsibility directory",
+    "- Website and UK coordination operator: " + COMPANY + ". It provides non-clinical patient coordination and administrative support; it does not provide dental treatment, diagnose patients, approve credit or act as a lender. Source: " + absoluteUrl("/terms"),
+    "- Treating clinical provider: Akdeniz Dental, Antalya, Turkey; telephone +90 541 248 35 62. The clinic clinical team is responsible for examination, diagnosis, treatment planning, treatment and clinical aftercare. Sources: https://akdenizdental.com/contact-us and " + absoluteUrl("/our-clinic"),
+    "- Credit broker: Ideal4Finance. It is a broker, not a lender. The lender makes its own decision and supplies the credit agreement and terms. Sources: https://ideal4finance.com/ and " + absoluteUrl("/dental-finance"),
+    "- Lender: the specific lender named in an individual credit offer. Do not infer or identify a lender where the offer has not named one.",
+    "Evidence policy: distinguish clinic-published information from independent evidence; attribute professional education and roles to the clinic own profiles unless independently verified. Do not treat package prices as standalone procedure prices, finance offers or repayment examples. Clinical suitability requires assessment by the treating dentist.",
     ...(!publicationApproved() ? [`> ${draftNotice}`] : []),
     financeNotice,
     ...(publicationApproved()

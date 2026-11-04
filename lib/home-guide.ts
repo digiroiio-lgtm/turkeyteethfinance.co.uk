@@ -291,6 +291,8 @@ export function homeStructuredData() {
         name: homeContent.title, description: homeContent.description,
         dateModified: homeContent.lastModified, inLanguage: "en-GB",
         isPartOf: { "@id": url + "#website" },
+        publisher: { "@id": url + "#organisation" },
+        about: { "@id": "https://akdenizdental.com/#clinic" },
         hasPart: { "@id": url + "#patient-guide" },
       },
       {
@@ -305,7 +307,11 @@ export function homeStructuredData() {
         articleSection: homeGuideSections.map((section) => section.title),
         articleBody: homeGuideText(),
         citation: homeGuideSources.map((source) => source.url),
-        about: { "@type": "Thing", name: SITE_NAME + " patient planning" },
+        about: [
+          { "@id": "https://akdenizdental.com/#clinic" },
+          { "@id": "https://ideal4finance.com/#organisation" },
+          { "@type": "Thing", name: SITE_NAME + " patient planning" },
+        ],
       },
       {
         "@type": "FAQPage", "@id": url + "#faq",
