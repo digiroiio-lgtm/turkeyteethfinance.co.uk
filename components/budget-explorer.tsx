@@ -98,6 +98,7 @@ export function BudgetExplorer({ answerIntro = false }: { answerIntro?: boolean 
             </div>
             <Link
               data-analytics-action="quote" data-analytics-location="budget_planner"
+              rel="nofollow"
               href={`/get-a-quote?treatment=${encodeURIComponent(treatment)}&budget=${cost}#treatment-enquiry`}
               className="button button-small"
             >

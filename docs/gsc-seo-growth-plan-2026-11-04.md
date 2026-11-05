@@ -95,3 +95,19 @@ The cluster is deliberately mapped to distinct intent owners to reduce cannibali
 Implementation: descriptive contextual HTML links connect the finance topic pages; pay-monthly metadata and FAQs explicitly distinguish monthly borrowing from clinic stage payments. Treatment page metadata clarifies UK/Turkey scope without making unsupported treatment or finance claims. The query "without a credit check" is answered cautiously and is not used as a promise or sales claim.
 
 Measurement: use UK-only Search Console query/page exports and verify the intended URL owns each query family. Compare fixed rolling 28-day periods; monitor impressions, clicks, CTR and average position. Do not create extra near-duplicate pages or repeat exact-match phrases unnaturally.
+
+
+## 5 November refresh (Search Console, Web, last 3 months)
+
+Facts from the supplied device, country and page exports, plus query x page rows from the Search Console API for 5 Aug - 5 Nov 2026. Volumes are very small; treat everything below as an early signal, not a trend.
+
+- Totals: 148 impressions, 1 click. United Kingdom 96 impressions (65%), average position 61.6; United States 15 (position 23.8); Turkey 9.
+- The only click is /all-on-6-finance (8 impressions, position 19.1). The clicking query is not visible in the export.
+- /prices and /pay-monthly do not appear in the page export (no impressions in the period). Whether they are indexed, or whether Google selected another URL as canonical, is not known from these files.
+- The parameterised URL /get-a-quote?treatment=Veneers&budget=3500 had 10 impressions (position 31.5), while /get-a-quote had none. The only internal link producing exactly that URL is the budget planner default (veneers, 3,500).
+- Head queries are spread across many URLs: "turkey teeth finance" appears on 15+ pages (positions 53-97) and "teeth on finance turkey" on 14 pages (positions 42-50). For "finance turkey teeth" the best row is /how-it-works (6 impressions, position 17.2). This is not proof of cannibalisation at this volume.
+- "turkey teeth on finance no credit check" appears on 12 pages (positions 38-50). Do not target it or imply any credit-check promise.
+
+Changes made on this basis: the budget planner CTA is marked rel="nofollow" (the link, prefill and enquiry flow are unchanged); /reviews, /before-and-after, /our-clinic and /all-on-6-finance now show the existing finance cluster links.
+
+Open checks for the Search Console owner: URL Inspection for /prices, /pay-monthly, /get-a-quote and the parameterised URL above (indexed? Google-selected canonical?); a Links export. If Google selected the parameterised URL as canonical, plan a separate fix to the budget link.
