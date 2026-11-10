@@ -2,7 +2,7 @@ import { pages } from "./content";
 import { COMPANY, SITE_URL, canonicalUrl } from "./site";
 import { evidence } from "./evidence";
 import { implantComparison } from "./expanded-treatments";
-export const expandedTreatmentSlugs = ["full-mouth-dental-implants-turkey", "all-on-6-finance", "composite-bonding-turkey", "veneers-finance"];
+export const expandedTreatmentSlugs = ["full-mouth-dental-implants-turkey", "all-on-6-finance", "composite-bonding-turkey", "veneers-finance", "veneers-turkey-cost", "dental-implants-turkey-prices"];
 export function implantComparisonText() {
   return implantComparison.map(row => `${row.option}. Support: ${row.support}. Removal: ${row.removal}. Cost scope: ${row.cost}.`).join("\n");
 }
