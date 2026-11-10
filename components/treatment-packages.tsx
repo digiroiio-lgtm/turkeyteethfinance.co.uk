@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, Check, MessageCircle, Moon, Sparkles } from "lucide-react";
 import { packageCondition, packageInclusions, packageIntro, packagePrice, packageQuoteHref, packageWhatsAppHref, treatmentPackages } from "@/lib/packages";
+const costGuides: Record<string, { href: string; text: string }> = {
+  "veneers-16": { href: "/veneers-turkey-cost", text: "What the veneer price covers" },
+  "veneers-20": { href: "/veneers-turkey-cost", text: "What the veneer price covers" },
+  "osstem-4-crowns-24": { href: "/dental-implants-turkey-prices", text: "What the implant price covers" },
+};
 export function TreatmentPackages({ preview = false }: { preview?: boolean }) {
   const items = preview ? treatmentPackages.filter(item => ["zirconium-24", "veneers-16", "osstem-4-crowns-24"].includes(item.id)) : treatmentPackages;
   return <section className="section packages-section" id="dental-treatment-packages" aria-labelledby="packages-heading" data-package-list={preview ? "packages_preview" : "packages_full"}><div className="container">
@@ -15,7 +20,8 @@ export function TreatmentPackages({ preview = false }: { preview?: boolean }) {
       <div className="package-actions"><Link href={packageQuoteHref(item)} className="button button-small" data-analytics-action="quote" data-analytics-location="package_card" data-analytics-package={item.id} aria-label={`Get a Free Quote for ${item.name}`}>Get a Free Quote <ArrowRight size={17} aria-hidden="true" /></Link>
       <a href={packageWhatsAppHref(item)} className="package-whatsapp" target="_blank" rel="noopener noreferrer" data-analytics-action="whatsapp" data-analytics-location="package_card" data-analytics-package={item.id} aria-label={`Enquire on WhatsApp about ${item.name}`}><MessageCircle size={18} aria-hidden="true" /> Enquire on WhatsApp</a>
       <Link className="package-treatment-link" href={`/finance-calculator?package=${item.id}#repayment-calculator`}>Estimate monthly repayments <ArrowRight size={14} aria-hidden="true" /></Link>
-      <Link className="package-treatment-link" href={item.treatmentPath}>Explore the treatment <ArrowRight size={14} aria-hidden="true" /></Link></div>
+      <Link className="package-treatment-link" href={item.treatmentPath}>Explore the treatment <ArrowRight size={14} aria-hidden="true" /></Link>
+      {costGuides[item.id] && <Link className="package-treatment-link" href={costGuides[item.id].href}>{costGuides[item.id].text} <ArrowRight size={14} aria-hidden="true" /></Link>}</div>
     </article>)}</div>
     <div className="package-footnote"><p>{packageCondition} Ask about flights, insurance, additional procedures and any extra nights separately.</p><p>{preview ? <Link href="/prices#dental-treatment-packages" className="text-link" data-analytics-action="packages" data-analytics-location="packages_preview">Compare all five packages <ArrowRight size={17} aria-hidden="true" /></Link> : <><Link href="/guides/compare-dental-quotes">Compare written quotes</Link> · <Link href="/guides/plan-dental-visit-antalya">Plan your visits</Link></>}</p></div>
   </div></section>;

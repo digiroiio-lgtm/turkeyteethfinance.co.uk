@@ -427,7 +427,7 @@ export const pages: Record<string, PageContent> = {
     ]
   },
   "smile-makeover-finance": {
-    "lastModified": "2026-11-04",
+    "lastModified": "2026-11-10",
     "title": "Smile Makeover in Turkey: Treatment Planning & Finance",
     "description": "Explore a smile makeover in Turkey for UK patients. Understand treatment options, stages, materials and how to review a separate finance decision after receiving an individual quote.",
     "label": "SMILE MAKEOVER",
@@ -451,6 +451,14 @@ export const pages: Record<string, PageContent> = {
       {
         "question": "Will a makeover involving implants need return travel?",
         "answer": "It may. Implant surgery, healing and final restorations can involve separate visits. Ask the dentist to confirm the sequence and travel schedule for your own plan."
+      },
+      {
+        "question": "Can I explore finance for a smile makeover in Turkey?",
+        "answer": "Eligible UK residents may explore separate finance, subject to lender criteria and approval. Request a written treatment estimate first, then read the lender’s own documents. A treatment enquiry is not a credit application and approval is never guaranteed."
+      },
+      {
+        "question": "What is the difference between a smile makeover estimate and a finance offer?",
+        "answer": "An estimate describes the proposed treatment and its cost, after clinical assessment. A finance offer comes from a lender under a separate agreement. Compare the total repayable, fees and term, not only the monthly amount."
       },
       {
         "question": "What should I include in a smile makeover enquiry?",
