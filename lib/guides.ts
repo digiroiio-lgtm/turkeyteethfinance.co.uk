@@ -106,7 +106,7 @@ export const guideArticles: PatientGuide[] = [
     category: "PAYMENT OPTIONS",
     summary: "How to compare ways to pay for dental treatment abroad: APR, fees, term and total repayable.",
     description: "A UK patient guide to paying for dental treatment in Turkey. Compare personal loans, broker-arranged finance, credit cards and savings, including APR, fees, repayment term and total repayable.",
-    lastModified: "2026-11-04",
+    lastModified: "2026-11-10",
     paragraphs: ["There is no single best way to pay for dental treatment in Turkey from the UK. Eligible UK patients may be able to explore third-party finance, but availability and terms depend on the broker, lender and the applicant’s circumstances. The lender makes the credit decision. Establish the proposed treatment cost in writing first, then compare the full cost of each payment route using the provider’s own documents rather than headline figures."],
     sections: [
       {
@@ -144,6 +144,8 @@ export const guideArticles: PatientGuide[] = [
       { question: "What is the best dental finance option in the UK for treatment abroad?", answer: "There is no single best option. Compare APR, fees, term and total repayable from each provider’s own quotation, and choose the route you can comfortably afford. Paying from savings avoids borrowing costs entirely." },
       { question: "Does asking for a treatment quote affect my credit file?", answer: "A treatment enquiry is not a credit application. The broker and lender explain any credit checks when you choose to apply through their separate process." },
       { question: "Is a lower monthly payment always better?", answer: "No. A longer term lowers each payment but usually increases the total interest paid. Compare the total amount repayable as well as the monthly figure." },
+      { question: "Can I get dental finance in the UK for treatment in Turkey?", answer: "Some eligible UK residents may be able to explore third-party finance for treatment abroad, but availability and terms depend on the broker, lender and your circumstances. Approval is never guaranteed, so request a written treatment estimate first." },
+      { question: "What should I check before signing a dental finance agreement?", answer: "Check the lender’s name, the APR, fees, term, monthly amount and total repayable, and whether early repayment is allowed. Read the documents before signing and ask for clarification if any term is unclear." },
     ],
     related: ["pay-monthly", "dental-finance", "finance-eligibility"],
   },

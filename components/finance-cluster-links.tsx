@@ -7,6 +7,8 @@ const destinations = [
   { href: "/finance-calculator", title: "Turkey teeth finance calculator", copy: "Model repayments using your own amount, rate and term assumptions." },
   { href: "/finance-eligibility", title: "UK dental finance eligibility and credit checks", copy: "Review the questions to ask before using a broker or lender application." },
   { href: "/prices", title: "Turkey teeth prices and treatment packages", copy: "Check confirmed package scope and inclusions before considering a budget." },
+  { href: "/veneers-turkey-cost", title: "Veneers in Turkey: what the price covers", copy: "See the published veneer packages, E.max versus porcelain and the costs outside the package." },
+  { href: "/dental-implants-turkey-prices", title: "Dental implants in Turkey: what the price covers", copy: "See the published implant package, the two visits and what can change the final estimate." },
 ];
 const clusterSlugs = new Set(["pay-monthly", "dental-finance", "finance-calculator", "finance-eligibility", "finance-faq", "prices", "smile-makeover-finance", "all-on-4-finance", "dental-implants-finance", "veneers-finance", "zirconia-crowns-finance", "how-it-works", "reviews", "before-and-after", "our-clinic", "all-on-6-finance", "veneers-turkey-cost", "dental-implants-turkey-prices"]);
 export function FinanceClusterLinks({ currentSlug }: { currentSlug: string }) {

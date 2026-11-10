@@ -917,4 +917,32 @@ for (const [slug, questions] of Object.entries(pagePaymentQuestions)) {
   includePaymentQuestions(pages[slug], questions);
 }
 
+pages["how-it-works"].lastModified = "2026-11-10";
+pages["how-it-works"].sections = [...pages["how-it-works"].sections, {
+  title: "What does the process cost and where do I start?",
+  body: "Start with the published packages and a written estimate. Packages show confirmed prices for the specified treatment, hotel nights and transfers; your personal quote confirms the scope for your case after clinical assessment. Flights, insurance, extra nights and additional procedures are separate unless your estimate says otherwise.",
+  paragraphs: ["If you are comparing treatments, the cost guides explain what the veneer and implant package prices cover. If you may borrow, finance is a separate decision made after you have the estimate: a treatment enquiry is not a credit application, and approval is never guaranteed."],
+  links: [{ text: "Compare published packages", href: "/prices" }, { text: "What veneers cost in Turkey", href: "/veneers-turkey-cost" }, { text: "What dental implants cost in Turkey", href: "/dental-implants-turkey-prices" }, { text: "Request a written estimate", href: "/get-a-quote" }],
+}];
+pages["how-it-works"].faqs = [...pages["how-it-works"].faqs,
+  { question: "How long does it take to receive a written estimate?", answer: "Timing is confirmed by the team when you enquire. Describe your concerns and any existing dental work, and ask when you can expect a response and what further information, such as photographs or X-rays, would help." },
+  { question: "Do I have to apply for finance to receive an estimate?", answer: "No. A treatment estimate and a finance application are separate. You can request an estimate without applying for credit, then decide whether to explore separate payment information." },
+];
+pages["is-turkey-teeth-finance-legit"].lastModified = "2026-11-10";
+pages["is-turkey-teeth-finance-legit"].faqs = [...pages["is-turkey-teeth-finance-legit"].faqs,
+  { question: "How can I check a dental clinic or finance provider before committing?", answer: "Ask for the registered company names and look them up in the public registers that apply, such as Companies House for UK companies and the Financial Conduct Authority Register for credit firms. Ask the clinic for the treating dentist’s name and qualifications, and keep every document in writing." },
+  { question: "Is paying a deposit before treatment safe?", answer: "Ask for the deposit amount, what it secures and the refund and cancellation terms in writing before you pay. Do not assume that a clinic refund cancels a separate loan, and ask the broker or lender about that separately." },
+];
+pages["prices"].lastModified = "2026-11-10";
+pages["prices"].sections = [...pages["prices"].sections, {
+  title: "What do the package prices cover, and where can I read more?",
+  body: "Each package price covers the specified treatment, hotel accommodation and airport and clinic transfers. It does not cover flights, insurance, additional procedures or extra nights, and it remains subject to clinical assessment. Use the treatment cost guides to see what a veneer or implant price includes before you compare it with another quote.",
+  paragraphs: ["When you compare Turkey with a UK estimate, match the number of teeth or implants, the material, the stages, the reviews and the aftercare. A lower headline price is not better value until the scope is equivalent and travel is included."],
+  links: [{ text: "Veneers in Turkey: what the price covers", href: "/veneers-turkey-cost" }, { text: "Dental implants in Turkey: what the price covers", href: "/dental-implants-turkey-prices" }, { text: "Compare written treatment quotes", href: "/guides/compare-dental-quotes" }],
+}];
+pages["prices"].faqs = [...pages["prices"].faqs,
+  { question: "What is the difference between a package price and a quote?", answer: "A package price is the published price for specified treatment, nights and transfers. A quote is your personalised written estimate after clinical assessment, which confirms the scope and arrangements for your case." },
+  { question: "Do package prices include flights?", answer: "No. Hotel nights and specified transfers are included. Flights, insurance, additional procedures and extra nights are separate unless your written estimate says otherwise." },
+];
+
 export { guideArticles } from "./guides";
