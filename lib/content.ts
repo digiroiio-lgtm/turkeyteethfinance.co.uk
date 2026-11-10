@@ -183,9 +183,9 @@ export const pages: Record<string, PageContent> = {
   "finance-calculator": calculatorContent,
   "pay-monthly": {
     lastModified: "2026-10-30",
-    title: "Pay Monthly for Turkey Teeth: UK Dental Finance Options",
+    title: "Dental Finance Plans for Turkey Teeth: Pay Monthly (UK)",
     description:
-      "Explore ways to pay monthly for Turkey teeth from the UK. Compare separate borrowing with clinic stage payments and estimate repayments using your own assumptions; approval and terms depend on the lender.",
+      "Compare dental finance plans for Turkey teeth from the UK: separate monthly borrowing versus clinic stage payments. Estimate repayments with your own assumptions; approval and terms depend on the lender.",
     label: "PAY MONTHLY",
     heading: "Can you pay monthly for Turkey teeth?",
     accent: "Understand your options.",
@@ -200,6 +200,14 @@ export const pages: Record<string, PageContent> = {
         answer: "Do not assume that finance is available without a credit check. The broker and lender explain which eligibility and credit searches apply at each stage. Ask whether a check is soft or hard before continuing, read the current disclosures and remember that approval is never guaranteed.",
       },
       {
+        question: "What are dental finance plans for treatment in Turkey?",
+        answer: "Dental finance plans usually means a separate loan from a lender that you repay in instalments, used to pay the clinic. Whether one is available to you depends on the lender’s criteria and approval. Request a written treatment estimate first, then read the lender’s own documents.",
+      },
+      {
+        question: "Can I use dental finance plans for veneers or implants in Turkey?",
+        answer: "You can request estimates for either treatment and then explore separate payment information. Borrowing depends on your circumstances and the lender’s assessment, and a treatment estimate is not a credit application. Compare total repayable, not only the monthly amount.",
+      },
+      {
         question: "What is the difference between paying monthly and clinic stage payments?",
         answer: "Monthly borrowing is repaid to a lender under a separate credit agreement. Clinic stage payments are dates for paying the treating clinic and are not necessarily monthly instalments. Ask for both schedules in writing and compare the full cost before booking.",
       },
@@ -208,17 +216,31 @@ export const pages: Record<string, PageContent> = {
   },
   "dental-finance": {
     lastModified: "2026-11-01",
-    title: "Dental Finance for Treatment in Turkey | UK Patients",
+    title: "Dental Finance UK: Paying for Treatment in Turkey",
     description:
-      "Understand dental finance for UK patients considering treatment in Turkey: treatment estimates, payment routes, the credit broker and lender roles, and what to check before a separate application.",
+      "Dental finance UK patients can explore for treatment in Turkey: dental finance plans, payment routes, credit broker and lender roles, and what to check before a separate application.",
     label: "DENTAL FINANCE",
-    heading: "Dental finance in Turkey.",
+    heading: "Dental finance for UK patients.",
     accent: "Explore your options.",
     intro:
       "A clear treatment plan comes first. Then explore ways to pay for dental care in Antalya, including third-party finance for eligible UK patients.",
     sections: dentalFinanceSections,
-    faqs: [instalmentFAQs[1], commonFAQs[3]],
-    related: ["pay-monthly", "finance-eligibility", "finance-faq", "is-turkey-teeth-finance-legit"],
+    faqs: [
+      instalmentFAQs[1], commonFAQs[3],
+      {
+        question: "Is dental finance available in the UK for treatment abroad?",
+        answer: "Some lenders may consider applications for treatment abroad from eligible UK residents, but approval is never guaranteed. Each lender sets its own criteria. Obtain a written treatment estimate first and read the lender’s current terms before applying.",
+      },
+      {
+        question: "How do I compare dental finance plans before applying?",
+        answer: "Compare the total repayable, fees, term and first repayment date rather than the monthly figure alone. Check whether a search is soft or hard, and confirm which organisation is the lender. Avoid borrowing more than the written estimate requires.",
+      },
+      {
+        question: "Which treatments can I request dental finance information for?",
+        answer: "You can request an estimate for veneers, crowns, implants and other treatments listed on this site, then explore separate payment information. Finance does not establish that a treatment is suitable; that is decided at clinical assessment.",
+      },
+    ],
+    related: ["pay-monthly", "finance-calculator", "finance-eligibility", "finance-faq", "is-turkey-teeth-finance-legit"],
   },
   "get-a-quote": {
     lastModified: "2026-10-24",
@@ -876,7 +898,8 @@ pages["veneers-finance"].faqs.push(
   { question: "Do the published veneer packages guarantee IPS e.max material?", answer: "No. Ask for the exact material and restoration design in your written estimate. Existing package prices must not be presented as E.max-specific offers without confirmation." },
   { question: "Does the E.max name mean my teeth will not need preparation?", answer: "No. The dentist assesses the restoration design, tooth condition and required preparation. A material brand does not guarantee a no-preparation or reversible treatment." }
 );
-pages["veneers-finance"].related = ["composite-bonding-turkey", ...pages["veneers-finance"].related];
+pages["veneers-finance"].related = ["veneers-turkey-cost", "composite-bonding-turkey", ...pages["veneers-finance"].related];
+pages["dental-implants-finance"].related = ["dental-implants-turkey-prices", ...pages["dental-implants-finance"].related];
 for (const slug of ["dental-implants-finance", "all-on-4-finance"]) {
   pages[slug].related = ["full-mouth-dental-implants-turkey", "all-on-6-finance", ...pages[slug].related];
   pages[slug].lastModified = "2026-10-31";

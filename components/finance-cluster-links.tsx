@@ -8,7 +8,7 @@ const destinations = [
   { href: "/finance-eligibility", title: "UK dental finance eligibility and credit checks", copy: "Review the questions to ask before using a broker or lender application." },
   { href: "/prices", title: "Turkey teeth prices and treatment packages", copy: "Check confirmed package scope and inclusions before considering a budget." },
 ];
-const clusterSlugs = new Set(["pay-monthly", "dental-finance", "finance-calculator", "finance-eligibility", "finance-faq", "prices", "smile-makeover-finance", "all-on-4-finance", "dental-implants-finance", "veneers-finance", "zirconia-crowns-finance", "how-it-works", "reviews", "before-and-after", "our-clinic", "all-on-6-finance"]);
+const clusterSlugs = new Set(["pay-monthly", "dental-finance", "finance-calculator", "finance-eligibility", "finance-faq", "prices", "smile-makeover-finance", "all-on-4-finance", "dental-implants-finance", "veneers-finance", "zirconia-crowns-finance", "how-it-works", "reviews", "before-and-after", "our-clinic", "all-on-6-finance", "veneers-turkey-cost", "dental-implants-turkey-prices"]);
 export function FinanceClusterLinks({ currentSlug }: { currentSlug: string }) {
   if (!clusterSlugs.has(currentSlug)) return null;
   return (
