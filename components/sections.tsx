@@ -59,6 +59,9 @@ export function TreatmentGrid({ compact = false, answerIntro = false }: { compac
             </Link>
           ))}
         </div>
+        <p className="treatment-cost-links">
+          Comparing prices? <Link className="text-link" href="/veneers-turkey-cost">What veneers cost in Turkey</Link> · <Link className="text-link" href="/dental-implants-turkey-prices">What dental implants cost in Turkey</Link>
+        </p>
       </div>
     </section>
   );

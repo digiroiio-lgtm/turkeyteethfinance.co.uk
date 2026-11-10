@@ -3418,3 +3418,5 @@ select:focus-visible {
 .sitelinks-grid a { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .sitelinks-grid p { margin: .6rem 0 0; }
 @media (max-width: 760px) { .sitelinks-grid { grid-template-columns: 1fr; } }
+
+.treatment-cost-links{max-width:850px;margin:24px auto 0;text-align:center;font-size:14px;line-height:1.7;color:#625b71}

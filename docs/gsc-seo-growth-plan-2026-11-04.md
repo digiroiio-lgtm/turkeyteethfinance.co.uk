@@ -127,3 +127,11 @@ Source: Google Trends, UK, last 12 months (rising queries: dental finance uk +80
 | Package cards (/prices, home preview) | Links to the two new pages | — |
 
 Note: two titles changed at once, which this plan advises against. Compare these two pages only after 28 days of data; do not change them again before then. /get-a-quote canonical was checked: `canonicalUrl()` rejects queries, so the declared canonical is already the parameterless URL; any parameterised canonical chosen by Google is Google's selection (budget link is already nofollow).
+
+### Hub pages — 10 November 2026 (same PR)
+
+| Page | Change |
+|---|---|
+| /guides | "Where should I start" section linking cost, payment and trust pages; 4 FAQs added |
+| Home (treatment section) | Two text links to /veneers-turkey-cost and /dental-implants-turkey-prices |
+| /dental-finance | Links-only section "Which page answers which question?"; title, H1 and description unchanged to keep the 28-day comparison clean |

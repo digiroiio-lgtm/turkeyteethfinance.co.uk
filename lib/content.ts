@@ -945,4 +945,40 @@ pages["prices"].faqs = [...pages["prices"].faqs,
   { question: "Do package prices include flights?", answer: "No. Hotel nights and specified transfers are included. Flights, insurance, additional procedures and extra nights are separate unless your written estimate says otherwise." },
 ];
 
+pages["guides"].lastModified = "2026-11-10";
+pages["guides"].sections = [{
+  title: "Where should I start, depending on what I need?",
+  body: "Choose the page that matches your next decision. For costs, start with the published packages and the veneer and implant cost guides. For payment, read how monthly borrowing differs from clinic stage payments, then check eligibility and your own repayment assumptions. For trust, read how the process works and who is responsible for clinical care.",
+  paragraphs: ["Each page explains general information and questions to ask. None replaces a clinical assessment or a lender’s own documents, and a treatment enquiry is not a credit application."],
+  links: [
+    { text: "Compare published packages", href: "/prices" },
+    { text: "What veneers cost in Turkey", href: "/veneers-turkey-cost" },
+    { text: "What dental implants cost in Turkey", href: "/dental-implants-turkey-prices" },
+    { text: "Pay monthly for Turkey teeth", href: "/pay-monthly" },
+    { text: "Estimate repayments with your own assumptions", href: "/finance-calculator" },
+    { text: "Understand eligibility and credit checks", href: "/finance-eligibility" },
+    { text: "How treatment in Turkey works", href: "/how-it-works" },
+    { text: "Check who is involved and who is responsible", href: "/is-turkey-teeth-finance-legit" },
+  ],
+}, ...pages["guides"].sections];
+pages["guides"].faqs = [...pages["guides"].faqs,
+  { question: "Which guide should I read first?", answer: "Read the guide that matches your next decision: comparing a written quote, planning a visit or reviewing how to pay. If you have no quote yet, request a written estimate first, because most other questions depend on it." },
+  { question: "What is the difference between a treatment estimate and a finance offer?", answer: "A treatment estimate describes the proposed care and cost after clinical assessment. A finance offer comes from a lender under a separate agreement. Compare the total repayable, not only the monthly amount." },
+  { question: "Are the prices in these guides final?", answer: "Published package prices are subject to clinical assessment and a personalised written quote. Ask for the current price and what it includes in writing before you rely on it." },
+  { question: "Does reading these guides mean I have applied for finance?", answer: "No. Reading guides or requesting a treatment estimate is not a credit application, and approval for any finance is never guaranteed." },
+];
+pages["dental-finance"].sections = [...pages["dental-finance"].sections, {
+  title: "Which page answers which question?",
+  body: "Use this page for the overview, then go to the page that answers your specific question. Monthly borrowing and clinic stage payments are explained on the pay-monthly page; your own repayment assumptions go into the calculator; eligibility and credit-check questions have their own page.",
+  paragraphs: ["If you are still deciding on treatment, the cost guides explain what the published veneer and implant package prices cover. Finance is a separate decision made after you have a written estimate."],
+  links: [
+    { text: "Pay monthly for Turkey teeth", href: "/pay-monthly" },
+    { text: "Estimate repayments", href: "/finance-calculator" },
+    { text: "Eligibility and credit checks", href: "/finance-eligibility" },
+    { text: "Finance questions answered", href: "/finance-faq" },
+    { text: "What veneers cost in Turkey", href: "/veneers-turkey-cost" },
+    { text: "What dental implants cost in Turkey", href: "/dental-implants-turkey-prices" },
+  ],
+}];
+
 export { guideArticles } from "./guides";
