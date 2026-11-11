@@ -111,3 +111,27 @@ Facts from the supplied device, country and page exports, plus query x page rows
 Changes made on this basis: the budget planner CTA is marked rel="nofollow" (the link, prefill and enquiry flow are unchanged); /reviews, /before-and-after, /our-clinic and /all-on-6-finance now show the existing finance cluster links.
 
 Open checks for the Search Console owner: URL Inspection for /prices, /pay-monthly, /get-a-quote and the parameterised URL above (indexed? Google-selected canonical?); a Links export. If Google selected the parameterised URL as canonical, plan a separate fix to the budget link.
+
+
+## Change log — 10 November 2026 (for the 28-day comparison)
+
+Source: Google Trends, UK, last 12 months (rising queries: dental finance uk +80%, dental finance plans +70%, emax veneers turkey +110%, turkey veneers package +80%, dental implants turkey prices +140%).
+
+| Page | Change | Target queries |
+|---|---|---|
+| /dental-finance | Title "Dental Finance for Treatment in Turkey \| UK Patients" → "Dental Finance UK: Paying for Treatment in Turkey"; H1 "Dental finance in Turkey." → "Dental finance for UK patients."; description rewritten; 3 FAQs added | dental finance uk; dental finance plans |
+| /pay-monthly | Title "Pay Monthly for Turkey Teeth: UK Dental Finance Options" → "Dental Finance Plans for Turkey Teeth: Pay Monthly (UK)"; description rewritten; 2 FAQs added | dental finance plans; pay monthly turkey teeth |
+| /veneers-turkey-cost | New page (package prices from lib/packages.ts) | veneers turkey cost; emax veneers turkey; turkey veneers package |
+| /dental-implants-turkey-prices | New page (package price from lib/packages.ts) | dental implants turkey prices |
+| /smile-makeover-finance | 2 finance FAQs added | smile makeover finance |
+| Package cards (/prices, home preview) | Links to the two new pages | — |
+
+Note: two titles changed at once, which this plan advises against. Compare these two pages only after 28 days of data; do not change them again before then. /get-a-quote canonical was checked: `canonicalUrl()` rejects queries, so the declared canonical is already the parameterless URL; any parameterised canonical chosen by Google is Google's selection (budget link is already nofollow).
+
+### Hub pages — 10 November 2026 (same PR)
+
+| Page | Change |
+|---|---|
+| /guides | "Where should I start" section linking cost, payment and trust pages; 4 FAQs added |
+| Home (treatment section) | Two text links to /veneers-turkey-cost and /dental-implants-turkey-prices |
+| /dental-finance | Links-only section "Which page answers which question?"; title, H1 and description unchanged to keep the 28-day comparison clean |
