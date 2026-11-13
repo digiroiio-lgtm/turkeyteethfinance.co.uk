@@ -1,4 +1,4 @@
-import { commonFAQs, homeContent, journeySteps } from "./content";
+import { homeFAQs, homeContent, journeySteps } from "./content";
 import { COMPANY, SITE_NAME, SITE_URL } from "./site";
 import { packageForId, packagePrice } from "./packages";
 
@@ -315,7 +315,7 @@ export function homeStructuredData() {
       },
       {
         "@type": "FAQPage", "@id": url + "#faq",
-        mainEntity: commonFAQs.map((faq) => ({
+        mainEntity: homeFAQs.map((faq) => ({
           "@type": "Question", name: faq.question,
           acceptedAnswer: { "@type": "Answer", text: faq.answer },
         })),
