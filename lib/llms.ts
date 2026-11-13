@@ -2,7 +2,7 @@ import { implantComparisonText } from "./treatment-schema";
 import { packageCondition, packageInclusions, packagePrice, treatmentPackages } from "./packages";
 import { guideSource, homeGuide, homeGuideSections } from "./home-guide";
 import {
-  commonFAQs,
+  homeFAQs,
   guideArticles,
   homeContent,
   informationSources,
@@ -108,7 +108,7 @@ function documents(): Document[] {
           treatment.detail,
           link(treatment.name, `/${treatment.slug}`),
         ]),
-        ...faqBlocks(commonFAQs),
+        ...faqBlocks(homeFAQs),
       ],
     },
     ...routeSlugs.map((slug): Document => {

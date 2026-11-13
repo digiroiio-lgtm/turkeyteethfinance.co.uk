@@ -135,3 +135,14 @@ Note: two titles changed at once, which this plan advises against. Compare these
 | /guides | "Where should I start" section linking cost, payment and trust pages; 4 FAQs added |
 | Home (treatment section) | Two text links to /veneers-turkey-cost and /dental-implants-turkey-prices |
 | /dental-finance | Links-only section "Which page answers which question?"; title, H1 and description unchanged to keep the 28-day comparison clean |
+
+### Consolidated PR #38 content — 13 November 2026
+
+Content from the older PR #38 was re-applied on top of current `main`. Only FAQs were added; no title, H1 or description changed on /dental-finance or /pay-monthly.
+
+| Page | Change |
+|---|---|
+| Home | Visible FAQ "How does Turkey teeth finance work for UK patients?" |
+| /pay-monthly | FAQ on bad credit (no guaranteed route) |
+| /dental-finance | 2 FAQs: comparing a real lender offer; personal loan or savings as alternatives |
+| docs | `GSC-QUESTION-TO-URL-MAP-2026-11-05.md` added |

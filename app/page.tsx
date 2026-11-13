@@ -12,7 +12,7 @@ import {
 import { BudgetExplorer } from "@/components/budget-explorer";
 import { ConversionBanner, FAQSection, FinanceNotice } from "@/components/ui";
 import { HomeGuide, HomeUpdated } from "@/components/home-guide";
-import { commonFAQs, homeContent } from "@/lib/content";
+import { homeFAQs, homeContent } from "@/lib/content";
 import { pageMetadata } from "@/lib/metadata";
 const { title, description } = homeContent;
 export const metadata = { ...pageMetadata(title, description, "/"), title: { absolute: title } };
@@ -31,7 +31,7 @@ export default function Home() {
       <ImportantPages />
       <HomeGuide />
       <EligibilityPanel />
-      <FAQSection faqs={commonFAQs} />
+      <FAQSection faqs={homeFAQs} />
       <ConversionBanner location="conversion_lower" />
       <div className="container">
         <FinanceNotice full />
