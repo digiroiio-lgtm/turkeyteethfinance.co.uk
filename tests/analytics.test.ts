@@ -20,6 +20,8 @@ test("analytics waits for consent, filters patient data, deduplicates page views
   const error = w.dataLayer.at(-1)![2] as Record<string, unknown>;
   assert.equal(error.form_id, "treatment_enquiry"); assert.equal(error.package_id, undefined); assert.equal(error.form_step, undefined); assert.equal(error.email, undefined); assert.equal(error.concern, undefined);
   assert.equal(error.page_location, "https://turkeyteethfinance.co.uk/get-a-quote"); assert.equal(error.page_referrer, "https://search.example");
+  trackEvent("form_abandon", { form_step: 3, email: "private@example.com" } as never);
+  assert.equal(w.dataLayer.at(-1)![1], "form_abandon"); assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).email, undefined);
   const anchor = document.createElement("a"); anchor.href = "/get-a-quote?package=zirconium-24"; anchor.dataset.analyticsPackage = "zirconium-24"; anchor.dataset.analyticsLocation = "package_card"; trackCTAClick(anchor);
   assert.equal(w.dataLayer.at(-1)![1], "quote_cta_click"); assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).package_id, "zirconium-24");
   assert.doesNotMatch(JSON.stringify(w.dataLayer), /private@example|secret|\?email/);

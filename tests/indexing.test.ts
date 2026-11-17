@@ -227,3 +227,14 @@ test("unknown content dates are omitted and valid explicit dates are preserved",
   const entry = publicSitemapEntries([{ path: "/", title: "Home", description: "Home" }])[0];
   assert.equal("lastModified" in entry, false);
 });
+
+test("prefilled quote URLs are noindex while the clean quote page and other query URLs stay indexable", () => {
+  withEnv(production, () => {
+    assert.equal(proxy(new NextRequest(SITE_URL + "/get-a-quote")).headers.has("X-Robots-Tag"), false);
+    assert.equal(
+      proxy(new NextRequest(SITE_URL + "/get-a-quote?treatment=Veneers&budget=3500")).headers.get("X-Robots-Tag"),
+      "noindex, follow",
+    );
+    assert.equal(proxy(new NextRequest(SITE_URL + "/prices?x=1")).headers.has("X-Robots-Tag"), false);
+  });
+});

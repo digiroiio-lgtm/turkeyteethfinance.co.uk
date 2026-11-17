@@ -1001,4 +1001,21 @@ pages["dental-finance"].sections = [...pages["dental-finance"].sections, {
   ],
 }];
 
+homeFAQs.push(
+  { question: "Can I get Turkey teeth on finance in the UK?", answer: "Eligible UK residents may be able to explore separate finance for dental treatment in Turkey, but approval is never guaranteed and the lender decides. Request a written treatment estimate first, then read the broker’s and lender’s own documents. A treatment enquiry is not a credit application." },
+  { question: "What should I compare before choosing Turkey teeth finance?", answer: "Compare the total repayable, APR, fees, term and first repayment date, not only the monthly amount. Also compare the clinic’s written treatment scope, stage payments and aftercare. A lower monthly payment does not necessarily mean a lower overall cost." },
+);
+pages["pay-monthly"].faqs = [...pages["pay-monthly"].faqs,
+  { question: "Can I pay monthly for Turkey teeth packages in the UK?", answer: "Eligible UK residents may be able to explore separate monthly borrowing to pay for a published treatment package, subject to lender approval. Check what the package includes first, then request a written estimate before considering any credit." },
+  { question: "How do I estimate what monthly payments for Turkey teeth might be?", answer: "Use the finance calculator with your own amount, rate and term assumptions. It is an illustration, not a lender quotation, and your actual offer depends on the lender’s assessment of your circumstances." },
+];
+pages["pay-monthly"].lastModified = "2026-11-17";
+pages["reviews"].faqs = [...pages["reviews"].faqs,
+  { question: "Are there independent Turkey teeth finance reviews?", answer: "Look for reviews on independent platforms and check what each one describes: the clinic’s treatment, the coordinator’s service or a lender’s product. Reviews of one do not describe the others, and a review is not a guarantee of your own result." },
+];
+pages["reviews"].description = "Looking for Turkey teeth finance or Akdeniz Dental reviews? See what to check in independent patient reviews: verified sources, treatment context, follow-up and aftercare.";
+pages["reviews"].lastModified = "2026-11-17";
+pages["how-it-works"].description = "See how dental treatment in Turkey works for UK patients: request a written estimate, review the dentist-led plan, compare ways to pay and plan travel. Finance is a separate decision.";
+pages["how-it-works"].lastModified = "2026-11-17";
+
 export { guideArticles } from "./guides";

@@ -39,6 +39,10 @@ export function proxy(request: NextRequest) {
   )
     return NextResponse.rewrite(new URL("/api/indexnow-key", request.url));
   const response = NextResponse.next();
+  // Prefilled quote links (?treatment=...&budget=...) must not compete with the clean /get-a-quote URL.
+  if (indexable && path === "/get-a-quote" && request.nextUrl.search) {
+    response.headers.set("X-Robots-Tag", "noindex, follow");
+  }
   if (!indexable || path.startsWith("/api/")) {
     response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
     response.headers.set("Cache-Control", "private, no-store");
