@@ -10,7 +10,7 @@ let paths = new Set(["/"]);
 const listeners = new Set<() => void>();
 export const ctaLocations = ["header", "hero", "conversion_upper", "conversion_lower", "conversion_banner", "budget_planner", "package_card", "packages_preview", "floating_chat", "content", "guide", "footer", "form_fallback"] as const;
 export type CTALocation = typeof ctaLocations[number];
-const events = ["quote_cta_click", "whatsapp_click", "finance_cta_click", "packages_cta_click", "package_list_view", "budget_interaction", "faq_open", "form_start", "form_step_complete", "form_submit_attempt", "form_validation_error", "form_submit_error", "generate_lead"] as const;
+const events = ["quote_cta_click", "whatsapp_click", "finance_cta_click", "packages_cta_click", "package_list_view", "budget_interaction", "faq_open", "form_start", "form_step_complete", "form_submit_attempt", "form_validation_error", "form_submit_error", "form_abandon", "generate_lead"] as const;
 export type AnalyticsEvent = typeof events[number];
 type Params = { cta_location?: CTALocation; package_id?: string; form_step?: number; faq_position?: number; list_id?: "packages_full" | "packages_preview" };
 export function consentRecord(value: unknown, now = Date.now()): Consent | undefined {

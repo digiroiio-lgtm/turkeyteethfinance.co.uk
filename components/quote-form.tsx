@@ -113,10 +113,24 @@ function QuoteFormInner({
   const firstRender = useRef(true);
   const started = useRef(false);
   const completedSteps = useRef(new Set<number>());
+  const stepRef = useRef(0);
+  const doneRef = useRef(false);
+  const abandoned = useRef(false);
   const selectedPackage = packageForId(values.packageId);
   function startForm() { if (!started.current) started.current = trackEvent("form_start", { form_step: step + 1 }); }
   function fail(message: string, delivery = false) { setError(message); trackEvent(delivery ? "form_submit_error" : "form_validation_error", { form_step: step + 1 }); }
 
+  useEffect(() => { stepRef.current = step; doneRef.current = done; }, [step, done]);
+  useEffect(() => {
+    // Records the step where a started, unsent enquiry was left, so form drop-off can be located.
+    function leaving() {
+      if (started.current && !doneRef.current && !abandoned.current && document.visibilityState === "hidden") {
+        abandoned.current = trackEvent("form_abandon", { form_step: stepRef.current + 1 });
+      }
+    }
+    document.addEventListener("visibilitychange", leaving);
+    return () => document.removeEventListener("visibilitychange", leaving);
+  }, []);
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;

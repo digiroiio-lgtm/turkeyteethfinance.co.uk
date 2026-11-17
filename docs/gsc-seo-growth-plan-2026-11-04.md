@@ -146,3 +146,13 @@ Content from the older PR #38 was re-applied on top of current `main`. Only FAQs
 | /pay-monthly | FAQ on bad credit (no guaranteed route) |
 | /dental-finance | 2 FAQs: comparing a real lender offer; personal loan or savings as alternatives |
 | docs | `GSC-QUESTION-TO-URL-MAP-2026-11-05.md` added |
+
+### Code changes from the 17 November Nightwatch / GSC / GA4 review
+
+| Item | Change |
+|---|---|
+| Page-2 keywords | Home: 2 FAQs (finance in the UK; what to compare). /pay-monthly: 2 FAQs (packages; estimating payments). /reviews: 1 FAQ. Titles untouched. |
+| Snippets | Description only on /reviews and /how-it-works. /dental-finance and /pay-monthly title, H1 and description unchanged until 8 Dec. |
+| Parameterised URL | `proxy.ts` sends `X-Robots-Tag: noindex, follow` for /get-a-quote when a query string is present, so prefilled links stop competing with the clean URL (39 impressions at position 49 in 28 days). |
+| Form drop-off | New GA4 event `form_abandon` (with `form_step`) when a started enquiry is left unsent. |
+| GA4 finding | 27 "Direct" desktop sessions (23 on /pay-monthly) had country "(not set)", 0 engaged sessions and 0 duration: almost certainly automated. Real traffic is roughly UK organic plus Türkiye (team) sessions. |
