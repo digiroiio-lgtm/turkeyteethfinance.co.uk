@@ -34,3 +34,52 @@ GA4 administration was verified in the connected browser: Tortilla Supplier prop
 After deployment, visually verify desktop/mobile cards, follow a quote link without submission and verify page/CTA events in GA4 Realtime after opting in. Reject through Cookie settings and verify persistence. Never create a fake patient lead for a conversion test. Local checks do not establish live deployment, actual GA event receipt or improved conversion rates. Standard reports/custom dimensions may process later than Realtime.
 
 Live follow-up on 22 October: package preselection and Continue worked in the browser. At 390px, all five cards fit without horizontal overflow. The Google library loaded after consent. The tag adapter was corrected to use Google's documented Arguments command shape; a regression assertion covers the queue format. Realtime receipt must be checked after this correction is deployed.
+
+## Event expansion, 23 November 2026
+
+Goal: measure user experience and raise form and WhatsApp conversion. Enhanced measurement stays off, so nothing here double counts GA4 automatic events. Every parameter comes from a fixed list in `lib/analytics.ts`; entered values, treatment names, error text, URLs with queries and identifiers are never sent.
+
+| Event | Trigger | Parameters |
+| --- | --- | --- |
+| form_view | Form 30% visible, or first interaction | form_id |
+| form_step_view | Step 2, 3 or 4 shown, once per step | form_id, form_step |
+| form_field_focus | First focus of a field | form_id, form_step, field_name |
+| form_field_complete | Field left with a value (flag only, no value) | form_id, form_step, field_name |
+| form_option_select | Preferred contact, package or treatment chosen (treatment name is not sent) | form_id, field_name, contact_method, package_id |
+| form_photo_add | Photographs added | form_id, field_name |
+| form_back_click | Back button | form_id, form_step |
+| form_validation_error | Existing, now with the field that failed | form_id, form_step, field_name |
+| form_abandon | Existing, now with the last field touched | form_id, form_step, field_name |
+| generate_lead | Existing, now with segments | form_id, form_step, contact_method, duration_bucket, package_id |
+| whatsapp_cta_view / quote_cta_view | CTA 50% visible, once per type, location and package per page | cta_location, package_id |
+| contact_click | mailto or tel link | contact_method |
+| content_link_click | Internal link to a public page | link_group, link_target |
+| outbound_click | External link (not WhatsApp) | link_domain |
+| scroll_depth | 25, 50, 75, 100% (pages that fit the screen are skipped) | scroll_percent |
+| engaged_time | 15, 30, 60, 120 s visible and focused | engaged_seconds |
+| calculator_start / calculator_result_view | First calculator change; estimate shown | none (amounts are never sent) |
+| web_vital | Latest LCP, INP and CLS sent when the page is hidden (CLS x 1000) | metric_name, metric_rating, metric_value |
+
+Calculator quote links use `cta_location = calculator`.
+
+### Ratios to watch
+
+| Ratio | Formula |
+| --- | --- |
+| Form start rate | form_start / form_view |
+| Step reach | form_step_view (step n) / form_view |
+| Field friction | form_field_focus without form_field_complete, and form_validation_error by field_name |
+| Where people leave | form_abandon by form_step and field_name |
+| Form completion | generate_lead / form_start |
+| WhatsApp click-through | whatsapp_click / whatsapp_cta_view, by cta_location |
+| Quote click-through | quote_cta_click / quote_cta_view, by cta_location |
+| Reading | scroll_depth 75 and engaged_time 30 per landing page |
+
+### GA4 administration (not possible from code)
+
+1. Key events: keep `generate_lead`; add `whatsapp_click` (and optionally `quote_cta_click`).
+2. Event-scoped custom dimensions: `cta_location`, `form_step`, `field_name`, `contact_method`, `duration_bucket`, `scroll_percent`, `engaged_seconds`, `link_group`, `link_target`, `link_domain`, `metric_name`, `metric_rating`, `package_id`, `page_type`. Custom metric: `metric_value`.
+3. Internal-traffic filter for the clinic team (Turkey) and a review of the "(direct)", country "(not set)", zero-engagement sessions on /pay-monthly.
+4. Funnel exploration: form_view, form_start, form_step_view (2, 3, 4), form_submit_attempt, generate_lead.
+
+The consent banner and the privacy page now list scroll, time on page, contact and link clicks and page speed. The wording needs approval from the compliance owner before release.

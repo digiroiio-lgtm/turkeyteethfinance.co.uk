@@ -181,7 +181,9 @@ test("enquiry delivery disables duplicate submissions, refreshes CAPTCHA on fail
     fireEvent.click(view.getByRole("radio", { name: "Veneers" }));
     fireEvent.click(view.getByRole("button", { name: "Continue" }));
     fireEvent.click(view.getByRole("button", { name: "Continue" }));
+    fireEvent.focus(view.getByLabelText(/Full name/));
     fireEvent.change(view.getByLabelText(/Full name/), { target: { value: "Test Patient" } });
+    fireEvent.blur(view.getByLabelText(/Full name/));
     fireEvent.change(view.getByLabelText(/Email address/), { target: { value: "test@example.com" } });
     fireEvent.click(view.getByRole("button", { name: "Continue" }));
     fireEvent.click(view.getByLabelText(/I have read the/));
@@ -201,6 +203,14 @@ test("enquiry delivery disables duplicate submissions, refreshes CAPTCHA on fail
     assert.equal(layer.filter(command => command[1] === "form_start").length, 1);
     assert.equal(layer.filter(command => command[1] === "form_step_complete").length, 3);
     assert.equal(layer.filter(command => command[1] === "form_submit_attempt").length, 2);
+    const fired = (name: string) => layer.filter(command => command[1] === name).map(command => command[2] as Record<string, unknown>);
+    assert.equal(fired("form_view").length, 1);
+    assert.deepEqual(fired("form_step_view").map(event => event.form_step), [2, 3, 4]);
+    assert.deepEqual(fired("form_field_focus").map(event => event.field_name), ["name"]);
+    assert.deepEqual(fired("form_field_complete").map(event => event.field_name), ["name"]);
+    assert.deepEqual(fired("form_option_select").map(event => event.field_name), ["treatment"]);
+    assert.equal(fired("generate_lead")[0].contact_method, "email");
+    assert.match(String(fired("generate_lead")[0].duration_bucket), /^(under_60s|60_180s|180_600s|over_600s)$/);
     assert.doesNotMatch(JSON.stringify(layer), /Test Patient|test@example|private@example|test-accepted-reference|Test delivery failure|Veneers/);
   } finally {
     globalThis.fetch = originalFetch;

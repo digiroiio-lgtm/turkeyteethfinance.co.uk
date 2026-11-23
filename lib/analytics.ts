@@ -8,11 +8,24 @@ let memory: Consent | undefined;
 let enabled = false, active = false, initialised = false, lastPage = "";
 let paths = new Set(["/"]);
 const listeners = new Set<() => void>();
-export const ctaLocations = ["header", "hero", "conversion_upper", "conversion_lower", "conversion_banner", "budget_planner", "package_card", "packages_preview", "floating_chat", "content", "guide", "footer", "form_fallback"] as const;
+export const ctaLocations = ["header", "hero", "conversion_upper", "conversion_lower", "conversion_banner", "budget_planner", "package_card", "packages_preview", "floating_chat", "calculator", "content", "guide", "footer", "form_fallback"] as const;
 export type CTALocation = typeof ctaLocations[number];
-const events = ["quote_cta_click", "whatsapp_click", "finance_cta_click", "packages_cta_click", "package_list_view", "budget_interaction", "faq_open", "form_start", "form_step_complete", "form_submit_attempt", "form_validation_error", "form_submit_error", "form_abandon", "generate_lead"] as const;
+const events = ["quote_cta_click", "whatsapp_click", "finance_cta_click", "packages_cta_click", "package_list_view", "budget_interaction", "faq_open", "form_start", "form_step_complete", "form_submit_attempt", "form_validation_error", "form_submit_error", "form_abandon", "generate_lead", "form_view", "form_step_view", "form_field_focus", "form_field_complete", "form_option_select", "form_photo_add", "form_back_click", "whatsapp_cta_view", "quote_cta_view", "scroll_depth", "engaged_time", "content_link_click", "outbound_click", "contact_click", "calculator_start", "calculator_result_view", "web_vital"] as const;
 export type AnalyticsEvent = typeof events[number];
-type Params = { cta_location?: CTALocation; package_id?: string; form_step?: number; faq_position?: number; list_id?: "packages_full" | "packages_preview" };
+export const formFields = ["treatment", "package", "teeth", "concern", "notes", "photos", "name", "email", "whatsapp", "preferred_contact", "timeframe", "consent_data", "consent_health", "consent_marketing", "security_check"] as const;
+export type FormField = typeof formFields[number];
+export const durationBuckets = ["under_60s", "60_180s", "180_600s", "over_600s"] as const;
+export type DurationBucket = typeof durationBuckets[number];
+export const scrollThresholds = [25, 50, 75, 100] as const;
+export const engagedThresholds = [15, 30, 60, 120] as const;
+export const linkGroups = ["header", "footer", "breadcrumb", "cluster", "related", "context", "content"] as const;
+export type LinkGroup = typeof linkGroups[number];
+export const webVitalNames = ["LCP", "INP", "CLS"] as const;
+export const webVitalRatings = ["good", "needs-improvement", "poor"] as const;
+export const timestamp = () => Date.now();
+export const secondsSince = (start: number) => (timestamp() - start) / 1000;
+export function durationBucket(seconds: number): DurationBucket { return seconds < 60 ? "under_60s" : seconds < 180 ? "60_180s" : seconds < 600 ? "180_600s" : "over_600s"; }
+type Params = { cta_location?: CTALocation; package_id?: string; form_step?: number; faq_position?: number; list_id?: "packages_full" | "packages_preview"; field_name?: FormField; contact_method?: "email" | "whatsapp" | "phone"; duration_bucket?: DurationBucket; scroll_percent?: number; engaged_seconds?: number; link_group?: LinkGroup; link_target?: string; link_domain?: string; metric_name?: typeof webVitalNames[number]; metric_rating?: typeof webVitalRatings[number]; metric_value?: number };
 export function consentRecord(value: unknown, now = Date.now()): Consent | undefined {
   if (!value || typeof value !== "object") return;
   const v = value as Partial<Consent>;
@@ -82,14 +95,45 @@ export function trackEvent(event: AnalyticsEvent, params: Params = {}) {
   if (Number.isInteger(params.form_step) && params.form_step! >= 1 && params.form_step! <= 4) safe.form_step = params.form_step!;
   if (Number.isInteger(params.faq_position) && params.faq_position! >= 1 && params.faq_position! <= 50) safe.faq_position = params.faq_position!;
   if (["packages_full", "packages_preview"].includes(params.list_id || "")) safe.list_id = params.list_id!;
+  if (formFields.includes(params.field_name as FormField)) safe.field_name = params.field_name!;
+  if (params.contact_method === "email" || params.contact_method === "whatsapp" || params.contact_method === "phone") safe.contact_method = params.contact_method;
+  if (scrollThresholds.includes(params.scroll_percent as never)) safe.scroll_percent = params.scroll_percent!;
+  if (engagedThresholds.includes(params.engaged_seconds as never)) safe.engaged_seconds = params.engaged_seconds!;
+  if (linkGroups.includes(params.link_group as LinkGroup)) safe.link_group = params.link_group!;
+  if (typeof params.link_target === "string" && paths.has(params.link_target)) safe.link_target = params.link_target;
+  if (typeof params.link_domain === "string" && /^[a-z0-9][a-z0-9.-]{2,60}$/.test(params.link_domain)) safe.link_domain = params.link_domain;
+  if (webVitalNames.includes(params.metric_name as never)) safe.metric_name = params.metric_name!;
+  if (webVitalRatings.includes(params.metric_rating as never)) safe.metric_rating = params.metric_rating!;
+  if (typeof params.metric_value === "number" && Number.isFinite(params.metric_value) && params.metric_value >= 0 && params.metric_value <= 600000) safe.metric_value = Math.round(params.metric_value);
+  if (durationBuckets.includes(params.duration_bucket as DurationBucket)) safe.duration_bucket = params.duration_bucket!;
   if (/^form_|^generate_lead$/.test(event)) safe.form_id = "treatment_enquiry";
   (window as TagWindow).gtag?.("event", event, { ...safeAnalyticsContext(window.location.href, document.referrer), ...safe, send_to: GA_MEASUREMENT_ID, transport_type: "beacon" }); return true;
 }
-export function trackCTAClick(anchor: HTMLAnchorElement) {
+/** Which tracked call-to-action an anchor is, inferred from fixed data attributes or the destination. */
+export function ctaDescriptor(anchor: HTMLAnchorElement): { click: AnalyticsEvent; view?: AnalyticsEvent; cta_location: CTALocation; package_id?: string } | undefined {
   let action = anchor.dataset.analyticsAction;
   try { const url = new URL(anchor.href); if (!action && url.origin === window.location.origin && url.pathname === "/get-a-quote") action = "quote"; if (!action && url.hostname === "wa.me" && url.pathname === "/905353998999") action = "whatsapp"; } catch { return; }
-  const names: Record<string, AnalyticsEvent> = { quote: "quote_cta_click", whatsapp: "whatsapp_click", finance: "finance_cta_click", packages: "packages_cta_click" };
+  const names: Record<string, { click: AnalyticsEvent; view?: AnalyticsEvent }> = { quote: { click: "quote_cta_click", view: "quote_cta_view" }, whatsapp: { click: "whatsapp_click", view: "whatsapp_cta_view" }, finance: { click: "finance_cta_click" }, packages: { click: "packages_cta_click" } };
   if (!action || !names[action]) return;
   const inferred = anchor.closest("header") ? "header" : anchor.closest("footer") ? "footer" : anchor.classList.contains("floating-contact") ? "floating_chat" : "content";
-  trackEvent(names[action], { cta_location: ctaLocations.includes(anchor.dataset.analyticsLocation as CTALocation) ? anchor.dataset.analyticsLocation as CTALocation : inferred, package_id: anchor.dataset.analyticsPackage });
+  return { ...names[action], cta_location: ctaLocations.includes(anchor.dataset.analyticsLocation as CTALocation) ? anchor.dataset.analyticsLocation as CTALocation : inferred, package_id: anchor.dataset.analyticsPackage };
+}
+export function trackCTAClick(anchor: HTMLAnchorElement) {
+  const cta = ctaDescriptor(anchor);
+  if (cta) trackEvent(cta.click, { cta_location: cta.cta_location, package_id: cta.package_id });
+}
+
+export function linkGroup(anchor: HTMLAnchorElement): LinkGroup {
+  return anchor.closest("header") ? "header" : anchor.closest("footer") ? "footer" : anchor.closest(".breadcrumbs") ? "breadcrumb" : anchor.closest(".finance-cluster") ? "cluster" : anchor.closest(".related-grid") ? "related" : anchor.closest(".context-links") ? "context" : "content";
+}
+/** Contact, internal-navigation and outbound clicks. Destinations are reduced to a public path or a hostname. */
+export function trackLinkClick(anchor: HTMLAnchorElement) {
+  if (ctaDescriptor(anchor)) return;
+  let url: URL;
+  try { url = new URL(anchor.href); } catch { return; }
+  if (url.protocol === "mailto:") { trackEvent("contact_click", { contact_method: "email" }); return; }
+  if (url.protocol === "tel:") { trackEvent("contact_click", { contact_method: "phone" }); return; }
+  if (!/^https?:$/.test(url.protocol)) return;
+  if (url.origin === window.location.origin) { if (url.pathname !== window.location.pathname && paths.has(url.pathname)) trackEvent("content_link_click", { link_group: linkGroup(anchor), link_target: url.pathname }); return; }
+  trackEvent("outbound_click", { link_domain: url.hostname });
 }

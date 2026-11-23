@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { packageForId, treatmentPackages } from "@/lib/packages";
 import { estimateRepayments } from "@/lib/repayment-calculator";
+import { trackEvent } from "@/lib/analytics";
 const money = (value: number) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(value);
 export function RepaymentCalculator() {
   const query = useSearchParams();
@@ -20,7 +21,10 @@ export function CalculatorFields({ initialPackage }: { initialPackage?: string }
   const complete = [cost, deposit, months, annualRate].every(value => value.trim() !== "");
   const result = complete ? estimateRepayments(Number(cost), Number(deposit), Number(months), Number(annualRate)) : null;
   const termComparison = result ? [12, 24, 36, 60].map(term => ({ term, result: estimateRepayments(Number(cost), Number(deposit), term, Number(annualRate))! })) : [];
-  return <div className="repayment-tool">
+  const started = useRef(false);
+  const resultShown = useRef(false);
+  useEffect(() => { if (result && !resultShown.current && started.current) resultShown.current = trackEvent("calculator_result_view"); });
+  return <div className="repayment-tool" onChangeCapture={() => { if (!started.current) { started.current = true; trackEvent("calculator_start"); } }}>
     <div className="repayment-fields">
       <label htmlFor="repayment-package">Start with a published treatment package</label>
       <select id="repayment-package" value={packageId} onChange={event => {
@@ -48,7 +52,7 @@ export function CalculatorFields({ initialPackage }: { initialPackage?: string }
         <div><dt>Total including upfront contribution</dt><dd>{money(result.includingDeposit)}</dd></div>
       </dl> : <p>{complete ? "Check your inputs: cost must be above zero and at most £100,000; the contribution cannot exceed the cost; choose 1–120 whole months and a rate between 0 and 100%." : "Enter your own interest-rate assumption to see an estimate. No lender rate is selected for you."}</p>}
       <p className="small">Illustration only. This does not check your credit file, assess eligibility or apply for finance. Actual lender calculations, fees and payment dates can differ. Displayed figures are rounded; a final payment may differ.</p>
-      <Link className="button button-small" href={packageId ? `/get-a-quote?package=${packageId}#treatment-enquiry` : "/get-a-quote#treatment-enquiry"}>Request a written treatment quote</Link>
+      <Link className="button button-small" data-analytics-action="quote" data-analytics-location="calculator" href={packageId ? `/get-a-quote?package=${packageId}#treatment-enquiry` : "/get-a-quote#treatment-enquiry"}>Request a written treatment quote</Link>
     </div>
     {result && <div className="table-scroll repayment-comparison"><table className="cost-table"><caption>Compare terms using your inputs and the same assumed rate</caption><thead><tr><th scope="col">Months</th><th scope="col">Monthly estimate</th><th scope="col">Total interest</th><th scope="col">Total loan repayments</th></tr></thead><tbody>{termComparison.map(({ term, result: row }) => <tr key={term}><th scope="row">{term}</th><td>{money(row.monthly)}</td><td>{money(row.interest)}</td><td>{money(row.total)}</td></tr>)}</tbody></table></div>}
   </div>;
