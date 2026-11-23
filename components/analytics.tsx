@@ -2,7 +2,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { analyticsConsent, applyAnalyticsConsent, configureAnalytics, saveAnalyticsConsent, subscribeAnalytics, trackCTAClick, trackEvent, trackPageView } from "@/lib/analytics";
+import { analyticsConsent, applyAnalyticsConsent, configureAnalytics, ctaDescriptor, saveAnalyticsConsent, subscribeAnalytics, trackCTAClick, trackEvent, trackPageView } from "@/lib/analytics";
 const noopSubscribe = () => () => {};
 export function Analytics({ enabled, paths }: { enabled: boolean; paths: string[] }) {
   const choice = useSyncExternalStore(subscribeAnalytics, analyticsConsent, () => "unknown" as const);
@@ -21,6 +21,21 @@ export function Analytics({ enabled, paths }: { enabled: boolean; paths: string[
     if (!enabled || choice !== "granted" || typeof IntersectionObserver === "undefined") return;
     const observer = new IntersectionObserver(entries => { for (const entry of entries) if (entry.isIntersecting) { const id = (entry.target as HTMLElement).dataset.packageList; if (id === "packages_full" || id === "packages_preview") trackEvent("package_list_view", { list_id: id }); observer.unobserve(entry.target); } }, { threshold: 0.1 });
     document.querySelectorAll("[data-package-list]").forEach(item => observer.observe(item)); return () => observer.disconnect();
+  }, [enabled, pathname, choice]);
+  useEffect(() => {
+    // One view per call-to-action type, location and package per page: the denominator for click-through rates.
+    if (!enabled || choice !== "granted" || typeof IntersectionObserver === "undefined") return;
+    const seen = new Set<string>();
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting || !(entry.target instanceof HTMLAnchorElement)) continue;
+        const cta = ctaDescriptor(entry.target);
+        if (cta?.view) { const key = [cta.view, cta.cta_location, cta.package_id || ""].join("|"); if (!seen.has(key) && trackEvent(cta.view, { cta_location: cta.cta_location, package_id: cta.package_id })) seen.add(key); }
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: 0.5 });
+    document.querySelectorAll("a").forEach(anchor => { if (ctaDescriptor(anchor)?.view) observer.observe(anchor); });
+    return () => observer.disconnect();
   }, [enabled, pathname, choice]);
   function choose(value: "granted" | "denied") { saveAnalyticsConsent(value); setPreferences(false); }
   if (!hydrated || (!(enabled && choice === "unknown") && !preferences)) return null;

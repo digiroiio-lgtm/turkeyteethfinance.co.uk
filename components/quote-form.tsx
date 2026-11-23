@@ -18,7 +18,7 @@ import { Icon } from "./ui";
 import { MAX_TOTAL_UPLOAD_SIZE } from "../lib/enquiry-limits";
 
 import { packageForId, packagePrice, treatmentPackages } from "../lib/packages";
-import { trackEvent } from "../lib/analytics";
+import { durationBucket, formFields, secondsSince, timestamp, trackEvent, type FormField } from "../lib/analytics";
 
 const interests = treatmentInterests;
 const validBudget = (value: string | null) =>
@@ -116,16 +116,34 @@ function QuoteFormInner({
   const stepRef = useRef(0);
   const doneRef = useRef(false);
   const abandoned = useRef(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const viewed = useRef(false);
+  const startedAt = useRef(0);
+  const lastField = useRef<FormField | undefined>(undefined);
+  const touchedFields = useRef(new Set<string>());
+  const completedFields = useRef(new Set<string>());
+  const viewedSteps = useRef(new Set<number>());
   const selectedPackage = packageForId(values.packageId);
-  function startForm() { if (!started.current) started.current = trackEvent("form_start", { form_step: step + 1 }); }
-  function fail(message: string, delivery = false) { setError(message); trackEvent(delivery ? "form_submit_error" : "form_validation_error", { form_step: step + 1 }); }
+  function markViewed() { if (!viewed.current) viewed.current = trackEvent("form_view"); }
+  function startForm() { markViewed(); if (!started.current) { started.current = trackEvent("form_start", { form_step: step + 1 }); if (started.current) startedAt.current = timestamp(); } }
+  function fail(message: string, delivery = false, field?: FormField) { setError(message); trackEvent(delivery ? "form_submit_error" : "form_validation_error", { form_step: step + 1, field_name: field }); }
+  function fieldOf(target: EventTarget): FormField | undefined { const name = (target as Partial<Element>).closest?.("[data-field]")?.getAttribute("data-field"); return formFields.find(item => item === name); }
 
   useEffect(() => { stepRef.current = step; doneRef.current = done; }, [step, done]);
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined" || !formRef.current) return;
+    const observer = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) markViewed(); }, { threshold: 0.3 });
+    observer.observe(formRef.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    if (step > 0 && !viewedSteps.current.has(step) && trackEvent("form_step_view", { form_step: step + 1 })) viewedSteps.current.add(step);
+  }, [step]);
   useEffect(() => {
     // Records the step where a started, unsent enquiry was left, so form drop-off can be located.
     function leaving() {
       if (started.current && !doneRef.current && !abandoned.current && document.visibilityState === "hidden") {
-        abandoned.current = trackEvent("form_abandon", { form_step: stepRef.current + 1 });
+        abandoned.current = trackEvent("form_abandon", { form_step: stepRef.current + 1, field_name: lastField.current });
       }
     }
     document.addEventListener("visibilitychange", leaving);
@@ -143,13 +161,16 @@ function QuoteFormInner({
   }, [error]);
   function change<K extends keyof FormValues>(key: K, value: FormValues[K]) {
     startForm();
+    if (key === "preferredContact" && (value === "email" || value === "whatsapp")) trackEvent("form_option_select", { contact_method: value, field_name: "preferred_contact" });
+    if (key === "packageId" && value) trackEvent("form_option_select", { package_id: String(value), field_name: "package" });
+    if (key === "treatment") trackEvent("form_option_select", { field_name: "treatment" });
     setValues((v) => ({ ...v, [key]: value, ...(key === "treatment" && packageForId(v.packageId)?.treatment !== value ? { packageId: "" } : {}) }));
   }
   function advance() {
     startForm();
     setError("");
     if (step === 0 && !values.treatment) {
-      fail("Please choose a treatment, or select “Not sure yet”.");
+      fail("Please choose a treatment, or select “Not sure yet”.", false, "treatment");
       return;
     }
     if (
@@ -159,7 +180,7 @@ function QuoteFormInner({
         Number(values.teeth) < 1 ||
         Number(values.teeth) > 32)
     ) {
-      fail("Enter a whole number between 1 and 32, or leave it blank.");
+      fail("Enter a whole number between 1 and 32, or leave it blank.", false, "teeth");
       return;
     }
     if (step === 2) {
@@ -167,14 +188,14 @@ function QuoteFormInner({
         values.fullName.trim().length < 2 ||
         !/^\S+@\S+\.\S+$/.test(values.email)
       ) {
-        fail("Please enter your full name and a valid email address.");
+        fail("Please enter your full name and a valid email address.", false, values.fullName.trim().length < 2 ? "name" : "email");
         return;
       }
       if (
         values.preferredContact === "whatsapp" &&
         !/^\+?[\d\s()-]{7,24}$/.test(values.whatsapp)
       ) {
-        fail("Please add a WhatsApp number, including the country code.");
+        fail("Please add a WhatsApp number, including the country code.", false, "whatsapp");
         return;
       }
     }
@@ -185,7 +206,7 @@ function QuoteFormInner({
     if (!files) return;
     const list = Array.from(files);
     if (list.length + photos.length > 3) {
-      fail("Please select up to 3 photographs.");
+      fail("Please select up to 3 photographs.", false, "photos");
       return;
     }
     if (
@@ -195,14 +216,15 @@ function QuoteFormInner({
           f.size > 3 * 1024 * 1024,
       )
     ) {
-      fail("Use JPEG, PNG or WebP photographs, no larger than 3 MB each.");
+      fail("Use JPEG, PNG or WebP photographs, no larger than 3 MB each.", false, "photos");
       return;
     }
     if ([...photos, ...list].reduce((total, file) => total + file.size, 0) > MAX_TOTAL_UPLOAD_SIZE) {
-      fail("Please keep photographs under 4 MB in total.");
+      fail("Please keep photographs under 4 MB in total.", false, "photos");
       return;
     }
     setError("");
+    trackEvent("form_photo_add", { field_name: "photos" });
     setPhotos((p) => [...p, ...list]);
   }
   async function submit(e: React.FormEvent) {
@@ -221,11 +243,13 @@ function QuoteFormInner({
     if (!values.dataConsent || !values.healthConsent) {
       fail(
         "Please confirm the required privacy and health-information consents.",
+        false,
+        values.dataConsent ? "consent_health" : "consent_data",
       );
       return;
     }
     if (turnstileSiteKey && !token) {
-      fail("Please complete the security check.");
+      fail("Please complete the security check.", false, "security_check");
       return;
     }
     startForm();
@@ -256,7 +280,7 @@ function QuoteFormInner({
         throw new Error("We could not confirm delivery. Please try again later.");
       }
       setReference(result.reference);
-      trackEvent("generate_lead", { form_step: 4 });
+      trackEvent("generate_lead", { form_step: 4, contact_method: values.preferredContact === "whatsapp" ? "whatsapp" : "email", duration_bucket: startedAt.current ? durationBucket(secondsSince(startedAt.current)) : undefined, package_id: values.packageId || undefined });
       setDone(true);
       setValues({ ...initial });
       setPhotos([]);
@@ -302,6 +326,20 @@ function QuoteFormInner({
   ];
   return (
     <form
+      ref={formRef}
+      onFocusCapture={(event) => {
+        const field = fieldOf(event.target);
+        if (!field) return;
+        lastField.current = field;
+        if (!touchedFields.current.has(field) && trackEvent("form_field_focus", { form_step: step + 1, field_name: field })) touchedFields.current.add(field);
+      }}
+      onBlurCapture={(event) => {
+        const field = fieldOf(event.target);
+        const input = event.target as unknown as HTMLInputElement;
+        if (!field || field === "photos" || input.type === "radio" || completedFields.current.has(field)) return;
+        const filled = input.type === "checkbox" ? input.checked : !!input.value?.trim();
+        if (filled && trackEvent("form_field_complete", { form_step: step + 1, field_name: field })) completedFields.current.add(field);
+      }}
       className="quote-form"
       aria-busy={sending}
       onSubmit={submit}
@@ -350,6 +388,7 @@ function QuoteFormInner({
                 <input
                   type="radio"
                   name="treatment"
+                  data-field="treatment"
                   value={t}
                   checked={values.treatment === t}
                   onChange={() => change("treatment", t)}
@@ -364,7 +403,7 @@ function QuoteFormInner({
             ))}
           </fieldset>
           <div className="form-fields package-choice"><label>Package to discuss (optional)
-            <select value={values.packageId} onChange={event => change("packageId", event.target.value)}><option value="">A personalised treatment estimate</option>{treatmentPackages.filter(item => item.treatment === values.treatment).map(item => <option value={item.id} key={item.id}>{item.name} · {packagePrice(item)}</option>)}</select>
+            <select data-field="package" value={values.packageId} onChange={event => change("packageId", event.target.value)}><option value="">A personalised treatment estimate</option>{treatmentPackages.filter(item => item.treatment === values.treatment).map(item => <option value={item.id} key={item.id}>{item.name} · {packagePrice(item)}</option>)}</select>
           </label>{selectedPackage && <p className="small">{selectedPackage.stay} · Hotel accommodation, airport and clinic transfers. Subject to clinical assessment and personalised treatment planning.</p>}</div>
         </>
       )}
@@ -384,6 +423,7 @@ function QuoteFormInner({
               step="1"
               value={values.teeth}
               onChange={(e) => change("teeth", e.target.value)}
+              data-field="teeth"
               placeholder="Leave blank if you are not sure"
             />
           </label>
@@ -393,6 +433,7 @@ function QuoteFormInner({
               maxLength={1200}
               value={values.concern}
               onChange={(e) => change("concern", e.target.value)}
+              data-field="concern"
               placeholder="What would you like to discuss?"
               rows={3}
             />
@@ -403,6 +444,7 @@ function QuoteFormInner({
               maxLength={1200}
               value={values.notes}
               onChange={(e) => change("notes", e.target.value)}
+              data-field="notes"
               rows={2}
             />
           </label>
@@ -415,6 +457,7 @@ function QuoteFormInner({
               <span>Up to 3 images · JPEG, PNG or WebP · 3 MB each · 4 MB total</span>
               <input
                 id="dental-photos"
+                data-field="photos"
                 type="file"
                 accept="image/jpeg,image/png,image/webp"
                 multiple
@@ -453,6 +496,7 @@ function QuoteFormInner({
               value={values.fullName}
               maxLength={100}
               onChange={(e) => change("fullName", e.target.value)}
+              data-field="name"
               required
             />
           </label>
@@ -464,6 +508,7 @@ function QuoteFormInner({
               maxLength={200}
               value={values.email}
               onChange={(e) => change("email", e.target.value)}
+              data-field="email"
               required
             />
           </label>
@@ -477,6 +522,7 @@ function QuoteFormInner({
               placeholder="Including country code, e.g. +44"
               value={values.whatsapp}
               onChange={(e) => change("whatsapp", e.target.value)}
+              data-field="whatsapp"
             />
           </label>
           <label>
@@ -484,6 +530,7 @@ function QuoteFormInner({
             <select
               value={values.preferredContact}
               onChange={(e) => change("preferredContact", e.target.value)}
+              data-field="preferred_contact"
             >
               <option value="email">Email</option>
               <option value="whatsapp">WhatsApp</option>
@@ -495,6 +542,7 @@ function QuoteFormInner({
             <select
               value={values.timeframe}
               onChange={(e) => change("timeframe", e.target.value)}
+              data-field="timeframe"
             >
               {[
                 "Not sure yet",
@@ -552,6 +600,7 @@ function QuoteFormInner({
               type="checkbox"
               checked={values.dataConsent}
               onChange={(e) => change("dataConsent", e.target.checked)}
+              data-field="consent_data"
             />
             <span>
               I have read the <Link href="/privacy">privacy notice</Link> and
@@ -564,6 +613,7 @@ function QuoteFormInner({
               type="checkbox"
               checked={values.healthConsent}
               onChange={(e) => change("healthConsent", e.target.checked)}
+              data-field="consent_health"
             />
             <span>
               I explicitly consent to the processing of any dental information
@@ -577,6 +627,7 @@ function QuoteFormInner({
               type="checkbox"
               checked={values.marketingConsent}
               onChange={(e) => change("marketingConsent", e.target.checked)}
+              data-field="consent_marketing"
             />
             <span>
               I would also like occasional treatment news and offers by email.
@@ -616,6 +667,7 @@ function QuoteFormInner({
             className="back-button"
             disabled={sending}
             onClick={() => {
+              trackEvent("form_back_click", { form_step: step + 1 });
               setError("");
               setStep((s) => s - 1);
             }}

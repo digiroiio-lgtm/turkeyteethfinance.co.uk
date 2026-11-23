@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { JSDOM } from "jsdom";
-import { ANALYTICS_CONSENT_KEY, analyticsConsent, applyAnalyticsConsent, configureAnalytics, consentRecord, safeAnalyticsContext, saveAnalyticsConsent, subscribeAnalytics, trackCTAClick, trackEvent, trackPageView } from "../lib/analytics";
+import { durationBucket, ctaDescriptor, ANALYTICS_CONSENT_KEY, analyticsConsent, applyAnalyticsConsent, configureAnalytics, consentRecord, safeAnalyticsContext, saveAnalyticsConsent, subscribeAnalytics, trackCTAClick, trackEvent, trackPageView } from "../lib/analytics";
 
 test("analytics waits for consent, filters patient data, deduplicates page views and respects withdrawal and preview", () => {
   const dom = new JSDOM("<head></head><body></body>", { url: "https://turkeyteethfinance.co.uk/get-a-quote?email=private@example.com#secret", referrer: "https://search.example/find?private" });
@@ -22,6 +22,14 @@ test("analytics waits for consent, filters patient data, deduplicates page views
   assert.equal(error.page_location, "https://turkeyteethfinance.co.uk/get-a-quote"); assert.equal(error.page_referrer, "https://search.example");
   trackEvent("form_abandon", { form_step: 3, email: "private@example.com" } as never);
   assert.equal(w.dataLayer.at(-1)![1], "form_abandon"); assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).email, undefined);
+  trackEvent("form_field_focus", { form_step: 2, field_name: "email" });
+  assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).field_name, "email"); assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).form_id, "treatment_enquiry");
+  trackEvent("form_field_complete", { field_name: "not-a-field" } as never);
+  assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).field_name, undefined);
+  trackEvent("generate_lead", { contact_method: "whatsapp", duration_bucket: "60_180s" });
+  assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).contact_method, "whatsapp"); assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).duration_bucket, "60_180s");
+  trackEvent("generate_lead", { contact_method: "private@example.com", duration_bucket: "secret" } as never);
+  assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).contact_method, undefined); assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).duration_bucket, undefined);
   const anchor = document.createElement("a"); anchor.href = "/get-a-quote?package=zirconium-24"; anchor.dataset.analyticsPackage = "zirconium-24"; anchor.dataset.analyticsLocation = "package_card"; trackCTAClick(anchor);
   assert.equal(w.dataLayer.at(-1)![1], "quote_cta_click"); assert.equal((w.dataLayer.at(-1)![2] as Record<string, unknown>).package_id, "zirconium-24");
   assert.doesNotMatch(JSON.stringify(w.dataLayer), /private@example|secret|\?email/);
@@ -41,4 +49,14 @@ test("expired, future and malformed consent and unknown URLs never leak into col
   assert.equal(consentRecord({ choice: "yes", savedAt: Date.now() }), undefined);
   const context = safeAnalyticsContext("https://turkeyteethfinance.co.uk/private@example.com?secret", "https://user:pass@example.com/?secret");
   assert.equal(context.page_location, "https://turkeyteethfinance.co.uk"); assert.equal(context.page_referrer, "");
+});
+
+test("duration buckets and call-to-action descriptors use fixed labels", () => {
+  assert.deepEqual([5, 60, 179, 180, 599, 600, 5000].map(durationBucket), ["under_60s", "60_180s", "60_180s", "180_600s", "180_600s", "over_600s", "over_600s"]);
+  const dom = new JSDOM("<body><a id='w' href='https://wa.me/905353998999'></a><a id='q' href='/get-a-quote#treatment-enquiry' data-analytics-location='hero'></a><a id='o' href='https://example.com/'></a></body>", { url: "https://turkeyteethfinance.co.uk/" });
+  Object.assign(globalThis, { window: dom.window, document: dom.window.document });
+  const get = (id: string) => dom.window.document.getElementById(id) as HTMLAnchorElement;
+  assert.deepEqual([ctaDescriptor(get("w"))?.view, ctaDescriptor(get("w"))?.cta_location], ["whatsapp_cta_view", "content"]);
+  assert.deepEqual([ctaDescriptor(get("q"))?.view, ctaDescriptor(get("q"))?.cta_location], ["quote_cta_view", "hero"]);
+  assert.equal(ctaDescriptor(get("o")), undefined); dom.window.close();
 });
