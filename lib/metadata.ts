@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
 import { SITE_NAME, canonicalUrl, indexingEnabled } from "./site";
 import { publicPages } from "./public-pages";
+export const MAX_TITLE_LENGTH = 60;
 export function pageMetadata(
   title: string,
   description: string,
   path: string,
 ): Metadata {
   return {
-    title: title.includes(SITE_NAME) ? { absolute: title } : title,
+    // Keep the full browser/SERP title within ~60 characters: long titles drop the
+    // " | Turkey Teeth Finance" suffix instead of being truncated by Google.
+    title:
+      title.includes(SITE_NAME) || `${title} | ${SITE_NAME}`.length > MAX_TITLE_LENGTH
+        ? { absolute: title }
+        : title,
     description,
     alternates: { canonical: canonicalUrl(path) },
     robots: indexingEnabled() && publicPages().some((page) => page.path === path)

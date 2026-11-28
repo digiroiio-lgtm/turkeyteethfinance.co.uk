@@ -105,7 +105,7 @@ export const guideArticles: PatientGuide[] = [
     title: "Dental Finance for Treatment in Turkey: UK Patient Guide",
     category: "PAYMENT OPTIONS",
     summary: "How to compare ways to pay for dental treatment abroad: APR, fees, term and total repayable.",
-    description: "A UK patient guide to paying for dental treatment in Turkey. Compare personal loans, broker-arranged finance, credit cards and savings, including APR, fees, repayment term and total repayable.",
+    description: "A UK guide to paying for dental treatment in Turkey: compare personal loans, broker-arranged finance, credit cards and savings, APR and total repayable.",
     lastModified: "2026-11-10",
     paragraphs: ["There is no single best way to pay for dental treatment in Turkey from the UK. Eligible UK patients may be able to explore third-party finance, but availability and terms depend on the broker, lender and the applicant’s circumstances. The lender makes the credit decision. Establish the proposed treatment cost in writing first, then compare the full cost of each payment route using the provider’s own documents rather than headline figures."],
     sections: [
@@ -162,7 +162,7 @@ export const guideArticles: PatientGuide[] = [
 ];
 guideArticles.push({
   id: "deposits-and-stage-payments", path: "/guides/turkey-teeth-deposits-and-payment-plans",
-  title: "Turkey teeth payment plans: deposits, stages and monthly loans",
+  title: "Turkey Teeth Payment Plans: Deposits, Stages & Monthly Loans",
   category: "PAYMENT OPTIONS", lastModified: "2026-10-30",
   summary: "Separate clinic payment dates from loan repayments and plan for changes before booking travel.",
   description: "Understand deposits, staged clinic payments, monthly borrowing and two-visit implant budgets for Turkey dental treatment. Questions to confirm in writing.",
