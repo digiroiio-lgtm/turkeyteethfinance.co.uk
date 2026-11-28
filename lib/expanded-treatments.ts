@@ -3,7 +3,7 @@ import type { PageContent } from "./content";
 export const expandedTreatmentPages: Record<string, PageContent> = {
   "full-mouth-dental-implants-turkey": {
     lastModified: "2026-10-31", title: "Full Mouth Dental Implants Turkey: Costs & Options",
-    description: "Compare full mouth implant options in Turkey: All-on-4, All-on-6, fixed bridges and implant-retained dentures. Plan costs, visits, aftercare and a written quote.",
+    description: "Compare full mouth implant options in Turkey: All-on-4, All-on-6, fixed bridges and implant dentures. Plan costs, visits, aftercare and a written quote.",
     label: "FULL MOUTH DENTAL IMPLANTS", heading: "Full mouth dental implants in Turkey.", accent: "Compare your options.", treatment: "Full mouth dental implants",
     intro: "Understand one-arch and two-arch treatment, the proposed teeth and implant support, and the complete cost before considering travel or finance. Request a personalised estimate in writing.",
     sections: [
@@ -45,7 +45,7 @@ export const expandedTreatmentPages: Record<string, PageContent> = {
   },
   "composite-bonding-turkey": {
     lastModified: "2026-10-31", title: "Composite Bonding Turkey: Costs, Suitability & Veneers",
-    description: "Considering composite bonding in Turkey? Compare resin bonding with porcelain veneers, understand cost per tooth, repairs and travel, and ask about availability.",
+    description: "Composite bonding in Turkey: compare resin bonding with porcelain veneers, cost per tooth, repairs, travel and payment plan options for UK patients.",
     label: "COMPOSITE BONDING", heading: "Composite bonding in Turkey.", accent: "Consider a conservative option.", treatment: "Composite bonding",
     intro: "Discuss small changes to tooth shape, edges or gaps with a dentist. Ask the clinic to confirm availability, suitability and a written estimate before arranging a dental trip.",
     sections: [
@@ -66,7 +66,7 @@ export const expandedTreatmentPages: Record<string, PageContent> = {
   },
   "veneers-turkey-cost": {
     lastModified: "2026-11-10", title: "Veneers Turkey Cost: E.max & Package Prices Explained",
-    description: "What do veneers cost in Turkey? See the published 16- and 20-veneer package prices, how E.max differs from porcelain, what is included and what to ask before you travel.",
+    description: "What do veneers cost in Turkey? See 16- and 20-veneer package prices, how E.max differs from porcelain, what is included and what to ask before you travel.",
     label: "VENEERS TURKEY COST", heading: "Veneers in Turkey: what the price covers.", accent: "Compare like with like.", treatment: "Veneers",
     intro: "Read the published veneer package prices, understand what E.max and porcelain mean in a quote and list the extra costs before you compare Turkey with a UK estimate. A written estimate follows clinical assessment.",
     sections: [

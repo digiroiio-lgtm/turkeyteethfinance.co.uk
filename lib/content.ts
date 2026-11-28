@@ -193,7 +193,7 @@ export const pages: Record<string, PageContent> = {
     lastModified: "2026-11-13",
     title: "Dental Finance Plans for Turkey Teeth: Pay Monthly (UK)",
     description:
-      "Compare dental finance plans for Turkey teeth from the UK: separate monthly borrowing versus clinic stage payments. Estimate repayments with your own assumptions; approval and terms depend on the lender.",
+      "Pay monthly for Turkey teeth from the UK: compare monthly finance with clinic stage payments, estimate repayments. Approval and terms depend on the lender.",
     label: "PAY MONTHLY",
     heading: "Can you pay monthly for Turkey teeth?",
     accent: "Understand your options.",
@@ -230,7 +230,7 @@ export const pages: Record<string, PageContent> = {
     lastModified: "2026-11-13",
     title: "Dental Finance UK: Paying for Treatment in Turkey",
     description:
-      "Dental finance UK patients can explore for treatment in Turkey: dental finance plans, payment routes, credit broker and lender roles, and what to check before a separate application.",
+      "Dental finance for UK patients having treatment in Turkey: payment routes, credit broker and lender roles, and what to check before you apply.",
     label: "DENTAL FINANCE",
     heading: "Dental finance for UK patients.",
     accent: "Explore your options.",
@@ -326,7 +326,7 @@ export const pages: Record<string, PageContent> = {
     lastModified: "2026-10-30",
     title: "Turkey Teeth Finance Eligibility & Credit Checks",
     description:
-      "Understand the UK finance eligibility questions to consider before applying for dental treatment finance. Decisions depend on affordability, status and lender criteria.",
+      "Turkey teeth finance with bad credit? See UK eligibility and credit check questions first. Decisions depend on affordability and lender criteria.",
     label: "FINANCE ELIGIBILITY",
     heading: "UK finance eligibility.",
     accent: "Before you apply.",
@@ -411,7 +411,7 @@ export const pages: Record<string, PageContent> = {
   "prices": {
     "lastModified": "2026-10-21",
     "title": "Turkey Teeth Packages & Prices with Finance",
-    "description": "Compare confirmed Turkey teeth packages in Antalya with hotel and transfers for UK patients, then explore finance subject to status. Written quotes follow clinical assessment.",
+    "description": "Compare Turkey teeth packages in Antalya with hotel and transfers for UK patients, and explore finance subject to status. Written quotes follow assessment.",
     "label": "PRICES & PAYMENT OPTIONS",
     "heading": "Dental treatment prices.",
     "accent": "Clear before you commit.",
@@ -449,7 +449,7 @@ export const pages: Record<string, PageContent> = {
   "smile-makeover-finance": {
     "lastModified": "2026-11-10",
     "title": "Smile Makeover in Turkey: Treatment Planning & Finance",
-    "description": "Explore a smile makeover in Turkey for UK patients. Understand treatment options, stages, materials and how to review a separate finance decision after receiving an individual quote.",
+    "description": "Smile makeover in Turkey for UK patients: treatment options, stages and materials, and how to weigh finance once you have an individual written quote.",
     "label": "SMILE MAKEOVER",
     "heading": "Your smile makeover.",
     "accent": "One considered plan.",
@@ -533,7 +533,7 @@ export const pages: Record<string, PageContent> = {
   "all-on-4-finance": {
     "lastModified": "2026-10-29",
     "title": "All-on-4 Dental Implants in Turkey: Costs, Finance & Visits",
-    "description": "Explore All-on-4 dental implants in Turkey for UK patients. Understand full-arch options, treatment stages, written quote inclusions and separate payment or finance considerations.",
+    "description": "All-on-4 dental implants in Turkey for UK patients: full-arch options, treatment stages, what a written quote includes and payment or finance options.",
     "label": "ALL-ON-4",
     "heading": "All-on-4 in Turkey.",
     "accent": "A full-arch plan.",
@@ -869,7 +869,7 @@ export const pages: Record<string, PageContent> = {
     lastModified: "2026-10-21",
     title: "Contact | Dental Treatment Quote Antalya",
     description:
-      "Contact the patient coordination team about treatment in Antalya. Request a written estimate, ask a question and choose email or WhatsApp without a required call.",
+      "Contact the patient coordination team about treatment in Antalya. Request a written estimate or ask a question by email or WhatsApp, no call needed.",
     label: "LET’S TALK",
     heading: "Contact our patient team.",
     accent: "On your terms.",
@@ -1013,9 +1013,9 @@ pages["pay-monthly"].lastModified = "2026-11-17";
 pages["reviews"].faqs = [...pages["reviews"].faqs,
   { question: "Are there independent Turkey teeth finance reviews?", answer: "Look for reviews on independent platforms and check what each one describes: the clinic’s treatment, the coordinator’s service or a lender’s product. Reviews of one do not describe the others, and a review is not a guarantee of your own result." },
 ];
-pages["reviews"].description = "Looking for Turkey teeth finance or Akdeniz Dental reviews? See what to check in independent patient reviews: verified sources, treatment context, follow-up and aftercare.";
+pages["reviews"].description = "Looking for Turkey teeth finance or Akdeniz Dental reviews? What to check in independent reviews: verified sources, treatment context and aftercare.";
 pages["reviews"].lastModified = "2026-11-17";
-pages["how-it-works"].description = "See how dental treatment in Turkey works for UK patients: request a written estimate, review the dentist-led plan, compare ways to pay and plan travel. Finance is a separate decision.";
+pages["how-it-works"].description = "How dental treatment in Turkey works for UK patients: get a written estimate, review the dentist-led plan, compare ways to pay and plan your travel.";
 pages["how-it-works"].lastModified = "2026-11-17";
 
 export { guideArticles } from "./guides";

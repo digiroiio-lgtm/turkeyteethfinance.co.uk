@@ -2,7 +2,7 @@ import type { PageContent } from "./content";
 export const calculatorContent: PageContent = {
   lastModified: "2026-10-30",
   title: "Turkey Teeth Finance Calculator: Monthly Repayment Estimates",
-  description: "Estimate monthly repayments for dental treatment in Turkey using your own cost, upfront contribution, term and interest assumption. Compare interest and total cost.",
+  description: "Estimate monthly repayments for dental treatment in Turkey using your own cost, deposit, term and interest rate. Compare total interest and total cost.",
   label: "FINANCE CALCULATOR", heading: "Turkey teeth finance calculator.", accent: "See the whole cost.", kind: "calculator",
   intro: "Explore how a treatment budget, upfront contribution, repayment term and your own interest-rate assumption affect monthly repayments. Illustrations are not lender offers.",
   sections: [
